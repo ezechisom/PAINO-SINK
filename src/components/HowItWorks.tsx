@@ -27,8 +27,8 @@ export const HowItWorks: React.FC = () => {
       subtitle: "Effortless Drainage & Clean Deck",
       description: "Place freshly rinsed produce or utensils in the perforated colander to drip directly into the drain. Turn the deck-mounted rotary knob to drain the sink without ever getting your hands wet.",
       icon: CheckCircle,
-      color: "from-emerald-500/20 to-emerald-500/5",
-      borderColor: "border-emerald-500/30"
+      color: "from-blue-600/20 to-blue-600/5",
+      borderColor: "border-blue-500/30"
     }
   ];
 

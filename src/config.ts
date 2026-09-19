@@ -187,35 +187,8 @@ export const CONFIG: SiteConfig = {
       name: "Engr. Babatunde A.",
       location: "Lekki Phase 1, Lagos",
       rating: 5,
-      review: "We installed this piano sink during our kitchen remodeling last month. The waterfall feature for washing vegetables is simply incredible. The water temperature display also keeps my kids safe from accidental hot water burns. Premium quality through and through!",
-      date: "3 weeks ago",
-      verified: true
-    },
-    {
-      id: "rev-2",
-      name: "Mrs. Nkechi Okonkwo",
-      location: "Maitama, Abuja",
-      rating: 5,
-      review: "I was skeptical about ordering online, but it arrived safely in a solid crate with every single accessory as advertised. The glass washer cleans my cups in two seconds. It completely changed the look of my kitchen island. Highly recommended!",
-      date: "1 month ago",
-      verified: true
-    },
-    {
-      id: "rev-3",
-      name: "Dr. Femi Adeleke",
-      location: "GRA Phase 2, Port Harcourt",
-      rating: 5,
-      review: "The sliding cutting board and colander make meal preparation so organized. I don't have to clutter my countertop anymore. The piano buttons feel solid and responsive. Worth every naira spent.",
-      date: "2 weeks ago",
-      verified: true
-    },
-    {
-      id: "rev-4",
-      name: "Amina Bello",
-      location: "Kano Municipal, Kano",
-      rating: 5,
-      review: "Excellent finish. The nano steel does not stain easily and water slides right into the drain. My plumber had no issues fitting the hot and cold pipes. Beautiful product!",
-      date: "5 days ago",
+      review: "We installed this piano sink during our kitchen remodeling last month. The waterfall feature for washing vegetables is simply incredible. The water temperature display also keeps my kids safe from accidental hot water burns. The heavy-duty 304 nano finish resists scratches completely. Premium quality through and through!",
+      date: "Verified Homeowner &bull; Lagos",
       verified: true
     }
   ],

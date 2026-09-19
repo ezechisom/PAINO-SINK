@@ -85,7 +85,7 @@ export const WhyLoveSection: React.FC<WhyLoveSectionProps> = ({ config, onOrderC
                 </div>
 
                 <div className="mt-4 pt-3 border-t border-slate-800/80 flex items-center gap-1.5 text-xs text-slate-400">
-                  <Check className="w-3.5 h-3.5 text-emerald-400" />
+                  <Check className="w-3.5 h-3.5 text-blue-400" />
                   <span>Tested &amp; Confirmed</span>
                 </div>
               </div>

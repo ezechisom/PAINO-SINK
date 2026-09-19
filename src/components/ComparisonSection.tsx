@@ -117,7 +117,7 @@ export const ComparisonSection: React.FC<ComparisonSectionProps> = ({ onOrderCli
               <ul className="space-y-4">
                 {comparisonItems.map((item, idx) => (
                   <li key={idx} className="flex items-start gap-3 text-slate-200 text-sm">
-                    <div className="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 mt-0.5">
+                    <div className="w-5 h-5 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center shrink-0 mt-0.5">
                       <Check className="w-3.5 h-3.5" />
                     </div>
                     <div>

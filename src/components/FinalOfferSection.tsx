@@ -41,7 +41,7 @@ export const FinalOfferSection: React.FC<FinalOfferSectionProps> = ({ config, on
               {formatNaira(config.promoPrice)}
             </div>
             {savings > 0 && (
-              <span className="text-xs font-bold text-emerald-400 bg-emerald-500/15 px-3 py-1 rounded-full border border-emerald-500/20 mt-2">
+              <span className="text-xs font-bold text-blue-300 bg-blue-500/20 px-3 py-1 rounded-full border border-blue-400/30 mt-2">
                 Save {formatNaira(savings)} off regular price
               </span>
             )}
@@ -64,7 +64,7 @@ export const FinalOfferSection: React.FC<FinalOfferSectionProps> = ({ config, on
             Light Turns On With Water Flow
           </span>
           <span className="flex items-center gap-1.5 bg-slate-900/80 px-3 py-1.5 rounded-full border border-slate-800">
-            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+            <CheckCircle2 className="w-3.5 h-3.5 text-blue-400" />
             100% Hydroelectric Powered
           </span>
         </div>
@@ -88,17 +88,17 @@ export const FinalOfferSection: React.FC<FinalOfferSectionProps> = ({ config, on
 
         <div className="flex items-center justify-center gap-3 text-xs text-slate-400">
           <span className="flex items-center gap-1">
-            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+            <CheckCircle2 className="w-3.5 h-3.5 text-blue-400" />
             Nationwide Delivery
           </span>
           <span>&bull;</span>
           <span className="flex items-center gap-1">
-            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+            <CheckCircle2 className="w-3.5 h-3.5 text-blue-400" />
             Secure Packaging
           </span>
           <span>&bull;</span>
           <span className="flex items-center gap-1">
-            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+            <CheckCircle2 className="w-3.5 h-3.5 text-blue-400" />
             1-Year Warranty
           </span>
         </div>

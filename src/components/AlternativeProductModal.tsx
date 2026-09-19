@@ -129,7 +129,7 @@ export const AlternativeProductModal: React.FC<AlternativeProductModalProps> = (
                 <span className="text-sm text-slate-500 line-through">
                   {formatNaira(product.normalPrice)}
                 </span>
-                <span className="text-xs font-bold text-emerald-400 bg-emerald-950/80 px-2 py-0.5 rounded border border-emerald-500/30">
+                <span className="text-xs font-bold text-blue-300 bg-blue-950/80 px-2 py-0.5 rounded border border-blue-500/30">
                   SAVE {formatNaira(product.normalPrice - product.price)}
                 </span>
               </div>
@@ -174,7 +174,7 @@ export const AlternativeProductModal: React.FC<AlternativeProductModalProps> = (
             <div className="space-y-2.5">
               {product.keyFeatures.map((feat, i) => (
                 <div key={i} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-200">
-                  <div className="w-4 h-4 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 mt-0.5">
+                  <div className="w-4 h-4 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center shrink-0 mt-0.5">
                     <Check className="w-3 h-3" />
                   </div>
                   <span>{feat}</span>
@@ -185,7 +185,7 @@ export const AlternativeProductModal: React.FC<AlternativeProductModalProps> = (
 
           {/* Trust Guarantees */}
           <div className="flex flex-wrap items-center justify-between gap-4 p-3 bg-slate-950 rounded-xl border border-slate-800 text-xs text-slate-400">
-            <span className="flex items-center gap-1.5 text-emerald-400 font-medium">
+            <span className="flex items-center gap-1.5 text-blue-400 font-medium">
               <ShieldCheck className="w-4 h-4" />
               Payment on Delivery Available
             </span>

@@ -35,8 +35,13 @@ export interface GalleryImage {
   url: string;
   title: string;
   subtitle: string;
-  tag: 'main' | 'details' | 'console' | 'basin' | 'accessories' | 'lifestyle' | 'unboxing';
+  tag: string;
   alt: string;
+  productId?: 'sink' | 'cooker-2burner' | 'cooker-5burner' | string;
+  productName?: string;
+  price?: number;
+  dimensions?: string;
+  badge?: string;
 }
 
 export interface OrderItem {

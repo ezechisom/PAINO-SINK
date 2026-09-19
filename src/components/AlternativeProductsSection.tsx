@@ -4,13 +4,11 @@ import { formatNaira } from '../config';
 import { 
   Flame, 
   Zap, 
-  Clock, 
-  Check, 
-  ExternalLink, 
-  Sparkles, 
   ArrowRight,
+  ExternalLink,
+  PlusCircle,
   ShieldCheck,
-  Truck
+  Check
 } from 'lucide-react';
 
 interface AlternativeProductsSectionProps {
@@ -23,138 +21,106 @@ export const AlternativeProductsSection: React.FC<AlternativeProductsSectionProp
   onSelectForOrder
 }) => {
   return (
-    <section id="alternative-products-section" className="py-16 bg-[#0a0e14] border-t border-slate-800/80 relative">
+    <section id="alternative-products-section" className="py-10 bg-slate-50 border-t border-slate-200 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 bg-amber-500/10 border border-amber-500/30 px-3.5 py-1.5 rounded-full text-xs font-bold text-amber-400 uppercase tracking-widest mb-3">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>ALTERNATIVE &amp; MATCHING KITCHEN APPLIANCES</span>
+        {/* Compact Header */}
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-6">
+          <div>
+            <div className="inline-flex items-center gap-1.5 bg-blue-100 text-blue-800 text-[11px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider mb-1">
+              <span>Matching Kitchen Appliances</span>
+            </div>
+            <h3 className="text-xl sm:text-2xl font-black text-[#0a192f] tracking-tight">
+              Optional Cooktops from Moonlight Luxury Home Tech
+            </h3>
+            <p className="text-xs sm:text-sm text-slate-600">
+              Easily pair your smart piano sink with a matching built-in luxury cooktop.
+            </p>
           </div>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight">
-            Complete Your Modern Kitchen Setup
-          </h2>
-          <p className="text-slate-300 text-sm sm:text-base mt-2">
-            Looking for luxury cooktops designed to complement your Smart Piano Sink? Explore our official 2-Flip-Up Double Burner and 5-Burner Gas + Electric Hybrid Cooktops from Moonlight Luxury Home Tech.
-          </p>
+
+          <a
+            href="https://www.moonlightluxuryhometech.shop/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1 text-xs text-[#0a192f] hover:text-blue-600 font-bold self-start md:self-auto"
+          >
+            <span>Visit Cooktop Catalog</span>
+            <ExternalLink className="w-3.5 h-3.5 text-blue-600" />
+          </a>
         </div>
 
-        {/* 2-Column Product Cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        {/* Compact 2-Item Row */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {ALTERNATIVE_PRODUCTS.map((prod) => {
             const is5Burner = prod.id === 'cooker-5burner';
+            const savings = prod.normalPrice - prod.price;
 
             return (
               <div
                 key={prod.id}
-                className="bg-slate-900/90 border border-slate-800 hover:border-amber-500/50 rounded-3xl overflow-hidden shadow-2xl transition-all duration-300 flex flex-col group"
+                className="bg-white border border-slate-200 hover:border-blue-500/50 rounded-2xl p-3.5 sm:p-4 shadow-xs hover:shadow-md transition-all flex flex-col sm:flex-row items-center gap-4"
               >
-                {/* Image Showcase */}
+                {/* Thumbnail */}
                 <div 
                   onClick={() => onViewProduct(prod)}
-                  className="relative aspect-[16/10] bg-slate-950 overflow-hidden cursor-pointer"
+                  className="relative w-full sm:w-36 h-32 sm:h-28 rounded-xl overflow-hidden bg-slate-100 border border-slate-200 shrink-0 cursor-pointer"
                 >
                   <img
                     src={prod.images[0]}
                     alt={prod.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                     referrerPolicy="no-referrer"
                   />
-                  <div className="absolute top-4 left-4 bg-black/80 backdrop-blur-md border border-amber-500/40 text-amber-300 text-xs font-black px-3 py-1.5 rounded-full flex items-center gap-1.5">
-                    {is5Burner ? <Zap className="w-3.5 h-3.5 text-cyan-400" /> : <Flame className="w-3.5 h-3.5 text-orange-400" />}
-                    <span>{prod.badge}</span>
-                  </div>
-
-                  <div className="absolute bottom-4 right-4 bg-black/75 backdrop-blur-md px-3 py-1 rounded-lg text-xs font-mono text-slate-300 border border-slate-700">
-                    Panel: {prod.dimensions}
+                  <div className="absolute top-1.5 left-1.5 bg-[#0a192f]/90 text-white text-[9px] font-bold px-2 py-0.5 rounded-md">
+                    {is5Burner ? '5-BURNER HYBRID' : '90° FLIP-UP'}
                   </div>
                 </div>
 
-                {/* Content Details */}
-                <div className="p-6 sm:p-8 flex-1 flex flex-col justify-between">
-                  <div>
-                    <div className="flex items-center justify-between gap-2 mb-2">
-                      <span className="text-xs font-bold text-cyan-400 bg-cyan-950/60 border border-cyan-500/30 px-2.5 py-0.5 rounded-full">
-                        {prod.category}
-                      </span>
-                      <span className="text-xs font-semibold text-emerald-400">
-                        In Stock &bull; Ships Nationwide
-                      </span>
-                    </div>
-
-                    <h3 className="text-xl sm:text-2xl font-black text-white group-hover:text-amber-300 transition-colors">
-                      {prod.name}
-                    </h3>
-                    
-                    <p className="text-slate-300 text-xs sm:text-sm mt-2 leading-relaxed">
-                      {prod.description}
-                    </p>
-
-                    {/* Features List */}
-                    <div className="mt-4 space-y-2 border-t border-slate-800/80 pt-4">
-                      {prod.keyFeatures.slice(0, 3).map((feat, i) => (
-                        <div key={i} className="flex items-start gap-2 text-xs text-slate-300">
-                          <div className="w-3.5 h-3.5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 mt-0.5">
-                            <Check className="w-2.5 h-2.5" />
-                          </div>
-                          <span>{feat}</span>
-                        </div>
-                      ))}
-                    </div>
+                {/* Details */}
+                <div className="flex-1 min-w-0 w-full">
+                  <div className="flex items-center justify-between gap-1 mb-1">
+                    <span className="text-[10px] font-bold uppercase text-slate-500">
+                      {prod.dimensions}
+                    </span>
+                    <span className="text-[10px] font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded-full border border-blue-200">
+                      Save {formatNaira(savings)}
+                    </span>
                   </div>
 
-                  {/* Price & Action Footer */}
-                  <div className="mt-6 pt-5 border-t border-slate-800">
-                    <div className="flex items-baseline justify-between mb-4">
-                      <div>
-                        <span className="text-xs text-slate-400 block">Promotional Price</span>
-                        <div className="flex items-baseline gap-2">
-                          <span className="text-2xl sm:text-3xl font-black text-amber-400 font-display">
-                            {formatNaira(prod.price)}
-                          </span>
-                          <span className="text-xs sm:text-sm text-slate-500 line-through">
-                            {formatNaira(prod.normalPrice)}
-                          </span>
-                        </div>
-                      </div>
-                      <span className="text-xs font-bold text-emerald-400 bg-emerald-950/80 px-2.5 py-1 rounded-full border border-emerald-500/30">
-                        Save {formatNaira(prod.normalPrice - prod.price)}
+                  <h4 
+                    onClick={() => onViewProduct(prod)}
+                    className="text-sm sm:text-base font-bold text-[#0a192f] hover:text-blue-600 cursor-pointer line-clamp-1"
+                  >
+                    {prod.name}
+                  </h4>
+
+                  <p className="text-xs text-slate-500 line-clamp-1 mt-0.5">
+                    {prod.description}
+                  </p>
+
+                  <div className="flex items-center justify-between gap-2 mt-3 pt-2 border-t border-slate-100">
+                    <div className="flex items-baseline gap-1.5">
+                      <span className="text-base font-extrabold text-[#0a192f] font-mono">
+                        {formatNaira(prod.price)}
+                      </span>
+                      <span className="text-xs text-slate-400 line-through">
+                        {formatNaira(prod.normalPrice)}
                       </span>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                      <button
-                        onClick={() => onViewProduct(prod)}
-                        className="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 hover:to-amber-500 text-black font-extrabold text-xs py-3 px-4 rounded-xl shadow-lg transition-transform active:scale-95 cursor-pointer uppercase tracking-wider"
-                      >
-                        <span>VIEW SPECS &amp; PHOTOS</span>
-                        <ArrowRight className="w-3.5 h-3.5" />
-                      </button>
-
-                      <a
-                        href={prod.officialUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-full inline-flex items-center justify-center gap-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white font-bold text-xs py-3 px-4 rounded-xl border border-slate-700 transition-colors"
-                      >
-                        <span>Visit Official Store</span>
-                        <ExternalLink className="w-3.5 h-3.5 text-amber-400" />
-                      </a>
-                    </div>
+                    <button
+                      type="button"
+                      onClick={() => onViewProduct(prod)}
+                      className="inline-flex items-center gap-1 text-xs font-bold bg-[#0a192f] hover:bg-blue-600 text-white px-3 py-1.5 rounded-lg transition-colors"
+                    >
+                      <span>View Specs</span>
+                      <ArrowRight className="w-3 h-3" />
+                    </button>
                   </div>
                 </div>
-
               </div>
             );
           })}
-        </div>
-
-        {/* Combo Note */}
-        <div className="mt-10 bg-slate-900/60 border border-slate-800 rounded-2xl p-4 sm:p-6 text-center max-w-2xl mx-auto">
-          <p className="text-xs sm:text-sm text-slate-300">
-            💡 <strong className="text-amber-400">Want to order a Sink + Cooktop Combo?</strong> You can add either cooker directly in the Order Form below or speak with customer care to arrange combined delivery anywhere in Nigeria!
-          </p>
         </div>
 
       </div>

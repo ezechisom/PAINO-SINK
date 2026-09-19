@@ -33,7 +33,7 @@ import { AlternativeProductModal } from './components/AlternativeProductModal';
 import { AlternativeProduct } from './data/alternativeProducts';
 import { getWhatsAppUrl } from './utils/whatsapp';
 import { trackViewContent, trackInitiateCheckout, trackContact } from './utils/metaPixel';
-import { Sparkles, Phone, MessageCircle, ShoppingBag, Headphones, Flame } from 'lucide-react';
+import { Sparkles, Phone, MessageCircle, ShoppingBag, Flame } from 'lucide-react';
 
 export default function App() {
   const [config, setConfig] = useState<SiteConfig>(initialConfig);
@@ -85,25 +85,25 @@ export default function App() {
   );
 
   return (
-    <div className="min-h-screen bg-[#0b0f14] text-[#e2e8f0] flex flex-col font-sans selection:bg-amber-500/30 selection:text-amber-200">
+    <div className="min-h-screen bg-white text-slate-900 flex flex-col font-sans selection:bg-blue-500/20 selection:text-blue-900">
       
-      {/* 1. TOP PROMOTIONAL BAR */}
+      {/* 1. TOP PROMOTIONAL BAR (Dark Blue & Emerald Green) */}
       <PromoTopBar promoPrice={config.promoPrice} />
 
       {/* Main Brand Navigation Bar */}
-      <header className="bg-[#0b0f14]/95 backdrop-blur-md border-b border-slate-800/80 sticky top-[42px] z-40 transition-colors">
+      <header className="bg-white/95 backdrop-blur-md border-b border-slate-200 sticky top-[41px] z-40 transition-colors shadow-xs">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
           
           {/* Logo & Product Badge */}
           <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-amber-500 to-amber-600 flex items-center justify-center text-black font-extrabold shadow-md shadow-amber-500/20">
-              <Sparkles className="w-5 h-5" />
+            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#0a192f] flex items-center justify-center text-white font-extrabold shadow-sm">
+              <Sparkles className="w-5 h-5 text-blue-400" />
             </div>
             <div>
-              <span className="font-extrabold text-white text-base sm:text-lg tracking-tight font-display block leading-tight">
+              <span className="font-extrabold text-[#0a192f] text-base sm:text-lg tracking-tight font-display block leading-tight">
                 SMART PIANO SINK
               </span>
-              <span className="text-[10px] text-amber-400 font-semibold tracking-widest uppercase">
+              <span className="text-[10px] text-blue-700 font-bold tracking-wider uppercase">
                 SUS304 Nano Workstation
               </span>
             </div>
@@ -115,24 +115,24 @@ export default function App() {
             {/* Quick jump to Alternative Cooktops */}
             <a
               href="#alternative-products-section"
-              className="hidden xl:inline-flex items-center gap-1.5 text-xs text-amber-400 font-bold bg-amber-500/10 border border-amber-500/30 hover:bg-amber-500/20 px-3 py-2 rounded-xl transition-all"
+              className="hidden xl:inline-flex items-center gap-1.5 text-xs text-[#0a192f] font-bold bg-slate-100 hover:bg-slate-200 border border-slate-200 px-3 py-2 rounded-xl transition-all"
             >
-              <Flame className="w-3.5 h-3.5 text-amber-400" />
+              <Flame className="w-3.5 h-3.5 text-blue-600" />
               <span>Matching Cooktops</span>
             </a>
 
             {/* If Order is Placed: SHOW MERCHANT NUMBER PROMINENTLY AT TOP */}
-            {placedOrder ? (
+            {placedOrder && (
               <div className="flex items-center gap-2">
                 <a
                   href={`tel:${config.phoneNumber.replace(/\s+/g, '')}`}
                   onClick={() => trackContact('phone', 'header-call')}
                   id="header-placed-order-call-btn"
-                  className="flex items-center gap-1.5 text-xs text-white font-extrabold bg-amber-500 hover:bg-amber-400 px-3 py-2 rounded-xl transition-all shadow-md cursor-pointer animate-action-blink"
+                  className="flex items-center gap-1.5 text-xs text-white font-extrabold bg-[#0a192f] hover:bg-slate-800 px-3 py-2 rounded-xl transition-all shadow-sm cursor-pointer"
                 >
-                  <Phone className="w-3.5 h-3.5 text-black" />
-                  <span className="text-black hidden sm:inline">Call Dispatch: {config.phoneNumber}</span>
-                  <span className="text-black sm:hidden">{config.phoneNumber}</span>
+                  <Phone className="w-3.5 h-3.5 text-blue-400" />
+                  <span className="hidden sm:inline">Call Dispatch: {config.phoneNumber}</span>
+                  <span className="sm:hidden">{config.phoneNumber}</span>
                 </a>
 
                 <a
@@ -141,29 +141,20 @@ export default function App() {
                   rel="noopener noreferrer"
                   onClick={() => trackContact('whatsapp', 'header-whatsapp')}
                   id="header-whatsapp-btn"
-                  className="inline-flex items-center gap-1.5 text-xs font-bold text-white bg-[#25D366] hover:bg-[#20bd5a] px-3 py-2 rounded-xl transition-all shadow-md cursor-pointer animate-soft-blink"
+                  className="inline-flex items-center gap-1.5 text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-500 px-3 py-2 rounded-xl transition-all shadow-sm cursor-pointer animate-soft-blink"
                 >
                   <MessageCircle className="w-3.5 h-3.5 fill-white" />
                   <span className="hidden md:inline">WhatsApp Dispatch</span>
                   <span className="md:hidden">WhatsApp</span>
                 </a>
               </div>
-            ) : (
-              /* Before order: Customer Service link without printing raw phone number at top */
-              <a
-                href="#customer-service-section"
-                className="hidden sm:inline-flex items-center gap-1.5 text-xs text-slate-300 hover:text-amber-400 bg-slate-900/80 border border-slate-800 hover:border-slate-700 px-3 py-2 rounded-xl transition-colors"
-              >
-                <Headphones className="w-3.5 h-3.5 text-amber-400" />
-                <span>Customer Service</span>
-              </a>
             )}
 
-            {/* Header Order CTA — BLINKING */}
+            {/* Header Order CTA — BLINKING in Blue */}
             <button
               onClick={scrollToOrder}
               id="header-order-btn"
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 hover:from-amber-400 hover:to-amber-500 text-black font-extrabold text-xs sm:text-sm py-2 sm:py-2.5 px-3.5 sm:px-5 rounded-xl shadow-lg cursor-pointer uppercase tracking-wider transition-all animate-action-blink"
+              className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-extrabold text-xs sm:text-sm py-2 sm:py-2.5 px-3.5 sm:px-5 rounded-xl shadow-md cursor-pointer uppercase tracking-wider transition-all animate-action-blink"
             >
               <ShoppingBag className="w-4 h-4 shrink-0" />
               <span>
@@ -176,7 +167,7 @@ export default function App() {
         </div>
       </header>
 
-      {/* ALTERNATIVE APPLIANCES TOP SHOWCASE BAR - PROMINENT AT TOP */}
+      {/* ALTERNATIVE APPLIANCES TOP SHOWCASE BAR - SLIDING ACROSS TOP SCREEN */}
       <AlternativeProductsTopBanner 
         onViewProduct={(p) => setSelectedAltProduct(p)}
         onOrderProduct={handleSelectAltForOrder}
@@ -197,8 +188,8 @@ export default function App() {
         {/* 5. WHY YOU'LL LOVE IT (Features & Benefits) */}
         <WhyLoveSection config={config} onOrderClick={scrollToOrder} />
 
-        {/* 6. PRODUCT IMAGE SHOWCASE (Interactive Gallery) */}
-        <ImageGallery images={config.productImages} />
+        {/* 6. PRODUCT IMAGE SHOWCASE (3-Product Interactive Gallery) */}
+        <ImageGallery onOrderClick={scrollToOrder} />
 
         {/* ALTERNATIVE & MATCHING LUXURY COOKTOPS (MOONLIGHT LUXURY HOME TECH) */}
         <AlternativeProductsSection 
@@ -230,7 +221,7 @@ export default function App() {
         {/* 14. URGENCY SECTION */}
         <UrgencySection config={config} onOrderClick={scrollToOrder} />
 
-        {/* 15. FAQ ACCORDION (13 Verified Questions) */}
+        {/* 15. FAQ ACCORDION */}
         <FaqSection 
           faqs={config.faqs} 
           phoneNumber={config.phoneNumber}
@@ -239,7 +230,7 @@ export default function App() {
         {/* 16. FINAL OFFER SECTION */}
         <FinalOfferSection config={config} onOrderClick={scrollToOrder} />
 
-        {/* 17. ORDER FORM (Checkout with Nigerian States & Cooktop Option) */}
+        {/* 17. ORDER FORM (Checkout with Dynamic Subtotal calculation) */}
         <OrderForm 
           config={config} 
           onOrderPlaced={setPlacedOrder}
@@ -252,7 +243,7 @@ export default function App() {
       {/* Footer */}
       <Footer config={config} onOrderClick={scrollToOrder} />
 
-      {/* Floating WhatsApp Bubble — Only visible after placing order */}
+      {/* Floating WhatsApp Bubble */}
       <FloatingWhatsApp 
         whatsappNumber={config.whatsappNumber} 
         productName={config.productName} 

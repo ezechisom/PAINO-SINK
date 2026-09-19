@@ -106,7 +106,7 @@ export const Footer: React.FC<FooterProps> = ({ config, onOrderClick }) => {
             <p className="text-slate-400 leading-relaxed mb-3">
               Nationwide dispatch to Lagos, Abuja, Port Harcourt, Ibadan, Abia, Delta, Kano, and all 36 states of Nigeria.
             </p>
-            <div className="flex items-center gap-2 text-emerald-400 font-medium">
+            <div className="flex items-center gap-2 text-blue-400 font-medium">
               <ShieldCheck className="w-4 h-4" />
               <span>Inspection on Delivery Available</span>
             </div>

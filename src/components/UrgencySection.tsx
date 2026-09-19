@@ -43,9 +43,9 @@ export const UrgencySection: React.FC<UrgencySectionProps> = ({ config, onOrderC
           </div>
 
           {savings > 0 && (
-            <div className="flex items-center justify-between text-xs sm:text-sm text-emerald-400 font-bold mb-6">
+            <div className="flex items-center justify-between text-xs sm:text-sm text-blue-400 font-bold mb-6">
               <span>Instant Savings:</span>
-              <span className="bg-emerald-500/20 px-3 py-1 rounded-full border border-emerald-500/30">
+              <span className="text-blue-300 bg-blue-500/20 px-3 py-1 rounded-full border border-blue-400/30">
                 Save {formatNaira(savings)}
               </span>
             </div>
@@ -54,8 +54,8 @@ export const UrgencySection: React.FC<UrgencySectionProps> = ({ config, onOrderC
           {/* Availability & Delivery Status Block */}
           <div className="bg-slate-900/90 rounded-xl p-4 border border-slate-800 flex flex-col sm:flex-row items-center justify-around gap-3 text-xs">
             <div className="flex items-center gap-2 text-slate-300">
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
-              <span className="font-semibold text-emerald-400">Stock Available in Warehouse</span>
+              <span className="w-2.5 h-2.5 rounded-full bg-blue-400 animate-ping" />
+              <span className="font-semibold text-blue-400">Stock Available in Warehouse</span>
             </div>
             <span className="hidden sm:inline text-slate-700">|</span>
             <div className="text-slate-300 flex items-center gap-1.5">
@@ -75,7 +75,7 @@ export const UrgencySection: React.FC<UrgencySectionProps> = ({ config, onOrderC
         </button>
 
         <div className="flex items-center justify-center gap-2 mt-4 text-xs text-slate-400">
-          <ShieldCheck className="w-4 h-4 text-emerald-400" />
+          <ShieldCheck className="w-4 h-4 text-blue-400" />
           <span>Pay On Delivery Available in Lagos &amp; Abuja &bull; 100% Genuine Quality</span>
         </div>
 
