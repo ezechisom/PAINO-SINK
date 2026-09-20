@@ -26,6 +26,7 @@ export const ConfigEditorModal: React.FC<ConfigEditorModalProps> = ({
     paymentInformation: currentConfig.paymentInformation,
     returnPolicy: currentConfig.returnPolicy,
     warrantyInformation: currentConfig.warrantyInformation,
+    formspreeEndpoint: currentConfig.formspreeEndpoint || 'https://formspree.io/f/xppwqdyj',
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -50,6 +51,7 @@ export const ConfigEditorModal: React.FC<ConfigEditorModalProps> = ({
       paymentInformation: formData.paymentInformation,
       returnPolicy: formData.returnPolicy,
       warrantyInformation: formData.warrantyInformation,
+      formspreeEndpoint: formData.formspreeEndpoint,
     });
     setSavedSuccess(true);
     setTimeout(() => {
@@ -169,6 +171,19 @@ export const ConfigEditorModal: React.FC<ConfigEditorModalProps> = ({
                   onChange={handleChange}
                   className="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-white"
                 />
+              </div>
+
+              <div>
+                <label className="block text-slate-300 font-bold mb-1">Formspree Endpoint (Receives Customer Orders)</label>
+                <input
+                  type="url"
+                  name="formspreeEndpoint"
+                  value={formData.formspreeEndpoint}
+                  onChange={handleChange}
+                  placeholder="https://formspree.io/f/xppwqdyj"
+                  className="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white font-mono text-xs"
+                />
+                <span className="text-[10px] text-slate-400 mt-0.5 block">Customer submissions will be sent directly to this URL.</span>
               </div>
 
               <div className="pt-3 border-t border-slate-800 flex items-center justify-between gap-3">

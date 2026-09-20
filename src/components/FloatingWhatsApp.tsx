@@ -23,7 +23,7 @@ export const FloatingWhatsApp: React.FC<FloatingWhatsAppProps> = ({
   }
 
   const customMessage = orderId 
-    ? `Hello, I just placed order #${orderId} for the ${productName}. Please confirm dispatch.`
+    ? `Hello Moonlight, I just placed order #${orderId} for the ${productName}. Please confirm with me.`
     : undefined;
 
   const whatsappUrl = getWhatsAppUrl(whatsappNumber, productName, undefined, customMessage);
@@ -32,7 +32,7 @@ export const FloatingWhatsApp: React.FC<FloatingWhatsAppProps> = ({
     <div className="fixed bottom-20 md:bottom-6 right-4 md:right-6 z-40 flex flex-col items-end animate-bounce">
       {showTooltip && (
         <div className="mb-2 bg-emerald-950 border border-emerald-500/60 text-emerald-200 text-xs py-2 px-3 rounded-xl shadow-2xl flex items-center gap-2">
-          <span>Order Received! Tap to confirm on WhatsApp</span>
+          <span>Order Received! Tap to chat with Moonlight on WhatsApp</span>
           <button
             onClick={() => setShowTooltip(false)}
             className="text-emerald-400 hover:text-white p-0.5 cursor-pointer"
@@ -50,10 +50,10 @@ export const FloatingWhatsApp: React.FC<FloatingWhatsAppProps> = ({
         onClick={() => trackContact('whatsapp')}
         id="floating-whatsapp-btn"
         className="w-14 h-14 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white flex items-center justify-center shadow-2xl hover:scale-110 active:scale-95 transition-all group ring-4 ring-emerald-400/40"
-        aria-label="Chat on WhatsApp"
+        aria-label="Chat with Moonlight on WhatsApp"
       >
         <MessageCircle className="w-7 h-7 fill-white" />
-        <span className="sr-only">Chat on WhatsApp</span>
+        <span className="sr-only">Chat with Moonlight on WhatsApp</span>
       </a>
     </div>
   );

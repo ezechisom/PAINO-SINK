@@ -1,17 +1,7 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { ALTERNATIVE_PRODUCTS, AlternativeProduct } from '../data/alternativeProducts';
 import { formatNaira } from '../config';
-import { 
-  Flame, 
-  Zap, 
-  ChevronLeft, 
-  ChevronRight, 
-  Sparkles,
-  ExternalLink,
-  ArrowRight,
-  ShieldCheck,
-  PlusCircle
-} from 'lucide-react';
+import { Flame, ArrowRight } from 'lucide-react';
 
 interface AlternativeProductsTopBannerProps {
   onViewProduct: (product: AlternativeProduct) => void;
@@ -19,200 +9,180 @@ interface AlternativeProductsTopBannerProps {
 }
 
 export const AlternativeProductsTopBanner: React.FC<AlternativeProductsTopBannerProps> = ({
-  onViewProduct,
-  onOrderProduct
+  onViewProduct
 }) => {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(true);
-  const [isPaused, setIsPaused] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
-  const checkScroll = () => {
-    if (scrollRef.current) {
-      const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
-      setCanScrollLeft(scrollLeft > 5);
-      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 5);
-    }
-  };
-
-  useEffect(() => {
-    checkScroll();
-    window.addEventListener('resize', checkScroll);
-    return () => window.removeEventListener('resize', checkScroll);
-  }, []);
-
-  // Smooth auto-slide across the top screen with pause on hover
-  useEffect(() => {
-    if (isPaused) return;
-    const interval = setInterval(() => {
-      if (scrollRef.current) {
-        const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
-        if (scrollLeft >= scrollWidth - clientWidth - 5) {
-          scrollRef.current.scrollTo({ left: 0, behavior: 'smooth' });
-        } else {
-          scrollRef.current.scrollBy({ left: 200, behavior: 'smooth' });
-        }
-        checkScroll();
-      }
-    }, 4000);
-    return () => clearInterval(interval);
-  }, [isPaused]);
-
-  const handleScroll = (direction: 'left' | 'right') => {
-    if (scrollRef.current) {
-      const amount = direction === 'left' ? -220 : 220;
-      scrollRef.current.scrollBy({ left: amount, behavior: 'smooth' });
-      setTimeout(checkScroll, 300);
-    }
-  };
+  // Quadruple the products to guarantee a seamless, infinite loop on any screen width
+  const loopProducts = [
+    ...ALTERNATIVE_PRODUCTS,
+    ...ALTERNATIVE_PRODUCTS,
+    ...ALTERNATIVE_PRODUCTS,
+    ...ALTERNATIVE_PRODUCTS
+  ];
 
   return (
     <div 
       id="alternative-products-top" 
-      className="bg-white/95 border-b border-slate-200/80 py-1.5 px-3 sm:px-6 relative z-30 shadow-2xs"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
+      className="bg-gradient-to-r from-red-600 via-red-500 to-red-600 border-y-2 border-yellow-400 py-2 px-2 sm:px-4 relative z-30 shadow-lg overflow-hidden select-none"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onTouchStart={() => setIsHovered(true)}
+      onTouchEnd={() => setIsHovered(false)}
     >
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+      <div className="max-w-7xl mx-auto flex items-center gap-2 sm:gap-3">
         
-        {/* Compact Label */}
-        <div className="flex items-center justify-between shrink-0">
-          <div className="flex items-center gap-1.5">
-            <span className="flex h-1.5 w-1.5 relative">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-blue-600"></span>
-            </span>
-            <span className="text-[10px] font-extrabold uppercase tracking-wider text-[#0a192f] whitespace-nowrap">
-              Matching Cooktops:
-            </span>
-          </div>
-
-          <div className="flex items-center gap-1 md:hidden">
-            <button
-              type="button"
-              onClick={() => handleScroll('left')}
-              disabled={!canScrollLeft}
-              className="p-0.5 rounded bg-slate-100 text-slate-600 disabled:opacity-30 transition-all cursor-pointer"
-              title="Scroll left"
-            >
-              <ChevronLeft className="w-3 h-3" />
-            </button>
-            <button
-              type="button"
-              onClick={() => handleScroll('right')}
-              disabled={!canScrollRight}
-              className="p-0.5 rounded bg-slate-100 text-slate-600 disabled:opacity-30 transition-all cursor-pointer"
-              title="Scroll right"
-            >
-              <ChevronRight className="w-3 h-3" />
-            </button>
+        {/* High-Notice Red & Yellow Sticky Announcement Badge */}
+        <div className="shrink-0 z-20 flex items-center">
+          <div className="bg-yellow-400 text-red-950 font-black text-[10px] sm:text-xs px-2.5 py-1.5 rounded-lg uppercase tracking-wider flex items-center gap-1.5 shadow-md border border-yellow-300 animate-pulse">
+            <Flame className="w-3.5 h-3.5 fill-red-600 text-red-600 shrink-0" />
+            <span className="hidden sm:inline">MATCHING COOKTOPS &bull; SPECIAL DEALS:</span>
+            <span className="sm:hidden">MATCHING COOKERS:</span>
           </div>
         </div>
 
-        {/* Sliding Compact Track */}
-        <div className="relative flex-1 min-w-0 flex items-center">
-          <button
-            type="button"
-            onClick={() => handleScroll('left')}
-            disabled={!canScrollLeft}
-            className="hidden md:flex p-1 rounded-full bg-white/90 border border-slate-200 hover:bg-slate-100 text-slate-700 disabled:opacity-0 transition-all shadow-xs cursor-pointer absolute -left-2.5 z-10"
-            title="Scroll left"
-          >
-            <ChevronLeft className="w-3 h-3" />
-          </button>
+        {/* Continuous Smooth Sliding Ticker Track */}
+        <div className="relative flex-1 min-w-0 overflow-hidden">
+          {/* Subtle Red Gradients on edges for smooth fading into track */}
+          <div className="pointer-events-none absolute left-0 inset-y-0 w-4 bg-gradient-to-r from-red-600 to-transparent z-10" />
+          <div className="pointer-events-none absolute right-0 inset-y-0 w-4 bg-gradient-to-l from-red-600 to-transparent z-10" />
 
-          <div
-            ref={scrollRef}
-            onScroll={checkScroll}
-            className="flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5 scroll-smooth w-full"
+          <div 
+            className="animate-marquee-slide flex items-center gap-3 py-0.5 cursor-pointer"
+            style={{ animationPlayState: isHovered ? 'paused' : 'running' }}
           >
-            {ALTERNATIVE_PRODUCTS.map((prod) => {
+            {/* Set 1 */}
+            {loopProducts.map((prod, idx) => {
               const is5Burner = prod.id === 'cooker-5burner';
               const savings = prod.normalPrice - prod.price;
 
               return (
                 <div
-                  key={prod.id}
+                  key={`top-alt-prod-1-${prod.id}-${idx}`}
                   onClick={() => onViewProduct(prod)}
-                  className="group bg-slate-50/90 hover:bg-blue-50/50 border border-slate-200/90 hover:border-blue-400 rounded-lg p-1.5 transition-all duration-200 cursor-pointer flex items-center gap-2 shrink-0 w-[240px] sm:w-[255px]"
+                  className="group bg-yellow-400 hover:bg-yellow-300 border-2 border-yellow-500 hover:border-yellow-200 rounded-xl p-2 transition-transform duration-200 hover:scale-[1.02] active:scale-[0.98] shadow-md flex items-center gap-3 shrink-0 w-[330px] sm:w-[370px]"
                 >
-                  {/* Ultra-compact Thumbnail */}
-                  <div className="relative w-10 h-10 rounded-md overflow-hidden bg-slate-200 border border-slate-200 shrink-0">
+                  {/* Large High-Visibility Product Picture */}
+                  <div className="relative w-28 sm:w-36 h-20 sm:h-24 rounded-lg overflow-hidden bg-black/80 border-2 border-red-700/60 shrink-0 shadow-inner">
                     <img
                       src={prod.images[0]}
                       alt={prod.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-300"
                       referrerPolicy="no-referrer"
                     />
-                    <div className="absolute top-0 left-0 bg-[#0a192f]/90 text-white px-0.5 rounded-br text-[7px] font-bold">
-                      {is5Burner ? '5-BURN' : '2-BURN'}
+                    <div className="absolute top-0 left-0 bg-red-600 text-yellow-300 px-1.5 py-0.5 rounded-br text-[9px] font-black tracking-tight shadow-sm">
+                      {is5Burner ? '⚡ 5-BURNER DUAL-FUEL' : '🔥 90° FLIP-UP 2-BURNER'}
+                    </div>
+                    <div className="absolute bottom-0 inset-x-0 bg-black/75 backdrop-blur-xs text-yellow-300 text-[8px] font-extrabold px-1 py-0.5 text-center truncate">
+                      {is5Burner ? '4 Gas + 1 Electric Plate' : 'Twin Flip Burners + Timer'}
                     </div>
                   </div>
 
-                  {/* Compact Info Details */}
+                  {/* Details */}
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between gap-1">
-                      <span className="text-[11px] font-bold text-[#0a192f] group-hover:text-blue-700 transition-colors truncate">
+                      <span className="text-xs font-black text-red-950 group-hover:text-red-900 transition-colors truncate">
                         {prod.name}
-                      </span>
-                      <span className="text-[8px] font-bold text-emerald-700 bg-emerald-50 px-1 rounded border border-emerald-200 shrink-0">
-                        -{formatNaira(savings)}
                       </span>
                     </div>
 
-                    <div className="flex items-center justify-between mt-0.5">
-                      <div className="flex items-baseline gap-1">
-                        <span className="text-xs font-black text-[#0a192f] font-mono">
+                    <div className="flex items-center gap-1.5 mt-0.5">
+                      <span className="text-[9px] font-black text-yellow-300 bg-red-600 px-1.5 py-0.5 rounded border border-red-700 shrink-0">
+                        SAVE {formatNaira(savings)}
+                      </span>
+                      <span className="text-[9px] text-red-900 font-extrabold truncate">
+                        {prod.dimensions.split(' ')[0]}
+                      </span>
+                    </div>
+
+                    <div className="flex items-center justify-between mt-1.5 pt-1 border-t border-yellow-500/50">
+                      <div className="flex items-baseline gap-1.5">
+                        <span className="text-xs sm:text-sm font-black text-red-950 font-mono">
                           {formatNaira(prod.price)}
                         </span>
-                        <span className="text-[9px] text-slate-400 line-through">
+                        <span className="text-[9px] text-red-800 line-through font-semibold">
                           {formatNaira(prod.normalPrice)}
                         </span>
                       </div>
 
-                      <span className="text-[9px] font-semibold text-blue-600 hover:text-blue-800 flex items-center gap-0.5">
-                        View &rarr;
-                      </span>
+                      <div className="inline-flex items-center gap-1 bg-red-600 hover:bg-red-700 text-yellow-300 font-extrabold text-[9px] px-2 py-0.5 rounded shadow-xs uppercase tracking-tight">
+                        <span>VIEW</span>
+                        <ArrowRight className="w-2.5 h-2.5" />
+                      </div>
                     </div>
                   </div>
                 </div>
               );
             })}
 
-            {/* Third Companion Mini-Pill: Moonlight catalog link */}
-            <a
-              href="https://www.moonlightluxuryhometech.shop/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-blue-50/70 hover:bg-blue-100/70 border border-blue-200 rounded-lg p-1.5 flex items-center gap-2 shrink-0 px-2.5 transition-colors"
-            >
-              <div className="w-7 h-7 rounded-md bg-blue-600 text-white flex items-center justify-center shrink-0">
-                <ShieldCheck className="w-3.5 h-3.5" />
-              </div>
-              <div className="flex flex-col">
-                <span className="text-[9px] font-extrabold text-blue-900 uppercase tracking-tight flex items-center gap-1">
-                  <span>Moonlight Catalog</span>
-                  <ExternalLink className="w-2.5 h-2.5" />
-                </span>
-                <span className="text-[9px] text-slate-500">
-                  Combine with sink for combo savings
-                </span>
-              </div>
-            </a>
-          </div>
+            {/* Set 2 (Duplicated for seamless continuous loop) */}
+            {loopProducts.map((prod, idx) => {
+              const is5Burner = prod.id === 'cooker-5burner';
+              const savings = prod.normalPrice - prod.price;
 
-          <button
-            type="button"
-            onClick={() => handleScroll('right')}
-            disabled={!canScrollRight}
-            className="hidden md:flex p-1 rounded-full bg-white/90 border border-slate-200 hover:bg-slate-100 text-slate-700 disabled:opacity-0 transition-all shadow-xs cursor-pointer absolute -right-2.5 z-10"
-            title="Scroll right"
-          >
-            <ChevronRight className="w-3 h-3" />
-          </button>
+              return (
+                <div
+                  key={`top-alt-prod-2-${prod.id}-${idx}`}
+                  onClick={() => onViewProduct(prod)}
+                  className="group bg-yellow-400 hover:bg-yellow-300 border-2 border-yellow-500 hover:border-yellow-200 rounded-xl p-2 transition-transform duration-200 hover:scale-[1.02] active:scale-[0.98] shadow-md flex items-center gap-3 shrink-0 w-[330px] sm:w-[370px]"
+                >
+                  {/* Large High-Visibility Product Picture */}
+                  <div className="relative w-28 sm:w-36 h-20 sm:h-24 rounded-lg overflow-hidden bg-black/80 border-2 border-red-700/60 shrink-0 shadow-inner">
+                    <img
+                      src={prod.images[0]}
+                      alt={prod.name}
+                      className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-300"
+                      referrerPolicy="no-referrer"
+                    />
+                    <div className="absolute top-0 left-0 bg-red-600 text-yellow-300 px-1.5 py-0.5 rounded-br text-[9px] font-black tracking-tight shadow-sm">
+                      {is5Burner ? '⚡ 5-BURNER DUAL-FUEL' : '🔥 90° FLIP-UP 2-BURNER'}
+                    </div>
+                    <div className="absolute bottom-0 inset-x-0 bg-black/75 backdrop-blur-xs text-yellow-300 text-[8px] font-extrabold px-1 py-0.5 text-center truncate">
+                      {is5Burner ? '4 Gas + 1 Electric Plate' : 'Twin Flip Burners + Timer'}
+                    </div>
+                  </div>
+
+                  {/* Details */}
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center justify-between gap-1">
+                      <span className="text-xs font-black text-red-950 group-hover:text-red-900 transition-colors truncate">
+                        {prod.name}
+                      </span>
+                    </div>
+
+                    <div className="flex items-center gap-1.5 mt-0.5">
+                      <span className="text-[9px] font-black text-yellow-300 bg-red-600 px-1.5 py-0.5 rounded border border-red-700 shrink-0">
+                        SAVE {formatNaira(savings)}
+                      </span>
+                      <span className="text-[9px] text-red-900 font-extrabold truncate">
+                        {prod.dimensions.split(' ')[0]}
+                      </span>
+                    </div>
+
+                    <div className="flex items-center justify-between mt-1.5 pt-1 border-t border-yellow-500/50">
+                      <div className="flex items-baseline gap-1.5">
+                        <span className="text-xs sm:text-sm font-black text-red-950 font-mono">
+                          {formatNaira(prod.price)}
+                        </span>
+                        <span className="text-[9px] text-red-800 line-through font-semibold">
+                          {formatNaira(prod.normalPrice)}
+                        </span>
+                      </div>
+
+                      <div className="inline-flex items-center gap-1 bg-red-600 hover:bg-red-700 text-yellow-300 font-extrabold text-[9px] px-2 py-0.5 rounded shadow-xs uppercase tracking-tight">
+                        <span>VIEW</span>
+                        <ArrowRight className="w-2.5 h-2.5" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
 
       </div>
     </div>
   );
 };
+

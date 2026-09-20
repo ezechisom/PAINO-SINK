@@ -49,8 +49,8 @@ export const AlternativeProductsSection: React.FC<AlternativeProductsSectionProp
           </a>
         </div>
 
-        {/* Compact 2-Item Row */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {/* 2-Item Grid with Large Visible Pictures */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {ALTERNATIVE_PRODUCTS.map((prod) => {
             const is5Burner = prod.id === 'cooker-5burner';
             const savings = prod.normalPrice - prod.price;
@@ -58,52 +58,89 @@ export const AlternativeProductsSection: React.FC<AlternativeProductsSectionProp
             return (
               <div
                 key={prod.id}
-                className="bg-white border border-slate-200 hover:border-blue-500/50 rounded-2xl p-3.5 sm:p-4 shadow-xs hover:shadow-md transition-all flex flex-col sm:flex-row items-center gap-4"
+                className="bg-white border-2 border-slate-200 hover:border-blue-500/60 rounded-2xl p-4 shadow-sm hover:shadow-md transition-all flex flex-col sm:flex-row items-start gap-4"
               >
-                {/* Thumbnail */}
-                <div 
-                  onClick={() => onViewProduct(prod)}
-                  className="relative w-full sm:w-36 h-32 sm:h-28 rounded-xl overflow-hidden bg-slate-100 border border-slate-200 shrink-0 cursor-pointer"
-                >
-                  <img
-                    src={prod.images[0]}
-                    alt={prod.name}
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                    referrerPolicy="no-referrer"
-                  />
-                  <div className="absolute top-1.5 left-1.5 bg-[#0a192f]/90 text-white text-[9px] font-bold px-2 py-0.5 rounded-md">
-                    {is5Burner ? '5-BURNER HYBRID' : '90° FLIP-UP'}
+                {/* Large Product Picture & Thumbnail Strip */}
+                <div className="w-full sm:w-60 shrink-0">
+                  <div 
+                    onClick={() => onViewProduct(prod)}
+                    className="relative w-full h-44 sm:h-40 rounded-xl overflow-hidden bg-slate-900 border border-slate-200 cursor-pointer group shadow-inner"
+                  >
+                    <img
+                      src={prod.images[0]}
+                      alt={prod.name}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      referrerPolicy="no-referrer"
+                    />
+                    <div className="absolute top-2 left-2 bg-[#0a192f]/90 backdrop-blur-xs text-white text-[10px] font-black px-2.5 py-1 rounded-md shadow-sm">
+                      {is5Burner ? '⚡ 5-BURNER DUAL-FUEL' : '🔥 90° FLIP-UP 2-BURNER'}
+                    </div>
+                    <div className="absolute bottom-2 inset-x-2 bg-black/75 backdrop-blur-xs text-yellow-300 text-[9px] font-bold px-2 py-1 rounded text-center">
+                      {is5Burner ? '4 High-Heat Gas + 1 Electric Zone' : 'Dual Foldable Burners + 180min Timer'}
+                    </div>
+                  </div>
+
+                  {/* Multi-Photo Preview Strip (Visible without clicking details) */}
+                  <div className="grid grid-cols-3 gap-1.5 mt-2">
+                    {prod.images.slice(1, 4).map((imgUrl, imgIdx) => (
+                      <div
+                        key={`mini-thumb-${prod.id}-${imgIdx}`}
+                        onClick={() => onViewProduct(prod)}
+                        className="relative h-12 rounded-lg overflow-hidden border border-slate-200 bg-slate-100 cursor-pointer hover:border-blue-500 transition-colors"
+                      >
+                        <img
+                          src={imgUrl}
+                          alt={`${prod.name} view ${imgIdx + 2}`}
+                          className="w-full h-full object-cover"
+                          referrerPolicy="no-referrer"
+                        />
+                      </div>
+                    ))}
                   </div>
                 </div>
 
                 {/* Details */}
-                <div className="flex-1 min-w-0 w-full">
-                  <div className="flex items-center justify-between gap-1 mb-1">
-                    <span className="text-[10px] font-bold uppercase text-slate-500">
-                      {prod.dimensions}
-                    </span>
-                    <span className="text-[10px] font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded-full border border-blue-200">
-                      Save {formatNaira(savings)}
-                    </span>
+                <div className="flex-1 min-w-0 w-full flex flex-col justify-between self-stretch">
+                  <div>
+                    <div className="flex items-center justify-between gap-1 mb-1">
+                      <span className="text-[10px] font-bold uppercase text-slate-500 bg-slate-100 px-2 py-0.5 rounded">
+                        {prod.dimensions}
+                      </span>
+                      <span className="text-[10px] font-bold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+                        Save {formatNaira(savings)}
+                      </span>
+                    </div>
+
+                    <h4 
+                      onClick={() => onViewProduct(prod)}
+                      className="text-base sm:text-lg font-black text-[#0a192f] hover:text-blue-600 cursor-pointer leading-tight mt-1"
+                    >
+                      {prod.name}
+                    </h4>
+
+                    <p className="text-xs text-slate-600 mt-1.5 leading-relaxed line-clamp-3">
+                      {prod.description}
+                    </p>
+
+                    {/* Quick Specs Highlight */}
+                    <div className="mt-3 flex flex-wrap gap-1.5">
+                      {prod.keyFeatures.slice(0, 2).map((feat, fIdx) => (
+                        <span 
+                          key={fIdx} 
+                          className="text-[10px] bg-slate-100 text-slate-700 px-2 py-0.5 rounded-md font-medium"
+                        >
+                          &bull; {feat.split(':')[0]}
+                        </span>
+                      ))}
+                    </div>
                   </div>
 
-                  <h4 
-                    onClick={() => onViewProduct(prod)}
-                    className="text-sm sm:text-base font-bold text-[#0a192f] hover:text-blue-600 cursor-pointer line-clamp-1"
-                  >
-                    {prod.name}
-                  </h4>
-
-                  <p className="text-xs text-slate-500 line-clamp-1 mt-0.5">
-                    {prod.description}
-                  </p>
-
-                  <div className="flex items-center justify-between gap-2 mt-3 pt-2 border-t border-slate-100">
+                  <div className="flex items-center justify-between gap-2 mt-4 pt-3 border-t border-slate-100">
                     <div className="flex items-baseline gap-1.5">
-                      <span className="text-base font-extrabold text-[#0a192f] font-mono">
+                      <span className="text-lg font-black text-[#0a192f] font-mono">
                         {formatNaira(prod.price)}
                       </span>
-                      <span className="text-xs text-slate-400 line-through">
+                      <span className="text-xs text-slate-400 line-through font-semibold">
                         {formatNaira(prod.normalPrice)}
                       </span>
                     </div>
@@ -111,10 +148,10 @@ export const AlternativeProductsSection: React.FC<AlternativeProductsSectionProp
                     <button
                       type="button"
                       onClick={() => onViewProduct(prod)}
-                      className="inline-flex items-center gap-1 text-xs font-bold bg-[#0a192f] hover:bg-blue-600 text-white px-3 py-1.5 rounded-lg transition-colors"
+                      className="inline-flex items-center gap-1.5 text-xs font-black bg-[#0a192f] hover:bg-blue-600 text-white px-3.5 py-2 rounded-xl transition-colors shadow-xs cursor-pointer"
                     >
-                      <span>View Specs</span>
-                      <ArrowRight className="w-3 h-3" />
+                      <span>View Full Specs</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
                     </button>
                   </div>
                 </div>

@@ -60,7 +60,7 @@
 .animate-marquee-slide {
   display: flex;
   width: max-content;
-  animation: marquee-slide 32s linear infinite;
+  animation: marquee-slide 25s linear infinite;
 }
 
 .animate-marquee-slide:hover {

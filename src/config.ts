@@ -8,6 +8,9 @@ const getInitialPromoEndDate = (): string => {
   return now.toISOString();
 };
 
+// Central Formspree Form Submission Endpoint
+export const FORMSPREE_ENDPOINT = "https://formspree.io/f/xppwqdyj";
+
 export const CONFIG: SiteConfig = {
   productName: "Smart Kitchen Piano Sink",
   normalPrice: 160000,
@@ -16,6 +19,7 @@ export const CONFIG: SiteConfig = {
   countdownEndDate: getInitialPromoEndDate(),
   whatsappNumber: "2349136827730", // Store WhatsApp number (09136827730)
   phoneNumber: "09136827730",
+  formspreeEndpoint: FORMSPREE_ENDPOINT,
   
   deliveryInformation: "Nationwide delivery across Nigeria. Lagos orders arrive in 1–2 business days. For other states, delivery takes 3–5 business days: standard orders are picked up at your city's major commercial motor park terminal, while direct doorstep delivery is available for an extra fee of ₦5,000.",
   paymentInformation: "Payment on Delivery available in selected major cities (Lagos, Abuja, PH). Bank transfer and secure online payment available nationwide.",

@@ -85,6 +85,7 @@ export interface SiteConfig {
   paymentInformation: string;
   returnPolicy: string;
   warrantyInformation: string;
+  formspreeEndpoint?: string;
   trustStatements: {
     delivery: string;
     packaging: string;

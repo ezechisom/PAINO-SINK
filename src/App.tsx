@@ -121,7 +121,7 @@ export default function App() {
               <span>Matching Cooktops</span>
             </a>
 
-            {/* If Order is Placed: SHOW MERCHANT NUMBER PROMINENTLY AT TOP */}
+            {/* If Order is Placed: SHOW MOONLIGHT CONTACT NUMBER PROMINENTLY AT TOP */}
             {placedOrder && (
               <div className="flex items-center gap-2">
                 <a
@@ -129,10 +129,11 @@ export default function App() {
                   onClick={() => trackContact('phone', 'header-call')}
                   id="header-placed-order-call-btn"
                   className="flex items-center gap-1.5 text-xs text-white font-extrabold bg-[#0a192f] hover:bg-slate-800 px-3 py-2 rounded-xl transition-all shadow-sm cursor-pointer"
+                  title="Call Moonlight"
                 >
                   <Phone className="w-3.5 h-3.5 text-blue-400" />
-                  <span className="hidden sm:inline">Call Dispatch: {config.phoneNumber}</span>
-                  <span className="sm:hidden">{config.phoneNumber}</span>
+                  <span className="hidden sm:inline">Call Moonlight: {config.phoneNumber}</span>
+                  <span className="sm:hidden">Call: {config.phoneNumber}</span>
                 </a>
 
                 <a
@@ -142,9 +143,10 @@ export default function App() {
                   onClick={() => trackContact('whatsapp', 'header-whatsapp')}
                   id="header-whatsapp-btn"
                   className="inline-flex items-center gap-1.5 text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-500 px-3 py-2 rounded-xl transition-all shadow-sm cursor-pointer animate-soft-blink"
+                  title="WhatsApp Moonlight"
                 >
                   <MessageCircle className="w-3.5 h-3.5 fill-white" />
-                  <span className="hidden md:inline">WhatsApp Dispatch</span>
+                  <span className="hidden md:inline">WhatsApp Moonlight</span>
                   <span className="md:hidden">WhatsApp</span>
                 </a>
               </div>

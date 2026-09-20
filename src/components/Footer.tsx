@@ -1,6 +1,6 @@
 import React from 'react';
 import { SiteConfig } from '../types';
-import { Phone, ShieldCheck, Truck, Sparkles, Headphones, Clock, MapPin } from 'lucide-react';
+import { Phone, MessageCircle, ShieldCheck, Truck, Sparkles, Headphones, Clock, MapPin } from 'lucide-react';
 
 interface FooterProps {
   config: SiteConfig;
@@ -13,43 +13,56 @@ export const Footer: React.FC<FooterProps> = ({ config, onOrderClick }) => {
     <footer id="customer-service-section" className="bg-[#070a0e] text-slate-400 border-t border-slate-800/80 pt-12 pb-24 md:pb-12 text-xs scroll-mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Customer Service & Support Spotlight Card */}
+        {/* Call or WhatsApp Moonlight Spotlight Card */}
         <div className="bg-slate-900/90 border border-slate-800 rounded-2xl p-6 mb-10 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
           <div className="flex items-start gap-4">
-            <div className="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 shrink-0">
+            <div className="w-12 h-12 rounded-2xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400 shrink-0">
               <Headphones className="w-6 h-6" />
             </div>
             <div>
-              <span className="text-amber-400 font-bold uppercase tracking-widest text-[11px] block">
-                Official Support Desk
+              <span className="text-blue-400 font-bold uppercase tracking-widest text-[11px] block">
+                Official Moonlight Support Desk
               </span>
               <h3 className="text-lg font-bold text-white mt-0.5">
-                Customer Service &amp; Delivery Dispatch
+                Call or WhatsApp Moonlight
               </h3>
               <p className="text-slate-300 text-xs mt-1 max-w-xl">
-                Need help with your kitchen countertop cutout dimensions, installation advice, or tracking an ongoing parcel? Our dedicated customer care team is here to assist you.
+                Need help with your kitchen countertop cutout dimensions, installation advice, or tracking an ongoing parcel? Contact Moonlight directly via phone call or WhatsApp.
               </p>
               <div className="flex flex-wrap items-center gap-4 mt-2 text-[11px] text-slate-400">
                 <span className="flex items-center gap-1">
-                  <Clock className="w-3.5 h-3.5 text-amber-400" />
+                  <Clock className="w-3.5 h-3.5 text-blue-400" />
                   Mon – Sat: 8:00 AM – 8:00 PM
                 </span>
                 <span className="flex items-center gap-1">
-                  <MapPin className="w-3.5 h-3.5 text-amber-400" />
-                  Nationwide Dispatch Hubs (Lagos, Abuja, PH, Ibadan)
+                  <MapPin className="w-3.5 h-3.5 text-blue-400" />
+                  Nationwide Distribution Hubs (Lagos, Abuja, PH, Ibadan)
                 </span>
               </div>
             </div>
           </div>
 
-          <a
-            href={`tel:${config.phoneNumber.replace(/\s+/g, '')}`}
-            id="footer-call-support-btn"
-            className="w-full md:w-auto inline-flex items-center justify-center gap-2.5 bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 hover:to-amber-500 text-black font-extrabold text-xs py-3.5 px-6 rounded-xl shadow-lg transition-transform active:scale-95 cursor-pointer shrink-0 animate-soft-blink"
-          >
-            <Phone className="w-4 h-4" />
-            <span>CUSTOMER SERVICE: {config.phoneNumber}</span>
-          </a>
+          <div className="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto shrink-0">
+            <a
+              href={`tel:${config.phoneNumber.replace(/\s+/g, '')}`}
+              id="footer-call-support-btn"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#0a192f] hover:bg-slate-800 text-white border border-slate-700 font-extrabold text-xs py-3.5 px-5 rounded-xl shadow-lg transition-transform active:scale-95 cursor-pointer"
+            >
+              <Phone className="w-4 h-4 text-blue-400" />
+              <span>CALL MOONLIGHT: {config.phoneNumber}</span>
+            </a>
+
+            <a
+              href={`https://wa.me/${config.whatsappNumber}?text=${encodeURIComponent("Hello Moonlight Luxury Home Tech, I am inquiring about the Smart Kitchen Piano Sink.")}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              id="footer-whatsapp-support-btn"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-xs py-3.5 px-5 rounded-xl shadow-lg transition-transform active:scale-95 cursor-pointer animate-soft-blink"
+            >
+              <MessageCircle className="w-4 h-4 fill-white" />
+              <span>WHATSAPP MOONLIGHT</span>
+            </a>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 pb-10 border-b border-slate-800">
@@ -57,7 +70,7 @@ export const Footer: React.FC<FooterProps> = ({ config, onOrderClick }) => {
           {/* Brand Info */}
           <div className="md:col-span-2">
             <div className="flex items-center gap-2 mb-3">
-              <div className="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold font-display">
+              <div className="w-8 h-8 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center font-bold font-display">
                 <Sparkles className="w-4 h-4" />
               </div>
               <span className="font-extrabold text-white text-base tracking-tight font-display">
@@ -70,10 +83,10 @@ export const Footer: React.FC<FooterProps> = ({ config, onOrderClick }) => {
             <div className="flex items-center gap-4 text-slate-300">
               <a 
                 href={`tel:${config.phoneNumber.replace(/\s+/g, '')}`}
-                className="flex items-center gap-1.5 hover:text-amber-400 transition-colors font-semibold"
+                className="flex items-center gap-1.5 hover:text-blue-400 transition-colors font-semibold"
               >
-                <Phone className="w-3.5 h-3.5 text-amber-400" />
-                <span>Customer Care Line: {config.phoneNumber}</span>
+                <Phone className="w-3.5 h-3.5 text-blue-400" />
+                <span>Call or WhatsApp Moonlight: {config.phoneNumber}</span>
               </a>
             </div>
           </div>
@@ -84,14 +97,14 @@ export const Footer: React.FC<FooterProps> = ({ config, onOrderClick }) => {
               Quick Navigation
             </h4>
             <ul className="space-y-2">
-              <li><a href="#hero-section" className="hover:text-amber-400 transition-colors">Overview</a></li>
-              <li><a href="#features-section" className="hover:text-amber-400 transition-colors">Key Features</a></li>
-              <li><a href="#gallery-section" className="hover:text-amber-400 transition-colors">Product Gallery</a></li>
-              <li><a href="#specs-section" className="hover:text-amber-400 transition-colors">Specifications</a></li>
-              <li><a href="#faq-section" className="hover:text-amber-400 transition-colors">Questions &amp; Answers</a></li>
-              <li><a href="#customer-service-section" className="hover:text-amber-400 transition-colors font-semibold text-amber-400">Customer Service</a></li>
+              <li><a href="#hero-section" className="hover:text-blue-400 transition-colors">Overview</a></li>
+              <li><a href="#features-section" className="hover:text-blue-400 transition-colors">Key Features</a></li>
+              <li><a href="#gallery-section" className="hover:text-blue-400 transition-colors">Product Gallery</a></li>
+              <li><a href="#specs-section" className="hover:text-blue-400 transition-colors">Specifications</a></li>
+              <li><a href="#faq-section" className="hover:text-blue-400 transition-colors">Questions &amp; Answers</a></li>
+              <li><a href="#customer-service-section" className="hover:text-blue-400 transition-colors font-semibold text-blue-400">Call or WhatsApp Moonlight</a></li>
               <li>
-                <button onClick={onOrderClick} className="text-amber-400 hover:underline cursor-pointer">
+                <button onClick={onOrderClick} className="text-blue-400 hover:underline cursor-pointer">
                   Order Now (Pay on Delivery)
                 </button>
               </li>

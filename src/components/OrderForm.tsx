@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { SiteConfig, OrderData, OrderItem } from '../types';
 import { NIGERIAN_STATES, getMotorParksForState } from '../data/nigeria';
-import { formatNaira } from '../config';
+import { formatNaira, FORMSPREE_ENDPOINT } from '../config';
 import { getWhatsAppUrl } from '../utils/whatsapp';
 import { trackPurchase, trackContact } from '../utils/metaPixel';
 import { 
@@ -212,7 +212,7 @@ export const OrderForm: React.FC<OrderFormProps> = ({
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) {
       const firstError = document.getElementById("order-form-card");
@@ -228,51 +228,93 @@ export const OrderForm: React.FC<OrderFormProps> = ({
       ? (selectedMotorPark || (availableParks && availableParks.length > 0 ? availableParks[0].name : 'Central Motor Park'))
       : undefined;
 
-    setTimeout(() => {
-      const orderId = `SKS-${Math.floor(100000 + Math.random() * 900000)}`;
-      const cookerAddonSummary = (cooker2bQty > 0 && cooker5bQty > 0)
-        ? 'both'
-        : (cooker2bQty > 0 ? 'cooker-2burner' : (cooker5bQty > 0 ? 'cooker-5burner' : 'none'));
+    const orderId = `SKS-${Math.floor(100000 + Math.random() * 900000)}`;
+    const cookerAddonSummary = (cooker2bQty > 0 && cooker5bQty > 0)
+      ? 'both'
+      : (cooker2bQty > 0 ? 'cooker-2burner' : (cooker5bQty > 0 ? 'cooker-5burner' : 'none'));
 
-      const cookerNamesSummary = (cooker2bQty > 0 && cooker5bQty > 0)
-        ? `${cooker2bQty}x 2-Flip-Up Cooker + ${cooker5bQty}x 5-Burner Hybrid`
-        : (cooker2bQty > 0 ? `${cooker2bQty}x 2-Flip-Up Double Burner` : (cooker5bQty > 0 ? `${cooker5bQty}x 5-Burner Hybrid` : undefined));
+    const cookerNamesSummary = (cooker2bQty > 0 && cooker5bQty > 0)
+      ? `${cooker2bQty}x 2-Flip-Up Cooker + ${cooker5bQty}x 5-Burner Hybrid`
+      : (cooker2bQty > 0 ? `${cooker2bQty}x 2-Flip-Up Double Burner` : (cooker5bQty > 0 ? `${cooker5bQty}x 5-Burner Hybrid` : undefined));
 
-      const newOrder = {
-        orderId,
-        orderData: { 
-          ...formData,
-          quantity: totalItemCount,
-          items: selectedItems,
-          multiItemDiscount,
-          deliveryMethod: isLagosState ? 'doorstep' : deliveryMethod,
-          pickupMotorPark: effectivePark,
-          deliveryFee,
-          estimatedDeliveryDays: estimatedDays,
-          includedAlternativeCooker: cookerAddonSummary,
-          alternativeCookerName: cookerNamesSummary,
-          alternativeCookerPrice: (cooker2bSubtotal + cooker5bSubtotal) > 0 ? (cooker2bSubtotal + cooker5bSubtotal) : undefined
+    const deliveryMethodText = isLagosState
+      ? 'Direct Doorstep Delivery (Lagos - FREE)'
+      : (deliveryMethod === 'doorstep'
+          ? 'Doorstep Delivery (+₦5,000 Extra Fee)'
+          : `Motor Park Pick-Up (FREE)${effectivePark ? ` - ${effectivePark}` : ''}`);
+
+    const itemsSummaryText = (selectedItems && selectedItems.length > 0)
+      ? selectedItems.map(item => `${item.quantity}x ${item.name} (${formatNaira(item.totalPrice)})`).join(' | ')
+      : `${totalItemCount}x ${config.productName}`;
+
+    // Send customer order details to Formspree endpoint so the merchant receives the submission
+    const formspreeUrl = config.formspreeEndpoint || FORMSPREE_ENDPOINT;
+    try {
+      await fetch(formspreeUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
         },
-        totalAmount: totalPrice,
-        timestamp: new Date().toLocaleString('en-NG', { dateStyle: 'medium', timeStyle: 'short' })
-      };
-      setSubmittedOrder(newOrder);
-      if (onOrderPlaced) {
-        onOrderPlaced(newOrder);
+        body: JSON.stringify({
+          order_id: orderId,
+          customer_name: formData.fullName,
+          phone_number: formData.phone,
+          delivery_state: formData.state,
+          delivery_address: formData.address,
+          email: formData.email || "Not provided",
+          delivery_method: deliveryMethodText,
+          pickup_motor_park: effectivePark || "N/A",
+          ordered_items: itemsSummaryText,
+          total_products_count: totalItemCount,
+          subtotal: formatNaira(itemsSubtotal),
+          multi_item_discount: multiItemDiscount > 0 ? `-${formatNaira(multiItemDiscount)}` : "None",
+          delivery_fee: formatNaira(deliveryFee),
+          total_amount_payable: formatNaira(totalPrice),
+          customer_notes: formData.notes || "None",
+          submission_time: new Date().toLocaleString('en-NG', { dateStyle: 'medium', timeStyle: 'short' }),
+          _subject: `New Order ${orderId}: ${formData.fullName} - ${formatNaira(totalPrice)}`
+        })
+      });
+    } catch (err) {
+      console.warn("Formspree submission notification error (proceeding with order receipt):", err);
+    }
+
+    const newOrder = {
+      orderId,
+      orderData: { 
+        ...formData,
+        quantity: totalItemCount,
+        items: selectedItems,
+        multiItemDiscount,
+        deliveryMethod: isLagosState ? 'doorstep' : deliveryMethod,
+        pickupMotorPark: effectivePark,
+        deliveryFee,
+        estimatedDeliveryDays: estimatedDays,
+        includedAlternativeCooker: cookerAddonSummary,
+        alternativeCookerName: cookerNamesSummary,
+        alternativeCookerPrice: (cooker2bSubtotal + cooker5bSubtotal) > 0 ? (cooker2bSubtotal + cooker5bSubtotal) : undefined
+      },
+      totalAmount: totalPrice,
+      timestamp: new Date().toLocaleString('en-NG', { dateStyle: 'medium', timeStyle: 'short' })
+    };
+
+    setSubmittedOrder(newOrder);
+    if (onOrderPlaced) {
+      onOrderPlaced(newOrder);
+    }
+    setIsSubmitting(false);
+
+    // Fire Meta Pixel Purchase event with total item count
+    trackPurchase(orderId, totalPrice, 'NGN', totalItemCount);
+
+    // Scroll smoothly to order receipt
+    setTimeout(() => {
+      const receipt = document.getElementById("order-success-receipt");
+      if (receipt) {
+        receipt.scrollIntoView({ behavior: 'smooth' });
       }
-      setIsSubmitting(false);
-
-      // Fire Meta Pixel Purchase event with total item count
-      trackPurchase(orderId, totalPrice, 'NGN', totalItemCount);
-
-      // Scroll smoothly to order receipt
-      setTimeout(() => {
-        const receipt = document.getElementById("order-success-receipt");
-        if (receipt) {
-          receipt.scrollIntoView({ behavior: 'smooth' });
-        }
-      }, 100);
-    }, 750);
+    }, 100);
   };
 
   // WhatsApp link generator for the confirmed order
@@ -436,16 +478,16 @@ export const OrderForm: React.FC<OrderFormProps> = ({
               </div>
             </div>
 
-            {/* Post-Order Customer Service & Merchant Direct Phone Helpline */}
+            {/* Post-Order Moonlight Phone & WhatsApp Helpline */}
             <div className="bg-slate-50 border-2 border-blue-500/30 rounded-2xl p-5 sm:p-6 mb-6 text-center shadow-sm">
               <span className="text-xs font-bold text-blue-800 uppercase tracking-widest bg-blue-100 px-3 py-1 rounded-full border border-blue-200 inline-block mb-2">
-                📞 CUSTOMER SERVICE &amp; DISPATCH HELPLINE
+                📞 CALL OR WHATSAPP MOONLIGHT
               </span>
               <h4 className="text-[#0a192f] text-base sm:text-lg font-extrabold mb-1">
                 Your Order Reference: <span className="text-blue-700 font-mono">#{submittedOrder.orderId}</span>
               </h4>
               <p className="text-slate-600 text-xs sm:text-sm mb-4 max-w-md mx-auto">
-                Need instant delivery dispatch or have questions about your sink? Call our dedicated customer service line or chat on WhatsApp now:
+                Need immediate assistance or have questions about your order? Call or WhatsApp Moonlight directly:
               </p>
 
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
@@ -456,7 +498,7 @@ export const OrderForm: React.FC<OrderFormProps> = ({
                   className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-[#0a192f] hover:bg-slate-800 text-white font-black text-sm py-4 px-6 rounded-xl shadow-md transition-transform active:scale-[0.98] cursor-pointer tracking-wide"
                 >
                   <Phone className="w-4 h-4 text-blue-400" />
-                  <span>CALL CUSTOMER SERVICE: {config.phoneNumber}</span>
+                  <span>CALL MOONLIGHT: {config.phoneNumber}</span>
                 </a>
 
                 <a
@@ -468,7 +510,7 @@ export const OrderForm: React.FC<OrderFormProps> = ({
                   className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-sm py-4 px-6 rounded-xl shadow-md transition-transform active:scale-[0.98] cursor-pointer animate-soft-blink"
                 >
                   <MessageCircle className="w-5 h-5 fill-white" />
-                  <span>CHAT ON WHATSAPP</span>
+                  <span>WHATSAPP MOONLIGHT</span>
                 </a>
               </div>
             </div>
@@ -873,7 +915,12 @@ export const OrderForm: React.FC<OrderFormProps> = ({
             </div>
 
             {/* The Form Fields */}
-            <form onSubmit={handleSubmit} className="space-y-5">
+            <form 
+              action={config.formspreeEndpoint || FORMSPREE_ENDPOINT} 
+              method="POST" 
+              onSubmit={handleSubmit} 
+              className="space-y-5"
+            >
               
               {/* Full Name */}
               <div>
