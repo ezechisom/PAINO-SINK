@@ -29,7 +29,7 @@ export const CONFIG: SiteConfig = {
   trustStatements: {
     delivery: "Nationwide Delivery (1-5 Days)",
     packaging: "Heavy-Duty Wooden/Foam Packaging",
-    support: "24/7 WhatsApp & Phone Support"
+    support: "100% Genuine Quality Guarantee"
   },
 
   productImages: [
@@ -78,56 +78,56 @@ export const CONFIG: SiteConfig = {
   features: [
     {
       id: "piano-controls",
-      title: "Piano-Key Water Mode Controls",
-      description: "Tactile mechanical piano push buttons allow you to switch effortlessly between the flying rain waterfall, main pull-out faucet, glass rinser, and drinking water tap.",
+      title: "Piano-Key Water Controls",
+      description: "Tactile mechanical piano buttons switch instantly between waterfall, pull-out sprayer, glass rinser, and drinking tap.",
       iconName: "Sliders",
       badge: "Signature Feature",
       highlight: true
     },
     {
       id: "digital-display",
-      title: "Digital Temperature Display & Flow-Activated Light",
-      description: "Features a crystal-clear LED digital screen showing real-time water temperature in °C and running time, plus a striking ambient glow light that turns on automatically the moment water passes through the sink. 100% self-powered by internal hydroelectric water flow — zero electricity, zero wiring, and no batteries required!",
+      title: "Digital Temp (°C) & Flow Light",
+      description: "Real-time LED °C screen and auto-glow light powered 100% by hydroelectric water flow — zero batteries or wiring required!",
       iconName: "Gauge",
-      badge: "Lights Up On Water Flow",
+      badge: "Lights Up On Flow",
       highlight: true
     },
     {
       id: "flying-rain",
       title: "Flying Rain Waterfall Spout",
-      description: "A wide, gentle horizontal cascading waterfall stream designed for effortless, splash-free rinsing of delicate fruits, vegetables, and leafy greens.",
+      description: "Gentle horizontal cascading waterfall for effortless, splash-free rinsing of delicate fruits and leafy vegetables.",
       iconName: "Waves",
       badge: "Splash-Free",
       highlight: true
     },
     {
       id: "pull-out-faucet",
-      title: "360° High-Arc Pull-Out Faucet",
-      description: "Flexible pull-out sprayer reaches every corner of the deep basin with dual spray modes (aerated stream and high-pressure blade spray) for heavy-duty pot cleaning.",
+      title: "360° Pull-Out Faucet",
+      description: "Flexible pull-out sprayer with dual stream & high-pressure blade spray modes for deep pot cleaning.",
       iconName: "Maximize2"
     },
     {
       id: "cup-washer",
       title: "High-Pressure Glass Rinser",
-      description: "Quickly cleans cups, baby bottles, and mugs in seconds. Simply invert your glass and press down for multi-angle high-velocity water jets.",
+      description: "Multi-angle high-velocity jets clean cups, mugs, and bottles in 2 seconds with a simple downward press.",
       iconName: "Sparkles"
     },
     {
       id: "nested-workstation",
-      title: "Integrated Double-Track Workstation",
-      description: "Dual-tier built-in rails let you slide the solid wood cutting board, colander drain basket, and secondary prep basin across the sink to save counter space.",
+      title: "Double-Track Workstation",
+      description: "Slide the solid wood cutting board, colander, and prep basin over the basin to save counter space.",
       iconName: "Layers"
     },
     {
       id: "nano-coating",
-      title: "Nano-Embossed Anti-Scratch Finish",
-      description: "High-grade 304 stainless steel with a micro-honeycomb textured nano-coating that resists oil stains, fingerprints, scratches, and water spots.",
+      title: "Anti-Scratch Nano Finish",
+      description: "Heavy-duty SUS304 stainless steel with micro-honeycomb nano coating that repels oil, watermarks, and abrasions.",
       iconName: "ShieldCheck"
     },
     {
       id: "drinking-tap",
-      title: "Dedicated Filtered Water Faucet",
-      description: "A sleek secondary gooseneck tap connects directly to your water filtration unit for instant, clean drinking water right at your sink deck.",
+      title: "Filtered Drinking Water Tap",
+      description: "Dedicated gooseneck tap connects directly to your water purifier for clean drinking water on deck.",
       iconName: "Droplet"
     }
   ],
@@ -135,22 +135,22 @@ export const CONFIG: SiteConfig = {
   specifications: [
     {
       feature: "Sink Design",
-      detail: "Single deep bowl workstation with integrated piano console & double-track sliding rails",
+      detail: "Single deep bowl workstation with integrated piano console & double-track rails",
       iconName: "Square"
     },
     {
       feature: "Outer Dimensions",
-      detail: "750mm (Length) x 450mm (Width) x 205mm (Depth) [75cm x 45cm x 20.5cm]",
+      detail: "750 × 450 × 205 mm (75 × 45 × 20.5 cm)",
       iconName: "Ruler"
     },
     {
       feature: "Inner Basin Dimensions",
-      detail: "700mm (Length) x 350mm (Width) x 200mm (Depth)",
+      detail: "700 × 350 × 200 mm",
       iconName: "Box"
     },
     {
       feature: "Material & Craft",
-      detail: "Heavy-duty SUS304 Stainless Steel with scratch-resistant Nano Bionic textured finish",
+      detail: "Heavy-duty SUS304 Stainless Steel with scratch-resistant Nano Bionic finish",
       iconName: "Shield"
     },
     {
@@ -160,27 +160,27 @@ export const CONFIG: SiteConfig = {
     },
     {
       feature: "Faucet System",
-      detail: "Integrated Piano-key console with Flying Rain waterfall, 360° pull-out sprayer, drinking water spout & cup washer",
+      detail: "Integrated Piano Console with Waterfall, 360° pull-out sprayer, drinking tap & cup washer",
       iconName: "Droplets"
     },
     {
       feature: "Digital Display & Flow Light",
-      detail: "Real-time LED water temperature (°C) & timer display with automatic ambient light that turns on when water passes through (100% hydroelectric self-generating power, zero batteries or electrical wiring)",
+      detail: "Real-time LED °C & auto ambient glow (100% hydroelectric, zero batteries or wiring)",
       iconName: "Cpu"
     },
     {
       feature: "Included Accessories",
-      detail: "Solid wood cutting board, perforated stainless drain basket, secondary prep basin, cup washer, soap dispenser, 110mm drain assembly, hot/cold hoses, angle valves",
+      detail: "Wood cutting board, colander basket, prep basin, cup washer, soap dispenser & full plumbing kit",
       iconName: "PackageCheck"
     },
     {
       feature: "Installation Type",
-      detail: "Compatible with Top-mount (overmount), Flush-mount, and Undermount configurations",
+      detail: "Compatible with Top-mount, Flush-mount, or Undermount configurations",
       iconName: "Hammer"
     },
     {
       feature: "Drainage System",
-      detail: "Rear right 110mm drain with rotary deck control knob and anti-odor flexible sewer piping",
+      detail: "110mm drain with deck rotary control knob & anti-odor trap",
       iconName: "RotateCw"
     }
   ],

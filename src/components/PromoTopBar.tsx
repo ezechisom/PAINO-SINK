@@ -7,7 +7,7 @@ interface PromoTopBarProps {
   promoPrice?: number;
 }
 
-export const PromoTopBar: React.FC<PromoTopBarProps> = ({ promoPrice = 260000 }) => {
+export const PromoTopBar: React.FC<PromoTopBarProps> = ({ promoPrice = 140000 }) => {
   return (
     <div id="promo-top-bar" className="bg-[#0a192f] text-white py-2 px-4 shadow-sm border-b border-blue-900/60 sticky top-0 z-50 transition-all duration-200">
       <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-center sm:text-left">

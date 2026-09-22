@@ -99,20 +99,20 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({
   const cooker5bCount = images.filter(i => i.productId === 'cooker-5burner').length;
 
   return (
-    <section id="gallery-section" className="py-14 md:py-20 bg-slate-50 border-y border-slate-200">
+    <section id="gallery-section" className="py-8 sm:py-16 bg-slate-50 border-y border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-8">
-          <div className="inline-flex items-center gap-1.5 bg-blue-50 border border-blue-200 px-3.5 py-1.5 rounded-full text-xs font-bold text-blue-800 uppercase tracking-widest mb-2.5">
-            <Sparkles className="w-3.5 h-3.5 text-blue-600" />
+        <div className="text-center max-w-2xl mx-auto mb-5 sm:mb-8">
+          <div className="inline-flex items-center gap-1 bg-blue-50 border border-blue-200 px-3 py-1 rounded-full text-[11px] font-bold text-blue-800 uppercase tracking-widest mb-2">
+            <Sparkles className="w-3 h-3 text-blue-600" />
             <span>High-Definition Visual Gallery</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#0a192f] tracking-tight leading-tight">
+          <h2 className="text-xl sm:text-3xl font-extrabold text-[#0a192f] tracking-tight leading-tight">
             Explore All 3 Kitchen Appliances
           </h2>
-          <p className="text-slate-600 text-sm sm:text-base mt-2">
-            Inspect every detail, material, and dimension for our Smart Piano Sink, 2-Flip-Up Double Burner, and Executive 5-Burner Hybrid Cooktop.
+          <p className="text-slate-600 text-xs sm:text-sm mt-1.5">
+            Inspect every angle, finish, and dimension for our Smart Piano Sink and companion kitchen appliances.
           </p>
         </div>
 
@@ -311,26 +311,15 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({
                   </p>
                 </div>
 
-                {/* Price & Direct Order Action */}
-                <div className="flex sm:flex-col items-center sm:items-end justify-between gap-3 pt-3 md:pt-0 border-t md:border-0 border-slate-100 shrink-0">
-                  {activeImage?.price && (
-                    <div className="text-left sm:text-right">
-                      <span className="text-[11px] text-slate-500 uppercase block font-semibold">Special Promo Price</span>
-                      <span className="text-lg sm:text-xl font-extrabold text-[#0a192f] font-mono">
-                        {formatNaira(activeImage.price)}
-                      </span>
-                    </div>
-                  )}
-
-                  <button
-                    type="button"
-                    onClick={() => handleOrderTarget(activeImage?.productId)}
-                    className="inline-flex items-center gap-1.5 bg-blue-600 hover:bg-blue-500 text-white text-xs font-extrabold px-3.5 py-2 rounded-xl transition-all shadow-md cursor-pointer uppercase tracking-wider"
-                  >
-                    <ShoppingBag className="w-3.5 h-3.5" />
-                    <span>Order Now</span>
-                  </button>
-                </div>
+                {/* Price Display */}
+                {activeImage?.price && (
+                  <div className="flex sm:flex-col items-center sm:items-end justify-between gap-1 pt-3 md:pt-0 border-t md:border-0 border-slate-100 shrink-0">
+                    <span className="text-[11px] text-slate-500 uppercase block font-semibold">Special Promo Price</span>
+                    <span className="text-lg sm:text-xl font-extrabold text-[#0a192f] font-mono">
+                      {formatNaira(activeImage.price)}
+                    </span>
+                  </div>
+                )}
               </div>
             </div>
 

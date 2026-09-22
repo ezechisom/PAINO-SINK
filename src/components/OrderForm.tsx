@@ -4,6 +4,8 @@ import { NIGERIAN_STATES, getMotorParksForState } from '../data/nigeria';
 import { formatNaira, FORMSPREE_ENDPOINT } from '../config';
 import { getWhatsAppUrl } from '../utils/whatsapp';
 import { trackPurchase, trackContact } from '../utils/metaPixel';
+import { ALTERNATIVE_PRODUCTS, AlternativeProduct } from '../data/alternativeProducts';
+import confetti from 'canvas-confetti';
 import { 
   ShoppingBag, 
   CheckCircle2, 
@@ -22,23 +24,74 @@ import {
   Building2,
   Home,
   AlertCircle,
-  Flame,
   Tag,
-  PackageCheck
+  PackageCheck,
+  Check,
+  Lock,
+  BadgeCheck
 } from 'lucide-react';
+
+// Celebratory multi-stage confetti burst to boost customer excitement when placing an order
+export const triggerOrderConfetti = () => {
+  try {
+    // 1. Initial vibrant center explosion
+    confetti({
+      particleCount: 100,
+      spread: 75,
+      origin: { y: 0.6 },
+      colors: ['#2563eb', '#10b981', '#f59e0b', '#3b82f6', '#ec4899', '#6366f1'],
+      zIndex: 99999,
+    });
+
+    // 2. Left side cannon wave
+    setTimeout(() => {
+      confetti({
+        particleCount: 60,
+        angle: 60,
+        spread: 60,
+        origin: { x: 0.1, y: 0.7 },
+        colors: ['#2563eb', '#10b981', '#fbbf24', '#38bdf8'],
+        zIndex: 99999,
+      });
+    }, 250);
+
+    // 3. Right side cannon wave
+    setTimeout(() => {
+      confetti({
+        particleCount: 60,
+        angle: 120,
+        spread: 60,
+        origin: { x: 0.9, y: 0.7 },
+        colors: ['#2563eb', '#10b981', '#fbbf24', '#38bdf8'],
+        zIndex: 99999,
+      });
+    }, 450);
+
+    // 4. Grand finale celebration shower
+    setTimeout(() => {
+      confetti({
+        particleCount: 80,
+        spread: 100,
+        origin: { y: 0.4 },
+        colors: ['#ffd700', '#f59e0b', '#2563eb', '#10b981'],
+        zIndex: 99999,
+      });
+    }, 700);
+  } catch (error) {
+    console.warn('Confetti trigger encountered an issue:', error);
+  }
+};
 
 interface OrderFormProps {
   config: SiteConfig;
   onOrderPlaced?: (order: { orderId: string; orderData: OrderData; totalAmount: number; timestamp: string } | null) => void;
-  selectedCookerAddon?: 'none' | 'cooker-2burner' | 'cooker-5burner' | 'both';
-  onCookerAddonChange?: (addon: 'none' | 'cooker-2burner' | 'cooker-5burner' | 'both') => void;
+  onViewSuggestedProduct?: (product: AlternativeProduct) => void;
 }
 
 export const OrderForm: React.FC<OrderFormProps> = ({ 
   config, 
   onOrderPlaced,
-  selectedCookerAddon = 'none',
-  onCookerAddonChange
+  onViewSuggestedProduct
 }) => {
   const [formData, setFormData] = useState<OrderData>({
     fullName: '',
@@ -50,22 +103,22 @@ export const OrderForm: React.FC<OrderFormProps> = ({
     notes: '',
   });
 
-  // Individual product quantities for multi-product orders
+  // Dedicated single-product checkout for Smart Kitchen Piano Sink
   const [sinkQty, setSinkQty] = useState<number>(1);
-  const [cooker2bQty, setCooker2bQty] = useState<number>(0);
-  const [cooker5bQty, setCooker5bQty] = useState<number>(0);
 
-  // Sync with incoming cooker addon prop
-  useEffect(() => {
-    if (selectedCookerAddon === 'cooker-2burner') {
-      setCooker2bQty(prev => (prev > 0 ? prev : 1));
-    } else if (selectedCookerAddon === 'cooker-5burner') {
-      setCooker5bQty(prev => (prev > 0 ? prev : 1));
-    } else if (selectedCookerAddon === 'both') {
-      setCooker2bQty(prev => (prev > 0 ? prev : 1));
-      setCooker5bQty(prev => (prev > 0 ? prev : 1));
-    }
-  }, [selectedCookerAddon]);
+  // Post-order suggested companion product state (after customer submits order)
+  const [addedSuggestedIds, setAddedSuggestedIds] = useState<string[]>([]);
+  const [suggestedQuantities, setSuggestedQuantities] = useState<Record<string, number>>({});
+  const [isAddingSuggested, setIsAddingSuggested] = useState<string | null>(null);
+  const [suggestedFeedback, setSuggestedFeedback] = useState<string | null>(null);
+
+  const getSuggestedQty = (id: string): number => suggestedQuantities[id] || 1;
+  const setSuggestedQty = (id: string, qty: number) => {
+    setSuggestedQuantities(prev => ({
+      ...prev,
+      [id]: Math.max(1, Math.min(10, qty))
+    }));
+  };
 
   const [deliveryMethod, setDeliveryMethod] = useState<'park_pickup' | 'doorstep'>('park_pickup');
   const availableParks = getMotorParksForState(formData.state);
@@ -92,28 +145,15 @@ export const OrderForm: React.FC<OrderFormProps> = ({
   const isLagosState = formData.state.toLowerCase().trim() === 'lagos';
   const deliveryFee = isLagosState ? 0 : (deliveryMethod === 'doorstep' ? 5000 : 0);
   
-  // Product Unit Prices
+  // Product Unit Price
   const SINK_PRICE = config.promoPrice;
-  const COOKER_2B_PRICE = 170000;
-  const COOKER_5B_PRICE = 280000;
+  const itemsSubtotal = sinkQty * SINK_PRICE;
+  const totalItemCount = sinkQty;
 
-  // Dynamic Subtotals per item
-  const sinkSubtotal = sinkQty * SINK_PRICE;
-  const cooker2bSubtotal = cooker2bQty * COOKER_2B_PRICE;
-  const cooker5bSubtotal = cooker5bQty * COOKER_5B_PRICE;
-
-  // Combined Subtotal across all products
-  const itemsSubtotal = sinkSubtotal + cooker2bSubtotal + cooker5bSubtotal;
-  const totalItemCount = sinkQty + cooker2bQty + cooker5bQty;
-
-  // Automatic multi-product tiered discount
+  // Multi-product bundle discount: ₦5,000 (5K) for 2 or more products
   let multiItemDiscount = 0;
-  if (totalItemCount === 2) {
-    multiItemDiscount = 10000;
-  } else if (totalItemCount === 3) {
-    multiItemDiscount = 20000;
-  } else if (totalItemCount >= 4) {
-    multiItemDiscount = 30000;
+  if (sinkQty >= 2) {
+    multiItemDiscount = 5000;
   }
 
   const totalPrice = Math.max(0, itemsSubtotal - multiItemDiscount) + deliveryFee;
@@ -121,56 +161,157 @@ export const OrderForm: React.FC<OrderFormProps> = ({
 
   // Itemized array of selected products
   const selectedItems: OrderItem[] = [
-    ...(sinkQty > 0 ? [{
+    {
       id: 'sink',
-      name: config.productName,
+      name: `${config.productName} (75×45cm)`,
       quantity: sinkQty,
       unitPrice: SINK_PRICE,
-      totalPrice: sinkSubtotal
-    }] : []),
-    ...(cooker2bQty > 0 ? [{
-      id: 'cooker-2burner',
-      name: '2-Flip-Up Double Gas Burner with Timer (75×45cm)',
-      quantity: cooker2bQty,
-      unitPrice: COOKER_2B_PRICE,
-      totalPrice: cooker2bSubtotal
-    }] : []),
-    ...(cooker5bQty > 0 ? [{
-      id: 'cooker-5burner',
-      name: 'Executive 5-Burner Gas + Electric Hybrid Cooktop (90×51cm)',
-      quantity: cooker5bQty,
-      unitPrice: COOKER_5B_PRICE,
-      totalPrice: cooker5bSubtotal
-    }] : [])
+      totalPrice: itemsSubtotal
+    }
   ];
 
-  // Helper for quick bundle presets
-  const handleApplyPreset = (preset: 'single_sink' | 'double_sink' | 'sink_plus_2b' | 'sink_plus_5b' | 'kitchen_trio') => {
-    if (preset === 'single_sink') {
-      setSinkQty(1);
-      setCooker2bQty(0);
-      setCooker5bQty(0);
-      if (onCookerAddonChange) onCookerAddonChange('none');
-    } else if (preset === 'double_sink') {
-      setSinkQty(2);
-      setCooker2bQty(0);
-      setCooker5bQty(0);
-      if (onCookerAddonChange) onCookerAddonChange('none');
-    } else if (preset === 'sink_plus_2b') {
-      setSinkQty(1);
-      setCooker2bQty(1);
-      setCooker5bQty(0);
-      if (onCookerAddonChange) onCookerAddonChange('cooker-2burner');
-    } else if (preset === 'sink_plus_5b') {
-      setSinkQty(1);
-      setCooker2bQty(0);
-      setCooker5bQty(1);
-      if (onCookerAddonChange) onCookerAddonChange('cooker-5burner');
-    } else if (preset === 'kitchen_trio') {
-      setSinkQty(1);
-      setCooker2bQty(1);
-      setCooker5bQty(1);
-      if (onCookerAddonChange) onCookerAddonChange('both');
+  // Handler when customer adds a suggested companion cooktop on the order receipt screen
+  const handleAddSuggestedProduct = async (product: AlternativeProduct, qtyToAdd?: number) => {
+    if (!submittedOrder) return;
+    const quantity = qtyToAdd || getSuggestedQty(product.id);
+
+    setIsAddingSuggested(product.id);
+
+    const currentItems = submittedOrder.orderData.items || [];
+    const existingIndex = currentItems.findIndex(it => it.id === product.id);
+
+    let updatedItems: OrderItem[];
+    if (existingIndex >= 0) {
+      const existing = currentItems[existingIndex];
+      const newQty = existing.quantity + quantity;
+      updatedItems = [...currentItems];
+      updatedItems[existingIndex] = {
+        ...existing,
+        quantity: newQty,
+        totalPrice: newQty * existing.unitPrice
+      };
+    } else {
+      const newItem: OrderItem = {
+        id: product.id,
+        name: product.name,
+        quantity: quantity,
+        unitPrice: product.price,
+        totalPrice: quantity * product.price
+      };
+      updatedItems = [...currentItems, newItem];
+    }
+
+    const newItemsCount = updatedItems.reduce((acc, it) => acc + it.quantity, 0);
+
+    // Multi-product bundle discount is 5K (₦5,000) whenever 2 or more products are ordered
+    const updatedDiscount = newItemsCount >= 2 ? 5000 : 0;
+    const rawSubtotal = updatedItems.reduce((acc, it) => acc + it.totalPrice, 0);
+    const deliverySurcharge = submittedOrder.orderData.deliveryFee || 0;
+    const newTotal = Math.max(0, rawSubtotal - updatedDiscount) + deliverySurcharge;
+
+    const updatedOrder = {
+      ...submittedOrder,
+      orderData: {
+        ...submittedOrder.orderData,
+        quantity: newItemsCount,
+        items: updatedItems,
+        multiItemDiscount: updatedDiscount,
+        includedAlternativeCooker: product.id,
+        alternativeCookerName: product.name,
+        alternativeCookerPrice: product.price
+      },
+      totalAmount: newTotal
+    };
+
+    setSubmittedOrder(updatedOrder);
+    setAddedSuggestedIds(prev => Array.from(new Set([...prev, product.id])));
+    setSuggestedFeedback(`🎉 Fantastic! We've added ${quantity > 1 ? `${quantity}x ` : ''}${product.name} to your order #${submittedOrder.orderId}. Your ₦5,000 multi-product bundle discount was applied, bringing your updated total payable on delivery to ${formatNaira(newTotal)}.`);
+    setIsAddingSuggested(null);
+    triggerOrderConfetti();
+
+    if (onOrderPlaced) {
+      onOrderPlaced(updatedOrder);
+    }
+
+    // Inform seller via Formspree in background
+    const formspreeUrl = config.formspreeEndpoint || FORMSPREE_ENDPOINT;
+    try {
+      await fetch(formspreeUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          order_id: submittedOrder.orderId,
+          update_type: 'CUSTOMER_ADDED_SUGGESTED_COMPANION_PRODUCT',
+          customer_name: submittedOrder.orderData.fullName,
+          phone_number: submittedOrder.orderData.phone,
+          state: submittedOrder.orderData.state,
+          delivery_address: submittedOrder.orderData.address,
+          added_product: `${quantity}x ${product.name} (${formatNaira(product.price * quantity)})`,
+          bundle_discount: '-₦5,000 Multi-Product Bundle Discount',
+          updated_total_payable_on_delivery: formatNaira(newTotal),
+          all_items_in_order: updatedItems.map(it => `${it.quantity}x ${it.name}`).join(' | '),
+          submission_time: new Date().toLocaleString('en-NG'),
+          _subject: `[ADD-ON ADDED] Order ${submittedOrder.orderId}: ${submittedOrder.orderData.fullName} added ${quantity}x ${product.name} - New Total: ${formatNaira(newTotal)}`
+        })
+      });
+    } catch (err) {
+      console.warn('Formspree add-on update error:', err);
+    }
+  };
+
+  // Handler to adjust quantity of an already added suggested product directly from receipt
+  const handleModifyAddedSuggestedQty = (productId: string, newQty: number) => {
+    if (!submittedOrder) return;
+    const currentItems = submittedOrder.orderData.items || [];
+    const existing = currentItems.find(it => it.id === productId);
+    if (!existing) return;
+
+    let updatedItems: OrderItem[];
+    if (newQty <= 0) {
+      updatedItems = currentItems.filter(it => it.id !== productId);
+      setAddedSuggestedIds(prev => prev.filter(id => id !== productId));
+    } else {
+      updatedItems = currentItems.map(it => {
+        if (it.id === productId) {
+          return {
+            ...it,
+            quantity: newQty,
+            totalPrice: newQty * it.unitPrice
+          };
+        }
+        return it;
+      });
+    }
+
+    const newItemsCount = updatedItems.reduce((acc, it) => acc + it.quantity, 0);
+    const updatedDiscount = newItemsCount >= 2 ? 5000 : 0;
+    const rawSubtotal = updatedItems.reduce((acc, it) => acc + it.totalPrice, 0);
+    const deliverySurcharge = submittedOrder.orderData.deliveryFee || 0;
+    const newTotal = Math.max(0, rawSubtotal - updatedDiscount) + deliverySurcharge;
+
+    const updatedOrder = {
+      ...submittedOrder,
+      orderData: {
+        ...submittedOrder.orderData,
+        quantity: newItemsCount,
+        items: updatedItems,
+        multiItemDiscount: updatedDiscount,
+      },
+      totalAmount: newTotal
+    };
+
+    setSubmittedOrder(updatedOrder);
+    setSuggestedFeedback(
+      newQty <= 0
+        ? `Item removed from order #${submittedOrder.orderId}. Updated total: ${formatNaira(newTotal)}.`
+        : `Updated to ${newQty}x ${existing.name}. Updated total payable on delivery: ${formatNaira(newTotal)}.`
+    );
+
+    if (onOrderPlaced) {
+      onOrderPlaced(updatedOrder);
     }
   };
 
@@ -229,13 +370,6 @@ export const OrderForm: React.FC<OrderFormProps> = ({
       : undefined;
 
     const orderId = `SKS-${Math.floor(100000 + Math.random() * 900000)}`;
-    const cookerAddonSummary = (cooker2bQty > 0 && cooker5bQty > 0)
-      ? 'both'
-      : (cooker2bQty > 0 ? 'cooker-2burner' : (cooker5bQty > 0 ? 'cooker-5burner' : 'none'));
-
-    const cookerNamesSummary = (cooker2bQty > 0 && cooker5bQty > 0)
-      ? `${cooker2bQty}x 2-Flip-Up Cooker + ${cooker5bQty}x 5-Burner Hybrid`
-      : (cooker2bQty > 0 ? `${cooker2bQty}x 2-Flip-Up Double Burner` : (cooker5bQty > 0 ? `${cooker5bQty}x 5-Burner Hybrid` : undefined));
 
     const deliveryMethodText = isLagosState
       ? 'Direct Doorstep Delivery (Lagos - FREE)'
@@ -243,9 +377,7 @@ export const OrderForm: React.FC<OrderFormProps> = ({
           ? 'Doorstep Delivery (+₦5,000 Extra Fee)'
           : `Motor Park Pick-Up (FREE)${effectivePark ? ` - ${effectivePark}` : ''}`);
 
-    const itemsSummaryText = (selectedItems && selectedItems.length > 0)
-      ? selectedItems.map(item => `${item.quantity}x ${item.name} (${formatNaira(item.totalPrice)})`).join(' | ')
-      : `${totalItemCount}x ${config.productName}`;
+    const itemsSummaryText = selectedItems.map(item => `${item.quantity}x ${item.name} (${formatNaira(item.totalPrice)})`).join(' | ');
 
     // Send customer order details to Formspree endpoint so the merchant receives the submission
     const formspreeUrl = config.formspreeEndpoint || FORMSPREE_ENDPOINT;
@@ -291,19 +423,21 @@ export const OrderForm: React.FC<OrderFormProps> = ({
         pickupMotorPark: effectivePark,
         deliveryFee,
         estimatedDeliveryDays: estimatedDays,
-        includedAlternativeCooker: cookerAddonSummary,
-        alternativeCookerName: cookerNamesSummary,
-        alternativeCookerPrice: (cooker2bSubtotal + cooker5bSubtotal) > 0 ? (cooker2bSubtotal + cooker5bSubtotal) : undefined
       },
       totalAmount: totalPrice,
       timestamp: new Date().toLocaleString('en-NG', { dateStyle: 'medium', timeStyle: 'short' })
     };
 
     setSubmittedOrder(newOrder);
+    setAddedSuggestedIds([]);
+    setSuggestedFeedback(null);
     if (onOrderPlaced) {
       onOrderPlaced(newOrder);
     }
     setIsSubmitting(false);
+
+    // Trigger celebratory confetti explosion effect to boost customer excitement
+    triggerOrderConfetti();
 
     // Fire Meta Pixel Purchase event with total item count
     trackPurchase(orderId, totalPrice, 'NGN', totalItemCount);
@@ -332,12 +466,16 @@ export const OrderForm: React.FC<OrderFormProps> = ({
       ? orderData.items.map(item => `• ${item.quantity}x ${item.name} (${formatNaira(item.totalPrice)})`).join('\n')
       : `• ${orderData.quantity}x ${config.productName}`;
 
-    const msg = `*NEW MULTI-PRODUCT ORDER* 📦\n\n` +
+    const rawSubtotal = (orderData.items && orderData.items.length > 0)
+      ? orderData.items.reduce((acc, it) => acc + it.totalPrice, 0)
+      : (orderData.quantity * SINK_PRICE);
+
+    const msg = `*CONFIRMED ORDER - MOONLIGHT LUXURY HOME TECH* 📦\n\n` +
       `*Order ID:* ${orderId}\n` +
       `*Total Products:* ${orderData.quantity} item(s)\n\n` +
       `*ORDERED ITEMS:*\n${itemsSummaryText}\n\n` +
-      `*Items Subtotal:* ${formatNaira(itemsSubtotal)}\n` +
-      (orderData.multiItemDiscount && orderData.multiItemDiscount > 0 ? `*Multi-Product Discount:* -${formatNaira(orderData.multiItemDiscount)} 🎉\n` : '') +
+      `*Subtotal:* ${formatNaira(rawSubtotal)}\n` +
+      (orderData.multiItemDiscount && orderData.multiItemDiscount > 0 ? `*Package Discount:* -${formatNaira(orderData.multiItemDiscount)} 🎉\n` : '') +
       `*Delivery Method:* ${deliveryMethodText}\n` +
       (orderData.pickupMotorPark ? `*Pick-Up Station:* ${orderData.pickupMotorPark}\n` : '') +
       `*Estimated Delivery Time:* ${orderData.estimatedDeliveryDays || (isCustomerLagos ? '1 to 2 business days' : '3 to 5 business days')}\n` +
@@ -349,7 +487,7 @@ export const OrderForm: React.FC<OrderFormProps> = ({
       (orderData.pickupMotorPark ? `• Designated Park: ${orderData.pickupMotorPark}\n` : '') +
       `• Address/Destination: ${orderData.address}\n` +
       (orderData.email ? `• Email: ${orderData.email}\n` : '') +
-      `\nHello! I have just submitted my multi-product order on your website. Please confirm dispatch details with me.`;
+      `\nHello Moonlight! I have just submitted my order on your website. Please confirm dispatch details with me.`;
 
     return getWhatsAppUrl(config.whatsappNumber, config.productName, orderData.quantity, msg);
   };
@@ -478,6 +616,204 @@ export const OrderForm: React.FC<OrderFormProps> = ({
               </div>
             </div>
 
+            {/* SUGGESTED COMPANION APPLIANCES SECTION (SHOWN ONLY AFTER ORDER SUBMISSION) */}
+            <div className="bg-gradient-to-br from-amber-500/10 via-slate-50 to-blue-50/40 border-2 border-amber-400/80 rounded-2xl p-5 sm:p-7 mb-8 shadow-md relative">
+              {/* Top Badge */}
+              <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
+                <span className="inline-flex items-center gap-1.5 text-xs font-black tracking-wider uppercase text-amber-900 bg-amber-200/80 border border-amber-400 px-3 py-1 rounded-full shadow-xs">
+                  <Sparkles className="w-3.5 h-3.5 text-amber-700" />
+                  <span>SUGGESTED COMPANIONS FOR YOUR NEW SINK</span>
+                </span>
+                <span className="text-[11px] font-bold text-blue-900 bg-blue-100 px-2.5 py-0.5 rounded-md border border-blue-200">
+                  Ships in Same Parcel &bull; Free Combined Dispatch
+                </span>
+              </div>
+
+              <h4 className="text-lg sm:text-xl font-black text-[#0a192f] tracking-tight mb-1">
+                Complete Your Luxury Kitchen Before We Dispatch!
+              </h4>
+              <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-5 max-w-2xl">
+                Customers who ordered the <strong>Smart Piano Sink</strong> often add one of Moonlight's matching executive built-in cooktops to their package. Add one or more now to your existing order <span className="font-mono font-bold text-blue-700">#{submittedOrder.orderId}</span> to enjoy an instant <strong>₦5,000 multi-product bundle discount</strong> and combined pay-on-delivery inspection.
+              </p>
+
+              {/* Live Feedback banner if product was added */}
+              {suggestedFeedback && (
+                <div className="mb-5 p-3.5 bg-emerald-50 border-2 border-emerald-400 text-emerald-900 rounded-xl text-xs sm:text-sm font-semibold flex items-start gap-2.5 shadow-xs">
+                  <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
+                  <div>{suggestedFeedback}</div>
+                </div>
+              )}
+
+              {/* Cards Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
+                {ALTERNATIVE_PRODUCTS.map((prod) => {
+                  const currentItems = submittedOrder.orderData.items || [];
+                  const addedItem = currentItems.find(it => it.id === prod.id);
+                  const isAdded = !!addedItem && addedItem.quantity > 0;
+                  const isProcessing = isAddingSuggested === prod.id;
+                  const previewImg = prod.images[0] || 'https://www.moonlightluxuryhometech.shop/images/cooker_active_blue_flames.jpg';
+                  const qtyToSelect = getSuggestedQty(prod.id);
+
+                  return (
+                    <div 
+                      key={prod.id}
+                      className={`bg-white rounded-xl border-2 transition-all p-4 flex flex-col justify-between shadow-xs ${
+                        isAdded ? 'border-emerald-500 bg-emerald-50/20' : 'border-slate-200 hover:border-amber-400'
+                      }`}
+                    >
+                      <div>
+                        {/* Image & Badges */}
+                        <div className="relative rounded-lg overflow-hidden border border-slate-200 bg-slate-900 mb-3 group">
+                          <img 
+                            src={previewImg} 
+                            alt={prod.name} 
+                            className="w-full h-44 sm:h-48 object-cover transition-transform duration-300 group-hover:scale-105"
+                          />
+                          <div className="absolute top-2 left-2 flex flex-col gap-1 items-start">
+                            <span className="text-[10px] font-black uppercase tracking-wider bg-amber-400 text-black px-2 py-0.5 rounded shadow-sm">
+                              {prod.badge}
+                            </span>
+                          </div>
+                          <div className="absolute bottom-2 right-2 bg-black/80 backdrop-blur-xs text-white text-[11px] font-bold px-2 py-0.5 rounded">
+                            {prod.dimensions}
+                          </div>
+                        </div>
+
+                        {/* Title & Pricing */}
+                        <div className="mb-2">
+                          <div className="flex items-center gap-2 mb-1 flex-wrap">
+                            <span className="text-xs text-slate-400 line-through">{formatNaira(prod.normalPrice)}</span>
+                            <span className="text-base sm:text-lg font-black text-[#0a192f] font-mono">{formatNaira(prod.price)}</span>
+                            <span className="text-[10px] font-bold text-rose-700 bg-rose-50 px-2 py-0.5 rounded border border-rose-200">
+                              Save {formatNaira(prod.normalPrice - prod.price)}
+                            </span>
+                          </div>
+                          <h5 className="font-extrabold text-sm sm:text-base text-[#0a192f] leading-snug">
+                            {prod.name}
+                          </h5>
+                          <p className="text-xs text-slate-500 mt-1 line-clamp-2">
+                            {prod.description}
+                          </p>
+                        </div>
+
+                        {/* Key Features */}
+                        <ul className="space-y-1 my-3 text-xs text-slate-700 border-t border-b border-slate-100 py-2.5">
+                          {prod.keyFeatures.slice(0, 3).map((feat, i) => (
+                            <li key={i} className="flex items-start gap-1.5">
+                              <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
+                              <span>{feat}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      {/* Action CTAs */}
+                      <div className="space-y-2.5 pt-2">
+                        {isAdded ? (
+                          <div className="p-3 bg-emerald-50 border-2 border-emerald-400 rounded-xl space-y-2">
+                            <div className="flex items-center justify-between gap-2">
+                              <span className="text-xs font-black text-emerald-800 flex items-center gap-1.5">
+                                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                                <span>IN ORDER #{submittedOrder.orderId}:</span>
+                              </span>
+                              <span className="text-xs font-mono font-black text-emerald-900">
+                                {addedItem.quantity} unit{addedItem.quantity > 1 ? 's' : ''} ({formatNaira(addedItem.totalPrice)})
+                              </span>
+                            </div>
+
+                            <div className="flex items-center justify-between gap-2 pt-2 border-t border-emerald-200">
+                              <span className="text-[11px] font-bold text-slate-600">Adjust Quantity:</span>
+                              <div className="flex items-center gap-1.5 bg-white border border-emerald-300 rounded-lg p-0.5">
+                                <button
+                                  type="button"
+                                  onClick={() => handleModifyAddedSuggestedQty(prod.id, addedItem.quantity - 1)}
+                                  className="w-7 h-7 flex items-center justify-center rounded text-slate-700 hover:bg-slate-100 font-black cursor-pointer text-sm"
+                                  aria-label="Decrease quantity"
+                                >
+                                  <Minus className="w-3.5 h-3.5" />
+                                </button>
+                                <span className="w-8 text-center text-xs font-black font-mono text-emerald-950">
+                                  {addedItem.quantity}
+                                </span>
+                                <button
+                                  type="button"
+                                  onClick={() => handleModifyAddedSuggestedQty(prod.id, addedItem.quantity + 1)}
+                                  className="w-7 h-7 flex items-center justify-center rounded text-slate-700 hover:bg-slate-100 font-black cursor-pointer text-sm"
+                                  aria-label="Increase quantity"
+                                >
+                                  <Plus className="w-3.5 h-3.5" />
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        ) : (
+                          <div className="space-y-2">
+                            {/* Quantity Selector Before Adding */}
+                            <div className="flex items-center justify-between gap-2 p-2 bg-slate-50 border border-slate-200 rounded-xl">
+                              <span className="text-xs font-bold text-slate-700">Choose Quantity:</span>
+                              <div className="flex items-center gap-1.5 bg-white border border-slate-300 rounded-lg p-0.5">
+                                <button
+                                  type="button"
+                                  onClick={() => setSuggestedQty(prod.id, qtyToSelect - 1)}
+                                  className="w-7 h-7 flex items-center justify-center rounded text-slate-700 hover:bg-slate-100 font-bold cursor-pointer"
+                                  aria-label="Decrease quantity"
+                                >
+                                  <Minus className="w-3.5 h-3.5" />
+                                </button>
+                                <span className="w-8 text-center text-xs font-black font-mono text-[#0a192f]">
+                                  {qtyToSelect}
+                                </span>
+                                <button
+                                  type="button"
+                                  onClick={() => setSuggestedQty(prod.id, qtyToSelect + 1)}
+                                  className="w-7 h-7 flex items-center justify-center rounded text-slate-700 hover:bg-slate-100 font-bold cursor-pointer"
+                                  aria-label="Increase quantity"
+                                >
+                                  <Plus className="w-3.5 h-3.5" />
+                                </button>
+                              </div>
+                            </div>
+
+                            <button
+                              type="button"
+                              disabled={isProcessing}
+                              onClick={() => handleAddSuggestedProduct(prod, qtyToSelect)}
+                              className="w-full py-3 px-4 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-black tracking-wide flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all cursor-pointer active:scale-[0.99] animate-action-blink"
+                            >
+                              {isProcessing ? (
+                                <>
+                                  <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                                  <span>Adding to Order #{submittedOrder.orderId}...</span>
+                                </>
+                              ) : (
+                                <>
+                                  <Plus className="w-4 h-4 shrink-0" />
+                                  <span>
+                                    ADD {qtyToSelect > 1 ? `${qtyToSelect}x ` : ''}TO ORDER (PAY {formatNaira(prod.price * qtyToSelect)} ON DELIVERY)
+                                  </span>
+                                </>
+                              )}
+                            </button>
+                          </div>
+                        )}
+
+                        {/* View Specs Button without WhatsApp */}
+                        {onViewSuggestedProduct && (
+                          <button
+                            type="button"
+                            onClick={() => onViewSuggestedProduct(prod)}
+                            className="w-full py-2.5 px-3 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl text-xs font-bold text-center border border-slate-200 transition-colors cursor-pointer"
+                          >
+                            Inspect Full Photos &amp; Specs
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
             {/* Post-Order Moonlight Phone & WhatsApp Helpline */}
             <div className="bg-slate-50 border-2 border-blue-500/30 rounded-2xl p-5 sm:p-6 mb-6 text-center shadow-sm">
               <span className="text-xs font-bold text-blue-800 uppercase tracking-widest bg-blue-100 px-3 py-1 rounded-full border border-blue-200 inline-block mb-2">
@@ -557,76 +893,54 @@ export const OrderForm: React.FC<OrderFormProps> = ({
                 <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
                   <h3 className="text-base sm:text-lg font-extrabold text-[#0a192f] flex items-center gap-2">
                     <ShoppingBag className="w-5 h-5 text-blue-600" />
-                    <span>Select Your Products &amp; Quantities</span>
+                    <span>Select Your Smart Piano Sink Quantity</span>
                   </h3>
                   <span className="text-xs font-bold text-blue-800 bg-blue-100 px-2.5 py-1 rounded-full border border-blue-200">
-                    Payment on Delivery &bull; Ships Together
+                    Payment on Delivery &bull; Inspect Before Payment
                   </span>
                 </div>
                 <p className="text-xs text-slate-600">
-                  You can order 1 or more products together in a single shipment. Mix &amp; match sinks and cooktops to unlock instant multi-product combo discounts!
+                  Select how many Smart Luxury Piano Sinks you need for your kitchen or building project. Complete plumbing kit &amp; digital workstation included with each sink.
                 </p>
 
                 {/* Quick Presets / Bundle Shortcuts */}
                 <div className="mt-4 pt-3 border-t border-slate-200">
                   <span className="text-[11px] font-bold text-slate-600 uppercase tracking-wider block mb-2">
-                    Popular Package Presets (Click to Auto-Select):
+                    Quick Quantity Selection (Click to Choose):
                   </span>
                   <div className="flex flex-wrap gap-2">
                     <button
                       type="button"
-                      onClick={() => handleApplyPreset('single_sink')}
-                      className={`text-xs px-3 py-1.5 rounded-lg border transition-all cursor-pointer ${
-                        sinkQty === 1 && cooker2bQty === 0 && cooker5bQty === 0
-                          ? 'bg-[#0a192f] border-[#0a192f] text-white font-bold shadow-xs'
+                      onClick={() => setSinkQty(1)}
+                      className={`text-xs px-3.5 py-2 rounded-xl border transition-all cursor-pointer font-bold ${
+                        sinkQty === 1
+                          ? 'bg-[#0a192f] border-[#0a192f] text-white shadow-xs'
                           : 'bg-white border-slate-200 text-slate-700 hover:border-slate-300'
                       }`}
                     >
-                      1x Piano Sink Only (₦260k)
+                      1x Piano Sink ({formatNaira(SINK_PRICE)}) &bull; 1 Kitchen
                     </button>
                     <button
                       type="button"
-                      onClick={() => handleApplyPreset('double_sink')}
-                      className={`text-xs px-3 py-1.5 rounded-lg border transition-all cursor-pointer ${
-                        sinkQty === 2 && cooker2bQty === 0 && cooker5bQty === 0
-                          ? 'bg-[#0a192f] border-[#0a192f] text-white font-bold shadow-xs'
+                      onClick={() => setSinkQty(2)}
+                      className={`text-xs px-3.5 py-2 rounded-xl border transition-all cursor-pointer font-bold ${
+                        sinkQty === 2
+                          ? 'bg-blue-600 border-blue-600 text-white shadow-xs'
                           : 'bg-white border-slate-200 text-slate-700 hover:border-slate-300'
                       }`}
                     >
-                      2x Sinks (Duplex/Villa - Save ₦10k)
+                      2x Sinks ({formatNaira(SINK_PRICE * 2 - 5000)}) &bull; Duplex / Save ₦5k 🎉
                     </button>
                     <button
                       type="button"
-                      onClick={() => handleApplyPreset('sink_plus_2b')}
-                      className={`text-xs px-3 py-1.5 rounded-lg border transition-all cursor-pointer ${
-                        sinkQty === 1 && cooker2bQty === 1 && cooker5bQty === 0
-                          ? 'bg-blue-600 border-blue-600 text-white font-bold shadow-xs'
+                      onClick={() => setSinkQty(3)}
+                      className={`text-xs px-3.5 py-2 rounded-xl border transition-all cursor-pointer font-bold ${
+                        sinkQty === 3
+                          ? 'bg-blue-700 border-blue-700 text-white shadow-xs'
                           : 'bg-white border-slate-200 text-slate-700 hover:border-slate-300'
                       }`}
                     >
-                      Sink + 2-Flip Cooker (Save ₦10k)
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => handleApplyPreset('sink_plus_5b')}
-                      className={`text-xs px-3 py-1.5 rounded-lg border transition-all cursor-pointer ${
-                        sinkQty === 1 && cooker2bQty === 0 && cooker5bQty === 1
-                          ? 'bg-blue-600 border-blue-600 text-white font-bold shadow-xs'
-                          : 'bg-white border-slate-200 text-slate-700 hover:border-slate-300'
-                      }`}
-                    >
-                      Sink + 5-Burner Hybrid (Save ₦10k)
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => handleApplyPreset('kitchen_trio')}
-                      className={`text-xs px-3 py-1.5 rounded-lg border transition-all cursor-pointer ${
-                        sinkQty === 1 && cooker2bQty === 1 && cooker5bQty === 1
-                          ? 'bg-blue-700 border-blue-700 text-white font-extrabold shadow-sm'
-                          : 'bg-white border-slate-200 text-slate-700 hover:border-slate-300'
-                      }`}
-                    >
-                      🔥 Complete Trio Combo (Save ₦20k)
+                      3x Sinks ({formatNaira(SINK_PRICE * 3 - 5000)}) &bull; Villa / Save ₦5k 🎉
                     </button>
                   </div>
                 </div>
@@ -653,11 +967,11 @@ export const OrderForm: React.FC<OrderFormProps> = ({
                           <span className="text-[10px] font-bold uppercase tracking-wider bg-blue-100 text-blue-800 px-2 py-0.5 rounded border border-blue-200">
                             Smart Workstation
                           </span>
-                          <span className="text-xs text-slate-400 line-through">₦380,000</span>
+                          <span className="text-xs text-slate-400 line-through">{formatNaira(config.normalPrice)}</span>
                           <span className="text-xs font-black text-[#0a192f]">{formatNaira(SINK_PRICE)}</span>
                         </div>
                         <h4 className="text-sm sm:text-base font-bold text-[#0a192f] leading-snug">
-                          {config.productName} (75×46cm)
+                          {config.productName} (75×45cm)
                         </h4>
                         <p className="text-[11px] text-slate-500 mt-1 line-clamp-2">
                           Piano key waterfall, digital °C display, pull-out faucet, cup washer, cutting board &amp; prep basins.
@@ -669,7 +983,7 @@ export const OrderForm: React.FC<OrderFormProps> = ({
                       <div className="text-left sm:text-right">
                         <span className="text-[10px] uppercase text-slate-500 block">Item Subtotal</span>
                         <span className="text-sm font-bold font-mono text-blue-700">
-                          {sinkQty > 0 ? formatNaira(sinkSubtotal) : '₦0'}
+                          {sinkQty > 0 ? formatNaira(itemsSubtotal) : '₦0'}
                         </span>
                       </div>
 
@@ -690,132 +1004,6 @@ export const OrderForm: React.FC<OrderFormProps> = ({
                           onClick={() => setSinkQty(prev => Math.min(10, prev + 1))}
                           className="p-1 text-slate-600 hover:text-slate-900 hover:bg-white rounded transition-colors cursor-pointer"
                           aria-label="Increase sink quantity"
-                        >
-                          <Plus className="w-4 h-4" />
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Product 2: 2-Flip-Up Double Gas Burner */}
-                <div className={`p-4 rounded-xl border transition-all ${
-                  cooker2bQty > 0 
-                    ? 'bg-white border-2 border-blue-500 shadow-sm' 
-                    : 'bg-white/70 border-slate-200 opacity-80'
-                }`}>
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                    <div className="flex items-start gap-3">
-                      <img 
-                        src="https://www.moonlightluxuryhometech.shop/images/cooker_active_blue_flames.jpg" 
-                        alt="2-Flip-Up Double Gas Burner" 
-                        className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-lg border border-slate-200 bg-slate-100 flex-shrink-0"
-                      />
-                      <div>
-                        <div className="flex items-center gap-2 mb-1 flex-wrap">
-                          <span className="text-[10px] font-bold uppercase tracking-wider bg-blue-50 text-blue-800 px-2 py-0.5 rounded border border-blue-200 flex items-center gap-1">
-                            <Flame className="w-3 h-3 text-blue-600" /> 90° Flip-Up Cooker
-                          </span>
-                          <span className="text-xs text-slate-400 line-through">₦200,000</span>
-                          <span className="text-xs font-black text-[#0a192f]">{formatNaira(COOKER_2B_PRICE)}</span>
-                        </div>
-                        <h4 className="text-sm sm:text-base font-bold text-[#0a192f] leading-snug">
-                          2-Flip-Up Double Gas Burner With Timer (75×45cm)
-                        </h4>
-                        <p className="text-[11px] text-slate-500 mt-1 line-clamp-2">
-                          Dual 90° foldable burners for effortless countertop cleaning &amp; 1-180min digital safety auto-off timer.
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center justify-between sm:justify-end gap-3 pt-2 sm:pt-0 border-t border-slate-200 sm:border-0">
-                      <div className="text-left sm:text-right">
-                        <span className="text-[10px] uppercase text-slate-500 block">Item Subtotal</span>
-                        <span className="text-sm font-bold font-mono text-blue-700">
-                          {cooker2bQty > 0 ? formatNaira(cooker2bSubtotal) : '₦0'}
-                        </span>
-                      </div>
-
-                      <div className="flex items-center bg-slate-100 border border-slate-300 rounded-lg p-1">
-                        <button
-                          type="button"
-                          onClick={() => setCooker2bQty(prev => Math.max(0, prev - 1))}
-                          className="p-1 text-slate-600 hover:text-slate-900 hover:bg-white rounded transition-colors cursor-pointer"
-                          aria-label="Decrease 2-burner quantity"
-                        >
-                          <Minus className="w-4 h-4" />
-                        </button>
-                        <span className="px-3 text-sm font-bold text-slate-900 font-mono min-w-[28px] text-center">
-                          {cooker2bQty}
-                        </span>
-                        <button
-                          type="button"
-                          onClick={() => setCooker2bQty(prev => Math.min(10, prev + 1))}
-                          className="p-1 text-slate-600 hover:text-slate-900 hover:bg-white rounded transition-colors cursor-pointer"
-                          aria-label="Increase 2-burner quantity"
-                        >
-                          <Plus className="w-4 h-4" />
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Product 3: Executive 5-Burner Hybrid Cooktop */}
-                <div className={`p-4 rounded-xl border transition-all ${
-                  cooker5bQty > 0 
-                    ? 'bg-white border-2 border-blue-500 shadow-sm' 
-                    : 'bg-white/70 border-slate-200 opacity-80'
-                }`}>
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                    <div className="flex items-start gap-3">
-                      <img 
-                        src="https://www.moonlightluxuryhometech.shop/images/alternative_5burner/cooktop_showroom_active.jpg" 
-                        alt="Executive 5-Burner Gas + Electric Hybrid Cooktop" 
-                        className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-lg border border-slate-200 bg-slate-100 flex-shrink-0"
-                      />
-                      <div>
-                        <div className="flex items-center gap-2 mb-1 flex-wrap">
-                          <span className="text-[10px] font-bold uppercase tracking-wider bg-blue-50 text-blue-800 px-2 py-0.5 rounded border border-blue-200">
-                            5-Burner Gas + Electric
-                          </span>
-                          <span className="text-xs text-slate-400 line-through">₦340,000</span>
-                          <span className="text-xs font-black text-[#0a192f]">{formatNaira(COOKER_5B_PRICE)}</span>
-                        </div>
-                        <h4 className="text-sm sm:text-base font-bold text-[#0a192f] leading-snug">
-                          Executive 5-Burner Hybrid Cooktop (90×51cm)
-                        </h4>
-                        <p className="text-[11px] text-slate-500 mt-1 line-clamp-2">
-                          4 high-velocity gas burners + 1 ceramic electric 2000W zone. Never stop cooking when gas runs out.
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center justify-between sm:justify-end gap-3 pt-2 sm:pt-0 border-t border-slate-200 sm:border-0">
-                      <div className="text-left sm:text-right">
-                        <span className="text-[10px] uppercase text-slate-500 block">Item Subtotal</span>
-                        <span className="text-sm font-bold font-mono text-blue-700">
-                          {cooker5bQty > 0 ? formatNaira(cooker5bSubtotal) : '₦0'}
-                        </span>
-                      </div>
-
-                      <div className="flex items-center bg-slate-100 border border-slate-300 rounded-lg p-1">
-                        <button
-                          type="button"
-                          onClick={() => setCooker5bQty(prev => Math.max(0, prev - 1))}
-                          className="p-1 text-slate-600 hover:text-slate-900 hover:bg-white rounded transition-colors cursor-pointer"
-                          aria-label="Decrease 5-burner quantity"
-                        >
-                          <Minus className="w-4 h-4" />
-                        </button>
-                        <span className="px-3 text-sm font-bold text-slate-900 font-mono min-w-[28px] text-center">
-                          {cooker5bQty}
-                        </span>
-                        <button
-                          type="button"
-                          onClick={() => setCooker5bQty(prev => Math.min(10, prev + 1))}
-                          className="p-1 text-slate-600 hover:text-slate-900 hover:bg-white rounded transition-colors cursor-pointer"
-                          aria-label="Increase 5-burner quantity"
                         >
                           <Plus className="w-4 h-4" />
                         </button>
@@ -871,13 +1059,13 @@ export const OrderForm: React.FC<OrderFormProps> = ({
                   </div>
 
                   <div>
-                    <span className="text-slate-500 block text-[11px] uppercase">Bundle Savings</span>
+                    <span className="text-slate-500 block text-[11px] uppercase">Multi-Product Bundle Savings</span>
                     {multiItemDiscount > 0 ? (
                       <span className="font-bold text-blue-700 text-sm flex items-center gap-1">
                         <Sparkles className="w-3.5 h-3.5" /> -{formatNaira(multiItemDiscount)}
                       </span>
                     ) : (
-                      <span className="text-slate-400 text-xs">Add 2+ items for ₦10k–₦30k off</span>
+                      <span className="text-slate-400 text-xs">Order 2+ items for ₦5k bundle discount</span>
                     )}
                   </div>
 
@@ -1238,7 +1426,7 @@ export const OrderForm: React.FC<OrderFormProps> = ({
                 ) : (
                   <>
                     <div className="flex flex-col items-center">
-                      <span className="text-base sm:text-lg tracking-wide">ORDER NOW — PAYMENT ON DELIVERY</span>
+                      <span className="text-base sm:text-lg tracking-wide">CONFIRM ORDER &amp; DISPATCH (PAY ON DELIVERY)</span>
                       <span className="text-[11px] font-medium text-blue-100 normal-case tracking-normal">
                         No advance payment needed &bull; Pay when your sink arrives
                       </span>
@@ -1258,6 +1446,77 @@ export const OrderForm: React.FC<OrderFormProps> = ({
                   <Truck className="w-3.5 h-3.5 text-blue-600" />
                   Inspected Before Dispatch
                 </span>
+              </div>
+
+              {/* Row of Conversion Trust Badges directly below the Order Form */}
+              <div className="mt-8 pt-6 border-t border-slate-200">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
+                  
+                  {/* Badge 1: Payment Secured */}
+                  <div className="bg-slate-50 border border-slate-200 rounded-2xl p-3.5 flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-blue-100/80 border border-blue-200 flex items-center justify-center text-blue-700 shrink-0">
+                      <Lock className="w-5 h-5" />
+                    </div>
+                    <div className="min-w-0">
+                      <div className="flex items-center gap-1">
+                        <span className="text-xs font-black text-[#0a192f] tracking-tight">Payment Secured</span>
+                        <CheckCircle2 className="w-3.5 h-3.5 text-blue-600 shrink-0" />
+                      </div>
+                      <span className="text-[11px] text-slate-500 block leading-tight mt-0.5">
+                        256-Bit SSL &bull; Pay On Delivery Available
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Badge 2: Verified Vendor */}
+                  <div className="bg-slate-50 border border-slate-200 rounded-2xl p-3.5 flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-emerald-100/80 border border-emerald-200 flex items-center justify-center text-emerald-700 shrink-0">
+                      <BadgeCheck className="w-5 h-5" />
+                    </div>
+                    <div className="min-w-0">
+                      <div className="flex items-center gap-1">
+                        <span className="text-xs font-black text-[#0a192f] tracking-tight">Verified Vendor</span>
+                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                      </div>
+                      <span className="text-[11px] text-slate-500 block leading-tight mt-0.5">
+                        Moonlight Luxury Home Tech Official
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Badge 3: Inspect Before Paying */}
+                  <div className="bg-slate-50 border border-slate-200 rounded-2xl p-3.5 flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-amber-100/80 border border-amber-200 flex items-center justify-center text-amber-700 shrink-0">
+                      <PackageCheck className="w-5 h-5" />
+                    </div>
+                    <div className="min-w-0">
+                      <div className="flex items-center gap-1">
+                        <span className="text-xs font-black text-[#0a192f] tracking-tight">Inspect On Arrival</span>
+                        <CheckCircle2 className="w-3.5 h-3.5 text-amber-600 shrink-0" />
+                      </div>
+                      <span className="text-[11px] text-slate-500 block leading-tight mt-0.5">
+                        Inspect items before payment
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Badge 4: Guaranteed Genuine Steel */}
+                  <div className="bg-slate-50 border border-slate-200 rounded-2xl p-3.5 flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-purple-100/80 border border-purple-200 flex items-center justify-center text-purple-700 shrink-0">
+                      <ShieldCheck className="w-5 h-5" />
+                    </div>
+                    <div className="min-w-0">
+                      <div className="flex items-center gap-1">
+                        <span className="text-xs font-black text-[#0a192f] tracking-tight">SUS304 Certified</span>
+                        <CheckCircle2 className="w-3.5 h-3.5 text-purple-600 shrink-0" />
+                      </div>
+                      <span className="text-[11px] text-slate-500 block leading-tight mt-0.5">
+                        Original Honeycomb Nano Steel
+                      </span>
+                    </div>
+                  </div>
+
+                </div>
               </div>
 
             </form>

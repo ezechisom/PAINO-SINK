@@ -6,75 +6,75 @@ export const PerfectForSection: React.FC = () => {
     {
       id: "family-homes",
       title: "Family Homes",
-      description: "Ideal for busy households preparing hearty family meals. Deep basin accommodates oversized stock pots, while the food-prep accessories keep counter space tidy.",
+      description: "Deep basin fits large pots, while nested prep boards keep busy family kitchen counters tidy.",
       icon: Home
     },
     {
       id: "apartments",
       title: "Apartments",
-      description: "When countertop real estate is at a premium, the sliding workstation accessories let you wash, prep, and drain over the sink to maximize your kitchen space.",
+      description: "Maximizes counter space by sliding cutting boards and colanders directly over the basin.",
       icon: Building2
     },
     {
       id: "new-homes",
       title: "New Home Construction",
-      description: "Add a striking designer focal point to your brand-new kitchen island. Elevates the resale and appraised luxury feel of modern residential builds.",
+      description: "A striking luxury centerpiece for kitchen islands that elevates property finish and appeal.",
       icon: Sparkles
     },
     {
       id: "renovations",
       title: "Kitchen Renovations",
-      description: "Instantly upgrade from outdated chrome or stained ceramic sinks. Compatible with standard 750x450mm cutouts in granite, quartz, or solid surfaces.",
+      description: "Replaces outdated chrome sinks. Fits standard 750×450mm cutouts in granite or quartz.",
       icon: Hammer
     },
     {
       id: "shortlets",
-      title: "Shortlet & Airbnb Properties",
-      description: "Impression matters for premium short-stay rentals in Lagos, Abuja, and Port Harcourt. Guests love the modern piano keys and high-tech digital display.",
+      title: "Shortlets & Airbnb",
+      description: "Wows guests with piano push buttons, waterfall stream, and self-powered LED display.",
       icon: Hotel
     },
     {
       id: "executive-offices",
-      title: "Executive Offices & Lounges",
-      description: "Sophisticated executive kitchenettes and board lounges where clean aesthetics, quick cup rinsing, and dedicated filtered drinking water are valued.",
+      title: "Offices & Lounges",
+      description: "Sleek aesthetics with instant cup rinsing and dedicated filtered drinking water tap.",
       icon: Building
     }
   ];
 
   return (
-    <section id="perfect-for-section" className="py-16 md:py-20 bg-[#0b0f14]">
+    <section id="perfect-for-section" className="py-8 sm:py-14 bg-[#0b0f14]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <span className="text-amber-400 font-bold text-xs uppercase tracking-widest bg-amber-500/10 px-3.5 py-1.5 rounded-full border border-amber-500/20 mb-3 inline-block">
+        <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-10">
+          <span className="text-amber-400 font-bold text-[11px] uppercase tracking-widest bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20 mb-2 inline-block">
             Universal Architectural Fit
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight">
+          <h2 className="text-xl sm:text-3xl font-extrabold text-white tracking-tight leading-tight">
             PERFECT FOR MODERN KITCHENS
           </h2>
-          <p className="text-slate-400 text-sm sm:text-base mt-3">
-            Designed to fit seamlessly into diverse Nigerian residential and executive kitchen layouts.
+          <p className="text-slate-400 text-xs sm:text-sm mt-2">
+            Engineered to fit seamlessly into modern residential and luxury kitchen layouts.
           </p>
         </div>
 
         {/* Use Cases Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-5">
           {useCases.map((uc) => {
             const Icon = uc.icon;
             return (
               <div
                 key={uc.id}
-                className="bg-slate-900/60 border border-slate-800 hover:border-slate-700 rounded-2xl p-6 transition-all hover:bg-slate-900 shadow-md group flex flex-col justify-between"
+                className="bg-slate-900/60 border border-slate-800 hover:border-slate-700 rounded-xl sm:rounded-2xl p-4 sm:p-5 transition-all hover:bg-slate-900 shadow-sm group flex flex-col justify-between"
               >
                 <div>
-                  <div className="w-12 h-12 rounded-xl bg-slate-800 flex items-center justify-center text-amber-400 mb-4 group-hover:scale-110 transition-transform">
-                    <Icon className="w-6 h-6" />
+                  <div className="w-9 h-9 rounded-lg bg-slate-800 flex items-center justify-center text-amber-400 mb-3 group-hover:scale-105 transition-transform">
+                    <Icon className="w-4.5 h-4.5" />
                   </div>
-                  <h3 className="text-lg font-bold text-white mb-2 tracking-tight">
+                  <h3 className="text-sm sm:text-base font-bold text-white mb-1.5 tracking-tight">
                     {uc.title}
                   </h3>
-                  <p className="text-slate-400 text-xs sm:text-sm leading-relaxed">
+                  <p className="text-slate-400 text-xs leading-relaxed">
                     {uc.description}
                   </p>
                 </div>

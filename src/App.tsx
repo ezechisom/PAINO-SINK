@@ -25,20 +25,18 @@ import { FinalOfferSection } from './components/FinalOfferSection';
 import { OrderForm } from './components/OrderForm';
 import { StickyMobileBar } from './components/StickyMobileBar';
 import { FloatingWhatsApp } from './components/FloatingWhatsApp';
+import { FloatingFaqChat } from './components/FloatingFaqChat';
 import { ConfigEditorModal } from './components/ConfigEditorModal';
 import { Footer } from './components/Footer';
-import { AlternativeProductsTopBanner } from './components/AlternativeProductsTopBanner';
-import { AlternativeProductsSection } from './components/AlternativeProductsSection';
 import { AlternativeProductModal } from './components/AlternativeProductModal';
 import { AlternativeProduct } from './data/alternativeProducts';
 import { getWhatsAppUrl } from './utils/whatsapp';
 import { trackViewContent, trackInitiateCheckout, trackContact } from './utils/metaPixel';
-import { Sparkles, Phone, MessageCircle, ShoppingBag, Flame } from 'lucide-react';
+import { Sparkles, Phone, MessageCircle, ShoppingBag, ShieldCheck } from 'lucide-react';
 
 export default function App() {
   const [config, setConfig] = useState<SiteConfig>(initialConfig);
   const [selectedAltProduct, setSelectedAltProduct] = useState<AlternativeProduct | null>(null);
-  const [selectedCookerAddon, setSelectedCookerAddon] = useState<'none' | 'cooker-2burner' | 'cooker-5burner' | 'both'>('none');
   const [placedOrder, setPlacedOrder] = useState<{
     orderId: string;
     orderData: any;
@@ -59,12 +57,8 @@ export default function App() {
     }
   };
 
-  const handleSelectAltForOrder = (product: AlternativeProduct) => {
-    if (product.id === 'cooker-2burner') {
-      setSelectedCookerAddon('cooker-2burner');
-    } else if (product.id === 'cooker-5burner') {
-      setSelectedCookerAddon('cooker-5burner');
-    }
+  const handleSelectAltForOrder = (_product: AlternativeProduct) => {
+    setSelectedAltProduct(null);
     scrollToOrder();
   };
 
@@ -87,6 +81,15 @@ export default function App() {
   return (
     <div className="min-h-screen bg-white text-slate-900 flex flex-col font-sans selection:bg-blue-500/20 selection:text-blue-900">
       
+      {/* Floating FAQ Chat Icon at the top of the website */}
+      <FloatingFaqChat 
+        faqs={config.faqs}
+        phoneNumber={config.phoneNumber}
+        whatsappNumber={config.whatsappNumber}
+        productName={config.productName}
+        hasPlacedOrder={!!placedOrder}
+      />
+
       {/* 1. TOP PROMOTIONAL BAR (Dark Blue & Emerald Green) */}
       <PromoTopBar promoPrice={config.promoPrice} />
 
@@ -109,71 +112,44 @@ export default function App() {
             </div>
           </div>
 
-          {/* Header Action Buttons */}
-          <div className="flex items-center gap-2 sm:gap-3">
-            
-            {/* Quick jump to Alternative Cooktops */}
-            <a
-              href="#alternative-products-section"
-              className="hidden xl:inline-flex items-center gap-1.5 text-xs text-[#0a192f] font-bold bg-slate-100 hover:bg-slate-200 border border-slate-200 px-3 py-2 rounded-xl transition-all"
-            >
-              <Flame className="w-3.5 h-3.5 text-blue-600" />
-              <span>Matching Cooktops</span>
-            </a>
+          {/* Header Action Buttons: Only visible AFTER client fills the form */}
+          {placedOrder ? (
+            <div className="flex items-center gap-2 sm:gap-3">
+              <a
+                href={`tel:${config.phoneNumber.replace(/\s+/g, '')}`}
+                onClick={() => trackContact('phone', 'header-call')}
+                id="header-call-btn"
+                className="flex items-center gap-1.5 text-xs text-white font-extrabold bg-[#0a192f] hover:bg-slate-800 px-3 py-2 rounded-xl transition-all shadow-sm cursor-pointer"
+                title="Call Moonlight"
+              >
+                <Phone className="w-3.5 h-3.5 text-blue-400" />
+                <span className="hidden sm:inline">Call Moonlight: {config.phoneNumber}</span>
+                <span className="sm:hidden">Call</span>
+              </a>
 
-            {/* If Order is Placed: SHOW MOONLIGHT CONTACT NUMBER PROMINENTLY AT TOP */}
-            {placedOrder && (
-              <div className="flex items-center gap-2">
-                <a
-                  href={`tel:${config.phoneNumber.replace(/\s+/g, '')}`}
-                  onClick={() => trackContact('phone', 'header-call')}
-                  id="header-placed-order-call-btn"
-                  className="flex items-center gap-1.5 text-xs text-white font-extrabold bg-[#0a192f] hover:bg-slate-800 px-3 py-2 rounded-xl transition-all shadow-sm cursor-pointer"
-                  title="Call Moonlight"
-                >
-                  <Phone className="w-3.5 h-3.5 text-blue-400" />
-                  <span className="hidden sm:inline">Call Moonlight: {config.phoneNumber}</span>
-                  <span className="sm:hidden">Call: {config.phoneNumber}</span>
-                </a>
-
-                <a
-                  href={headerWhatsAppUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => trackContact('whatsapp', 'header-whatsapp')}
-                  id="header-whatsapp-btn"
-                  className="inline-flex items-center gap-1.5 text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-500 px-3 py-2 rounded-xl transition-all shadow-sm cursor-pointer animate-soft-blink"
-                  title="WhatsApp Moonlight"
-                >
-                  <MessageCircle className="w-3.5 h-3.5 fill-white" />
-                  <span className="hidden md:inline">WhatsApp Moonlight</span>
-                  <span className="md:hidden">WhatsApp</span>
-                </a>
-              </div>
-            )}
-
-            {/* Header Order CTA — BLINKING in Blue */}
-            <button
-              onClick={scrollToOrder}
-              id="header-order-btn"
-              className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-extrabold text-xs sm:text-sm py-2 sm:py-2.5 px-3.5 sm:px-5 rounded-xl shadow-md cursor-pointer uppercase tracking-wider transition-all animate-action-blink"
-            >
-              <ShoppingBag className="w-4 h-4 shrink-0" />
-              <span>
-                <span className="hidden md:inline">ORDER NOW (PAY ON DELIVERY)</span>
-                <span className="md:hidden">ORDER NOW</span>
-              </span>
-            </button>
-          </div>
+              <a
+                href={headerWhatsAppUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => trackContact('whatsapp', 'header-whatsapp')}
+                id="header-whatsapp-btn"
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-500 px-3 py-2 rounded-xl transition-all shadow-sm cursor-pointer animate-soft-blink"
+                title="WhatsApp Moonlight"
+              >
+                <MessageCircle className="w-3.5 h-3.5 fill-white" />
+                <span className="hidden md:inline">WhatsApp Moonlight</span>
+                <span className="md:hidden">WhatsApp</span>
+              </a>
+            </div>
+          ) : (
+            <div className="flex items-center gap-2 text-xs font-bold text-slate-700 bg-slate-100/90 border border-slate-200 px-3 py-1.5 rounded-xl">
+              <ShieldCheck className="w-4 h-4 text-blue-600" />
+              <span>Payment on Delivery Available</span>
+            </div>
+          )}
 
         </div>
       </header>
-
-      {/* ALTERNATIVE APPLIANCES TOP SHOWCASE BAR - SLIDING ACROSS TOP SCREEN */}
-      <AlternativeProductsTopBanner 
-        onViewProduct={(p) => setSelectedAltProduct(p)}
-        onOrderProduct={handleSelectAltForOrder}
-      />
 
       {/* Main Landing Page Content */}
       <main className="flex-1">
@@ -192,12 +168,6 @@ export default function App() {
 
         {/* 6. PRODUCT IMAGE SHOWCASE (3-Product Interactive Gallery) */}
         <ImageGallery onOrderClick={scrollToOrder} />
-
-        {/* ALTERNATIVE & MATCHING LUXURY COOKTOPS (MOONLIGHT LUXURY HOME TECH) */}
-        <AlternativeProductsSection 
-          onViewProduct={(p) => setSelectedAltProduct(p)}
-          onSelectForOrder={handleSelectAltForOrder}
-        />
 
         {/* 7. "WHAT MAKES IT DIFFERENT?" (Comparison Table) */}
         <ComparisonSection onOrderClick={scrollToOrder} />
@@ -227,23 +197,27 @@ export default function App() {
         <FaqSection 
           faqs={config.faqs} 
           phoneNumber={config.phoneNumber}
+          hasPlacedOrder={!!placedOrder}
         />
 
         {/* 16. FINAL OFFER SECTION */}
         <FinalOfferSection config={config} onOrderClick={scrollToOrder} />
 
-        {/* 17. ORDER FORM (Checkout with Dynamic Subtotal calculation) */}
+        {/* 17. ORDER FORM (Checkout with Post-Order Suggested Companion Products) */}
         <OrderForm 
           config={config} 
           onOrderPlaced={setPlacedOrder}
-          selectedCookerAddon={selectedCookerAddon}
-          onCookerAddonChange={setSelectedCookerAddon}
+          onViewSuggestedProduct={(prod) => setSelectedAltProduct(prod)}
         />
 
       </main>
 
       {/* Footer */}
-      <Footer config={config} onOrderClick={scrollToOrder} />
+      <Footer 
+        config={config} 
+        onOrderClick={scrollToOrder} 
+        hasPlacedOrder={!!placedOrder}
+      />
 
       {/* Floating WhatsApp Bubble */}
       <FloatingWhatsApp 
@@ -269,6 +243,7 @@ export default function App() {
         onClose={() => setSelectedAltProduct(null)}
         onSelectForOrder={handleSelectAltForOrder}
         whatsappNumber={config.whatsappNumber}
+        hasPlacedOrder={!!placedOrder}
       />
 
     </div>

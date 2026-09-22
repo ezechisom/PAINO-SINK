@@ -7,7 +7,7 @@ export const HowItWorks: React.FC = () => {
       number: "01",
       title: "PREPARE",
       subtitle: "Nested Food Prep Surfaces",
-      description: "Slide the solid wood cutting board and stainless prep basin onto the top built-in rails. Chop meat, poultry, and vegetables directly over the sink without transferring drippings onto your countertop.",
+      description: "Slide the solid wood cutting board and prep basin directly over the basin to chop vegetables and meat without countertop mess.",
       icon: Utensils,
       color: "from-amber-500/20 to-amber-500/5",
       borderColor: "border-amber-500/30"
@@ -16,7 +16,7 @@ export const HowItWorks: React.FC = () => {
       number: "02",
       title: "WASH",
       subtitle: "Targeted Water Stream Modes",
-      description: "Press the piano keys to activate the gentle Flying Rain waterfall for washing leaves, or pull out the 360° sprayer to clean heavy pots. Use the glass rinser to blast-clean cups with one single downward press.",
+      description: "Press piano keys to activate the gentle Flying Rain waterfall for greens, 360° pull-out sprayer for pots, or glass rinser for cups.",
       icon: Waves,
       color: "from-blue-500/20 to-blue-500/5",
       borderColor: "border-blue-500/30"
@@ -25,7 +25,7 @@ export const HowItWorks: React.FC = () => {
       number: "03",
       title: "ORGANIZE",
       subtitle: "Effortless Drainage & Clean Deck",
-      description: "Place freshly rinsed produce or utensils in the perforated colander to drip directly into the drain. Turn the deck-mounted rotary knob to drain the sink without ever getting your hands wet.",
+      description: "Drip-dry produce in the colander and turn the deck rotary knob to drain the sink without putting hands in dirty water.",
       icon: CheckCircle,
       color: "from-blue-600/20 to-blue-600/5",
       borderColor: "border-blue-500/30"
@@ -33,54 +33,54 @@ export const HowItWorks: React.FC = () => {
   ];
 
   return (
-    <section id="how-it-works-section" className="py-16 md:py-24 bg-[#0d121a] border-y border-slate-800/80">
+    <section id="how-it-works-section" className="py-8 sm:py-16 bg-[#0d121a] border-y border-slate-800/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-14">
-          <span className="text-amber-400 font-bold text-xs uppercase tracking-widest bg-amber-500/10 px-3.5 py-1.5 rounded-full border border-amber-500/20 mb-3 inline-block">
+        <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-10">
+          <span className="text-amber-400 font-bold text-[11px] uppercase tracking-widest bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20 mb-2 inline-block">
             Seamless Kitchen Workflow
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
+          <h2 className="text-xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight leading-tight">
             HOW IT TRANSFORMS YOUR DAILY ROUTINE
           </h2>
-          <p className="text-slate-400 text-sm sm:text-base mt-3">
-            Three simple, ergonomic steps that turn messy cooking sessions into an organized, joyful kitchen experience.
+          <p className="text-slate-400 text-xs sm:text-sm mt-2">
+            Three simple ergonomic steps that turn cooking and cleaning into an organized, effortless experience.
           </p>
         </div>
 
         {/* 3 Step Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
           {steps.map((step) => {
             const Icon = step.icon;
             return (
               <div
                 key={step.number}
-                className={`relative rounded-3xl bg-gradient-to-b ${step.color} bg-slate-900/80 border ${step.borderColor} p-8 flex flex-col justify-between shadow-xl group hover:border-amber-400/50 transition-all`}
+                className={`relative rounded-2xl bg-gradient-to-b ${step.color} bg-slate-900/80 border ${step.borderColor} p-5 sm:p-6 flex flex-col justify-between shadow-md group hover:border-amber-400/50 transition-all`}
               >
                 <div>
-                  <div className="flex items-center justify-between mb-6">
-                    <span className="text-4xl sm:text-5xl font-black text-white/20 font-display group-hover:text-amber-400/40 transition-colors">
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-3xl sm:text-4xl font-black text-white/20 font-display group-hover:text-amber-400/40 transition-colors">
                       {step.number}
                     </span>
-                    <div className="w-12 h-12 rounded-2xl bg-slate-800 border border-slate-700 flex items-center justify-center text-amber-400">
-                      <Icon className="w-6 h-6" />
+                    <div className="w-10 h-10 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-amber-400">
+                      <Icon className="w-5 h-5" />
                     </div>
                   </div>
 
-                  <h3 className="text-xl sm:text-2xl font-black text-white mb-1 tracking-tight">
+                  <h3 className="text-lg sm:text-xl font-black text-white mb-0.5 tracking-tight">
                     {step.title}
                   </h3>
-                  <div className="text-xs font-semibold text-amber-400/90 uppercase tracking-wider mb-3">
+                  <div className="text-[11px] font-semibold text-amber-400/90 uppercase tracking-wider mb-2">
                     {step.subtitle}
                   </div>
 
-                  <p className="text-slate-300 text-sm leading-relaxed">
+                  <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
                     {step.description}
                   </p>
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-slate-800/80 flex items-center gap-2 text-xs text-slate-400">
+                <div className="mt-4 pt-3 border-t border-slate-800/80 flex items-center gap-1.5 text-[11px] text-slate-400">
                   <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
                   <span>Step {step.number} of 3 in the Smart System</span>
                 </div>

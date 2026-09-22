@@ -22,13 +22,15 @@ interface AlternativeProductModalProps {
   onClose: () => void;
   onSelectForOrder?: (product: AlternativeProduct) => void;
   whatsappNumber: string;
+  hasPlacedOrder?: boolean;
 }
 
 export const AlternativeProductModal: React.FC<AlternativeProductModalProps> = ({
   product,
   onClose,
   onSelectForOrder,
-  whatsappNumber
+  whatsappNumber,
+  hasPlacedOrder = false
 }) => {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
 
@@ -209,16 +211,18 @@ export const AlternativeProductModal: React.FC<AlternativeProductModalProps> = (
               </button>
             )}
 
-            <a
-              href={whatsappInquiryUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => trackContact('whatsapp', `alt-${product.id}`)}
-              className="inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-sm py-3.5 px-5 rounded-xl transition-all cursor-pointer"
-            >
-              <MessageCircle className="w-4 h-4 fill-white" />
-              <span>INQUIRE ON WHATSAPP</span>
-            </a>
+            {hasPlacedOrder && (
+              <a
+                href={whatsappInquiryUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => trackContact('whatsapp', `alt-${product.id}`)}
+                className="inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-sm py-3.5 px-5 rounded-xl transition-all cursor-pointer"
+              >
+                <MessageCircle className="w-4 h-4 fill-white" />
+                <span>INQUIRE ON WHATSAPP</span>
+              </a>
+            )}
 
             <a
               href={product.officialUrl}
