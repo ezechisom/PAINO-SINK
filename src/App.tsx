@@ -29,7 +29,8 @@ import { FloatingFaqChat } from './components/FloatingFaqChat';
 import { ConfigEditorModal } from './components/ConfigEditorModal';
 import { Footer } from './components/Footer';
 import { AlternativeProductModal } from './components/AlternativeProductModal';
-import { AlternativeProduct } from './data/alternativeProducts';
+import { SuggestedProductTicker } from './components/SuggestedProductTicker';
+import { ALTERNATIVE_PRODUCTS, AlternativeProduct } from './data/alternativeProducts';
 import { getWhatsAppUrl } from './utils/whatsapp';
 import { trackViewContent, trackInitiateCheckout, trackContact } from './utils/metaPixel';
 import { Sparkles, Phone, MessageCircle, ShoppingBag, ShieldCheck } from 'lucide-react';
@@ -37,6 +38,7 @@ import { Sparkles, Phone, MessageCircle, ShoppingBag, ShieldCheck } from 'lucide
 export default function App() {
   const [config, setConfig] = useState<SiteConfig>(initialConfig);
   const [selectedAltProduct, setSelectedAltProduct] = useState<AlternativeProduct | null>(null);
+  const [productToAddToForm, setProductToAddToForm] = useState<{ productId: string; timestamp: number } | null>(null);
   const [placedOrder, setPlacedOrder] = useState<{
     orderId: string;
     orderData: any;
@@ -57,9 +59,40 @@ export default function App() {
     }
   };
 
-  const handleSelectAltForOrder = (_product: AlternativeProduct) => {
+  const handleViewProductSpecs = (productIdOrProduct: string | AlternativeProduct) => {
+    let prod: AlternativeProduct | undefined;
+    if (typeof productIdOrProduct === 'string') {
+      if (productIdOrProduct === 'sink') {
+        const specsSection = document.getElementById('specs-section');
+        if (specsSection) {
+          specsSection.scrollIntoView({ behavior: 'smooth' });
+          return;
+        }
+      }
+      prod = ALTERNATIVE_PRODUCTS.find(p => p.id === productIdOrProduct);
+    } else {
+      prod = productIdOrProduct;
+    }
+
+    if (prod) {
+      setSelectedAltProduct(prod);
+    }
+  };
+
+  const handleAddProductToOrder = (productIdOrProduct?: string | AlternativeProduct) => {
+    if (!productIdOrProduct) {
+      scrollToOrder();
+      return;
+    }
+
+    const pId = typeof productIdOrProduct === 'string' ? productIdOrProduct : productIdOrProduct.id;
+    setProductToAddToForm({ productId: pId, timestamp: Date.now() });
     setSelectedAltProduct(null);
     scrollToOrder();
+  };
+
+  const handleSelectAltForOrder = (product: AlternativeProduct) => {
+    handleAddProductToOrder(product);
   };
 
   const scrollToFeatures = () => {
@@ -151,6 +184,12 @@ export default function App() {
         </div>
       </header>
 
+      {/* Suggested Product Continuous Screen Ticker */}
+      <SuggestedProductTicker 
+        onViewSpecs={handleViewProductSpecs} 
+        onAddToForm={handleAddProductToOrder} 
+      />
+
       {/* Main Landing Page Content */}
       <main className="flex-1">
         
@@ -166,8 +205,11 @@ export default function App() {
         {/* 5. WHY YOU'LL LOVE IT (Features & Benefits) */}
         <WhyLoveSection config={config} onOrderClick={scrollToOrder} />
 
-        {/* 6. PRODUCT IMAGE SHOWCASE (3-Product Interactive Gallery) */}
-        <ImageGallery onOrderClick={scrollToOrder} />
+        {/* 6. PRODUCT IMAGE SHOWCASE (3-Product Interactive Gallery with Click-to-Specs & Direct Buy) */}
+        <ImageGallery 
+          onOrderClick={handleAddProductToOrder} 
+          onViewSpecs={handleViewProductSpecs} 
+        />
 
         {/* 7. "WHAT MAKES IT DIFFERENT?" (Comparison Table) */}
         <ComparisonSection onOrderClick={scrollToOrder} />
@@ -203,11 +245,12 @@ export default function App() {
         {/* 16. FINAL OFFER SECTION */}
         <FinalOfferSection config={config} onOrderClick={scrollToOrder} />
 
-        {/* 17. ORDER FORM (Checkout with Post-Order Suggested Companion Products) */}
+        {/* 17. ORDER FORM (Checkout with Multi-Product Appliance Selection & Bundle Discounts) */}
         <OrderForm 
           config={config} 
           onOrderPlaced={setPlacedOrder}
           onViewSuggestedProduct={(prod) => setSelectedAltProduct(prod)}
+          productToAddToForm={productToAddToForm}
         />
 
       </main>

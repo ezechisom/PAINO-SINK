@@ -12,7 +12,9 @@ import {
   ShieldCheck, 
   Truck,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  ShoppingBag,
+  ArrowRight
 } from 'lucide-react';
 import { getWhatsAppUrl } from '../utils/whatsapp';
 import { trackContact } from '../utils/metaPixel';
@@ -207,7 +209,9 @@ export const AlternativeProductModal: React.FC<AlternativeProductModalProps> = (
                 }}
                 className="flex-1 inline-flex items-center justify-center gap-2 bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 hover:from-amber-400 hover:to-amber-500 text-black font-black text-sm py-3.5 px-5 rounded-xl shadow-lg transition-transform active:scale-95 cursor-pointer uppercase tracking-wider animate-action-blink"
               >
-                <span>ORDER THIS COOKTOP (PAY ON DELIVERY)</span>
+                <ShoppingBag className="w-4 h-4 text-black" />
+                <span>ADD TO FORM &amp; BUY (PAY ON DELIVERY)</span>
+                <ArrowRight className="w-4 h-4 text-black" />
               </button>
             )}
 

@@ -12,17 +12,23 @@ import {
   Waves, 
   Layers, 
   ShoppingBag, 
-  Maximize2
+  Maximize2,
+  FileText,
+  ArrowRight,
+  CheckCircle2,
+  Sliders
 } from 'lucide-react';
 
 interface ImageGalleryProps {
   images?: GalleryImage[];
   onOrderClick?: (productId?: string) => void;
+  onViewSpecs?: (productId: string) => void;
 }
 
 export const ImageGallery: React.FC<ImageGalleryProps> = ({ 
   images = ALL_GALLERY_IMAGES,
-  onOrderClick 
+  onOrderClick,
+  onViewSpecs 
 }) => {
   const [selectedProduct, setSelectedProduct] = useState<string>('all');
   const [selectedTag, setSelectedTag] = useState<string>('all');
@@ -87,7 +93,17 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({
     if (onOrderClick) {
       onOrderClick(productId);
     } else {
-      const el = document.getElementById('order-form');
+      const el = document.getElementById('order-section');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handleSpecsTarget = (productId?: string) => {
+    const targetId = productId || activeImage?.productId || 'cooker-2burner';
+    if (onViewSpecs) {
+      onViewSpecs(targetId);
+    } else if (targetId === 'sink') {
+      const el = document.getElementById('specs-section');
       if (el) el.scrollIntoView({ behavior: 'smooth' });
     }
   };
@@ -286,6 +302,35 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({
                   </button>
                 </>
               )}
+
+              {/* Interactive Quick Action Overlay on Image */}
+              <div className="absolute bottom-3 right-3 z-10 flex flex-wrap items-center gap-2">
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleSpecsTarget(activeImage?.productId);
+                  }}
+                  className="inline-flex items-center gap-1.5 bg-[#0a192f]/90 hover:bg-[#0a192f] text-white text-[11px] sm:text-xs font-bold px-3 py-1.5 rounded-full border border-slate-600 shadow-lg backdrop-blur-md transition-all hover:scale-105 active:scale-95 cursor-pointer"
+                  title="Click to view complete technical specs"
+                >
+                  <Sliders className="w-3.5 h-3.5 text-blue-400" />
+                  <span>Click for Specs</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleOrderTarget(activeImage?.productId);
+                  }}
+                  className="inline-flex items-center gap-1.5 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white text-[11px] sm:text-xs font-black px-3.5 py-1.5 rounded-full shadow-lg border border-blue-400 transition-all hover:scale-105 active:scale-95 cursor-pointer"
+                  title="Directly fill form to buy this appliance"
+                >
+                  <ShoppingBag className="w-3.5 h-3.5 text-white" />
+                  <span>Buy Now</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </button>
+              </div>
             </div>
 
             {/* Bottom Caption Bar */}
@@ -320,6 +365,69 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({
                     </span>
                   </div>
                 )}
+              </div>
+
+              {/* Dedicated Burner / Sink Specs & Order Actions Card */}
+              <div className="mt-4 pt-4 border-t border-slate-200">
+                <div className="p-3.5 sm:p-4 rounded-xl bg-slate-50 border border-slate-200 flex flex-col lg:flex-row lg:items-center justify-between gap-3.5">
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <span className="text-xs font-extrabold text-[#0a192f] uppercase tracking-wide flex items-center gap-1.5">
+                        <Sliders className="w-3.5 h-3.5 text-blue-600" />
+                        <span>Specifications &amp; Fit:</span>
+                      </span>
+                      <span className="font-mono text-xs font-bold text-slate-800 bg-white px-2 py-0.5 rounded border border-slate-200">
+                        {activeImage?.dimensions || 'Standard Countertop Fit'}
+                      </span>
+                      {activeImage?.productId === 'cooker-2burner' && (
+                        <span className="text-xs font-mono text-blue-700 bg-blue-50 px-2 py-0.5 rounded border border-blue-200">
+                          Cutout: 650 × 350 mm
+                        </span>
+                      )}
+                      {activeImage?.productId === 'cooker-5burner' && (
+                        <span className="text-xs font-mono text-blue-700 bg-blue-50 px-2 py-0.5 rounded border border-blue-200">
+                          Cutout: 830 × 470 mm
+                        </span>
+                      )}
+                      {activeImage?.productId === 'sink' && (
+                        <span className="text-xs font-mono text-blue-700 bg-blue-50 px-2 py-0.5 rounded border border-blue-200">
+                          Cutout: 720 × 420 mm
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-[11px] sm:text-xs text-slate-600">
+                      {activeImage?.productId === 'cooker-2burner' ? (
+                        <span>✨ 90° flip-up burners for 5-second wipe downs • 0–180m mechanical auto shut-off timer • Pure blue flames</span>
+                      ) : activeImage?.productId === 'cooker-5burner' ? (
+                        <span>⚡ 4 gas burners + central 2000W radiant electric zone (dual-fuel reliability) • Digital touch controls</span>
+                      ) : (
+                        <span>💧 Hydroelectric LED temperature display • Piano key controls • Pull-out spray faucet + cup washer</span>
+                      )}
+                    </p>
+                  </div>
+
+                  {/* Dual Action Buttons */}
+                  <div className="flex items-center gap-2.5 shrink-0">
+                    <button
+                      type="button"
+                      onClick={() => handleSpecsTarget(activeImage?.productId)}
+                      className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-xl text-xs font-bold text-slate-800 bg-white border border-slate-300 hover:bg-slate-100 hover:border-slate-400 transition-all shadow-xs cursor-pointer active:scale-95"
+                    >
+                      <FileText className="w-3.5 h-3.5 text-blue-600" />
+                      <span>See Specs</span>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => handleOrderTarget(activeImage?.productId)}
+                      className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-black text-white bg-blue-600 hover:bg-blue-700 active:scale-95 transition-all shadow-md cursor-pointer animate-soft-blink"
+                    >
+                      <ShoppingBag className="w-3.5 h-3.5" />
+                      <span>Fill Form to Buy</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -413,6 +521,33 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({
               </span>
               <p className="font-extrabold text-white text-base sm:text-lg">{activeImage.title}</p>
               <p className="text-xs sm:text-sm text-slate-300 mt-1">{activeImage.subtitle}</p>
+
+              {/* Action Buttons in Zoom Lightbox */}
+              <div className="mt-4 flex items-center justify-center gap-3">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsZoomOpen(false);
+                    handleSpecsTarget(activeImage.productId);
+                  }}
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold bg-slate-800 hover:bg-slate-700 text-white border border-slate-600 transition-all cursor-pointer"
+                >
+                  <FileText className="w-3.5 h-3.5 text-blue-400" />
+                  <span>View Product Specs</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsZoomOpen(false);
+                    handleOrderTarget(activeImage.productId);
+                  }}
+                  className="inline-flex items-center gap-1.5 px-5 py-2 rounded-xl text-xs font-black bg-blue-600 hover:bg-blue-500 text-white transition-all shadow-lg cursor-pointer"
+                >
+                  <ShoppingBag className="w-3.5 h-3.5" />
+                  <span>Fill Form to Buy</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </button>
+              </div>
             </div>
           </div>
         </div>
