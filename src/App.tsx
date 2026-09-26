@@ -30,15 +30,19 @@ import { ConfigEditorModal } from './components/ConfigEditorModal';
 import { Footer } from './components/Footer';
 import { AlternativeProductModal } from './components/AlternativeProductModal';
 import { SuggestedProductTicker } from './components/SuggestedProductTicker';
+import { QuickOrderModal } from './components/QuickOrderModal';
+import { FloatingQuickOrderBtn } from './components/FloatingQuickOrderBtn';
 import { ALTERNATIVE_PRODUCTS, AlternativeProduct } from './data/alternativeProducts';
 import { getWhatsAppUrl } from './utils/whatsapp';
 import { trackViewContent, trackInitiateCheckout, trackContact } from './utils/metaPixel';
-import { Sparkles, Phone, MessageCircle, ShoppingBag, ShieldCheck } from 'lucide-react';
+import { Sparkles, Phone, MessageCircle, ShoppingBag, ShieldCheck, Zap } from 'lucide-react';
 
 export default function App() {
   const [config, setConfig] = useState<SiteConfig>(initialConfig);
   const [selectedAltProduct, setSelectedAltProduct] = useState<AlternativeProduct | null>(null);
   const [productToAddToForm, setProductToAddToForm] = useState<{ productId: string; timestamp: number } | null>(null);
+  const [isQuickOrderOpen, setIsQuickOrderOpen] = useState(false);
+  const [quickOrderProductId, setQuickOrderProductId] = useState<string | null>(null);
   const [placedOrder, setPlacedOrder] = useState<{
     orderId: string;
     orderData: any;
@@ -51,12 +55,30 @@ export default function App() {
     trackViewContent(config.productName, config.promoPrice);
   }, [config.productName, config.promoPrice]);
 
+  // Auto-open Quick Order Form after 30 seconds on site, and re-trigger every 30 seconds if closed
+  useEffect(() => {
+    // If the customer has already completed an order, do not auto-popup
+    if (placedOrder || isQuickOrderOpen) return;
+
+    const timer = setTimeout(() => {
+      setIsQuickOrderOpen(true);
+    }, 30000); // 30 seconds
+
+    return () => clearTimeout(timer);
+  }, [isQuickOrderOpen, placedOrder]);
+
   const scrollToOrder = () => {
     trackInitiateCheckout(config.promoPrice);
     const orderSection = document.getElementById('order-section');
     if (orderSection) {
       orderSection.scrollIntoView({ behavior: 'smooth' });
     }
+  };
+
+  const handleOpenQuickOrder = (productId?: string) => {
+    trackInitiateCheckout(config.promoPrice);
+    setQuickOrderProductId(productId || null);
+    setIsQuickOrderOpen(true);
   };
 
   const handleViewProductSpecs = (productIdOrProduct: string | AlternativeProduct) => {
@@ -148,6 +170,17 @@ export default function App() {
           {/* Header Action Buttons: Only visible AFTER client fills the form */}
           {placedOrder ? (
             <div className="flex items-center gap-2 sm:gap-3">
+              <button
+                type="button"
+                onClick={() => handleOpenQuickOrder()}
+                id="header-quick-order-btn-post"
+                className="hidden sm:inline-flex items-center gap-1.5 bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 text-slate-950 font-black text-xs px-3 py-2 rounded-xl shadow-xs transition-all cursor-pointer"
+                title="Open Quick Order Pop Up"
+              >
+                <Zap className="w-3.5 h-3.5 fill-slate-950" />
+                <span>Quick Order</span>
+              </button>
+
               <a
                 href={`tel:${config.phoneNumber.replace(/\s+/g, '')}`}
                 onClick={() => trackContact('phone', 'header-call')}
@@ -175,9 +208,21 @@ export default function App() {
               </a>
             </div>
           ) : (
-            <div className="flex items-center gap-2 text-xs font-bold text-slate-700 bg-slate-100/90 border border-slate-200 px-3 py-1.5 rounded-xl">
-              <ShieldCheck className="w-4 h-4 text-blue-600" />
-              <span>Payment on Delivery Available</span>
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => handleOpenQuickOrder()}
+                id="header-quick-order-btn"
+                className="inline-flex items-center gap-1.5 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-black text-xs sm:text-sm px-3.5 sm:px-4 py-2 rounded-xl shadow-md shadow-blue-600/30 transition-all cursor-pointer animate-action-blink"
+                title="Open Quick Order Pop Up"
+              >
+                <Zap className="w-3.5 h-3.5 text-amber-300 fill-amber-300" />
+                <span>⚡ Quick Order</span>
+              </button>
+              <div className="hidden sm:flex items-center gap-1.5 text-xs font-bold text-slate-700 bg-slate-100/90 border border-slate-200 px-3 py-1.5 rounded-xl">
+                <ShieldCheck className="w-4 h-4 text-blue-600" />
+                <span>Pay on Delivery</span>
+              </div>
             </div>
           )}
 
@@ -187,17 +232,26 @@ export default function App() {
       {/* Suggested Product Continuous Screen Ticker */}
       <SuggestedProductTicker 
         onViewSpecs={handleViewProductSpecs} 
-        onAddToForm={handleAddProductToOrder} 
+        onAddToForm={handleAddProductToOrder}
+        onQuickOrder={(prod) => handleOpenQuickOrder(prod.id)}
       />
 
       {/* Main Landing Page Content */}
       <main className="flex-1">
         
         {/* 2. HERO SECTION */}
-        <HeroSection config={config} onOrderClick={scrollToOrder} />
+        <HeroSection 
+          config={config} 
+          onOrderClick={scrollToOrder}
+          onQuickOrderClick={() => handleOpenQuickOrder()} 
+        />
 
         {/* 3. PRICE & OFFER CARD */}
-        <PriceOfferCard config={config} onOrderClick={scrollToOrder} />
+        <PriceOfferCard 
+          config={config} 
+          onOrderClick={scrollToOrder}
+          onQuickOrderClick={() => handleOpenQuickOrder()} 
+        />
 
         {/* 4. EMOTIONAL PROBLEM SECTION */}
         <ProblemSection onDiscoverClick={scrollToFeatures} />
@@ -209,6 +263,7 @@ export default function App() {
         <ImageGallery 
           onOrderClick={handleAddProductToOrder} 
           onViewSpecs={handleViewProductSpecs} 
+          onQuickOrderClick={(prodId) => handleOpenQuickOrder(prodId)}
         />
 
         {/* 7. "WHAT MAKES IT DIFFERENT?" (Comparison Table) */}
@@ -262,6 +317,9 @@ export default function App() {
         hasPlacedOrder={!!placedOrder}
       />
 
+      {/* Floating Quick Order Pill */}
+      <FloatingQuickOrderBtn onClick={() => handleOpenQuickOrder()} />
+
       {/* Floating WhatsApp Bubble */}
       <FloatingWhatsApp 
         whatsappNumber={config.whatsappNumber} 
@@ -271,7 +329,11 @@ export default function App() {
       />
 
       {/* Mobile Sticky Bottom CTA Bar */}
-      <StickyMobileBar config={config} onOrderClick={scrollToOrder} />
+      <StickyMobileBar 
+        config={config} 
+        onOrderClick={scrollToOrder}
+        onQuickOrderClick={() => handleOpenQuickOrder()} 
+      />
 
       {/* Optional Live Config Editor Drawer for Seller Customization */}
       <ConfigEditorModal
@@ -285,8 +347,20 @@ export default function App() {
         product={selectedAltProduct}
         onClose={() => setSelectedAltProduct(null)}
         onSelectForOrder={handleSelectAltForOrder}
+        onQuickOrder={(prod) => handleOpenQuickOrder(prod.id)}
         whatsappNumber={config.whatsappNumber}
         hasPlacedOrder={!!placedOrder}
+      />
+
+      {/* 1-Click Quick Order Form Pop Up Modal */}
+      <QuickOrderModal
+        isOpen={isQuickOrderOpen}
+        onClose={() => setIsQuickOrderOpen(false)}
+        config={config}
+        initialProductId={quickOrderProductId}
+        onOrderPlaced={(order) => {
+          setPlacedOrder(order);
+        }}
       />
 
     </div>

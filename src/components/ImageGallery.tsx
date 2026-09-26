@@ -23,12 +23,14 @@ interface ImageGalleryProps {
   images?: GalleryImage[];
   onOrderClick?: (productId?: string) => void;
   onViewSpecs?: (productId: string) => void;
+  onQuickOrderClick?: (productId?: string) => void;
 }
 
 export const ImageGallery: React.FC<ImageGalleryProps> = ({ 
   images = ALL_GALLERY_IMAGES,
   onOrderClick,
-  onViewSpecs 
+  onViewSpecs,
+  onQuickOrderClick 
 }) => {
   const [selectedProduct, setSelectedProduct] = useState<string>('all');
   const [selectedTag, setSelectedTag] = useState<string>('all');
@@ -95,6 +97,15 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({
     } else {
       const el = document.getElementById('order-section');
       if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handleQuickOrderTarget = (productId?: string) => {
+    const targetId = productId || activeImage?.productId || 'sink';
+    if (onQuickOrderClick) {
+      onQuickOrderClick(targetId);
+    } else {
+      handleOrderTarget(targetId);
     }
   };
 
@@ -304,7 +315,7 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({
               )}
 
               {/* Interactive Quick Action Overlay on Image */}
-              <div className="absolute bottom-3 right-3 z-10 flex flex-wrap items-center gap-2">
+              <div className="absolute bottom-3 right-3 z-10 flex flex-wrap items-center gap-1.5 sm:gap-2">
                 <button
                   type="button"
                   onClick={(e) => {
@@ -321,14 +332,13 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({
                   type="button"
                   onClick={(e) => {
                     e.stopPropagation();
-                    handleOrderTarget(activeImage?.productId);
+                    handleQuickOrderTarget(activeImage?.productId);
                   }}
-                  className="inline-flex items-center gap-1.5 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white text-[11px] sm:text-xs font-black px-3.5 py-1.5 rounded-full shadow-lg border border-blue-400 transition-all hover:scale-105 active:scale-95 cursor-pointer"
-                  title="Directly fill form to buy this appliance"
+                  className="inline-flex items-center gap-1.5 bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 hover:to-amber-300 text-slate-950 text-[11px] sm:text-xs font-black px-3.5 py-1.5 rounded-full shadow-lg border border-amber-300 transition-all hover:scale-105 active:scale-95 cursor-pointer"
+                  title="Open Quick Order Pop Up for this product"
                 >
-                  <ShoppingBag className="w-3.5 h-3.5 text-white" />
-                  <span>Buy Now</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
+                  <Zap className="w-3.5 h-3.5 fill-slate-950" />
+                  <span>⚡ Quick Order</span>
                 </button>
               </div>
             </div>
@@ -406,12 +416,12 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({
                     </p>
                   </div>
 
-                  {/* Dual Action Buttons */}
-                  <div className="flex items-center gap-2.5 shrink-0">
+                  {/* Action Buttons: Specs, Quick Order Pop-Up, and Fill Form */}
+                  <div className="flex flex-wrap sm:flex-nowrap items-center gap-2 shrink-0">
                     <button
                       type="button"
                       onClick={() => handleSpecsTarget(activeImage?.productId)}
-                      className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-xl text-xs font-bold text-slate-800 bg-white border border-slate-300 hover:bg-slate-100 hover:border-slate-400 transition-all shadow-xs cursor-pointer active:scale-95"
+                      className="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold text-slate-800 bg-white border border-slate-300 hover:bg-slate-100 transition-all shadow-xs cursor-pointer active:scale-95"
                     >
                       <FileText className="w-3.5 h-3.5 text-blue-600" />
                       <span>See Specs</span>
@@ -419,11 +429,20 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({
 
                     <button
                       type="button"
+                      onClick={() => handleQuickOrderTarget(activeImage?.productId)}
+                      className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-black text-slate-950 bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 hover:to-amber-300 transition-all shadow-sm cursor-pointer active:scale-95 whitespace-nowrap"
+                    >
+                      <Zap className="w-3.5 h-3.5 fill-slate-950" />
+                      <span>⚡ Quick Order</span>
+                    </button>
+
+                    <button
+                      type="button"
                       onClick={() => handleOrderTarget(activeImage?.productId)}
-                      className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-black text-white bg-blue-600 hover:bg-blue-700 active:scale-95 transition-all shadow-md cursor-pointer animate-soft-blink"
+                      className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 active:scale-95 transition-all shadow-md cursor-pointer whitespace-nowrap"
                     >
                       <ShoppingBag className="w-3.5 h-3.5" />
-                      <span>Fill Form to Buy</span>
+                      <span>Order Form</span>
                       <ArrowRight className="w-3.5 h-3.5" />
                     </button>
                   </div>

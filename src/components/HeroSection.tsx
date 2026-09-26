@@ -6,9 +6,10 @@ import { SiteConfig } from '../types';
 interface HeroSectionProps {
   config: SiteConfig;
   onOrderClick: () => void;
+  onQuickOrderClick?: () => void;
 }
 
-export const HeroSection: React.FC<HeroSectionProps> = ({ config, onOrderClick }) => {
+export const HeroSection: React.FC<HeroSectionProps> = ({ config, onOrderClick, onQuickOrderClick }) => {
   const savings = config.normalPrice - config.promoPrice;
 
   return (
@@ -116,8 +117,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ config, onOrderClick }
               </div>
             </div>
 
-            {/* Hero Order CTA */}
-            <div className="mb-6">
+            {/* Hero Order CTAs */}
+            <div className="mb-6 space-y-2.5">
               <button
                 onClick={onOrderClick}
                 id="hero-order-btn"
@@ -131,6 +132,18 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ config, onOrderClick }
                 </div>
                 <ArrowRight className="w-5 h-5 shrink-0" />
               </button>
+
+              {onQuickOrderClick && (
+                <button
+                  type="button"
+                  onClick={onQuickOrderClick}
+                  id="hero-quick-order-btn"
+                  className="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 hover:from-amber-400 hover:to-amber-300 text-slate-950 font-black text-sm py-3 px-6 rounded-xl shadow-md shadow-amber-500/20 transform active:scale-[0.98] transition-all cursor-pointer uppercase tracking-wider"
+                >
+                  <Zap className="w-4 h-4 fill-slate-950" />
+                  <span>⚡ 1-Click Quick Order Form (Pop-Up)</span>
+                </button>
+              )}
             </div>
 
             {/* Trust statements under CTA */}

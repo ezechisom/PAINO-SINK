@@ -23,6 +23,7 @@ interface AlternativeProductModalProps {
   product: AlternativeProduct | null;
   onClose: () => void;
   onSelectForOrder?: (product: AlternativeProduct) => void;
+  onQuickOrder?: (product: AlternativeProduct) => void;
   whatsappNumber: string;
   hasPlacedOrder?: boolean;
 }
@@ -31,6 +32,7 @@ export const AlternativeProductModal: React.FC<AlternativeProductModalProps> = (
   product,
   onClose,
   onSelectForOrder,
+  onQuickOrder,
   whatsappNumber,
   hasPlacedOrder = false
 }) => {
@@ -201,17 +203,31 @@ export const AlternativeProductModal: React.FC<AlternativeProductModalProps> = (
 
           {/* Action CTAs */}
           <div className="flex flex-col sm:flex-row gap-3 pt-2">
+            {onQuickOrder && (
+              <button
+                type="button"
+                onClick={() => {
+                  onQuickOrder(product);
+                  onClose();
+                }}
+                className="flex-1 inline-flex items-center justify-center gap-2 bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 hover:from-amber-400 hover:to-amber-500 text-black font-black text-sm py-3.5 px-5 rounded-xl shadow-lg transition-transform active:scale-95 cursor-pointer uppercase tracking-wider animate-action-blink"
+              >
+                <Zap className="w-4 h-4 fill-slate-950" />
+                <span>⚡ QUICK ORDER (POP-UP FORM)</span>
+              </button>
+            )}
+
             {onSelectForOrder && (
               <button
                 onClick={() => {
                   onSelectForOrder(product);
                   onClose();
                 }}
-                className="flex-1 inline-flex items-center justify-center gap-2 bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 hover:from-amber-400 hover:to-amber-500 text-black font-black text-sm py-3.5 px-5 rounded-xl shadow-lg transition-transform active:scale-95 cursor-pointer uppercase tracking-wider animate-action-blink"
+                className="inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-extrabold text-xs sm:text-sm py-3.5 px-4 rounded-xl shadow-md transition-transform active:scale-95 cursor-pointer uppercase tracking-wider"
               >
-                <ShoppingBag className="w-4 h-4 text-black" />
-                <span>ADD TO FORM &amp; BUY (PAY ON DELIVERY)</span>
-                <ArrowRight className="w-4 h-4 text-black" />
+                <ShoppingBag className="w-4 h-4 text-white" />
+                <span>Add to Main Form</span>
+                <ArrowRight className="w-4 h-4 text-white" />
               </button>
             )}
 

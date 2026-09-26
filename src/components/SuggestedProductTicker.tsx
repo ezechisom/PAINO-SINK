@@ -6,11 +6,13 @@ import { Flame, Zap, ArrowRight, Sparkles, ChevronRight, Eye, PlusCircle } from 
 interface SuggestedProductTickerProps {
   onViewSpecs: (product: AlternativeProduct) => void;
   onAddToForm: (product: AlternativeProduct) => void;
+  onQuickOrder?: (product: AlternativeProduct) => void;
 }
 
 export const SuggestedProductTicker: React.FC<SuggestedProductTickerProps> = ({
   onViewSpecs,
   onAddToForm,
+  onQuickOrder,
 }) => {
   const cooker2b = ALTERNATIVE_PRODUCTS.find(p => p.id === 'cooker-2burner') || ALTERNATIVE_PRODUCTS[0];
   const cooker5b = ALTERNATIVE_PRODUCTS.find(p => p.id === 'cooker-5burner') || ALTERNATIVE_PRODUCTS[1];
@@ -22,6 +24,15 @@ export const SuggestedProductTicker: React.FC<SuggestedProductTickerProps> = ({
   const handleAddClick = (e: React.MouseEvent, product: AlternativeProduct) => {
     e.stopPropagation();
     onAddToForm(product);
+  };
+
+  const handleQuickOrderClick = (e: React.MouseEvent, product: AlternativeProduct) => {
+    e.stopPropagation();
+    if (onQuickOrder) {
+      onQuickOrder(product);
+    } else {
+      onAddToForm(product);
+    }
   };
 
   // Repeated items array for smooth, gapless infinite marquee
@@ -129,11 +140,22 @@ export const SuggestedProductTicker: React.FC<SuggestedProductTickerProps> = ({
                 <button
                   type="button"
                   onClick={(e) => handleAddClick(e, item.product)}
-                  className="inline-flex items-center gap-1 bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-[11px] sm:text-xs px-2.5 sm:px-3 py-1 rounded-full shadow-sm transition-all transform hover:scale-105 active:scale-95 shrink-0 cursor-pointer"
+                  className="inline-flex items-center gap-1 bg-white/10 hover:bg-white/20 text-slate-200 hover:text-white font-bold text-[11px] sm:text-xs px-2.5 py-1 rounded-full shadow-sm transition-all transform hover:scale-105 active:scale-95 shrink-0 cursor-pointer"
                   title={`Add ${item.product.name} directly to your order form`}
                 >
-                  <PlusCircle className="w-3 h-3 text-slate-950" />
-                  <span>Add to Form</span>
+                  <PlusCircle className="w-3 h-3 text-blue-300" />
+                  <span className="hidden sm:inline">Add to Form</span>
+                </button>
+
+                {/* 1-Click Quick Order Pop-Up Button */}
+                <button
+                  type="button"
+                  onClick={(e) => handleQuickOrderClick(e, item.product)}
+                  className="inline-flex items-center gap-1 bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-[11px] sm:text-xs px-2.5 sm:px-3 py-1 rounded-full shadow-sm transition-all transform hover:scale-105 active:scale-95 shrink-0 cursor-pointer"
+                  title={`Open Quick Order Pop Up for ${item.product.name}`}
+                >
+                  <Zap className="w-3 h-3 fill-slate-950" />
+                  <span>Quick Order</span>
                   <ArrowRight className="w-3 h-3 text-slate-950 animate-bounce-x" />
                 </button>
 

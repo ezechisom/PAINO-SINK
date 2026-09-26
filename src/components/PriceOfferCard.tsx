@@ -1,14 +1,19 @@
 import React from 'react';
 import { SiteConfig } from '../types';
 import { formatNaira } from '../config';
-import { Sparkles, ArrowRight, ShieldCheck, CheckCircle2, Truck } from 'lucide-react';
+import { Sparkles, ArrowRight, ShieldCheck, CheckCircle2, Truck, Zap } from 'lucide-react';
 
 interface PriceOfferCardProps {
   config: SiteConfig;
   onOrderClick: () => void;
+  onQuickOrderClick?: () => void;
 }
 
-export const PriceOfferCard: React.FC<PriceOfferCardProps> = ({ config, onOrderClick }) => {
+export const PriceOfferCard: React.FC<PriceOfferCardProps> = ({ 
+  config, 
+  onOrderClick,
+  onQuickOrderClick 
+}) => {
   const savings = config.normalPrice - config.promoPrice;
 
   return (
@@ -98,6 +103,29 @@ export const PriceOfferCard: React.FC<PriceOfferCardProps> = ({ config, onOrderC
               <CheckCircle2 className="w-3.5 h-3.5 text-blue-600 shrink-0" />
               <span className="truncate">SUS304 Nano Stainless Steel</span>
             </div>
+          </div>
+
+          {/* Action CTAs: Order Form & Quick Order Pop-Up */}
+          <div className="flex flex-col sm:flex-row gap-3 mb-6">
+            <button
+              type="button"
+              onClick={onOrderClick}
+              className="flex-1 inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-extrabold text-sm sm:text-base py-3.5 px-6 rounded-2xl shadow-lg shadow-blue-600/30 transition-all cursor-pointer uppercase tracking-wider"
+            >
+              <span>CLAIM PROMO &amp; ORDER</span>
+              <ArrowRight className="w-4 h-4 shrink-0" />
+            </button>
+
+            {onQuickOrderClick && (
+              <button
+                type="button"
+                onClick={onQuickOrderClick}
+                className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 hover:to-amber-300 text-slate-950 font-black text-xs sm:text-sm py-3.5 px-5 rounded-2xl shadow-md transition-all cursor-pointer uppercase tracking-wider whitespace-nowrap"
+              >
+                <Zap className="w-4 h-4 fill-slate-950" />
+                <span>⚡ Quick Order Pop-Up</span>
+              </button>
+            )}
           </div>
 
           {/* Value Confirmation */}
