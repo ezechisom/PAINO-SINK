@@ -6,7 +6,6 @@ import {
   Check, 
   Flame, 
   Zap, 
-  ExternalLink, 
   MessageCircle, 
   Maximize2, 
   ShieldCheck, 
@@ -243,16 +242,6 @@ export const AlternativeProductModal: React.FC<AlternativeProductModalProps> = (
                 <span>INQUIRE ON WHATSAPP</span>
               </a>
             )}
-
-            <a
-              href={product.officialUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white font-semibold text-xs py-3.5 px-4 rounded-xl border border-slate-700 transition-colors"
-            >
-              <span>Visit Official Site</span>
-              <ExternalLink className="w-3.5 h-3.5" />
-            </a>
           </div>
 
         </div>

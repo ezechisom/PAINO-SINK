@@ -506,7 +506,15 @@ export const QuickOrderModal: React.FC<QuickOrderModalProps> = ({
                           <span className="text-[10px] bg-blue-100 text-blue-800 font-bold px-1.5 py-0.2 rounded shrink-0">75×45cm</span>
                         </div>
                         <p className="text-[11px] text-slate-500 truncate">Digital °C, Waterfall &amp; Full Prep Set</p>
-                        <span className="text-xs font-extrabold text-blue-700 font-mono">{formatNaira(SINK_PRICE)}</span>
+                        <div className="flex items-center gap-1.5 mt-0.5">
+                          <span className="text-xs font-extrabold text-blue-700 font-mono">{formatNaira(SINK_PRICE)}</span>
+                          <span className="text-[10px] text-slate-400 line-through">{formatNaira(config.normalPrice)}</span>
+                          {config.normalPrice > SINK_PRICE && (
+                            <span className="text-[9px] font-black text-emerald-700 bg-emerald-100 border border-emerald-300 px-1 py-0.2 rounded">
+                              Save {formatNaira(config.normalPrice - SINK_PRICE)}
+                            </span>
+                          )}
+                        </div>
                       </div>
 
                       <div className="flex items-center gap-1.5 shrink-0 bg-white border border-slate-200 rounded-xl p-1 shadow-2xs">

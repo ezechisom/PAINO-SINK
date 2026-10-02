@@ -15,6 +15,7 @@ export const PriceOfferCard: React.FC<PriceOfferCardProps> = ({
   onQuickOrderClick 
 }) => {
   const savings = config.normalPrice - config.promoPrice;
+  const discountPercent = config.normalPrice > 0 ? Math.round((savings / config.normalPrice) * 100) : 0;
 
   return (
     <section id="offer-section" className="py-8 sm:py-14 bg-white relative">
@@ -51,8 +52,8 @@ export const PriceOfferCard: React.FC<PriceOfferCardProps> = ({
                 {formatNaira(config.normalPrice)}
               </span>
               {savings > 0 && (
-                <span className="bg-blue-600 text-white font-extrabold text-[11px] sm:text-xs px-2.5 py-0.5 rounded-full shadow-xs">
-                  SAVE {formatNaira(savings)}
+                <span className="bg-emerald-600 text-white font-extrabold text-[11px] sm:text-xs px-2.5 py-0.5 rounded-full shadow-xs">
+                  SAVE {formatNaira(savings)} ({discountPercent}% OFF)
                 </span>
               )}
             </div>

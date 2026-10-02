@@ -1048,6 +1048,11 @@ export const OrderForm: React.FC<OrderFormProps> = ({
                           </span>
                           <span className="text-xs text-slate-400 line-through">{formatNaira(config.normalPrice)}</span>
                           <span className="text-xs font-black text-[#0a192f]">{formatNaira(SINK_PRICE)}</span>
+                          {config.normalPrice > SINK_PRICE && (
+                            <span className="text-[10px] font-black text-emerald-700 bg-emerald-100 border border-emerald-300 px-1.5 py-0.2 rounded">
+                              Save {formatNaira(config.normalPrice - SINK_PRICE)}
+                            </span>
+                          )}
                           {recentlyAddedId === 'sink' && (
                             <span className="text-[10px] font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded border border-emerald-300 animate-pulse">
                               ✨ Just Selected

@@ -11,6 +11,7 @@ interface HeroSectionProps {
 
 export const HeroSection: React.FC<HeroSectionProps> = ({ config, onOrderClick, onQuickOrderClick }) => {
   const savings = config.normalPrice - config.promoPrice;
+  const discountPercent = config.normalPrice > 0 ? Math.round((savings / config.normalPrice) * 100) : 0;
 
   return (
     <section id="hero-section" className="relative pt-4 pb-8 sm:py-12 overflow-hidden bg-gradient-to-b from-blue-50/50 via-white to-slate-50 border-b border-slate-200/80">
@@ -100,8 +101,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ config, onOrderClick, 
                   Regular Price: <span className="line-through text-slate-400 font-semibold">{formatNaira(config.normalPrice)}</span>
                 </div>
                 {savings > 0 && (
-                  <div className="bg-blue-50 text-blue-700 border border-blue-200 text-[10px] font-extrabold px-2 py-0.5 rounded-full">
-                    YOU SAVE {formatNaira(savings)}
+                  <div className="bg-emerald-50 text-emerald-800 border border-emerald-300 text-[10px] font-extrabold px-2 py-0.5 rounded-full flex items-center gap-1">
+                    <span>YOU SAVE {formatNaira(savings)}</span>
+                    <span className="bg-emerald-600 text-white px-1.5 py-0.2 rounded-full text-[9px] font-black">{discountPercent}% OFF</span>
                   </div>
                 )}
               </div>

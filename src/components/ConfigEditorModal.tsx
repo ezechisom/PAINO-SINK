@@ -29,6 +29,22 @@ export const ConfigEditorModal: React.FC<ConfigEditorModalProps> = ({
     formspreeEndpoint: currentConfig.formspreeEndpoint || 'https://formspree.io/f/xppwqdyj',
   });
 
+  React.useEffect(() => {
+    setFormData({
+      productName: currentConfig.productName,
+      normalPrice: currentConfig.normalPrice,
+      promoPrice: currentConfig.promoPrice,
+      whatsappNumber: currentConfig.whatsappNumber,
+      phoneNumber: currentConfig.phoneNumber,
+      countdownEndDate: currentConfig.countdownEndDate,
+      deliveryInformation: currentConfig.deliveryInformation,
+      paymentInformation: currentConfig.paymentInformation,
+      returnPolicy: currentConfig.returnPolicy,
+      warrantyInformation: currentConfig.warrantyInformation,
+      formspreeEndpoint: currentConfig.formspreeEndpoint || 'https://formspree.io/f/xppwqdyj',
+    });
+  }, [currentConfig]);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value, type } = e.target;
     setFormData(prev => ({

@@ -5,8 +5,6 @@ import {
   Flame, 
   Zap, 
   ArrowRight,
-  ExternalLink,
-  PlusCircle,
   ShieldCheck,
   Check
 } from 'lucide-react';
@@ -38,15 +36,10 @@ export const AlternativeProductsSection: React.FC<AlternativeProductsSectionProp
             </p>
           </div>
 
-          <a
-            href="https://www.moonlightluxuryhometech.shop/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 text-xs text-[#0a192f] hover:text-blue-600 font-bold self-start md:self-auto"
-          >
-            <span>Visit Cooktop Catalog</span>
-            <ExternalLink className="w-3.5 h-3.5 text-blue-600" />
-          </a>
+          <div className="inline-flex items-center gap-2 bg-white border border-slate-200 text-[#0a192f] text-xs font-bold px-3 py-1.5 rounded-full shadow-xs self-start md:self-auto">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+            <span>Order On This Page &bull; Pay On Delivery</span>
+          </div>
         </div>
 
         {/* 2-Item Grid with Large Visible Pictures */}

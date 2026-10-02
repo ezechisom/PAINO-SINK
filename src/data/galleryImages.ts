@@ -11,7 +11,7 @@ export const ALL_GALLERY_IMAGES: GalleryImage[] = [
     alt: "Smart Kitchen Piano Sink with piano keys and digital temperature display",
     productId: "sink",
     productName: "Smart Kitchen Piano Sink",
-    price: 140000,
+    price: 135000,
     dimensions: "750 × 450 mm",
     badge: "Smart Workstation Sink"
   },
@@ -24,7 +24,7 @@ export const ALL_GALLERY_IMAGES: GalleryImage[] = [
     alt: "Close up of piano keys, LED digital screen and ambient light illuminating as water passes through",
     productId: "sink",
     productName: "Smart Kitchen Piano Sink",
-    price: 140000,
+    price: 135000,
     dimensions: "750 × 450 mm",
     badge: "Hydroelectric LED"
   },
@@ -37,7 +37,7 @@ export const ALL_GALLERY_IMAGES: GalleryImage[] = [
     alt: "Technical dimension diagram of the Smart Piano Sink with standard 750x450mm fit",
     productId: "sink",
     productName: "Smart Kitchen Piano Sink",
-    price: 140000,
+    price: 135000,
     dimensions: "750 × 450 mm",
     badge: "Standard Fit Blueprint"
   },
@@ -50,7 +50,7 @@ export const ALL_GALLERY_IMAGES: GalleryImage[] = [
     alt: "Piano key control console demonstrating tap water, rain stream, waterfall, and cup washer modes",
     productId: "sink",
     productName: "Smart Kitchen Piano Sink",
-    price: 140000,
+    price: 135000,
     dimensions: "750 × 450 mm",
     badge: "4 Water Modes"
   },
@@ -63,7 +63,7 @@ export const ALL_GALLERY_IMAGES: GalleryImage[] = [
     alt: "Unboxing package layout showing all included components and fittings",
     productId: "sink",
     productName: "Smart Kitchen Piano Sink",
-    price: 140000,
+    price: 135000,
     dimensions: "750 × 450 mm",
     badge: "Full Package Included"
   },

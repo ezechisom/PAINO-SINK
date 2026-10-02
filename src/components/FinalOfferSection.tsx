@@ -10,6 +10,7 @@ interface FinalOfferSectionProps {
 
 export const FinalOfferSection: React.FC<FinalOfferSectionProps> = ({ config, onOrderClick }) => {
   const savings = config.normalPrice - config.promoPrice;
+  const discountPercent = config.normalPrice > 0 ? Math.round((savings / config.normalPrice) * 100) : 0;
 
   return (
     <section id="final-offer-section" className="py-8 sm:py-16 bg-gradient-to-b from-[#0b0f14] via-[#101824] to-[#0b0f14] border-t border-slate-800 relative overflow-hidden">
@@ -41,8 +42,8 @@ export const FinalOfferSection: React.FC<FinalOfferSectionProps> = ({ config, on
               {formatNaira(config.promoPrice)}
             </div>
             {savings > 0 && (
-              <span className="text-[11px] font-bold text-blue-300 bg-blue-500/20 px-2.5 py-0.5 rounded-full border border-blue-400/30 mt-1.5">
-                Save {formatNaira(savings)} off regular price
+              <span className="text-[11px] font-bold text-amber-300 bg-amber-500/20 px-2.5 py-0.5 rounded-full border border-amber-400/30 mt-1.5">
+                Save {formatNaira(savings)} ({discountPercent}% OFF) off regular price
               </span>
             )}
           </div>

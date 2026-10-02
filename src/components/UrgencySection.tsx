@@ -10,6 +10,7 @@ interface UrgencySectionProps {
 
 export const UrgencySection: React.FC<UrgencySectionProps> = ({ config, onOrderClick }) => {
   const savings = config.normalPrice - config.promoPrice;
+  const discountPercent = config.normalPrice > 0 ? Math.round((savings / config.normalPrice) * 100) : 0;
 
   return (
     <section id="urgency-section" className="py-8 sm:py-14 bg-gradient-to-b from-[#0d121a] via-[#121926] to-[#0d121a] border-y border-amber-500/20 relative">
@@ -45,8 +46,8 @@ export const UrgencySection: React.FC<UrgencySectionProps> = ({ config, onOrderC
           {savings > 0 && (
             <div className="flex items-center justify-between text-xs text-blue-400 font-bold mb-4">
               <span>Instant Savings:</span>
-              <span className="text-blue-300 bg-blue-500/20 px-2.5 py-0.5 rounded-full border border-blue-400/30">
-                Save {formatNaira(savings)}
+              <span className="text-emerald-300 bg-emerald-500/20 px-2.5 py-0.5 rounded-full border border-emerald-400/30 font-extrabold">
+                Save {formatNaira(savings)} ({discountPercent}% OFF)
               </span>
             </div>
           )}

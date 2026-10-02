@@ -14,7 +14,7 @@ export const FORMSPREE_ENDPOINT = "https://formspree.io/f/xppwqdyj";
 export const CONFIG: SiteConfig = {
   productName: "Smart Kitchen Piano Sink",
   normalPrice: 160000,
-  promoPrice: 140000,
+  promoPrice: 135000,
   currency: "₦",
   countdownEndDate: getInitialPromoEndDate(),
   whatsappNumber: "2349136827730", // Store WhatsApp number (09136827730)
