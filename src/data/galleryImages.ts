@@ -120,59 +120,5 @@ export const ALL_GALLERY_IMAGES: GalleryImage[] = [
     price: 170000,
     dimensions: "750 × 450 mm",
     badge: "Auto-Off Timer (0-180m)"
-  },
-
-  // --- 3. EXECUTIVE 5-BURNER GAS + ELECTRIC HYBRID (4 Photos) ---
-  {
-    id: "cooker5b-showroom",
-    url: "https://www.moonlightluxuryhometech.shop/images/alternative_5burner/cooktop_showroom_active.jpg",
-    title: "Executive 5-Burner Built-In Gas + Electric Hybrid Cooktop",
-    subtitle: "4 powerful gas burners + 1 central 2000W radiant ceramic electric cooking zone. Never get stranded when gas runs out unexpectedly.",
-    tag: "Gas + Electric Hybrid",
-    alt: "Executive 5-Burner Cooktop showroom display with all burners active",
-    productId: "cooker-5burner",
-    productName: "Executive 5-Burner Hybrid Cooktop",
-    price: 280000,
-    dimensions: "900 × 510 mm",
-    badge: "Dual-Fuel Hybrid"
-  },
-  {
-    id: "cooker5b-diagram",
-    url: "https://www.moonlightluxuryhometech.shop/images/alternative_5burner/cooktop_main_diagram.png",
-    title: "Technical Engineering Schematic & Cutout Blueprint",
-    subtitle: "900 × 510 mm luxury beveled glass top with 830 × 470 mm standard countertop cutout opening for easy drop-in installation.",
-    tag: "Dimensions & Cutout",
-    alt: "5-Burner Hybrid Cooktop technical dimension diagram",
-    productId: "cooker-5burner",
-    productName: "Executive 5-Burner Hybrid Cooktop",
-    price: 280000,
-    dimensions: "900 × 510 mm",
-    badge: "Cutout Blueprint (830×470mm)"
-  },
-  {
-    id: "cooker5b-hinged",
-    url: "https://www.moonlightluxuryhometech.shop/images/alternative_5burner/cooktop_hinged_burners.png",
-    title: "Foldable 90° Hinged Gas Burners & Electric Touch Zone",
-    subtitle: "Hinged gas burner heads for effortless wiping, plus independent digital touch power controls and timer for the 2000W ceramic electric plate.",
-    tag: "Hinged Burners & Controls",
-    alt: "Folded gas burners and electric digital touch control surface",
-    productId: "cooker-5burner",
-    productName: "Executive 5-Burner Hybrid Cooktop",
-    price: 280000,
-    dimensions: "900 × 510 mm",
-    badge: "Hinged Burners + Touch"
-  },
-  {
-    id: "cooker5b-installed",
-    url: "https://www.moonlightluxuryhometech.shop/images/alternative_5burner/cooktop_kitchen_installed.jpeg",
-    title: "Modern Architectural Kitchen Installation",
-    subtitle: "Seamless luxury drop-in finish in high-end contemporary Nigerian home kitchens. Delivers professional chef-grade cooking capacity.",
-    tag: "Kitchen Installation",
-    alt: "Executive 5-Burner cooktop installed in modern luxury kitchen countertop",
-    productId: "cooker-5burner",
-    productName: "Executive 5-Burner Hybrid Cooktop",
-    price: 280000,
-    dimensions: "900 × 510 mm",
-    badge: "Installed Luxury"
   }
 ];

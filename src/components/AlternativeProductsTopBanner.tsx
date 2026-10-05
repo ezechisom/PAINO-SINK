@@ -36,8 +36,8 @@ export const AlternativeProductsTopBanner: React.FC<AlternativeProductsTopBanner
         <div className="shrink-0 z-20 flex items-center">
           <div className="bg-yellow-400 text-red-950 font-black text-[10px] sm:text-xs px-2.5 py-1.5 rounded-lg uppercase tracking-wider flex items-center gap-1.5 shadow-md border border-yellow-300 animate-pulse">
             <Flame className="w-3.5 h-3.5 fill-red-600 text-red-600 shrink-0" />
-            <span className="hidden sm:inline">MATCHING COOKTOPS &bull; SPECIAL DEALS:</span>
-            <span className="sm:hidden">MATCHING COOKERS:</span>
+            <span className="hidden sm:inline">MATCHING 2-BURNER COOKER &bull; SPECIAL DEAL:</span>
+            <span className="sm:hidden">MATCHING COOKER:</span>
           </div>
         </div>
 
@@ -53,7 +53,6 @@ export const AlternativeProductsTopBanner: React.FC<AlternativeProductsTopBanner
           >
             {/* Set 1 */}
             {loopProducts.map((prod, idx) => {
-              const is5Burner = prod.id === 'cooker-5burner';
               const savings = prod.normalPrice - prod.price;
 
               return (
@@ -71,10 +70,10 @@ export const AlternativeProductsTopBanner: React.FC<AlternativeProductsTopBanner
                       referrerPolicy="no-referrer"
                     />
                     <div className="absolute top-0 left-0 bg-red-600 text-yellow-300 px-1.5 py-0.5 rounded-br text-[9px] font-black tracking-tight shadow-sm">
-                      {is5Burner ? '⚡ 5-BURNER DUAL-FUEL' : '🔥 90° FLIP-UP 2-BURNER'}
+                      🔥 90° FLIP-UP 2-BURNER
                     </div>
                     <div className="absolute bottom-0 inset-x-0 bg-black/75 backdrop-blur-xs text-yellow-300 text-[8px] font-extrabold px-1 py-0.5 text-center truncate">
-                      {is5Burner ? '4 Gas + 1 Electric Plate' : 'Twin Flip Burners + Timer'}
+                      Twin Flip Burners + Timer
                     </div>
                   </div>
 
@@ -117,7 +116,6 @@ export const AlternativeProductsTopBanner: React.FC<AlternativeProductsTopBanner
 
             {/* Set 2 (Duplicated for seamless continuous loop) */}
             {loopProducts.map((prod, idx) => {
-              const is5Burner = prod.id === 'cooker-5burner';
               const savings = prod.normalPrice - prod.price;
 
               return (
@@ -135,10 +133,10 @@ export const AlternativeProductsTopBanner: React.FC<AlternativeProductsTopBanner
                       referrerPolicy="no-referrer"
                     />
                     <div className="absolute top-0 left-0 bg-red-600 text-yellow-300 px-1.5 py-0.5 rounded-br text-[9px] font-black tracking-tight shadow-sm">
-                      {is5Burner ? '⚡ 5-BURNER DUAL-FUEL' : '🔥 90° FLIP-UP 2-BURNER'}
+                      🔥 90° FLIP-UP 2-BURNER
                     </div>
                     <div className="absolute bottom-0 inset-x-0 bg-black/75 backdrop-blur-xs text-yellow-300 text-[8px] font-extrabold px-1 py-0.5 text-center truncate">
-                      {is5Burner ? '4 Gas + 1 Electric Plate' : 'Twin Flip Burners + Timer'}
+                      Twin Flip Burners + Timer
                     </div>
                   </div>
 
@@ -185,4 +183,3 @@ export const AlternativeProductsTopBanner: React.FC<AlternativeProductsTopBanner
     </div>
   );
 };
-

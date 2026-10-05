@@ -162,7 +162,7 @@ export const AlternativeProductModal: React.FC<AlternativeProductModalProps> = (
 
             <div className="flex items-center gap-3">
               <div className="w-9 h-9 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 shrink-0">
-                {product.id === 'cooker-5burner' ? <Zap className="w-4 h-4" /> : <Flame className="w-4 h-4" />}
+                <Flame className="w-4 h-4" />
               </div>
               <div>
                 <span className="text-[11px] text-slate-400 uppercase font-semibold block">Countertop Cutout Needed</span>

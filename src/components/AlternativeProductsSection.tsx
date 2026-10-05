@@ -26,13 +26,13 @@ export const AlternativeProductsSection: React.FC<AlternativeProductsSectionProp
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-6">
           <div>
             <div className="inline-flex items-center gap-1.5 bg-blue-100 text-blue-800 text-[11px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider mb-1">
-              <span>Matching Kitchen Appliances</span>
+              <span>Matching Kitchen Appliance</span>
             </div>
             <h3 className="text-xl sm:text-2xl font-black text-[#0a192f] tracking-tight">
-              Optional Cooktops from Moonlight Luxury Home Tech
+              Optional 2-Burner Gas Cooktop from Moonlight Luxury Home Tech
             </h3>
             <p className="text-xs sm:text-sm text-slate-600">
-              Easily pair your smart piano sink with a matching built-in luxury cooktop.
+              Easily pair your smart piano sink with a matching 2-burner folding gas cooktop.
             </p>
           </div>
 
@@ -42,22 +42,21 @@ export const AlternativeProductsSection: React.FC<AlternativeProductsSectionProp
           </div>
         </div>
 
-        {/* 2-Item Grid with Large Visible Pictures */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Featured 2-Burner Companion Card */}
+        <div className="max-w-4xl mx-auto">
           {ALTERNATIVE_PRODUCTS.map((prod) => {
-            const is5Burner = prod.id === 'cooker-5burner';
             const savings = prod.normalPrice - prod.price;
 
             return (
               <div
                 key={prod.id}
-                className="bg-white border-2 border-slate-200 hover:border-blue-500/60 rounded-2xl p-4 shadow-sm hover:shadow-md transition-all flex flex-col sm:flex-row items-start gap-4"
+                className="bg-white border-2 border-slate-200 hover:border-blue-500/60 rounded-2xl p-4 sm:p-6 shadow-sm hover:shadow-md transition-all flex flex-col sm:flex-row items-start gap-5"
               >
                 {/* Large Product Picture & Thumbnail Strip */}
-                <div className="w-full sm:w-60 shrink-0">
+                <div className="w-full sm:w-72 shrink-0">
                   <div 
                     onClick={() => onViewProduct(prod)}
-                    className="relative w-full h-44 sm:h-40 rounded-xl overflow-hidden bg-slate-900 border border-slate-200 cursor-pointer group shadow-inner"
+                    className="relative w-full h-48 sm:h-44 rounded-xl overflow-hidden bg-slate-900 border border-slate-200 cursor-pointer group shadow-inner"
                   >
                     <img
                       src={prod.images[0]}
@@ -66,10 +65,10 @@ export const AlternativeProductsSection: React.FC<AlternativeProductsSectionProp
                       referrerPolicy="no-referrer"
                     />
                     <div className="absolute top-2 left-2 bg-[#0a192f]/90 backdrop-blur-xs text-white text-[10px] font-black px-2.5 py-1 rounded-md shadow-sm">
-                      {is5Burner ? '⚡ 5-BURNER DUAL-FUEL' : '🔥 90° FLIP-UP 2-BURNER'}
+                      🔥 90° FLIP-UP 2-BURNER
                     </div>
                     <div className="absolute bottom-2 inset-x-2 bg-black/75 backdrop-blur-xs text-yellow-300 text-[9px] font-bold px-2 py-1 rounded text-center">
-                      {is5Burner ? '4 High-Heat Gas + 1 Electric Zone' : 'Dual Foldable Burners + 180min Timer'}
+                      Dual Foldable Burners + 180min Timer
                     </div>
                   </div>
 

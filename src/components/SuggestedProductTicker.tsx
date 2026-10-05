@@ -15,7 +15,6 @@ export const SuggestedProductTicker: React.FC<SuggestedProductTickerProps> = ({
   onQuickOrder,
 }) => {
   const cooker2b = ALTERNATIVE_PRODUCTS.find(p => p.id === 'cooker-2burner') || ALTERNATIVE_PRODUCTS[0];
-  const cooker5b = ALTERNATIVE_PRODUCTS.find(p => p.id === 'cooker-5burner') || ALTERNATIVE_PRODUCTS[1];
 
   const handleTickerClick = (product: AlternativeProduct) => {
     onViewSpecs(product);
@@ -47,13 +46,13 @@ export const SuggestedProductTicker: React.FC<SuggestedProductTickerProps> = ({
       price: formatNaira(cooker2b.price),
     },
     {
-      product: cooker5b,
+      product: cooker2b,
       icon: Zap,
-      badge: "EXECUTIVE DUAL-FUEL HYBRID",
+      badge: "ENERGY SAVING BLUE FLAME",
       badgeColor: "bg-cyan-500/20 text-cyan-300 border-cyan-500/30",
-      title: "Executive 5-Burner Built-In Gas + Electric Cooktop (90×51cm)",
-      highlight: "4 Gas Burners + 1 Central 2000W Radiant Electric Zone (Never Get Stranded)",
-      price: formatNaira(cooker5b.price),
+      title: "Pure Blue Flame Brass Burners + Windproof Cast Stands",
+      highlight: "High Heat Efficiency • Heavy Nigerian Pot Support • Explosion-Proof Glass",
+      price: formatNaira(cooker2b.price),
     },
     {
       product: cooker2b,
@@ -68,7 +67,7 @@ export const SuggestedProductTicker: React.FC<SuggestedProductTickerProps> = ({
 
   return (
     <div 
-      className="relative z-30 bg-[#070e1c] text-white border-b border-blue-900/60 shadow-md overflow-hidden select-none"
+      className="sticky top-16 sm:top-20 z-30 bg-[#070e1c] text-white border-b border-blue-900/60 shadow-lg overflow-hidden select-none"
       role="region"
       aria-label="Suggested Companion Appliances Marquee"
     >

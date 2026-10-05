@@ -37,7 +37,7 @@ export interface GalleryImage {
   subtitle: string;
   tag: string;
   alt: string;
-  productId?: 'sink' | 'cooker-2burner' | 'cooker-5burner' | string;
+  productId?: 'sink' | 'cooker-2burner' | string;
   productName?: string;
   price?: number;
   dimensions?: string;
@@ -68,7 +68,7 @@ export interface OrderData {
   deliveryFee?: number;
   estimatedDeliveryDays?: string;
   notes?: string;
-  includedAlternativeCooker?: 'none' | 'cooker-2burner' | 'cooker-5burner' | 'both';
+  includedAlternativeCooker?: 'none' | 'cooker-2burner';
   alternativeCookerName?: string;
   alternativeCookerPrice?: number;
 }

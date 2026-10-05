@@ -112,7 +112,6 @@ export const OrderForm: React.FC<OrderFormProps> = ({
   // Multi-product quantities for checkout
   const [sinkQty, setSinkQty] = useState<number>(1);
   const [cooker2bQty, setCooker2bQty] = useState<number>(0);
-  const [cooker5bQty, setCooker5bQty] = useState<number>(0);
   const [recentlyAddedId, setRecentlyAddedId] = useState<string | null>(null);
 
   // Automatically react to product additions from gallery or ticker
@@ -122,9 +121,6 @@ export const OrderForm: React.FC<OrderFormProps> = ({
     if (productId === 'cooker-2burner') {
       setCooker2bQty(prev => (prev === 0 ? 1 : prev + 1));
       setRecentlyAddedId('cooker-2burner');
-    } else if (productId === 'cooker-5burner') {
-      setCooker5bQty(prev => (prev === 0 ? 1 : prev + 1));
-      setRecentlyAddedId('cooker-5burner');
     } else if (productId === 'sink') {
       setSinkQty(prev => (prev === 0 ? 1 : prev));
       setRecentlyAddedId('sink');
@@ -178,7 +174,6 @@ export const OrderForm: React.FC<OrderFormProps> = ({
   // Product Unit Prices
   const SINK_PRICE = config.promoPrice;
   const COOKER_2B_PRICE = 170000;
-  const COOKER_5B_PRICE = 280000;
 
   // Itemized array of selected products
   const selectedItems: OrderItem[] = [];
@@ -200,17 +195,8 @@ export const OrderForm: React.FC<OrderFormProps> = ({
       totalPrice: cooker2bQty * COOKER_2B_PRICE
     });
   }
-  if (cooker5bQty > 0) {
-    selectedItems.push({
-      id: 'cooker-5burner',
-      name: 'Executive 5-Burner Gas + Electric Hybrid Cooktop (90×51cm)',
-      quantity: cooker5bQty,
-      unitPrice: COOKER_5B_PRICE,
-      totalPrice: cooker5bQty * COOKER_5B_PRICE
-    });
-  }
 
-  const totalItemCount = sinkQty + cooker2bQty + cooker5bQty;
+  const totalItemCount = sinkQty + cooker2bQty;
   const itemsSubtotal = selectedItems.reduce((acc, it) => acc + it.totalPrice, 0);
 
   // Multi-product bundle discount: ₦5,000 (5K) for 2 or more products
@@ -963,9 +949,9 @@ export const OrderForm: React.FC<OrderFormProps> = ({
                   <div className="flex flex-wrap gap-2">
                     <button
                       type="button"
-                      onClick={() => { setSinkQty(1); setCooker2bQty(0); setCooker5bQty(0); }}
+                      onClick={() => { setSinkQty(1); setCooker2bQty(0); }}
                       className={`text-xs px-3.5 py-2 rounded-xl border transition-all cursor-pointer font-bold ${
-                        sinkQty === 1 && cooker2bQty === 0 && cooker5bQty === 0
+                        sinkQty === 1 && cooker2bQty === 0
                           ? 'bg-[#0a192f] border-[#0a192f] text-white shadow-xs'
                           : 'bg-white border-slate-200 text-slate-700 hover:border-slate-300'
                       }`}
@@ -974,9 +960,9 @@ export const OrderForm: React.FC<OrderFormProps> = ({
                     </button>
                     <button
                       type="button"
-                      onClick={() => { setSinkQty(1); setCooker2bQty(1); setCooker5bQty(0); }}
+                      onClick={() => { setSinkQty(1); setCooker2bQty(1); }}
                       className={`text-xs px-3.5 py-2 rounded-xl border transition-all cursor-pointer font-bold ${
-                        sinkQty === 1 && cooker2bQty === 1 && cooker5bQty === 0
+                        sinkQty === 1 && cooker2bQty === 1
                           ? 'bg-blue-600 border-blue-600 text-white shadow-xs'
                           : 'bg-white border-slate-200 text-slate-700 hover:border-slate-300'
                       }`}
@@ -985,36 +971,14 @@ export const OrderForm: React.FC<OrderFormProps> = ({
                     </button>
                     <button
                       type="button"
-                      onClick={() => { setSinkQty(1); setCooker2bQty(0); setCooker5bQty(1); }}
+                      onClick={() => { setSinkQty(0); setCooker2bQty(1); }}
                       className={`text-xs px-3.5 py-2 rounded-xl border transition-all cursor-pointer font-bold ${
-                        sinkQty === 1 && cooker2bQty === 0 && cooker5bQty === 1
-                          ? 'bg-blue-600 border-blue-600 text-white shadow-xs'
-                          : 'bg-white border-slate-200 text-slate-700 hover:border-slate-300'
-                      }`}
-                    >
-                      Sink + 5-Burner Hybrid Bundle (Save ₦5k 🎉)
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => { setSinkQty(0); setCooker2bQty(1); setCooker5bQty(0); }}
-                      className={`text-xs px-3.5 py-2 rounded-xl border transition-all cursor-pointer font-bold ${
-                        sinkQty === 0 && cooker2bQty === 1 && cooker5bQty === 0
+                        sinkQty === 0 && cooker2bQty === 1
                           ? 'bg-[#0a192f] border-[#0a192f] text-white shadow-xs'
                           : 'bg-white border-slate-200 text-slate-700 hover:border-slate-300'
                       }`}
                     >
                       Only 2-Burner Cooktop ({formatNaira(COOKER_2B_PRICE)})
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => { setSinkQty(0); setCooker2bQty(0); setCooker5bQty(1); }}
-                      className={`text-xs px-3.5 py-2 rounded-xl border transition-all cursor-pointer font-bold ${
-                        sinkQty === 0 && cooker2bQty === 0 && cooker5bQty === 1
-                          ? 'bg-[#0a192f] border-[#0a192f] text-white shadow-xs'
-                          : 'bg-white border-slate-200 text-slate-700 hover:border-slate-300'
-                      }`}
-                    >
-                      Only 5-Burner Hybrid ({formatNaira(COOKER_5B_PRICE)})
                     </button>
                   </div>
                 </div>
@@ -1190,104 +1154,6 @@ export const OrderForm: React.FC<OrderFormProps> = ({
                             onClick={() => setCooker2bQty(prev => Math.min(10, prev + 1))}
                             className="p-1 text-slate-600 hover:text-slate-900 hover:bg-white rounded transition-colors cursor-pointer"
                             aria-label="Increase 2-burner quantity"
-                          >
-                            <Plus className="w-4 h-4" />
-                          </button>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Product 3: Executive 5-Burner Built-In Gas + Electric Hybrid Cooktop */}
-                <div 
-                  id="product-card-cooker-5burner"
-                  className={`p-4 rounded-xl border transition-all ${
-                    recentlyAddedId === 'cooker-5burner'
-                      ? 'ring-4 ring-cyan-400 bg-cyan-50/60 border-cyan-500 shadow-md animate-pulse'
-                      : cooker5bQty > 0 
-                        ? 'bg-white border-2 border-cyan-500 shadow-sm' 
-                        : 'bg-white/70 border-slate-200 opacity-90'
-                  }`}
-                >
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                    <div className="flex items-start gap-3">
-                      <img 
-                        src="https://www.moonlightluxuryhometech.shop/images/alternative_5burner/cooktop_showroom_active.jpg" 
-                        alt="Executive 5-Burner Hybrid Cooktop" 
-                        className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-lg border border-slate-200 bg-slate-100 flex-shrink-0"
-                      />
-                      <div>
-                        <div className="flex items-center gap-2 mb-1 flex-wrap">
-                          <span className="text-[10px] font-bold uppercase tracking-wider bg-cyan-100 text-cyan-900 px-2 py-0.5 rounded border border-cyan-200 flex items-center gap-1">
-                            <Zap className="w-3 h-3 text-cyan-600" />
-                            <span>Dual-Fuel Gas + Electric</span>
-                          </span>
-                          <span className="text-xs text-slate-400 line-through">₦340,000</span>
-                          <span className="text-xs font-black text-[#0a192f]">{formatNaira(COOKER_5B_PRICE)}</span>
-                          {recentlyAddedId === 'cooker-5burner' && (
-                            <span className="text-[10px] font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded border border-emerald-300 animate-pulse">
-                              ✨ Added to Your Form!
-                            </span>
-                          )}
-                        </div>
-                        <div className="flex items-center gap-2 flex-wrap">
-                          <h4 className="text-sm sm:text-base font-bold text-[#0a192f] leading-snug">
-                            Executive 5-Burner Built-In Gas + Electric Hybrid Cooktop (90×51cm)
-                          </h4>
-                          <button
-                            type="button"
-                            onClick={() => {
-                              const prod = ALTERNATIVE_PRODUCTS.find(p => p.id === 'cooker-5burner');
-                              if (prod && onViewSuggestedProduct) onViewSuggestedProduct(prod);
-                            }}
-                            className="text-[11px] font-bold text-blue-700 hover:text-blue-900 underline inline-flex items-center gap-1 cursor-pointer"
-                          >
-                            <FileText className="w-3 h-3" />
-                            <span>View Specs &amp; Blueprint</span>
-                          </button>
-                        </div>
-                        <p className="text-[11px] text-slate-500 mt-1 line-clamp-2">
-                          4 High-power gas burners + central 2000W instant electric radiant ceramic plate. Never get stranded even when gas cylinder runs out unexpectedly.
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center justify-between sm:justify-end gap-3 pt-2 sm:pt-0 border-t border-slate-200 sm:border-0">
-                      <div className="text-left sm:text-right">
-                        <span className="text-[10px] uppercase text-slate-500 block">Subtotal</span>
-                        <span className="text-sm font-bold font-mono text-cyan-700">
-                          {cooker5bQty > 0 ? formatNaira(cooker5bQty * COOKER_5B_PRICE) : '₦0'}
-                        </span>
-                      </div>
-
-                      {cooker5bQty === 0 ? (
-                        <button
-                          type="button"
-                          onClick={() => setCooker5bQty(1)}
-                          className="px-3.5 py-2 bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-black rounded-lg transition-all shadow-xs cursor-pointer flex items-center gap-1.5"
-                        >
-                          <Plus className="w-3.5 h-3.5" />
-                          <span>Add to Order</span>
-                        </button>
-                      ) : (
-                        <div className="flex items-center bg-slate-100 border border-slate-300 rounded-lg p-1">
-                          <button
-                            type="button"
-                            onClick={() => setCooker5bQty(prev => Math.max(0, prev - 1))}
-                            className="p-1 text-slate-600 hover:text-slate-900 hover:bg-white rounded transition-colors cursor-pointer"
-                            aria-label="Decrease 5-burner quantity"
-                          >
-                            <Minus className="w-4 h-4" />
-                          </button>
-                          <span className="px-3 text-sm font-bold text-slate-900 font-mono min-w-[28px] text-center">
-                            {cooker5bQty}
-                          </span>
-                          <button
-                            type="button"
-                            onClick={() => setCooker5bQty(prev => Math.min(10, prev + 1))}
-                            className="p-1 text-slate-600 hover:text-slate-900 hover:bg-white rounded transition-colors cursor-pointer"
-                            aria-label="Increase 5-burner quantity"
                           >
                             <Plus className="w-4 h-4" />
                           </button>

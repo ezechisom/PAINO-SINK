@@ -123,7 +123,6 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({
   const totalCount = images.length;
   const sinkCount = images.filter(i => i.productId === 'sink').length;
   const cooker2bCount = images.filter(i => i.productId === 'cooker-2burner').length;
-  const cooker5bCount = images.filter(i => i.productId === 'cooker-5burner').length;
 
   return (
     <section id="gallery-section" className="py-8 sm:py-16 bg-slate-50 border-y border-slate-200">
@@ -132,14 +131,14 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-5 sm:mb-8">
           <div className="inline-flex items-center gap-1 bg-blue-50 border border-blue-200 px-3 py-1 rounded-full text-[11px] font-bold text-blue-800 uppercase tracking-widest mb-2">
-            <Sparkles className="w-3 h-3 text-blue-600" />
+            <Sparkles className="w-3.5 h-3.5 text-blue-600" />
             <span>High-Definition Visual Gallery</span>
           </div>
           <h2 className="text-xl sm:text-3xl font-extrabold text-[#0a192f] tracking-tight leading-tight">
-            Explore All 3 Kitchen Appliances
+            Explore Kitchen Appliances
           </h2>
           <p className="text-slate-600 text-xs sm:text-sm mt-1.5">
-            Inspect every angle, finish, and dimension for our Smart Piano Sink and companion kitchen appliances.
+            Inspect every angle, finish, and dimension for our Smart Piano Sink and companion 2-burner gas cooker.
           </p>
         </div>
 
@@ -182,19 +181,6 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({
           >
             <Flame className="w-4 h-4 text-blue-400" />
             <span>2-Flip Gas Cooker ({cooker2bCount})</span>
-          </button>
-
-          <button
-            type="button"
-            onClick={() => handleProductTabChange('cooker-5burner')}
-            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer border ${
-              selectedProduct === 'cooker-5burner'
-                ? 'bg-[#0a192f] text-white border-[#0a192f] shadow-md'
-                : 'bg-white text-slate-700 border-slate-200 hover:border-slate-300 hover:bg-slate-100'
-            }`}
-          >
-            <Zap className="w-4 h-4 text-blue-400" />
-            <span>5-Burner Hybrid ({cooker5bCount})</span>
           </button>
         </div>
 
@@ -394,11 +380,6 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({
                           Cutout: 650 × 350 mm
                         </span>
                       )}
-                      {activeImage?.productId === 'cooker-5burner' && (
-                        <span className="text-xs font-mono text-blue-700 bg-blue-50 px-2 py-0.5 rounded border border-blue-200">
-                          Cutout: 830 × 470 mm
-                        </span>
-                      )}
                       {activeImage?.productId === 'sink' && (
                         <span className="text-xs font-mono text-blue-700 bg-blue-50 px-2 py-0.5 rounded border border-blue-200">
                           Cutout: 720 × 420 mm
@@ -408,8 +389,6 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({
                     <p className="text-[11px] sm:text-xs text-slate-600">
                       {activeImage?.productId === 'cooker-2burner' ? (
                         <span>✨ 90° flip-up burners for 5-second wipe downs • 0–180m mechanical auto shut-off timer • Pure blue flames</span>
-                      ) : activeImage?.productId === 'cooker-5burner' ? (
-                        <span>⚡ 4 gas burners + central 2000W radiant electric zone (dual-fuel reliability) • Digital touch controls</span>
                       ) : (
                         <span>💧 Hydroelectric LED temperature display • Piano key controls • Pull-out spray faucet + cup washer</span>
                       )}

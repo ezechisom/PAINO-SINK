@@ -32,6 +32,7 @@ import { AlternativeProductModal } from './components/AlternativeProductModal';
 import { SuggestedProductTicker } from './components/SuggestedProductTicker';
 import { QuickOrderModal } from './components/QuickOrderModal';
 import { FloatingQuickOrderBtn } from './components/FloatingQuickOrderBtn';
+import { FloatingSuggestedProduct } from './components/FloatingSuggestedProduct';
 import { ALTERNATIVE_PRODUCTS, AlternativeProduct } from './data/alternativeProducts';
 import { getWhatsAppUrl } from './utils/whatsapp';
 import { trackViewContent, trackInitiateCheckout, trackContact } from './utils/metaPixel';
@@ -149,7 +150,7 @@ export default function App() {
       <PromoTopBar promoPrice={config.promoPrice} />
 
       {/* Main Brand Navigation Bar */}
-      <header className="bg-white/95 backdrop-blur-md border-b border-slate-200 sticky top-[41px] z-40 transition-colors shadow-xs">
+      <header className="bg-white/95 backdrop-blur-md border-b border-slate-200 sticky top-0 z-40 transition-colors shadow-xs">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
           
           {/* Logo & Product Badge */}
@@ -314,6 +315,14 @@ export default function App() {
       <Footer 
         config={config} 
         onOrderClick={scrollToOrder} 
+        hasPlacedOrder={!!placedOrder}
+      />
+
+      {/* Floating Suggested Product Companion (Always visible while scrolling on page) */}
+      <FloatingSuggestedProduct 
+        onViewSpecs={handleViewProductSpecs}
+        onAddToForm={handleAddProductToOrder}
+        onQuickOrder={(prod) => handleOpenQuickOrder(prod.id)}
         hasPlacedOrder={!!placedOrder}
       />
 

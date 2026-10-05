@@ -42,32 +42,5 @@ export const ALTERNATIVE_PRODUCTS: AlternativeProduct[] = [
       "https://www.moonlightluxuryhometech.shop/images/pure_blue_flame.jpg"
     ],
     officialUrl: "https://www.moonlightluxuryhometech.shop/"
-  },
-  {
-    id: "cooker-5burner",
-    name: "Executive 5-Burner Built-In Gas + Electric Hybrid Cooktop",
-    tagline: "Never Get Stranded: 4 High-Heat Gas Burners + 1 Central 2000W Radiant Electric Zone",
-    category: "Dual-Fuel Hybrid Cooktop (90 × 51 cm)",
-    price: 280000,
-    normalPrice: 340000,
-    dimensions: "900 × 510 mm (90 × 51 cm)",
-    cutout: "830 × 470 mm",
-    badge: "Executive Dual-Fuel Hybrid",
-    accentColor: "from-cyan-500 to-blue-600",
-    keyFeatures: [
-      "Dual-Fuel Reliability: Switch to the 2000W instant electric ceramic plate whenever gas runs out unexpectedly",
-      "90° Flip-Up Hinged Gas Burners: Effortless 1-wipe cleanups without dismantling heavy components",
-      "Digital Touch Controls & Timer: Independent LED touch interface for the electric cooking zone",
-      "4 High-Power Gas Burners: Triple-ring wok burner for rapid boiling and high-heat frying",
-      "Bevelled Luxury Black Glass: Designed for modern open-concept luxury kitchen architectural spaces"
-    ],
-    description: "The ultimate solution for uninterrupted Nigerian kitchen cooking. Powered by both gas and electricity, ensuring your meal is never interrupted even if your gas cylinder runs empty mid-cooking.",
-    images: [
-      "https://www.moonlightluxuryhometech.shop/images/alternative_5burner/cooktop_showroom_active.jpg",
-      "https://www.moonlightluxuryhometech.shop/images/alternative_5burner/cooktop_main_diagram.png",
-      "https://www.moonlightluxuryhometech.shop/images/alternative_5burner/cooktop_hinged_burners.png",
-      "https://www.moonlightluxuryhometech.shop/images/alternative_5burner/cooktop_kitchen_installed.jpeg"
-    ],
-    officialUrl: "https://www.moonlightluxuryhometech.shop/"
   }
 ];
