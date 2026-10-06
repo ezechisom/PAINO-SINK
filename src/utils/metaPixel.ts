@@ -1,5 +1,13 @@
-// Meta Pixel (Facebook Pixel) Tracking Utilities
-// Pixel ID: 947636671276929
+// Meta Pixel (Facebook Pixel) & TikTok Pixel Tracking Utilities
+// Meta Pixel ID: 947636671276929
+// TikTok Pixel ID: DB2I7I3C77UA626EHF30
+
+import { 
+  trackTikTokViewContent, 
+  trackTikTokInitiateCheckout, 
+  trackTikTokPurchase, 
+  trackTikTokContact 
+} from './tiktokPixel';
 
 export const META_PIXEL_ID = '947636671276929';
 
@@ -37,6 +45,7 @@ export function trackViewContent(productName: string, price: number, currency: s
     value: price,
     currency: currency,
   });
+  trackTikTokViewContent(productName, price, currency);
 }
 
 /**
@@ -47,6 +56,7 @@ export function trackInitiateCheckout(value: number, currency: string = 'NGN') {
     value: value,
     currency: currency,
   });
+  trackTikTokInitiateCheckout(value, currency);
 }
 
 /**
@@ -67,6 +77,8 @@ export function trackPurchase(orderId: string, totalAmount: number, currency: st
     value: totalAmount,
     currency: currency,
   });
+  // Track on TikTok (both CompletePayment and PlaceAnOrder)
+  trackTikTokPurchase(orderId, totalAmount, currency, quantity);
 }
 
 /**
@@ -77,4 +89,5 @@ export function trackContact(channel: 'whatsapp' | 'phone', label?: string) {
     channel,
     label,
   });
+  trackTikTokContact(channel, label);
 }
