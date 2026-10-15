@@ -29,10 +29,10 @@ export const AlternativeProductsSection: React.FC<AlternativeProductsSectionProp
               <span>Matching Kitchen Appliance</span>
             </div>
             <h3 className="text-xl sm:text-2xl font-black text-[#0a192f] tracking-tight">
-              Optional 2-Burner Gas Cooktop from Moonlight Luxury Home Tech
+              Optional Smart Kitchen Piano Sink from Moonlight Luxury Home Tech
             </h3>
             <p className="text-xs sm:text-sm text-slate-600">
-              Easily pair your smart piano sink with a matching 2-burner folding gas cooktop.
+              Easily pair your 2-burner gas cooktop with the matching multifunctional Smart Piano Sink.
             </p>
           </div>
 
@@ -42,7 +42,7 @@ export const AlternativeProductsSection: React.FC<AlternativeProductsSectionProp
           </div>
         </div>
 
-        {/* Featured 2-Burner Companion Card */}
+        {/* Featured Piano Sink Companion Card */}
         <div className="max-w-4xl mx-auto">
           {ALTERNATIVE_PRODUCTS.map((prod) => {
             const savings = prod.normalPrice - prod.price;
@@ -65,10 +65,10 @@ export const AlternativeProductsSection: React.FC<AlternativeProductsSectionProp
                       referrerPolicy="no-referrer"
                     />
                     <div className="absolute top-2 left-2 bg-[#0a192f]/90 backdrop-blur-xs text-white text-[10px] font-black px-2.5 py-1 rounded-md shadow-sm">
-                      🔥 90° FLIP-UP 2-BURNER
+                      ✨ SMART PIANO SINK
                     </div>
-                    <div className="absolute bottom-2 inset-x-2 bg-black/75 backdrop-blur-xs text-yellow-300 text-[9px] font-bold px-2 py-1 rounded text-center">
-                      Dual Foldable Burners + 180min Timer
+                    <div className="absolute bottom-2 inset-x-2 bg-black/75 backdrop-blur-xs text-blue-300 text-[9px] font-bold px-2 py-1 rounded text-center">
+                      Waterfall Faucet + LED Temp Display
                     </div>
                   </div>
 

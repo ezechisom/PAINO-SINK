@@ -5,38 +5,38 @@ export const PerfectForSection: React.FC = () => {
   const useCases = [
     {
       id: "family-homes",
-      title: "Family Homes",
-      description: "Deep basin fits large pots, while nested prep boards keep busy family kitchen counters tidy.",
+      title: "Busy Family Homes",
+      description: "Dual high-heat burners boil soups and fry simultaneously, while the 0–180m auto timer prevents burnt family meals.",
       icon: Home
     },
     {
       id: "apartments",
-      title: "Apartments",
-      description: "Maximizes counter space by sliding cutting boards and colanders directly over the basin.",
+      title: "Modern Apartments",
+      description: "Standard 750×450mm surface fits seamlessly into compact counters; 90° flip-up burners eliminate messy stove maintenance.",
       icon: Building2
     },
     {
       id: "new-homes",
-      title: "New Home Construction",
-      description: "A striking luxury centerpiece for kitchen islands that elevates property finish and appeal.",
+      title: "New Architectural Builds",
+      description: "Sleek explosion-proof tempered crystal glass panel creates an instant luxury focal point on granite or quartz slabs.",
       icon: Sparkles
     },
     {
       id: "renovations",
-      title: "Kitchen Renovations",
-      description: "Replaces outdated chrome sinks. Fits standard 750×450mm cutouts in granite or quartz.",
+      title: "Kitchen Upgrades",
+      description: "Directly drop into standard 650×350mm countertop cutouts to replace outdated, soot-producing metal stoves.",
       icon: Hammer
     },
     {
       id: "shortlets",
       title: "Shortlets & Airbnb",
-      description: "Wows guests with piano push buttons, waterfall stream, and self-powered LED display.",
+      description: "Timer auto-shutoff protects property from accidental fires, while pure blue flame keeps Airbnb cookware spotless.",
       icon: Hotel
     },
     {
-      id: "executive-offices",
-      title: "Offices & Lounges",
-      description: "Sleek aesthetics with instant cup rinsing and dedicated filtered drinking water tap.",
+      id: "outdoor-kitchens",
+      title: "Chef & Party Cooking",
+      description: "Heavy-duty windproof cast iron wok stands easily support large heavy Nigerian cooking pots without bending.",
       icon: Building
     }
   ];

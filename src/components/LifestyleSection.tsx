@@ -31,19 +31,19 @@ export const LifestyleSection: React.FC<LifestyleSectionProps> = ({ onOrderClick
                 <div className="w-4.5 h-4.5 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center shrink-0">
                   <CheckCircle2 className="w-3.5 h-3.5" />
                 </div>
-                <span>Gunmetal finish matches modern countertops &amp; appliances</span>
+                <span>90° flip-up burners let you wipe the tempered glass spotless in 5 seconds</span>
               </div>
               <div className="flex items-center gap-2.5">
                 <div className="w-4.5 h-4.5 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center shrink-0">
                   <CheckCircle2 className="w-3.5 h-3.5" />
                 </div>
-                <span>Hydroelectric digital LED shows live water temp &amp; glow light</span>
+                <span>0–180m mechanical timer prevents burnt pots and stops gas waste automatically</span>
               </div>
               <div className="flex items-center gap-2.5">
                 <div className="w-4.5 h-4.5 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center shrink-0">
                   <CheckCircle2 className="w-3.5 h-3.5" />
                 </div>
-                <span>Sliding nested prep trays eliminate messy countertop spills</span>
+                <span>High-efficiency pure blue flame keeps your cookware 100% free of black soot</span>
               </div>
             </div>
           </div>
@@ -52,20 +52,20 @@ export const LifestyleSection: React.FC<LifestyleSectionProps> = ({ onOrderClick
           <div className="lg:col-span-6">
             <div className="relative rounded-2xl overflow-hidden border border-slate-700 shadow-xl bg-slate-900 group">
               <img
-                src="/images/luxury_kitchen_lifestyle_1789548098794.jpg"
-                alt="Smart Kitchen Piano Sink installed in modern kitchen"
+                src="https://www.moonlightluxuryhometech.shop/images/cooker_active_blue_flames.jpg"
+                alt="2-Flip-Up Double Gas Burner with active pure blue flames"
                 className="w-full aspect-[16/10] object-cover group-hover:scale-105 transition-transform duration-500"
                 referrerPolicy="no-referrer"
               />
               
               <div className="absolute top-3 right-3 bg-black/80 backdrop-blur-md px-2.5 py-1 rounded-full border border-slate-700 text-[11px] font-semibold text-amber-300 flex items-center gap-1">
                 <Sparkles className="w-3 h-3" />
-                <span>Installed View</span>
+                <span>Active Pure Blue Flame</span>
               </div>
 
               <div className="p-3 bg-slate-950/90 border-t border-slate-800 text-xs text-slate-400 flex items-center justify-between">
-                <span>75 × 45 cm Universal Cutout</span>
-                <span className="text-slate-300 font-medium">Topmount / Flushmount / Undermount</span>
+                <span>750 × 450 mm Outer Dimensions</span>
+                <span className="text-slate-300 font-medium">Standard 650 × 350 mm Cutout Fit</span>
               </div>
             </div>
           </div>

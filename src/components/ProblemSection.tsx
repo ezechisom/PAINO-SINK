@@ -1,5 +1,5 @@
 import React from 'react';
-import { AlertCircle, LayoutGrid, Layers, Sparkles, ArrowDown } from 'lucide-react';
+import { AlertCircle, Flame, Clock, Sparkles, ArrowDown, ShieldAlert } from 'lucide-react';
 
 interface ProblemSectionProps {
   onDiscoverClick: () => void;
@@ -8,32 +8,32 @@ interface ProblemSectionProps {
 export const ProblemSection: React.FC<ProblemSectionProps> = ({ onDiscoverClick }) => {
   const problems = [
     {
-      id: "clutter",
-      title: "TIRED OF A CLUTTERED WORKTOP?",
-      description: "Cutting boards and bowls crowd your slabs. The piano sink moves chopping, rinsing, and draining directly inside the basin to keep counters clean.",
-      icon: LayoutGrid,
-      tag: "Workspace Chaos"
+      id: "burnt-food",
+      title: "TIRED OF BURNT FOOD & WASTED GAS?",
+      description: "Getting distracted while boiling beans, meat, or stews often leads to ruined meals and burnt pots. Our built-in 0–180m mechanical timer cuts off the gas flame automatically.",
+      icon: Clock,
+      tag: "Cooking Frustration"
     },
     {
-      id: "basic",
-      title: "STILL USING A BASIC SINK?",
-      description: "Old sinks splatter water everywhere, lack cup cleaning pressure, and offer zero built-in preparation surfaces.",
+      id: "cleaning",
+      title: "EXHAUSTED SCRUBBING GREASY BURNERS?",
+      description: "Traditional stoves have fixed burner heads that trap grease, soup spills, and baked-on oil underneath. Cleaning takes 20 painful minutes of unscrewing parts.",
       icon: AlertCircle,
-      tag: "Outdated Utility"
+      tag: "Stubborn Grease"
     },
     {
-      id: "space",
-      title: "LIMITED KITCHEN SPACE?",
-      description: "Maximize every centimeter by combining washing, gentle waterfall rinsing, chopping, and draining into one smart workstation.",
-      icon: Layers,
-      tag: "Space Constraints"
+      id: "soot",
+      title: "BLACK SOOT RUINING YOUR POTS?",
+      description: "Inferior gas burners produce smoky yellow flames that stain your expensive stainless and non-stick cookware with thick black carbon soot.",
+      icon: Flame,
+      tag: "Cookware Damage"
     },
     {
-      id: "aesthetic",
-      title: "WANT A MORE MODERN KITCHEN?",
-      description: "An outdated chrome sink cheapens granite or quartz slabs. Gunmetal nano steel brings an instant luxury designer centerpiece to your home.",
-      icon: Sparkles,
-      tag: "Visual Appeal"
+      id: "wobble",
+      title: "WOBBLY STANDS FOR HEAVY POTS?",
+      description: "Thin wire pot stands bend under heavy soup pots, creating dangerous tipping risks when stirring family-sized meals.",
+      icon: ShieldAlert,
+      tag: "Kitchen Hazard"
     }
   ];
 
@@ -46,10 +46,10 @@ export const ProblemSection: React.FC<ProblemSectionProps> = ({ onDiscoverClick 
             The Everyday Kitchen Challenge
           </span>
           <h2 className="text-xl sm:text-3xl font-extrabold text-white tracking-tight leading-tight">
-            YOUR KITCHEN DESERVES MORE THAN JUST A BASIC SINK.
+            YOUR KITCHEN DESERVES MORE THAN AN ORDINARY GAS STOVE.
           </h2>
           <p className="text-slate-400 text-xs sm:text-sm mt-2">
-            Why settle for messy counter clutter and splashing when your kitchen sink can work smarter for you?
+            Why struggle with burnt food, soot-covered pots, and greasy scrub downs when a smart cooker solves them all?
           </p>
         </div>
 
@@ -92,7 +92,7 @@ export const ProblemSection: React.FC<ProblemSectionProps> = ({ onDiscoverClick 
               THE MODERN SOLUTION IS HERE
             </span>
             <div className="text-lg sm:text-2xl font-black text-amber-400 tracking-tight flex items-center gap-2 font-display">
-              <span>MEET THE SMART KITCHEN PIANO SINK.</span>
+              <span>MEET THE 2-FLIP-UP GAS COOKER WITH TIMER.</span>
             </div>
             <button
               onClick={onDiscoverClick}

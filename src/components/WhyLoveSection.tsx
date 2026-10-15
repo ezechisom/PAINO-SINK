@@ -40,10 +40,10 @@ export const WhyLoveSection: React.FC<WhyLoveSectionProps> = ({ config, onOrderC
             Verified Product Capabilities
           </span>
           <h2 className="text-xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight leading-tight">
-            WHY THIS SMART PIANO SINK BELONGS IN YOUR KITCHEN
+            WHY THIS 2-FLIP-UP GAS COOKER BELONGS IN YOUR KITCHEN
           </h2>
           <p className="text-slate-400 text-xs sm:text-sm mt-2 max-w-xl mx-auto leading-relaxed">
-            Engineered to make everyday cooking, washing, and food preparation effortless and organized.
+            Engineered to make everyday cooking faster, safer, and cleanup practically effortless.
           </p>
         </div>
 

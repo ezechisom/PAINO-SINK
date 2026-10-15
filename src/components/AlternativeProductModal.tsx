@@ -13,7 +13,8 @@ import {
   ChevronLeft,
   ChevronRight,
   ShoppingBag,
-  ArrowRight
+  ArrowRight,
+  Sparkles
 } from 'lucide-react';
 import { getWhatsAppUrl } from '../utils/whatsapp';
 import { trackContact } from '../utils/metaPixel';
@@ -155,17 +156,17 @@ export const AlternativeProductModal: React.FC<AlternativeProductModalProps> = (
                 <Maximize2 className="w-4 h-4" />
               </div>
               <div>
-                <span className="text-[11px] text-slate-400 uppercase font-semibold block">Glass Top Dimensions</span>
+                <span className="text-[11px] text-slate-400 uppercase font-semibold block">Outer Dimensions</span>
                 <span className="text-sm font-bold text-white">{product.dimensions}</span>
               </div>
             </div>
 
             <div className="flex items-center gap-3">
               <div className="w-9 h-9 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 shrink-0">
-                <Flame className="w-4 h-4" />
+                <Sparkles className="w-4 h-4" />
               </div>
               <div>
-                <span className="text-[11px] text-slate-400 uppercase font-semibold block">Countertop Cutout Needed</span>
+                <span className="text-[11px] text-slate-400 uppercase font-semibold block">Countertop Fit</span>
                 <span className="text-sm font-bold text-white">{product.cutout}</span>
               </div>
             </div>
@@ -174,7 +175,7 @@ export const AlternativeProductModal: React.FC<AlternativeProductModalProps> = (
           {/* Key Features List */}
           <div>
             <h4 className="text-xs font-black text-slate-300 uppercase tracking-wider mb-3">
-              Why Homeowners Love This Cooktop:
+              Key Appliance Capabilities:
             </h4>
             <div className="space-y-2.5">
               {product.keyFeatures.map((feat, i) => (

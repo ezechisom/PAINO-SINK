@@ -159,19 +159,6 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({
 
           <button
             type="button"
-            onClick={() => handleProductTabChange('sink')}
-            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer border ${
-              selectedProduct === 'sink'
-                ? 'bg-[#0a192f] text-white border-[#0a192f] shadow-md'
-                : 'bg-white text-slate-700 border-slate-200 hover:border-slate-300 hover:bg-slate-100'
-            }`}
-          >
-            <Waves className="w-4 h-4 text-blue-400" />
-            <span>Smart Piano Sink ({sinkCount})</span>
-          </button>
-
-          <button
-            type="button"
             onClick={() => handleProductTabChange('cooker-2burner')}
             className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer border ${
               selectedProduct === 'cooker-2burner'
@@ -181,6 +168,19 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({
           >
             <Flame className="w-4 h-4 text-blue-400" />
             <span>2-Flip Gas Cooker ({cooker2bCount})</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => handleProductTabChange('sink')}
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer border ${
+              selectedProduct === 'sink'
+                ? 'bg-[#0a192f] text-white border-[#0a192f] shadow-md'
+                : 'bg-white text-slate-700 border-slate-200 hover:border-slate-300 hover:bg-slate-100'
+            }`}
+          >
+            <Waves className="w-4 h-4 text-blue-400" />
+            <span>Smart Piano Sink ({sinkCount})</span>
           </button>
         </div>
 

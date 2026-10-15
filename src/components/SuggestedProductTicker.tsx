@@ -14,7 +14,7 @@ export const SuggestedProductTicker: React.FC<SuggestedProductTickerProps> = ({
   onAddToForm,
   onQuickOrder,
 }) => {
-  const cooker2b = ALTERNATIVE_PRODUCTS.find(p => p.id === 'cooker-2burner') || ALTERNATIVE_PRODUCTS[0];
+  const suggestedProduct = ALTERNATIVE_PRODUCTS.find(p => p.id === 'sink') || ALTERNATIVE_PRODUCTS[0];
 
   const handleTickerClick = (product: AlternativeProduct) => {
     onViewSpecs(product);
@@ -37,29 +37,29 @@ export const SuggestedProductTicker: React.FC<SuggestedProductTickerProps> = ({
   // Repeated items array for smooth, gapless infinite marquee
   const tickerItems = [
     {
-      product: cooker2b,
-      icon: Flame,
-      badge: "MOST POPULAR COMPANION",
-      badgeColor: "bg-amber-500/20 text-amber-300 border-amber-500/30",
-      title: "2-Flip-Up Double Gas Burner With Timer (75×45cm)",
-      highlight: "90° Flip-Up Burners for 1-Wipe Cleaning & Auto-Off Safety Timer",
-      price: formatNaira(cooker2b.price),
-    },
-    {
-      product: cooker2b,
-      icon: Zap,
-      badge: "ENERGY SAVING BLUE FLAME",
-      badgeColor: "bg-cyan-500/20 text-cyan-300 border-cyan-500/30",
-      title: "Pure Blue Flame Brass Burners + Windproof Cast Stands",
-      highlight: "High Heat Efficiency • Heavy Nigerian Pot Support • Explosion-Proof Glass",
-      price: formatNaira(cooker2b.price),
-    },
-    {
-      product: cooker2b,
+      product: suggestedProduct,
       icon: Sparkles,
-      badge: "PERFECT COUNTERTOP MATCH",
+      badge: "MOST POPULAR COMPANION",
       badgeColor: "bg-blue-500/20 text-blue-300 border-blue-500/30",
-      title: "Designed to Pair With Your Smart Piano Sink",
+      title: "Smart Kitchen Piano Sink (75×45cm)",
+      highlight: "Piano Key Controls • Waterfall Spout • Hydroelectric LED Display",
+      price: formatNaira(suggestedProduct.price),
+    },
+    {
+      product: suggestedProduct,
+      icon: Zap,
+      badge: "SELF-POWERED HYDROELECTRIC",
+      badgeColor: "bg-cyan-500/20 text-cyan-300 border-cyan-500/30",
+      title: "Zero Batteries • Real-Time °C Display & Flow Light",
+      highlight: "SUS304 Nano Stainless Steel • High-Pressure Cup Rinser • Pull-Out Tap",
+      price: formatNaira(suggestedProduct.price),
+    },
+    {
+      product: suggestedProduct,
+      icon: Flame,
+      badge: "PERFECT COUNTERTOP MATCH",
+      badgeColor: "bg-amber-500/20 text-amber-300 border-amber-500/30",
+      title: "Designed to Pair With Your 2-Burner Gas Cooktop",
       highlight: "Save ₦5,000 Multi-Product Bundle Discount • Pay On Delivery Nationwide",
       price: "Bundle Available",
     },

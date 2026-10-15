@@ -9,10 +9,10 @@ interface ReviewsSectionProps {
 export const ReviewsSection: React.FC<ReviewsSectionProps> = ({ reviews }) => {
   const singleReview = reviews[0] || {
     id: "rev-1",
-    name: "Engr. Babatunde A.",
-    location: "Lekki Phase 1, Lagos",
+    name: "Mrs. Chioma Okonkwo",
+    location: "Magodo Phase 2, Lagos",
     rating: 5,
-    review: "We installed this piano sink during our kitchen remodeling last month. The waterfall feature for washing vegetables is simply incredible. The water temperature display also keeps my kids safe from accidental hot water burns. The heavy-duty 304 nano finish resists scratches completely. Premium quality through and through!",
+    review: "The 90-degree flip-up burners have completely transformed my kitchen routine! Previously, scrubbing burned oil around cooker rings was a nightmare. Now I just lift the burner heads and wipe the glass clean in 5 seconds. The auto-off timer is a lifesaver when boiling beans or soups. Absolutely worth every Naira!",
     date: "Verified Homeowner • Lagos",
     verified: true
   };

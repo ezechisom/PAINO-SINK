@@ -1,7 +1,8 @@
 import React from 'react';
 import { SiteConfig } from '../types';
 import { formatNaira } from '../config';
-import { ArrowRight, Sparkles, CheckCircle2, Truck, Thermometer, Zap } from 'lucide-react';
+import { ArrowRight, Sparkles, CheckCircle2, Truck, Thermometer, Zap, Clock } from 'lucide-react';
+import { CountdownTimer } from './CountdownTimer';
 
 interface FinalOfferSectionProps {
   config: SiteConfig;
@@ -29,7 +30,7 @@ export const FinalOfferSection: React.FC<FinalOfferSectionProps> = ({ config, on
         </h2>
 
         <p className="text-slate-300 text-xs sm:text-sm max-w-lg mx-auto mb-6">
-          Order now to secure your complete Smart Kitchen Piano Sink with LED temperature display, waterfall stream, and nested prep workstation accessories.
+          Order now to secure your 2-Flip-Up Double Gas Burner With Timer, featuring 90° flip-up burners for instant 1-wipe cleaning, safety auto-off timer, and pure blue flame.
         </p>
 
         {/* Promo Price Card */}
@@ -48,25 +49,34 @@ export const FinalOfferSection: React.FC<FinalOfferSectionProps> = ({ config, on
             )}
           </div>
 
-          <div className="pt-3 border-t border-slate-800 flex items-center justify-center gap-2 text-xs font-semibold text-slate-300">
+          <div className="pt-3 border-t border-slate-800 flex items-center justify-center gap-2 text-xs font-semibold text-slate-300 mb-4">
             <Truck className="w-3.5 h-3.5 text-amber-400" />
-            <span>Complete Full Workstation Set &bull; Free Nationwide Dispatch</span>
+            <span>Complete Factory Direct Unit &bull; Free Lagos Delivery &bull; 1-Year Warranty</span>
+          </div>
+
+          {/* 7-Day Countdown Timer */}
+          <div className="pt-3 border-t border-slate-800/80">
+            <CountdownTimer 
+              targetDate={config.countdownEndDate} 
+              variant="card" 
+              title="7-DAY PROMOTIONAL OFFER ENDS IN" 
+            />
           </div>
         </div>
 
         {/* Value Highlights */}
         <div className="flex flex-wrap items-center justify-center gap-2.5 max-w-lg mx-auto mb-6 text-xs text-slate-300">
           <span className="flex items-center gap-1 bg-slate-900/80 px-2.5 py-1 rounded-full border border-slate-800 text-[11px]">
-            <Thermometer className="w-3 h-3 text-amber-400" />
-            LED Temp Display
-          </span>
-          <span className="flex items-center gap-1 bg-slate-900/80 px-2.5 py-1 rounded-full border border-slate-800 text-[11px]">
-            <Zap className="w-3 h-3 text-blue-400" />
-            Water-Flow Ambient Light
+            <CheckCircle2 className="w-3 h-3 text-amber-400" />
+            90° Flip-Up Burners
           </span>
           <span className="flex items-center gap-1 bg-slate-900/80 px-2.5 py-1 rounded-full border border-slate-800 text-[11px]">
             <CheckCircle2 className="w-3 h-3 text-blue-400" />
-            100% Hydroelectric Powered
+            0–180m Auto Safety Timer
+          </span>
+          <span className="flex items-center gap-1 bg-slate-900/80 px-2.5 py-1 rounded-full border border-slate-800 text-[11px]">
+            <CheckCircle2 className="w-3 h-3 text-emerald-400" />
+            Pure Blue Flame (Zero Soot)
           </span>
         </div>
 

@@ -1,34 +1,34 @@
 import React from 'react';
-import { Utensils, Waves, CheckCircle } from 'lucide-react';
+import { Flame, Clock, Sparkles, CheckCircle } from 'lucide-react';
 
 export const HowItWorks: React.FC = () => {
   const steps = [
     {
       number: "01",
-      title: "PREPARE",
-      subtitle: "Nested Food Prep Surfaces",
-      description: "Slide the solid wood cutting board and prep basin directly over the basin to chop vegetables and meat without countertop mess.",
-      icon: Utensils,
+      title: "IGNITE & SET TIMER",
+      subtitle: "Instant Pulse Ignition & 180m Timer",
+      description: "Push and turn the rotary dial for instant pulse spark ignition, then dial the built-in mechanical safety timer (0–180 minutes) to eliminate cooking stress.",
+      icon: Clock,
       color: "from-amber-500/20 to-amber-500/5",
       borderColor: "border-amber-500/30"
     },
     {
       number: "02",
-      title: "WASH",
-      subtitle: "Targeted Water Stream Modes",
-      description: "Press piano keys to activate the gentle Flying Rain waterfall for greens, 360° pull-out sprayer for pots, or glass rinser for cups.",
-      icon: Waves,
+      title: "COOK WITHOUT SOOT",
+      subtitle: "Pure Blue Flame & Heavy Pot Stability",
+      description: "8-nozzle precision brass burner crowns deliver high-heat pure blue flames with zero black carbon soot, while heavy cast iron stands keep large pots rock steady.",
+      icon: Flame,
       color: "from-blue-500/20 to-blue-500/5",
       borderColor: "border-blue-500/30"
     },
     {
       number: "03",
-      title: "ORGANIZE",
-      subtitle: "Effortless Drainage & Clean Deck",
-      description: "Drip-dry produce in the colander and turn the deck rotary knob to drain the sink without putting hands in dirty water.",
-      icon: CheckCircle,
-      color: "from-blue-600/20 to-blue-600/5",
-      borderColor: "border-blue-500/30"
+      title: "5-SEC 1-WIPE CLEAN",
+      subtitle: "Revolutionary 90° Hinged Burners",
+      description: "When cooking is done, lift the burner heads 90 degrees upright with one finger. Wipe the tempered crystal glass clean in 5 seconds with zero dismantling.",
+      icon: Sparkles,
+      color: "from-emerald-500/20 to-emerald-500/5",
+      borderColor: "border-emerald-500/30"
     }
   ];
 
@@ -82,7 +82,7 @@ export const HowItWorks: React.FC = () => {
 
                 <div className="mt-4 pt-3 border-t border-slate-800/80 flex items-center gap-1.5 text-[11px] text-slate-400">
                   <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
-                  <span>Step {step.number} of 3 in the Smart System</span>
+                  <span>Step {step.number} of 3 in the Smart Cooker System</span>
                 </div>
               </div>
             );

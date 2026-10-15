@@ -1,7 +1,61 @@
 import { GalleryImage } from '../types';
 
 export const ALL_GALLERY_IMAGES: GalleryImage[] = [
-  // --- 1. SMART PIANO SINK (5 Photos) ---
+  // --- 1. 2-FLIP-UP DOUBLE GAS BURNER WITH TIMER (4 Photos) ---
+  {
+    id: "cooker2b-active",
+    url: "https://www.moonlightluxuryhometech.shop/images/cooker_active_blue_flames.jpg",
+    title: "2-Flip-Up Double Gas Burner Firing Test",
+    subtitle: "Dual high-heat pure blue flames with 8-nozzle brass burner crowns and oxygen damper air balance.",
+    tag: "Burners & Flame",
+    alt: "2-Flip-Up Double Gas Burner with active pure blue flames",
+    productId: "cooker-2burner",
+    productName: "2-Flip-Up Double Gas Burner With Timer",
+    price: 170000,
+    dimensions: "750 × 450 mm",
+    badge: "90° Flip-Up Cooktop"
+  },
+  {
+    id: "cooker2b-hinge",
+    url: "https://www.moonlightluxuryhometech.shop/images/burner_flip_hinge.jpg",
+    title: "90° Flip-Up Hinged Burner Mechanism",
+    subtitle: "Both burner heads lift upright with one finger, allowing you to wipe grease underneath in 5 seconds without dismantling anything.",
+    tag: "90° Hinge Mechanism",
+    alt: "Burner head lifted 90 degrees on its hinge showing effortless cleaning access",
+    productId: "cooker-2burner",
+    productName: "2-Flip-Up Double Gas Burner With Timer",
+    price: 170000,
+    dimensions: "750 × 450 mm",
+    badge: "5-Second 1-Wipe Cleaning"
+  },
+  {
+    id: "cooker2b-flame",
+    url: "https://www.moonlightluxuryhometech.shop/images/pure_blue_flame.jpg",
+    title: "Pure Blue Flame & 180-Minute Auto-Off Timer",
+    subtitle: "Zero soot on cooking pots, optimal gas efficiency, and an integrated mechanical safety timer that shuts off gas automatically.",
+    tag: "Timer & Blue Flame",
+    alt: "Pure blue flame close up and burner detail",
+    productId: "cooker-2burner",
+    productName: "2-Flip-Up Double Gas Burner With Timer",
+    price: 170000,
+    dimensions: "750 × 450 mm",
+    badge: "Auto-Off Timer (0-180m)"
+  },
+  {
+    id: "cooker2b-overview",
+    url: "https://www.moonlightluxuryhometech.shop/images/cooker_blue_flames.jpg",
+    title: "Dual Burner Crystal Glass Surface & Wok Stands",
+    subtitle: "Explosion-proof tempered crystal glass with heavy-duty windproof cast iron pot supports for large Nigerian cooking pots.",
+    tag: "Glass Surface & Stands",
+    alt: "2-Flip-Up Gas Burner glass panel and cast iron pot supports",
+    productId: "cooker-2burner",
+    productName: "2-Flip-Up Double Gas Burner With Timer",
+    price: 170000,
+    dimensions: "750 × 450 mm",
+    badge: "Tempered Crystal Glass"
+  },
+
+  // --- 2. SMART PIANO SINK COMPANION APPLIANCE (5 Photos) ---
   {
     id: "sink-main",
     url: "/images/smart_piano_sink_1789548024514.jpg",
@@ -13,7 +67,7 @@ export const ALL_GALLERY_IMAGES: GalleryImage[] = [
     productName: "Smart Kitchen Piano Sink",
     price: 135000,
     dimensions: "750 × 450 mm",
-    badge: "Smart Workstation Sink"
+    badge: "Matching Workstation Sink"
   },
   {
     id: "sink-console",
@@ -66,59 +120,5 @@ export const ALL_GALLERY_IMAGES: GalleryImage[] = [
     price: 135000,
     dimensions: "750 × 450 mm",
     badge: "Full Package Included"
-  },
-
-  // --- 2. 2-FLIP-UP DOUBLE GAS BURNER WITH TIMER (4 Photos) ---
-  {
-    id: "cooker2b-active",
-    url: "https://www.moonlightluxuryhometech.shop/images/cooker_active_blue_flames.jpg",
-    title: "2-Flip-Up Double Gas Burner Firing Test",
-    subtitle: "Dual high-heat pure blue flames with 8-nozzle brass burner crowns and oxygen damper air balance.",
-    tag: "Burners & Flame",
-    alt: "2-Flip-Up Double Gas Burner with active pure blue flames",
-    productId: "cooker-2burner",
-    productName: "2-Flip-Up Double Gas Burner With Timer",
-    price: 170000,
-    dimensions: "750 × 450 mm",
-    badge: "90° Flip-Up Cooktop"
-  },
-  {
-    id: "cooker2b-overview",
-    url: "https://www.moonlightluxuryhometech.shop/images/cooker_blue_flames.jpg",
-    title: "Dual Burner Crystal Glass Surface & Wok Stands",
-    subtitle: "Explosion-proof tempered crystal glass with heavy-duty windproof cast iron pot supports for large Nigerian cooking pots.",
-    tag: "Glass Surface & Stands",
-    alt: "2-Flip-Up Gas Burner glass panel and cast iron pot supports",
-    productId: "cooker-2burner",
-    productName: "2-Flip-Up Double Gas Burner With Timer",
-    price: 170000,
-    dimensions: "750 × 450 mm",
-    badge: "Tempered Crystal Glass"
-  },
-  {
-    id: "cooker2b-hinge",
-    url: "https://www.moonlightluxuryhometech.shop/images/burner_flip_hinge.jpg",
-    title: "90° Flip-Up Hinged Burner Mechanism",
-    subtitle: "Both burner heads lift upright with one finger, allowing you to wipe grease underneath in 5 seconds without dismantling anything.",
-    tag: "90° Hinge Mechanism",
-    alt: "Burner head lifted 90 degrees on its hinge showing effortless cleaning access",
-    productId: "cooker-2burner",
-    productName: "2-Flip-Up Double Gas Burner With Timer",
-    price: 170000,
-    dimensions: "750 × 450 mm",
-    badge: "5-Second 1-Wipe Cleaning"
-  },
-  {
-    id: "cooker2b-flame",
-    url: "https://www.moonlightluxuryhometech.shop/images/pure_blue_flame.jpg",
-    title: "Pure Blue Flame & 180-Minute Auto-Off Timer",
-    subtitle: "Zero soot on cooking pots, optimal gas efficiency, and an integrated mechanical safety timer that shuts off gas automatically.",
-    tag: "Timer & Blue Flame",
-    alt: "Pure blue flame close up and burner detail",
-    productId: "cooker-2burner",
-    productName: "2-Flip-Up Double Gas Burner With Timer",
-    price: 170000,
-    dimensions: "750 × 450 mm",
-    badge: "Auto-Off Timer (0-180m)"
   }
 ];

@@ -1,20 +1,43 @@
 import { SiteConfig } from './types';
 
-// Default countdown set to 2 days from initial load, with persistent fallback
+// 7-Day Promotional Countdown Timer with localStorage persistence
 const getInitialPromoEndDate = (): string => {
-  const now = new Date();
-  now.setDate(now.getDate() + 2);
-  now.setHours(23, 59, 59, 999);
-  return now.toISOString();
+  const STORAGE_KEY = 'moonlight_promo_7d_timer_end';
+  try {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        const savedDate = new Date(saved);
+        if (!isNaN(savedDate.getTime()) && savedDate.getTime() > Date.now()) {
+          return saved;
+        }
+      }
+    }
+  } catch (e) {
+    // Ignore storage errors
+  }
+
+  const target = new Date();
+  target.setDate(target.getDate() + 7);
+  target.setHours(23, 59, 59, 999);
+  const targetIso = target.toISOString();
+  try {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      localStorage.setItem(STORAGE_KEY, targetIso);
+    }
+  } catch (e) {
+    // Ignore storage errors
+  }
+  return targetIso;
 };
 
 // Central Formspree Form Submission Endpoint
 export const FORMSPREE_ENDPOINT = "https://formspree.io/f/xppwqdyj";
 
 export const CONFIG: SiteConfig = {
-  productName: "Smart Kitchen Piano Sink",
-  normalPrice: 160000,
-  promoPrice: 135000,
+  productName: "2-Flip-Up Double Gas Burner With Timer",
+  normalPrice: 200000,
+  promoPrice: 170000,
   currency: "₦",
   countdownEndDate: getInitialPromoEndDate(),
   whatsappNumber: "2349136827730", // Store WhatsApp number (09136827730)
@@ -24,174 +47,154 @@ export const CONFIG: SiteConfig = {
   deliveryInformation: "Nationwide delivery across Nigeria. Lagos orders arrive in 1–2 business days. For other states, delivery takes 3–5 business days: standard orders are picked up at your city's major commercial motor park terminal, while direct doorstep delivery is available for an extra fee of ₦5,000.",
   paymentInformation: "Payment on Delivery available in selected major cities (Lagos, Abuja, PH). Bank transfer and secure online payment available nationwide.",
   returnPolicy: "7-day inspection and exchange period upon delivery. Items must remain unused in original protective packaging.",
-  warrantyInformation: "1-Year Manufacturer Warranty covering the piano valve core, LED hydroelectric module, and faucet cartridge.",
+  warrantyInformation: "1-Year Manufacturer Warranty covering burner hinges, gas valves, ignition module, and tempered crystal glass.",
 
   trustStatements: {
     delivery: "Nationwide Delivery (1-5 Days)",
-    packaging: "Heavy-Duty Wooden/Foam Packaging",
+    packaging: "Heavy-Duty Reinforced Packaging",
     support: "100% Genuine Quality Guarantee"
   },
 
   productImages: [
     {
-      id: "hero-sink",
-      url: "/images/smart_piano_sink_1789548024514.jpg",
-      title: "Smart Kitchen Piano Sink",
-      subtitle: "Nano Stainless Steel Workstation with Digital Display",
+      id: "hero-cooker",
+      url: "https://www.moonlightluxuryhometech.shop/images/cooker_active_blue_flames.jpg",
+      title: "2-Flip-Up Double Gas Burner With Timer",
+      subtitle: "90° Flip-Up Burners for Instant 1-Wipe Cleaning & Built-In Safety Timer",
       tag: "main",
-      alt: "Smart Kitchen Piano Sink with piano keys and digital temperature display"
+      alt: "2-Flip-Up Double Gas Burner with active pure blue flames"
     },
     {
-      id: "console-details",
-      url: "/images/piano_console_details_1789548059707.jpg",
-      title: "Digital Temperature Display & Flow-Activated Light",
-      subtitle: "LED screen shows real-time temperature in °C; elegant ambient light turns on automatically as water passes through",
-      tag: "console",
-      alt: "Close up of piano keys, LED digital screen and ambient light illuminating as water passes through"
+      id: "hinge-details",
+      url: "https://www.moonlightluxuryhometech.shop/images/burner_flip_hinge.jpg",
+      title: "90° Flip-Up Hinged Burner Heads",
+      subtitle: "Effortlessly lift burner heads upright with one finger to wipe grease spills underneath in 5 seconds",
+      tag: "hinge",
+      alt: "Burner head lifted 90 degrees on its hinge showing effortless cleaning access"
     },
     {
-      id: "accessories-nesting",
-      url: "/images/workstation_accessories_1789548079842.jpg",
-      title: "Technical Dimensions & Fit Guide",
-      subtitle: "Standard 750mm × 450mm cutout with 205mm deep basin & console layout",
+      id: "pure-blue-flame",
+      url: "https://www.moonlightluxuryhometech.shop/images/pure_blue_flame.jpg",
+      title: "Pure Blue Flame & 0–180 Min Auto-Off Safety Timer",
+      subtitle: "8-nozzle brass crowns for high heat with zero pot soot, plus integrated mechanical timer that cuts gas automatically",
+      tag: "timer",
+      alt: "Pure blue flame close up and burner detail with timer dial"
+    },
+    {
+      id: "glass-wok-stands",
+      url: "https://www.moonlightluxuryhometech.shop/images/cooker_blue_flames.jpg",
+      title: "Explosion-Proof Tempered Crystal Glass & Windproof Wok Stands",
+      subtitle: "Heavy-duty cast iron supports heavy Nigerian cooking pots firmly with zero wobbling",
       tag: "details",
-      alt: "Technical dimension diagram of the Smart Piano Sink with standard 750x450mm fit"
-    },
-    {
-      id: "water-modes-controls",
-      url: "/images/luxury_kitchen_lifestyle_1789548098794.jpg",
-      title: "4 Water Modes & Piano Controls",
-      subtitle: "Independent piano keys for pull-out tap, flying rain, waterfall & high-pressure cup washer",
-      tag: "console",
-      alt: "Piano key control console demonstrating tap water, rain stream, waterfall, and cup washer modes"
-    },
-    {
-      id: "complete-package",
-      url: "/images/complete_package_kit_1789548119458.jpg",
-      title: "Full Set & Plumbing Accessories",
-      subtitle: "Includes sink, faucet console, pipes, valves, and sliding trays",
-      tag: "unboxing",
-      alt: "Unboxing package layout showing all included components and fittings"
+      alt: "2-Flip-Up Gas Burner glass panel and cast iron pot supports"
     }
   ],
 
   features: [
     {
-      id: "piano-controls",
-      title: "Piano-Key Water Controls",
-      description: "Tactile mechanical piano buttons switch instantly between waterfall, pull-out sprayer, glass rinser, and drinking tap.",
+      id: "flip-up-burners",
+      title: "90° Flip-Up Burner Heads",
+      description: "Both burner heads lift upright with 1 finger so you can wipe spills underneath in 5 seconds without dismantling anything.",
       iconName: "Sliders",
       badge: "Signature Feature",
       highlight: true
     },
     {
-      id: "digital-display",
-      title: "Digital Temp (°C) & Flow Light",
-      description: "Real-time LED °C screen and auto-glow light powered 100% by hydroelectric water flow — zero batteries or wiring required!",
+      id: "safety-timer",
+      title: "Built-In 0–180m Safety Timer",
+      description: "Mechanical auto-off timer automatically shuts off the gas supply when cooking time expires. Zero burnt pots or wasted gas!",
       iconName: "Gauge",
-      badge: "Lights Up On Flow",
+      badge: "Auto-Off Safety",
       highlight: true
     },
     {
-      id: "flying-rain",
-      title: "Flying Rain Waterfall Spout",
-      description: "Gentle horizontal cascading waterfall for effortless, splash-free rinsing of delicate fruits and leafy vegetables.",
+      id: "pure-blue-flame",
+      title: "Pure Blue High-Heat Flame",
+      description: "8-nozzle precision brass burner crowns with oxygen damper air balance produce clean, concentrated heat with zero black soot.",
       iconName: "Waves",
-      badge: "Splash-Free",
+      badge: "Zero Pot Soot",
       highlight: true
     },
     {
-      id: "pull-out-faucet",
-      title: "360° Pull-Out Faucet",
-      description: "Flexible pull-out sprayer with dual stream & high-pressure blade spray modes for deep pot cleaning.",
+      id: "cast-iron-stands",
+      title: "Windproof Cast Iron Stands",
+      description: "Heavy-duty cast iron wok supports provide non-slip stability for heavy Nigerian cooking pots and family-sized pans.",
       iconName: "Maximize2"
     },
     {
-      id: "cup-washer",
-      title: "High-Pressure Glass Rinser",
-      description: "Multi-angle high-velocity jets clean cups, mugs, and bottles in 2 seconds with a simple downward press.",
-      iconName: "Sparkles"
-    },
-    {
-      id: "nested-workstation",
-      title: "Double-Track Workstation",
-      description: "Slide the solid wood cutting board, colander, and prep basin over the basin to save counter space.",
-      iconName: "Layers"
-    },
-    {
-      id: "nano-coating",
-      title: "Anti-Scratch Nano Finish",
-      description: "Heavy-duty SUS304 stainless steel with micro-honeycomb nano coating that repels oil, watermarks, and abrasions.",
+      id: "tempered-glass",
+      title: "Explosion-Proof Crystal Glass",
+      description: "Thermal-shock resistant 8mm tempered crystal glass panel that resists scratches, oil build-up, and wipes clean instantly.",
       iconName: "ShieldCheck"
     },
     {
-      id: "drinking-tap",
-      title: "Filtered Drinking Water Tap",
-      description: "Dedicated gooseneck tap connects directly to your water purifier for clean drinking water on deck.",
-      iconName: "Droplet"
+      id: "pulse-ignition",
+      title: "Instant Pulse Battery Ignition",
+      description: "Smooth rotary dials with automatic battery-powered pulse ignition for immediate, effortless flame startup every time.",
+      iconName: "Sparkles"
     }
   ],
 
   specifications: [
     {
-      feature: "Sink Design",
-      detail: "Single deep bowl workstation with integrated piano console & double-track rails",
+      feature: "Cooktop Type",
+      detail: "Dual 90° Hinged Flip-Up Gas Burners with Integrated Mechanical Timer",
       iconName: "Square"
     },
     {
       feature: "Outer Dimensions",
-      detail: "750 × 450 × 205 mm (75 × 45 × 20.5 cm)",
+      detail: "750 × 450 mm (75 × 45 cm)",
       iconName: "Ruler"
     },
     {
-      feature: "Inner Basin Dimensions",
-      detail: "700 × 350 × 200 mm",
+      feature: "Counter Cutout Dimensions",
+      detail: "650 × 350 mm (fits standard Nigerian kitchen countertop openings)",
       iconName: "Box"
     },
     {
-      feature: "Material & Craft",
-      detail: "Heavy-duty SUS304 Stainless Steel with scratch-resistant Nano Bionic finish",
+      feature: "Surface Material",
+      detail: "Explosion-Proof Tempered Crystal Glass with bevelled edges",
       iconName: "Shield"
     },
     {
-      feature: "Color / Finish",
-      detail: "Gunmetal Gray / Matte Black Nano Metallic",
+      feature: "Burner Crown Material",
+      detail: "High-grade 8-nozzle brass burner crowns with oxygen damper air mixture",
       iconName: "Palette"
     },
     {
-      feature: "Faucet System",
-      detail: "Integrated Piano Console with Waterfall, 360° pull-out sprayer, drinking tap & cup washer",
-      iconName: "Droplets"
-    },
-    {
-      feature: "Digital Display & Flow Light",
-      detail: "Real-time LED °C & auto ambient glow (100% hydroelectric, zero batteries or wiring)",
+      feature: "Safety Timer Range",
+      detail: "0 to 180 Minutes mechanical countdown with automatic gas cut-off",
       iconName: "Cpu"
     },
     {
-      feature: "Included Accessories",
-      detail: "Wood cutting board, colander basket, prep basin, cup washer, soap dispenser & full plumbing kit",
+      feature: "Pan / Wok Supports",
+      detail: "Heavy-duty windproof non-slip cast iron pot supports",
       iconName: "PackageCheck"
     },
     {
-      feature: "Installation Type",
-      detail: "Compatible with Top-mount, Flush-mount, or Undermount configurations",
-      iconName: "Hammer"
+      feature: "Gas Compatibility",
+      detail: "LPG (Liquefied Petroleum Gas / standard domestic gas cylinder)",
+      iconName: "Droplets"
     },
     {
-      feature: "Drainage System",
-      detail: "110mm drain with deck rotary control knob & anti-odor trap",
+      feature: "Ignition Method",
+      detail: "Automatic pulse battery ignition (D-cell battery compartment underneath)",
       iconName: "RotateCw"
+    },
+    {
+      feature: "Installation Style",
+      detail: "Built-in countertop drop-in or tabletop rubber-footed placement",
+      iconName: "Hammer"
     }
   ],
 
   reviews: [
     {
       id: "rev-1",
-      name: "Engr. Babatunde A.",
-      location: "Lekki Phase 1, Lagos",
+      name: "Mrs. Chioma Okonkwo",
+      location: "Magodo Phase 2, Lagos",
       rating: 5,
-      review: "We installed this piano sink during our kitchen remodeling last month. The waterfall feature for washing vegetables is simply incredible. The water temperature display also keeps my kids safe from accidental hot water burns. The heavy-duty 304 nano finish resists scratches completely. Premium quality through and through!",
+      review: "The 90-degree flip-up burners have completely transformed my kitchen routine! Previously, scrubbing burned oil around cooker rings was a nightmare. Now I just lift the burner heads and wipe the glass clean in 5 seconds. The auto-off timer is a lifesaver when boiling beans or soups. Absolutely worth every Naira!",
       date: "Verified Homeowner &bull; Lagos",
       verified: true
     }
@@ -200,68 +203,58 @@ export const CONFIG: SiteConfig = {
   faqs: [
     {
       id: "faq-1",
-      question: "1. What is a Smart Kitchen Piano Sink?",
-      answer: "A Smart Kitchen Piano Sink is a luxury, multifunctional kitchen workstation sink equipped with mechanical piano-style push buttons to control multiple water streams, an integrated LED digital temperature display, a cascading flying rain waterfall, a pull-out spray faucet, a high-pressure glass rinser, and nested preparation accessories."
+      question: "1. What is the 2-Flip-Up Double Gas Burner With Timer?",
+      answer: "It is a premium luxury gas cooktop featuring revolutionary 90-degree folding burner heads that lift upright for instant 5-second 1-wipe cleaning, combined with a built-in 0–180 minute mechanical auto-off safety timer and pure blue high-heat brass burners."
     },
     {
       id: "faq-2",
-      question: "2. What functions does the sink have, and how does the light work?",
-      answer: "The sink integrates four key water dispensing modes: (1) Flying Rain horizontal waterfall for washing fruits and vegetables, (2) Pull-out flexible spray faucet with aerated stream and blade spray modes, (3) High-pressure glass cup washer, and (4) Dedicated filtered drinking water tap. Additionally, it features a real-time digital temperature display (°C) and an ambient glow light that automatically turns on whenever water passes through the sink, powered 100% by an internal hydroelectric turbine with zero batteries or electricity needed."
+      question: "2. How does the 90° flip-up cleaning mechanism work?",
+      answer: "Both burner heads are mounted on heavy-duty engineered hinges. When food spills or oil splatters occur, you simply lift the burner upright with one finger and wipe the smooth tempered glass underneath with a cloth. You never need to unscrew or dismantle burner parts."
     },
     {
       id: "faq-3",
-      question: "3. What accessories come with it?",
-      answer: "The complete set includes: (1) Main 750x450mm nano stainless steel sink, (2) Complete piano faucet console with waterfall & pull-out tap, (3) Solid natural wood chopping board, (4) Triangular/rectangular perforated draining colander, (5) Nested secondary prep basin, (6) High-pressure cup washer, (7) Soap/lotion dispenser, (8) 110mm pop-up drain strainer with rotary knob, and (9) Complete plumbing pipes, hot & cold hoses, and angle valves."
+      question: "3. How does the built-in 0–180 minute safety timer protect my kitchen?",
+      answer: "The mechanical timer operates like an oven timer. When you set it (for example, 45 minutes to boil meat or 90 minutes for beans), it automatically shuts off the gas supply and extinguishes the flame as soon as time is up, preventing burnt food, smoke damage, or wasted cooking gas."
     },
     {
       id: "faq-4",
-      question: "4. What material is it made from?",
-      answer: "It is constructed from heavy-gauge, premium SUS304 food-grade stainless steel treated with an advanced bionic nano textured coating that provides superior resistance against rust, corrosion, oil adhesion, and surface scratches."
+      question: "4. Will this cooker turn the bottom of my cooking pots black?",
+      answer: "No! It features 8-nozzle brass burner crowns with adjustable oxygen damper valves that ensure a 100% pure blue high-efficiency flame. Pure blue flame means complete gas combustion with zero smoke and zero black soot on your expensive cookware."
     },
     {
       id: "faq-5",
-      question: "5. What are the dimensions?",
-      answer: "External Dimensions: 750mm (Length) x 450mm (Width) x 205mm (Depth). Inner Bowl Dimensions: 700mm (Length) x 350mm (Width) x 200mm (Depth). The piano console measures 750mm long by 75mm wide."
+      question: "5. What are the product dimensions and countertop cutout size?",
+      answer: "Outer Surface Dimensions: 750 mm × 450 mm (75 × 45 cm). Countertop Cutout Dimensions: 650 mm × 350 mm. It easily fits standard countertop cutouts in granite, quartz, or tiles."
     },
     {
       id: "faq-6",
-      question: "6. Does it come with the faucet?",
-      answer: "Yes! The faucet system is pre-integrated into the piano console bar. It includes both the high-arc 360° pull-out sprayer and the separate dedicated drinking water faucet, as well as the horizontal waterfall bar."
+      question: "6. Can it also be used on a tabletop without cutting the counter?",
+      answer: "Yes! The cooktop includes heavy-duty non-slip rubber feet on the bottom casing, allowing it to sit safely and securely on top of any kitchen counter slab as a tabletop stove."
     },
     {
       id: "faq-7",
-      question: "7. Does it require professional installation?",
-      answer: "Yes, we recommend that a licensed or experienced plumber installs the sink to connect the standard 1/2-inch hot and cold water inlet pipes, the drainage trap, and the optional drinking water purifier line correctly."
+      question: "7. What gas does it use and how is it ignited?",
+      answer: "It runs on standard LPG cylinder gas (the regular gas cylinders used across Nigerian homes). It features instant pulse battery ignition powered by a standard battery, ignited effortlessly when pushing and turning the control knob."
     },
     {
       id: "faq-8",
-      question: "8. Is it suitable for a new kitchen?",
-      answer: "Absolutely. It is one of the most requested modern sinks for new architectural builds, custom homes, and luxury kitchen renovations across Nigeria."
+      question: "8. Can I also order the matching Smart Kitchen Piano Sink?",
+      answer: "Yes! The Smart Kitchen Piano Sink is available on this website as a matching companion appliance for ₦135,000. When you order both together, you receive an extra ₦5,000 multi-product bundle discount."
     },
     {
       id: "faq-9",
-      question: "9. Can it be installed in an existing kitchen?",
-      answer: "Yes. As long as your countertop cutout accommodates the 750 x 450 mm dimensions (or can be adjusted by your installer), it easily replaces conventional double or single sinks."
+      question: "9. How does delivery work across Nigeria?",
+      answer: "We deliver nationwide across all 36 states and the FCT. For Lagos State, doorstep delivery is free and takes 1–2 business days. For other states, delivery takes 3–5 business days to your city's major commercial motor park terminal, or direct doorstep delivery is available for ₦5,000 extra."
     },
     {
       id: "faq-10",
-      question: "10. How does delivery work for my state?",
-      answer: "We ship nationwide across all 36 states and the FCT. For Lagos State, doorstep delivery is included (1–2 business days). For other states, standard orders arrive in 3–5 business days and are picked up at your city's major commercial motor park terminal. If you prefer delivery directly to your home/doorstep in other states, it is gladly arranged for an extra delivery fee of ₦5,000."
+      question: "10. What payment options are available?",
+      answer: "We offer Payment on Delivery (POD) in eligible locations (Lagos, Abuja, Port Harcourt). Direct bank transfer and secure online checkout are also supported nationwide."
     },
     {
       id: "faq-11",
-      question: "11. What payment options are available?",
-      answer: "We offer Payment on Delivery (POD) in eligible locations (such as Lagos, Abuja, and Port Harcourt). We also accept direct bank transfers and secure online payments for all locations nationwide."
-    },
-    {
-      id: "faq-12",
-      question: "12. What are the estimated delivery days?",
-      answer: "Lagos State: 1 to 2 business days. Abuja (FCT) and other states: 3 to 5 business days. You will receive SMS/phone call updates with tracking information as soon as your unit is dispatched."
-    },
-    {
-      id: "faq-13",
-      question: "13. What is the return/warranty policy?",
-      answer: "We offer a 7-day inspection guarantee upon receipt of goods. In addition, the sink and valve mechanisms are backed by a 1-Year Manufacturer Warranty."
+      question: "11. What warranty is provided?",
+      answer: "The cooker comes with a 1-Year Manufacturer Warranty covering the burner hinges, gas valves, and tempered crystal glass, backed by a 7-day inspection guarantee upon delivery."
     }
   ]
 };

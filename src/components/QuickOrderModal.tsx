@@ -25,8 +25,10 @@ import {
   Zap,
   Check,
   PackageCheck,
-  Copy
+  Copy,
+  Clock
 } from 'lucide-react';
+import { CountdownTimer } from './CountdownTimer';
 
 interface QuickOrderModalProps {
   isOpen: boolean;
@@ -43,9 +45,9 @@ export const QuickOrderModal: React.FC<QuickOrderModalProps> = ({
   initialProductId,
   onOrderPlaced
 }) => {
-  // Product quantities
-  const [sinkQty, setSinkQty] = useState<number>(1);
-  const [cooker2bQty, setCooker2bQty] = useState<number>(0);
+  // Product quantities: Cooker is main product (1), Sink is companion (0)
+  const [cooker2bQty, setCooker2bQty] = useState<number>(1);
+  const [sinkQty, setSinkQty] = useState<number>(0);
 
   // Form Fields
   const [fullName, setFullName] = useState('');
@@ -71,12 +73,12 @@ export const QuickOrderModal: React.FC<QuickOrderModalProps> = ({
   useEffect(() => {
     if (!isOpen) return;
 
-    if (initialProductId === 'cooker-2burner') {
-      setCooker2bQty(1);
-      setSinkQty(0);
-    } else if (initialProductId === 'sink') {
+    if (initialProductId === 'sink') {
       setSinkQty(1);
       setCooker2bQty(0);
+    } else {
+      setCooker2bQty(1);
+      setSinkQty(0);
     }
   }, [isOpen, initialProductId]);
 
@@ -115,35 +117,35 @@ export const QuickOrderModal: React.FC<QuickOrderModalProps> = ({
 
   if (!isOpen) return null;
 
-  // Prices
-  const SINK_PRICE = config.promoPrice;
-  const COOKER_2B_PRICE = 170000;
+  // Prices: Cooker is 170K, Sink is 135K
+  const COOKER_2B_PRICE = config.promoPrice; // 170000
+  const SINK_PRICE = 135000;
 
   const isLagosState = state.toLowerCase().trim() === 'lagos';
   const deliveryFee = isLagosState ? 0 : (deliveryMethod === 'doorstep' ? 5000 : 0);
 
   // Selected items array
   const selectedItems: OrderItem[] = [];
-  if (sinkQty > 0) {
-    selectedItems.push({
-      id: 'sink',
-      name: `${config.productName} (75×45cm)`,
-      quantity: sinkQty,
-      unitPrice: SINK_PRICE,
-      totalPrice: sinkQty * SINK_PRICE
-    });
-  }
   if (cooker2bQty > 0) {
     selectedItems.push({
       id: 'cooker-2burner',
-      name: '2-Flip-Up Double Gas Burner With Timer (75×45cm)',
+      name: `${config.productName} (75×45cm)`,
       quantity: cooker2bQty,
       unitPrice: COOKER_2B_PRICE,
       totalPrice: cooker2bQty * COOKER_2B_PRICE
     });
   }
+  if (sinkQty > 0) {
+    selectedItems.push({
+      id: 'sink',
+      name: 'Smart Kitchen Piano Sink (75×45cm)',
+      quantity: sinkQty,
+      unitPrice: SINK_PRICE,
+      totalPrice: sinkQty * SINK_PRICE
+    });
+  }
 
-  const totalItemCount = sinkQty + cooker2bQty;
+  const totalItemCount = cooker2bQty + sinkQty;
   const itemsSubtotal = selectedItems.reduce((acc, it) => acc + it.totalPrice, 0);
 
   // Multi-product discount (₦5,000 for 2 or more products)
@@ -315,6 +317,19 @@ export const QuickOrderModal: React.FC<QuickOrderModalProps> = ({
           </button>
         </div>
 
+        {/* 7-Day Limited Promo Timer Urgency Ribbon */}
+        <div className="bg-amber-500/10 border-b border-amber-500/20 px-4 py-2 flex flex-wrap items-center justify-between gap-2 text-xs">
+          <div className="flex items-center gap-1.5 text-amber-800 font-bold text-[11px]">
+            <Clock className="w-3.5 h-3.5 text-amber-600 shrink-0" />
+            <span>7-DAY PROMO: ₦170,000</span>
+          </div>
+          <CountdownTimer 
+            targetDate={config.countdownEndDate}
+            variant="banner"
+            title="OFFER ENDS IN"
+          />
+        </div>
+
         {/* Modal Body: Scrollable */}
         <div className="overflow-y-auto px-4 sm:px-6 py-5 flex-1 space-y-5">
           
@@ -471,7 +486,58 @@ export const QuickOrderModal: React.FC<QuickOrderModalProps> = ({
                 )}
 
                 <div className="space-y-2.5">
-                  {/* Product 1: Smart Piano Sink */}
+                  {/* Product 1: 2-Flip-Up Cooker (Main Product) */}
+                  <div className={`p-3 rounded-2xl border transition-all ${
+                    cooker2bQty > 0 
+                      ? 'bg-amber-50/70 border-amber-500/60 ring-1 ring-amber-500/30' 
+                      : 'bg-white border-slate-200 opacity-80 hover:opacity-100'
+                  }`}>
+                    <div className="flex items-center gap-3">
+                      <img 
+                        src="https://www.moonlightluxuryhometech.shop/images/cooker_active_blue_flames.jpg" 
+                        alt="2-Flip-Up Double Gas Cooker"
+                        className="w-14 h-14 rounded-xl object-cover border border-slate-200 shrink-0" 
+                      />
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-1.5">
+                          <span className="text-xs font-black text-[#0a192f] truncate">2-Flip-Up Gas Burner</span>
+                          <span className="text-[10px] bg-amber-100 text-amber-900 font-bold px-1.5 py-0.2 rounded shrink-0">Timer</span>
+                        </div>
+                        <p className="text-[11px] text-slate-500 truncate">90° Flip-Up Hinges &amp; Safety Auto-Off</p>
+                        <div className="flex items-center gap-1.5 mt-0.5">
+                          <span className="text-xs font-extrabold text-amber-700 font-mono">{formatNaira(COOKER_2B_PRICE)}</span>
+                          <span className="text-[10px] text-slate-400 line-through">{formatNaira(config.normalPrice)}</span>
+                          {config.normalPrice > COOKER_2B_PRICE && (
+                            <span className="text-[9px] font-black text-emerald-700 bg-emerald-100 border border-emerald-300 px-1 py-0.2 rounded">
+                              Save {formatNaira(config.normalPrice - COOKER_2B_PRICE)}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-1.5 shrink-0 bg-white border border-slate-200 rounded-xl p-1 shadow-2xs">
+                        <button
+                          type="button"
+                          onClick={() => setCooker2bQty(prev => Math.max(0, prev - 1))}
+                          className="w-6 h-6 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center font-bold text-xs cursor-pointer transition-colors"
+                          aria-label="Decrease cooker quantity"
+                        >
+                          <Minus className="w-3 h-3" />
+                        </button>
+                        <span className="w-6 text-center text-xs font-black font-mono">{cooker2bQty}</span>
+                        <button
+                          type="button"
+                          onClick={() => setCooker2bQty(prev => Math.min(10, prev + 1))}
+                          className="w-6 h-6 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 flex items-center justify-center font-bold text-xs cursor-pointer transition-colors"
+                          aria-label="Increase cooker quantity"
+                        >
+                          <Plus className="w-3 h-3" />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Product 2: Smart Piano Sink (Companion Product) */}
                   <div className={`p-3 rounded-2xl border transition-all ${
                     sinkQty > 0 
                       ? 'bg-blue-50/60 border-blue-500/60 ring-1 ring-blue-500/30' 
@@ -491,12 +557,10 @@ export const QuickOrderModal: React.FC<QuickOrderModalProps> = ({
                         <p className="text-[11px] text-slate-500 truncate">Digital °C, Waterfall &amp; Full Prep Set</p>
                         <div className="flex items-center gap-1.5 mt-0.5">
                           <span className="text-xs font-extrabold text-blue-700 font-mono">{formatNaira(SINK_PRICE)}</span>
-                          <span className="text-[10px] text-slate-400 line-through">{formatNaira(config.normalPrice)}</span>
-                          {config.normalPrice > SINK_PRICE && (
-                            <span className="text-[9px] font-black text-emerald-700 bg-emerald-100 border border-emerald-300 px-1 py-0.2 rounded">
-                              Save {formatNaira(config.normalPrice - SINK_PRICE)}
-                            </span>
-                          )}
+                          <span className="text-[10px] text-slate-400 line-through">₦160,000</span>
+                          <span className="text-[9px] font-black text-emerald-700 bg-emerald-100 border border-emerald-300 px-1 py-0.2 rounded">
+                            Save ₦25,000
+                          </span>
                         </div>
                       </div>
 
@@ -515,49 +579,6 @@ export const QuickOrderModal: React.FC<QuickOrderModalProps> = ({
                           onClick={() => setSinkQty(prev => Math.min(10, prev + 1))}
                           className="w-6 h-6 rounded-lg bg-blue-600 hover:bg-blue-500 text-white flex items-center justify-center font-bold text-xs cursor-pointer transition-colors"
                           aria-label="Increase sink quantity"
-                        >
-                          <Plus className="w-3 h-3" />
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Product 2: 2-Flip-Up Cooker */}
-                  <div className={`p-3 rounded-2xl border transition-all ${
-                    cooker2bQty > 0 
-                      ? 'bg-amber-50/70 border-amber-500/60 ring-1 ring-amber-500/30' 
-                      : 'bg-white border-slate-200 opacity-80 hover:opacity-100'
-                  }`}>
-                    <div className="flex items-center gap-3">
-                      <img 
-                        src="https://www.moonlightluxuryhometech.shop/images/cooker_active_blue_flames.jpg" 
-                        alt="2-Flip-Up Double Gas Cooker"
-                        className="w-14 h-14 rounded-xl object-cover border border-slate-200 shrink-0" 
-                      />
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-1.5">
-                          <span className="text-xs font-black text-[#0a192f] truncate">2-Flip-Up Gas Burner</span>
-                          <span className="text-[10px] bg-amber-100 text-amber-900 font-bold px-1.5 py-0.2 rounded shrink-0">Timer</span>
-                        </div>
-                        <p className="text-[11px] text-slate-500 truncate">90° Flip-Up Hinges &amp; Safety Auto-Off</p>
-                        <span className="text-xs font-extrabold text-amber-700 font-mono">{formatNaira(COOKER_2B_PRICE)}</span>
-                      </div>
-
-                      <div className="flex items-center gap-1.5 shrink-0 bg-white border border-slate-200 rounded-xl p-1 shadow-2xs">
-                        <button
-                          type="button"
-                          onClick={() => setCooker2bQty(prev => Math.max(0, prev - 1))}
-                          className="w-6 h-6 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center font-bold text-xs cursor-pointer transition-colors"
-                          aria-label="Decrease cooker quantity"
-                        >
-                          <Minus className="w-3 h-3" />
-                        </button>
-                        <span className="w-6 text-center text-xs font-black font-mono">{cooker2bQty}</span>
-                        <button
-                          type="button"
-                          onClick={() => setCooker2bQty(prev => Math.min(10, prev + 1))}
-                          className="w-6 h-6 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 flex items-center justify-center font-bold text-xs cursor-pointer transition-colors"
-                          aria-label="Increase cooker quantity"
                         >
                           <Plus className="w-3 h-3" />
                         </button>

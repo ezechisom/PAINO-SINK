@@ -146,8 +146,11 @@ export default function App() {
         hasPlacedOrder={!!placedOrder}
       />
 
-      {/* 1. TOP PROMOTIONAL BAR (Dark Blue & Emerald Green) */}
-      <PromoTopBar promoPrice={config.promoPrice} />
+      {/* 1. TOP PROMOTIONAL BAR WITH 7-DAY LIVE COUNTDOWN */}
+      <PromoTopBar 
+        promoPrice={config.promoPrice} 
+        countdownEndDate={config.countdownEndDate}
+      />
 
       {/* Main Brand Navigation Bar */}
       <header className="bg-white/95 backdrop-blur-md border-b border-slate-200 sticky top-0 z-40 transition-colors shadow-xs">
@@ -156,14 +159,14 @@ export default function App() {
           {/* Logo & Product Badge */}
           <div className="flex items-center gap-2.5">
             <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#0a192f] flex items-center justify-center text-white font-extrabold shadow-sm">
-              <Sparkles className="w-5 h-5 text-blue-400" />
+              <Sparkles className="w-5 h-5 text-amber-400" />
             </div>
             <div>
               <span className="font-extrabold text-[#0a192f] text-base sm:text-lg tracking-tight font-display block leading-tight">
-                SMART PIANO SINK
+                2 FLIP UP DOUBLE GAS BURNER
               </span>
-              <span className="text-[10px] text-blue-700 font-bold tracking-wider uppercase">
-                SUS304 Nano Workstation
+              <span className="text-[10px] text-amber-700 font-bold tracking-wider uppercase">
+                With Auto Safety Timer &bull; 90° Hinges
               </span>
             </div>
           </div>
