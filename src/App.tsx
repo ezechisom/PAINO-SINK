@@ -43,6 +43,7 @@ export default function App() {
   const [selectedAltProduct, setSelectedAltProduct] = useState<AlternativeProduct | null>(null);
   const [productToAddToForm, setProductToAddToForm] = useState<{ productId: string; timestamp: number } | null>(null);
   const [isQuickOrderOpen, setIsQuickOrderOpen] = useState(false);
+  const [isSuggestedProductOpen, setIsSuggestedProductOpen] = useState(false);
   const [quickOrderProductId, setQuickOrderProductId] = useState<string | null>(null);
   const [placedOrder, setPlacedOrder] = useState<{
     orderId: string;
@@ -56,14 +57,25 @@ export default function App() {
     trackViewContent(config.productName, config.promoPrice);
   }, [config.productName, config.promoPrice]);
 
-  // Auto-open Quick Order Form after 30 seconds on site, and re-trigger every 30 seconds if closed
+  // 1. Auto-open Suggested Product popup after 45 seconds, and re-trigger every 45 seconds when closed
+  useEffect(() => {
+    if (placedOrder || isSuggestedProductOpen) return;
+
+    const timer = setTimeout(() => {
+      setIsSuggestedProductOpen(true);
+    }, 45000); // 45 seconds
+
+    return () => clearTimeout(timer);
+  }, [isSuggestedProductOpen, placedOrder]);
+
+  // 2. Auto-open Quick Order Form after 60 seconds on site, and re-trigger every 60 seconds when closed
   useEffect(() => {
     // If the customer has already completed an order, do not auto-popup
     if (placedOrder || isQuickOrderOpen) return;
 
     const timer = setTimeout(() => {
       setIsQuickOrderOpen(true);
-    }, 30000); // 30 seconds
+    }, 60000); // 60 seconds
 
     return () => clearTimeout(timer);
   }, [isQuickOrderOpen, placedOrder]);
@@ -82,17 +94,14 @@ export default function App() {
     setIsQuickOrderOpen(true);
   };
 
+  // Click handler to open the detailed specs & full photo gallery modal for the suggested product
   const handleViewProductSpecs = (productIdOrProduct: string | AlternativeProduct) => {
     let prod: AlternativeProduct | undefined;
     if (typeof productIdOrProduct === 'string') {
-      if (productIdOrProduct === 'sink') {
-        const specsSection = document.getElementById('specs-section');
-        if (specsSection) {
-          specsSection.scrollIntoView({ behavior: 'smooth' });
-          return;
-        }
-      }
       prod = ALTERNATIVE_PRODUCTS.find(p => p.id === productIdOrProduct);
+      if (!prod) {
+        prod = ALTERNATIVE_PRODUCTS[0];
+      }
     } else {
       prod = productIdOrProduct;
     }
@@ -321,8 +330,10 @@ export default function App() {
         hasPlacedOrder={!!placedOrder}
       />
 
-      {/* Floating Suggested Product Companion (Always visible while scrolling on page) */}
+      {/* Floating Suggested Product Companion (Pops up every 45s & clickable for all photos and specs) */}
       <FloatingSuggestedProduct 
+        isOpen={isSuggestedProductOpen}
+        onClose={() => setIsSuggestedProductOpen(false)}
         onViewSpecs={handleViewProductSpecs}
         onAddToForm={handleAddProductToOrder}
         onQuickOrder={(prod) => handleOpenQuickOrder(prod.id)}

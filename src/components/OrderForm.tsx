@@ -32,7 +32,8 @@ import {
   Flame,
   Zap,
   Sliders,
-  FileText
+  FileText,
+  Camera
 } from 'lucide-react';
 import { CountdownTimer } from './CountdownTimer';
 
@@ -1089,11 +1090,23 @@ export const OrderForm: React.FC<OrderFormProps> = ({
                 >
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div className="flex items-start gap-3">
-                      <img 
-                        src="/images/smart_piano_sink_1789548024514.jpg" 
-                        alt="Smart Kitchen Piano Sink" 
-                        className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-lg border border-slate-200 bg-slate-100 flex-shrink-0"
-                      />
+                      <div 
+                        onClick={() => {
+                          const prod = ALTERNATIVE_PRODUCTS.find(p => p.id === 'sink');
+                          if (prod && onViewSuggestedProduct) onViewSuggestedProduct(prod);
+                        }}
+                        className="relative cursor-pointer group shrink-0"
+                        title="Click to view 5 pictures and full details"
+                      >
+                        <img 
+                          src="/images/smart_piano_sink_1789548024514.jpg" 
+                          alt="Smart Kitchen Piano Sink" 
+                          className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-lg border border-slate-200 bg-slate-100 group-hover:scale-105 transition-transform"
+                        />
+                        <span className="absolute bottom-0 inset-x-0 bg-black/80 text-[8px] font-bold text-blue-300 text-center py-0.5 rounded-b-lg">
+                          5 Photos
+                        </span>
+                      </div>
                       <div>
                         <div className="flex items-center gap-2 mb-1 flex-wrap">
                           <span className="text-[10px] font-bold uppercase tracking-wider bg-blue-100 text-blue-800 px-2 py-0.5 rounded border border-blue-200">
@@ -1111,7 +1124,14 @@ export const OrderForm: React.FC<OrderFormProps> = ({
                           )}
                         </div>
                         <div className="flex items-center gap-2 flex-wrap">
-                          <h4 className="text-sm sm:text-base font-bold text-[#0a192f] leading-snug">
+                          <h4 
+                            onClick={() => {
+                              const prod = ALTERNATIVE_PRODUCTS.find(p => p.id === 'sink');
+                              if (prod && onViewSuggestedProduct) onViewSuggestedProduct(prod);
+                            }}
+                            className="text-sm sm:text-base font-bold text-[#0a192f] hover:text-blue-600 cursor-pointer leading-snug"
+                            title="Click to view full pictures and specifications"
+                          >
                             Smart Kitchen Piano Sink (75×45cm)
                           </h4>
                           <button
@@ -1120,10 +1140,10 @@ export const OrderForm: React.FC<OrderFormProps> = ({
                               const prod = ALTERNATIVE_PRODUCTS.find(p => p.id === 'sink');
                               if (prod && onViewSuggestedProduct) onViewSuggestedProduct(prod);
                             }}
-                            className="text-[11px] font-bold text-blue-700 hover:text-blue-900 underline inline-flex items-center gap-1 cursor-pointer"
+                            className="text-[11px] font-bold text-blue-700 hover:text-blue-900 underline inline-flex items-center gap-1 cursor-pointer bg-blue-50 px-2 py-0.5 rounded border border-blue-200"
                           >
-                            <FileText className="w-3 h-3" />
-                            <span>View Specs &amp; Blueprint</span>
+                            <Camera className="w-3 h-3 text-blue-600" />
+                            <span>View 5 Pictures &amp; Specs</span>
                           </button>
                         </div>
                         <p className="text-[11px] text-slate-500 mt-1 line-clamp-2">
