@@ -1,31 +1,31 @@
 import React from 'react';
-import { Flame, Clock, Sparkles, CheckCircle } from 'lucide-react';
+import { Utensils, Waves, CheckCircle, Sparkles } from 'lucide-react';
 
 export const HowItWorks: React.FC = () => {
   const steps = [
     {
       number: "01",
-      title: "IGNITE & SET TIMER",
-      subtitle: "Instant Pulse Ignition & 180m Timer",
-      description: "Push and turn the rotary dial for instant pulse spark ignition, then dial the built-in mechanical safety timer (0–180 minutes) to eliminate cooking stress.",
-      icon: Clock,
-      color: "from-amber-500/20 to-amber-500/5",
-      borderColor: "border-amber-500/30"
-    },
-    {
-      number: "02",
-      title: "COOK WITHOUT SOOT",
-      subtitle: "Pure Blue Flame & Heavy Pot Stability",
-      description: "8-nozzle precision brass burner crowns deliver high-heat pure blue flames with zero black carbon soot, while heavy cast iron stands keep large pots rock steady.",
-      icon: Flame,
+      title: "PREP ON SLIDING LEDGES",
+      subtitle: "Multi-Tier Dual Track",
+      description: "Slide the solid wood cutting board and stainless colander directly across the sink ledge to chop, rinse, and prep without taking up dry counter space.",
+      icon: Utensils,
       color: "from-blue-500/20 to-blue-500/5",
       borderColor: "border-blue-500/30"
     },
     {
+      number: "02",
+      title: "PIANO KEYS & WATERFALL",
+      subtitle: "Tactile Valves + LED Temp",
+      description: "Press mechanical piano buttons to switch between gentle flying rain waterfall and 3-mode pull-out sprayer while the hydroelectric screen shows real-time °C.",
+      icon: Waves,
+      color: "from-amber-500/20 to-amber-500/5",
+      borderColor: "border-amber-500/30"
+    },
+    {
       number: "03",
-      title: "5-SEC 1-WIPE CLEAN",
-      subtitle: "Revolutionary 90° Hinged Burners",
-      description: "When cooking is done, lift the burner heads 90 degrees upright with one finger. Wipe the tempered crystal glass clean in 5 seconds with zero dismantling.",
+      title: "2-SEC CUP WASH & DRAIN",
+      subtitle: "High-Pressure Rinser",
+      description: "Invert drinking glasses over the cup rinser for an instant multi-angle high-pressure blast, then turn the rotary knob to drain the vortex basin effortlessly.",
       icon: Sparkles,
       color: "from-emerald-500/20 to-emerald-500/5",
       borderColor: "border-emerald-500/30"
@@ -45,7 +45,7 @@ export const HowItWorks: React.FC = () => {
             HOW IT TRANSFORMS YOUR DAILY ROUTINE
           </h2>
           <p className="text-slate-400 text-xs sm:text-sm mt-2">
-            Three simple ergonomic steps that turn cooking and cleaning into an organized, effortless experience.
+            Three simple ergonomic steps that turn cooking and washing into an organized, effortless experience.
           </p>
         </div>
 
@@ -82,7 +82,7 @@ export const HowItWorks: React.FC = () => {
 
                 <div className="mt-4 pt-3 border-t border-slate-800/80 flex items-center gap-1.5 text-[11px] text-slate-400">
                   <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
-                  <span>Step {step.number} of 3 in the Smart Cooker System</span>
+                  <span>Step {step.number} of 3 in the Smart Workstation System</span>
                 </div>
               </div>
             );

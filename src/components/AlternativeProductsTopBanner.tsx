@@ -36,7 +36,7 @@ export const AlternativeProductsTopBanner: React.FC<AlternativeProductsTopBanner
         <div className="shrink-0 z-20 flex items-center">
           <div className="bg-yellow-400 text-red-950 font-black text-[10px] sm:text-xs px-2.5 py-1.5 rounded-lg uppercase tracking-wider flex items-center gap-1.5 shadow-md border border-yellow-300 animate-pulse">
             <Flame className="w-3.5 h-3.5 fill-red-600 text-red-600 shrink-0" />
-            <span className="hidden sm:inline">MATCHING 2-BURNER COOKER &bull; SPECIAL DEAL:</span>
+            <span className="hidden sm:inline">MATCHING 2-FLIP-UP GAS COOKER &bull; SPECIAL DEAL:</span>
             <span className="sm:hidden">MATCHING COOKER:</span>
           </div>
         </div>

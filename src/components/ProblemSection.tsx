@@ -1,5 +1,5 @@
 import React from 'react';
-import { AlertCircle, Flame, Clock, Sparkles, ArrowDown, ShieldAlert } from 'lucide-react';
+import { AlertCircle, LayoutGrid, Layers, Sparkles, ArrowDown, Droplets } from 'lucide-react';
 
 interface ProblemSectionProps {
   onDiscoverClick: () => void;
@@ -8,32 +8,32 @@ interface ProblemSectionProps {
 export const ProblemSection: React.FC<ProblemSectionProps> = ({ onDiscoverClick }) => {
   const problems = [
     {
-      id: "burnt-food",
-      title: "TIRED OF BURNT FOOD & WASTED GAS?",
-      description: "Getting distracted while boiling beans, meat, or stews often leads to ruined meals and burnt pots. Our built-in 0–180m mechanical timer cuts off the gas flame automatically.",
-      icon: Clock,
-      tag: "Cooking Frustration"
-    },
-    {
-      id: "cleaning",
-      title: "EXHAUSTED SCRUBBING GREASY BURNERS?",
-      description: "Traditional stoves have fixed burner heads that trap grease, soup spills, and baked-on oil underneath. Cleaning takes 20 painful minutes of unscrewing parts.",
+      id: "splashing",
+      title: "UNCONTROLLABLE WATER SPLASHING?",
+      description: "Shallow, flat traditional sinks cause water to rebound violently onto your clothes and kitchen floor. Our 220mm extra-deep basin and gentle flying rain waterfall keep countertops completely dry.",
       icon: AlertCircle,
-      tag: "Stubborn Grease"
+      tag: "Water Splash"
     },
     {
-      id: "soot",
-      title: "BLACK SOOT RUINING YOUR POTS?",
-      description: "Inferior gas burners produce smoky yellow flames that stain your expensive stainless and non-stick cookware with thick black carbon soot.",
-      icon: Flame,
-      tag: "Cookware Damage"
+      id: "temperature",
+      title: "TEMPERATURE GUESSWORK & BURNS?",
+      description: "Standard taps force you to test hot water blindly with your bare fingers. Our hydroelectric digital LED screen shows live water temperature in °C and running timer without batteries.",
+      icon: Droplets,
+      tag: "Temp Control"
     },
     {
-      id: "wobble",
-      title: "WOBBLY STANDS FOR HEAVY POTS?",
-      description: "Thin wire pot stands bend under heavy soup pots, creating dangerous tipping risks when stirring family-sized meals.",
-      icon: ShieldAlert,
-      tag: "Kitchen Hazard"
+      id: "cup-washing",
+      title: "TEDIOUS GLASS & BOTTLE CLEANING?",
+      description: "Bulky sponges cannot reach the bottoms of slim wine glasses, thermal mugs, or baby bottles. Simply press down on the high-pressure glass rinser for a 2-second spotless multi-angle jet wash.",
+      icon: Sparkles,
+      tag: "Hard to Clean"
+    },
+    {
+      id: "rust-stains",
+      title: "RUSTY, STAINED, SCRATCHED BASIN?",
+      description: "Thin metal sinks dent easily, scratch under heavy pots, and trap foul odors. Our 3mm SUS304 nano stainless steel features a honeycomb embossed coating that repels scratches, stains, and oil.",
+      icon: Layers,
+      tag: "Basin Damage"
     }
   ];
 
@@ -46,10 +46,10 @@ export const ProblemSection: React.FC<ProblemSectionProps> = ({ onDiscoverClick 
             The Everyday Kitchen Challenge
           </span>
           <h2 className="text-xl sm:text-3xl font-extrabold text-white tracking-tight leading-tight">
-            YOUR KITCHEN DESERVES MORE THAN AN ORDINARY GAS STOVE.
+            YOUR KITCHEN DESERVES MORE THAN JUST AN ORDINARY SINK.
           </h2>
           <p className="text-slate-400 text-xs sm:text-sm mt-2">
-            Why struggle with burnt food, soot-covered pots, and greasy scrub downs when a smart cooker solves them all?
+            Why settle for wet counters, scalding water, and endless pot scrubbing when your workstation sink can work smarter for you?
           </p>
         </div>
 
@@ -92,7 +92,7 @@ export const ProblemSection: React.FC<ProblemSectionProps> = ({ onDiscoverClick 
               THE MODERN SOLUTION IS HERE
             </span>
             <div className="text-lg sm:text-2xl font-black text-amber-400 tracking-tight flex items-center gap-2 font-display">
-              <span>MEET THE 2-FLIP-UP GAS COOKER WITH TIMER.</span>
+              <span>MEET THE SMART PAINO SINK.</span>
             </div>
             <button
               onClick={onDiscoverClick}

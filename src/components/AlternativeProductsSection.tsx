@@ -25,14 +25,15 @@ export const AlternativeProductsSection: React.FC<AlternativeProductsSectionProp
         {/* Compact Header */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-6">
           <div>
-            <div className="inline-flex items-center gap-1.5 bg-blue-100 text-blue-800 text-[11px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider mb-1">
+            <div className="inline-flex items-center gap-1.5 bg-amber-100 text-amber-900 text-[11px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider mb-1 border border-amber-200">
+              <Flame className="w-3.5 h-3.5 text-amber-600" />
               <span>Matching Kitchen Appliance</span>
             </div>
             <h3 className="text-xl sm:text-2xl font-black text-[#0a192f] tracking-tight">
-              Optional Smart Kitchen Piano Sink from Moonlight Luxury Home Tech
+              Optional 2-Flip-Up Double Gas Burner With Timer from Moonlight Luxury
             </h3>
             <p className="text-xs sm:text-sm text-slate-600">
-              Easily pair your 2-burner gas cooktop with the matching multifunctional Smart Piano Sink.
+              Pair your Smart Paino Sink with our matching 90° flip-up double gas burner with built-in safety timer.
             </p>
           </div>
 
@@ -42,7 +43,7 @@ export const AlternativeProductsSection: React.FC<AlternativeProductsSectionProp
           </div>
         </div>
 
-        {/* Featured Piano Sink Companion Card */}
+        {/* Featured Companion Card */}
         <div className="max-w-4xl mx-auto">
           {ALTERNATIVE_PRODUCTS.map((prod) => {
             const savings = prod.normalPrice - prod.price;
@@ -50,7 +51,7 @@ export const AlternativeProductsSection: React.FC<AlternativeProductsSectionProp
             return (
               <div
                 key={prod.id}
-                className="bg-white border-2 border-slate-200 hover:border-blue-500/60 rounded-2xl p-4 sm:p-6 shadow-sm hover:shadow-md transition-all flex flex-col sm:flex-row items-start gap-5"
+                className="bg-white border-2 border-slate-200 hover:border-amber-500/60 rounded-2xl p-4 sm:p-6 shadow-sm hover:shadow-md transition-all flex flex-col sm:flex-row items-start gap-5"
               >
                 {/* Large Product Picture & Thumbnail Strip */}
                 <div className="w-full sm:w-72 shrink-0">
@@ -64,11 +65,11 @@ export const AlternativeProductsSection: React.FC<AlternativeProductsSectionProp
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       referrerPolicy="no-referrer"
                     />
-                    <div className="absolute top-2 left-2 bg-[#0a192f]/90 backdrop-blur-xs text-white text-[10px] font-black px-2.5 py-1 rounded-md shadow-sm">
-                      ✨ SMART PIANO SINK
+                    <div className="absolute top-2 left-2 bg-[#0a192f]/90 backdrop-blur-xs text-white text-[10px] font-black px-2.5 py-1 rounded-md shadow-sm border border-slate-700">
+                      🔥 {prod.badge || "MATCHING GAS COOKER"}
                     </div>
-                    <div className="absolute bottom-2 inset-x-2 bg-black/75 backdrop-blur-xs text-blue-300 text-[9px] font-bold px-2 py-1 rounded text-center">
-                      Waterfall Faucet + LED Temp Display
+                    <div className="absolute bottom-2 inset-x-2 bg-black/80 backdrop-blur-xs text-amber-300 text-[9px] font-bold px-2 py-1 rounded text-center">
+                      90° Flip-Up Burners + Safety Timer
                     </div>
                   </div>
 

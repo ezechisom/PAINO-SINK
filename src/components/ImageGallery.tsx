@@ -146,15 +146,15 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({
         <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-5">
           <button
             type="button"
-            onClick={() => handleProductTabChange('all')}
+            onClick={() => handleProductTabChange('sink')}
             className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer border ${
-              selectedProduct === 'all'
+              selectedProduct === 'sink'
                 ? 'bg-[#0a192f] text-white border-[#0a192f] shadow-md'
                 : 'bg-white text-slate-700 border-slate-200 hover:border-slate-300 hover:bg-slate-100'
             }`}
           >
-            <Layers className="w-4 h-4 text-blue-400" />
-            <span>All Appliances ({totalCount})</span>
+            <Waves className="w-4 h-4 text-blue-400" />
+            <span>Smart Paino Sink (Main) ({sinkCount})</span>
           </button>
 
           <button
@@ -166,21 +166,21 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({
                 : 'bg-white text-slate-700 border-slate-200 hover:border-slate-300 hover:bg-slate-100'
             }`}
           >
-            <Flame className="w-4 h-4 text-blue-400" />
-            <span>2-Flip Gas Cooker ({cooker2bCount})</span>
+            <Flame className="w-4 h-4 text-amber-500" />
+            <span>2-Flip Gas Cooker (Suggested) ({cooker2bCount})</span>
           </button>
 
           <button
             type="button"
-            onClick={() => handleProductTabChange('sink')}
+            onClick={() => handleProductTabChange('all')}
             className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer border ${
-              selectedProduct === 'sink'
+              selectedProduct === 'all'
                 ? 'bg-[#0a192f] text-white border-[#0a192f] shadow-md'
                 : 'bg-white text-slate-700 border-slate-200 hover:border-slate-300 hover:bg-slate-100'
             }`}
           >
-            <Waves className="w-4 h-4 text-blue-400" />
-            <span>Smart Piano Sink ({sinkCount})</span>
+            <Layers className="w-4 h-4 text-blue-400" />
+            <span>All Appliances ({totalCount})</span>
           </button>
         </div>
 

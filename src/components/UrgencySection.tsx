@@ -27,7 +27,7 @@ export const UrgencySection: React.FC<UrgencySectionProps> = ({ config, onOrderC
         </h2>
 
         <p className="text-slate-300 text-xs sm:text-sm max-w-lg mx-auto mb-6">
-          Lock in this special promotional rate today. Includes the complete 2-Flip-Up Double Gas Burner With Timer, cast iron wok stands, and 1-year warranty.
+          Lock in this special promotional rate today. Includes the complete Smart Paino Sink Workstation, pull-out faucet, cutting board, and full 9-piece accessories kit.
         </p>
 
         {/* Pricing card in urgency */}
@@ -66,12 +66,12 @@ export const UrgencySection: React.FC<UrgencySectionProps> = ({ config, onOrderC
             </div>
           </div>
 
-          {/* 7-Day Countdown Timer */}
+          {/* 14-Day Countdown Timer */}
           <div className="mt-4 pt-4 border-t border-slate-800">
             <CountdownTimer 
               targetDate={config.countdownEndDate} 
               variant="card" 
-              title="7-DAY PROMOTIONAL OFFER ENDS IN" 
+              title="14-DAY PROMOTIONAL OFFER ENDS IN" 
             />
           </div>
         </div>

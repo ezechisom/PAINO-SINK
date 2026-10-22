@@ -5,38 +5,38 @@ export const PerfectForSection: React.FC = () => {
   const useCases = [
     {
       id: "family-homes",
-      title: "Busy Family Homes",
-      description: "Dual high-heat burners boil soups and fry simultaneously, while the 0–180m auto timer prevents burnt family meals.",
+      title: "Family Homes",
+      description: "Deep 220mm basin fits large pots, while nested prep boards keep busy family kitchen counters organized and splash-free.",
       icon: Home
     },
     {
       id: "apartments",
       title: "Modern Apartments",
-      description: "Standard 750×450mm surface fits seamlessly into compact counters; 90° flip-up burners eliminate messy stove maintenance.",
+      description: "Integrated double tracks turn the sink basin into an active food prep zone, maximizing compact countertop space.",
       icon: Building2
     },
     {
       id: "new-homes",
       title: "New Architectural Builds",
-      description: "Sleek explosion-proof tempered crystal glass panel creates an instant luxury focal point on granite or quartz slabs.",
+      description: "Sleek gunmetal nano stainless steel and LED digital ambient display create an instant luxury focal point on quartz slabs.",
       icon: Sparkles
     },
     {
       id: "renovations",
-      title: "Kitchen Upgrades",
-      description: "Directly drop into standard 650×350mm countertop cutouts to replace outdated, soot-producing metal stoves.",
+      title: "Kitchen Renovations",
+      description: "Directly drop into standard 700×400mm countertop cutouts to replace outdated, leaky sinks without rebuilding cabinetry.",
       icon: Hammer
     },
     {
       id: "shortlets",
       title: "Shortlets & Airbnb",
-      description: "Timer auto-shutoff protects property from accidental fires, while pure blue flame keeps Airbnb cookware spotless.",
+      description: "Scratch-resistant nano coating and self-powered digital display impress guests with low maintenance and zero battery hassles.",
       icon: Hotel
     },
     {
-      id: "outdoor-kitchens",
-      title: "Chef & Party Cooking",
-      description: "Heavy-duty windproof cast iron wok stands easily support large heavy Nigerian cooking pots without bending.",
+      id: "chefs",
+      title: "Passionate Home Chefs",
+      description: "Nested cutting board, prep colander, and instant high-pressure glass rinser make multi-course meal preparation effortless.",
       icon: Building
     }
   ];
@@ -58,20 +58,20 @@ export const PerfectForSection: React.FC = () => {
           </p>
         </div>
 
-        {/* Use Cases Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-5">
+        {/* 6 Grid Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-6">
           {useCases.map((uc) => {
             const Icon = uc.icon;
             return (
               <div
                 key={uc.id}
-                className="bg-slate-900/60 border border-slate-800 hover:border-slate-700 rounded-xl sm:rounded-2xl p-4 sm:p-5 transition-all hover:bg-slate-900 shadow-sm group flex flex-col justify-between"
+                className="bg-slate-900/60 border border-slate-800 hover:border-slate-700 rounded-xl sm:rounded-2xl p-4 sm:p-5 flex items-start gap-3.5 transition-colors group"
               >
+                <div className="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center text-amber-400 shrink-0 group-hover:scale-105 transition-transform">
+                  <Icon className="w-5 h-5" />
+                </div>
                 <div>
-                  <div className="w-9 h-9 rounded-lg bg-slate-800 flex items-center justify-center text-amber-400 mb-3 group-hover:scale-105 transition-transform">
-                    <Icon className="w-4.5 h-4.5" />
-                  </div>
-                  <h3 className="text-sm sm:text-base font-bold text-white mb-1.5 tracking-tight">
+                  <h3 className="text-sm sm:text-base font-bold text-white mb-1">
                     {uc.title}
                   </h3>
                   <p className="text-slate-400 text-xs leading-relaxed">

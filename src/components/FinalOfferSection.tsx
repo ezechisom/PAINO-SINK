@@ -30,7 +30,7 @@ export const FinalOfferSection: React.FC<FinalOfferSectionProps> = ({ config, on
         </h2>
 
         <p className="text-slate-300 text-xs sm:text-sm max-w-lg mx-auto mb-6">
-          Order now to secure your 2-Flip-Up Double Gas Burner With Timer, featuring 90° flip-up burners for instant 1-wipe cleaning, safety auto-off timer, and pure blue flame.
+          Order now to secure your Smart Paino Sink Workstation, featuring tactile piano keys, self-powered LED temperature display, flying rain waterfall, and complete 9-piece accessory kit.
         </p>
 
         {/* Promo Price Card */}
@@ -54,12 +54,12 @@ export const FinalOfferSection: React.FC<FinalOfferSectionProps> = ({ config, on
             <span>Complete Factory Direct Unit &bull; Free Lagos Delivery &bull; 1-Year Warranty</span>
           </div>
 
-          {/* 7-Day Countdown Timer */}
+          {/* 14-Day Countdown Timer */}
           <div className="pt-3 border-t border-slate-800/80">
             <CountdownTimer 
               targetDate={config.countdownEndDate} 
               variant="card" 
-              title="7-DAY PROMOTIONAL OFFER ENDS IN" 
+              title="14-DAY PROMOTIONAL OFFER ENDS IN" 
             />
           </div>
         </div>
@@ -68,15 +68,15 @@ export const FinalOfferSection: React.FC<FinalOfferSectionProps> = ({ config, on
         <div className="flex flex-wrap items-center justify-center gap-2.5 max-w-lg mx-auto mb-6 text-xs text-slate-300">
           <span className="flex items-center gap-1 bg-slate-900/80 px-2.5 py-1 rounded-full border border-slate-800 text-[11px]">
             <CheckCircle2 className="w-3 h-3 text-amber-400" />
-            90° Flip-Up Burners
+            Tactile Piano Keys
           </span>
           <span className="flex items-center gap-1 bg-slate-900/80 px-2.5 py-1 rounded-full border border-slate-800 text-[11px]">
             <CheckCircle2 className="w-3 h-3 text-blue-400" />
-            0–180m Auto Safety Timer
+            Hydroelectric LED Temp
           </span>
           <span className="flex items-center gap-1 bg-slate-900/80 px-2.5 py-1 rounded-full border border-slate-800 text-[11px]">
             <CheckCircle2 className="w-3 h-3 text-emerald-400" />
-            Pure Blue Flame (Zero Soot)
+            Flying Rain Waterfall
           </span>
         </div>
 

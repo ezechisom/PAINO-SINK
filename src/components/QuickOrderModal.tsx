@@ -73,12 +73,12 @@ export const QuickOrderModal: React.FC<QuickOrderModalProps> = ({
   useEffect(() => {
     if (!isOpen) return;
 
-    if (initialProductId === 'sink') {
-      setSinkQty(1);
-      setCooker2bQty(0);
-    } else {
+    if (initialProductId === 'cooker-2burner' || initialProductId === 'cooker') {
       setCooker2bQty(1);
       setSinkQty(0);
+    } else {
+      setSinkQty(1);
+      setCooker2bQty(0);
     }
   }, [isOpen, initialProductId]);
 
@@ -117,31 +117,31 @@ export const QuickOrderModal: React.FC<QuickOrderModalProps> = ({
 
   if (!isOpen) return null;
 
-  // Prices: Cooker is 170K, Sink is 135K
-  const COOKER_2B_PRICE = config.promoPrice; // 170000
-  const SINK_PRICE = 135000;
+  // Prices: Sink is config.promoPrice (135K), Cooker is 170K
+  const SINK_PRICE = config.promoPrice; // 135000
+  const COOKER_2B_PRICE = 170000;
 
   const isLagosState = state.toLowerCase().trim() === 'lagos';
   const deliveryFee = isLagosState ? 0 : (deliveryMethod === 'doorstep' ? 5000 : 0);
 
   // Selected items array
   const selectedItems: OrderItem[] = [];
-  if (cooker2bQty > 0) {
-    selectedItems.push({
-      id: 'cooker-2burner',
-      name: `${config.productName} (75×45cm)`,
-      quantity: cooker2bQty,
-      unitPrice: COOKER_2B_PRICE,
-      totalPrice: cooker2bQty * COOKER_2B_PRICE
-    });
-  }
   if (sinkQty > 0) {
     selectedItems.push({
       id: 'sink',
-      name: 'Smart Kitchen Piano Sink (75×45cm)',
+      name: `${config.productName} (75×45cm)`,
       quantity: sinkQty,
       unitPrice: SINK_PRICE,
       totalPrice: sinkQty * SINK_PRICE
+    });
+  }
+  if (cooker2bQty > 0) {
+    selectedItems.push({
+      id: 'cooker-2burner',
+      name: '2-Flip-Up Double Gas Burner With Timer (75×45cm)',
+      quantity: cooker2bQty,
+      unitPrice: COOKER_2B_PRICE,
+      totalPrice: cooker2bQty * COOKER_2B_PRICE
     });
   }
 
@@ -317,11 +317,11 @@ export const QuickOrderModal: React.FC<QuickOrderModalProps> = ({
           </button>
         </div>
 
-        {/* 7-Day Limited Promo Timer Urgency Ribbon */}
+        {/* 14-Day Limited Promo Timer Urgency Ribbon */}
         <div className="bg-amber-500/10 border-b border-amber-500/20 px-4 py-2 flex flex-wrap items-center justify-between gap-2 text-xs">
           <div className="flex items-center gap-1.5 text-amber-800 font-bold text-[11px]">
             <Clock className="w-3.5 h-3.5 text-amber-600 shrink-0" />
-            <span>7-DAY PROMO: ₦170,000</span>
+            <span>14-DAY PROMO: {formatNaira(config.promoPrice)}</span>
           </div>
           <CountdownTimer 
             targetDate={config.countdownEndDate}
@@ -486,75 +486,24 @@ export const QuickOrderModal: React.FC<QuickOrderModalProps> = ({
                 )}
 
                 <div className="space-y-2.5">
-                  {/* Product 1: 2-Flip-Up Cooker (Main Product) */}
-                  <div className={`p-3 rounded-2xl border transition-all ${
-                    cooker2bQty > 0 
-                      ? 'bg-amber-50/70 border-amber-500/60 ring-1 ring-amber-500/30' 
-                      : 'bg-white border-slate-200 opacity-80 hover:opacity-100'
-                  }`}>
-                    <div className="flex items-center gap-3">
-                      <img 
-                        src="https://www.moonlightluxuryhometech.shop/images/cooker_active_blue_flames.jpg" 
-                        alt="2-Flip-Up Double Gas Cooker"
-                        className="w-14 h-14 rounded-xl object-cover border border-slate-200 shrink-0" 
-                      />
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-1.5">
-                          <span className="text-xs font-black text-[#0a192f] truncate">2-Flip-Up Gas Burner</span>
-                          <span className="text-[10px] bg-amber-100 text-amber-900 font-bold px-1.5 py-0.2 rounded shrink-0">Timer</span>
-                        </div>
-                        <p className="text-[11px] text-slate-500 truncate">90° Flip-Up Hinges &amp; Safety Auto-Off</p>
-                        <div className="flex items-center gap-1.5 mt-0.5">
-                          <span className="text-xs font-extrabold text-amber-700 font-mono">{formatNaira(COOKER_2B_PRICE)}</span>
-                          <span className="text-[10px] text-slate-400 line-through">{formatNaira(config.normalPrice)}</span>
-                          {config.normalPrice > COOKER_2B_PRICE && (
-                            <span className="text-[9px] font-black text-emerald-700 bg-emerald-100 border border-emerald-300 px-1 py-0.2 rounded">
-                              Save {formatNaira(config.normalPrice - COOKER_2B_PRICE)}
-                            </span>
-                          )}
-                        </div>
-                      </div>
-
-                      <div className="flex items-center gap-1.5 shrink-0 bg-white border border-slate-200 rounded-xl p-1 shadow-2xs">
-                        <button
-                          type="button"
-                          onClick={() => setCooker2bQty(prev => Math.max(0, prev - 1))}
-                          className="w-6 h-6 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center font-bold text-xs cursor-pointer transition-colors"
-                          aria-label="Decrease cooker quantity"
-                        >
-                          <Minus className="w-3 h-3" />
-                        </button>
-                        <span className="w-6 text-center text-xs font-black font-mono">{cooker2bQty}</span>
-                        <button
-                          type="button"
-                          onClick={() => setCooker2bQty(prev => Math.min(10, prev + 1))}
-                          className="w-6 h-6 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 flex items-center justify-center font-bold text-xs cursor-pointer transition-colors"
-                          aria-label="Increase cooker quantity"
-                        >
-                          <Plus className="w-3 h-3" />
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Product 2: Smart Piano Sink (Companion Product) */}
+                  {/* Product 1: Smart Paino Sink (Main Product) */}
                   <div className={`p-3 rounded-2xl border transition-all ${
                     sinkQty > 0 
-                      ? 'bg-blue-50/60 border-blue-500/60 ring-1 ring-blue-500/30' 
+                      ? 'bg-blue-50/70 border-blue-500/60 ring-1 ring-blue-500/30' 
                       : 'bg-white border-slate-200 opacity-80 hover:opacity-100'
                   }`}>
                     <div className="flex items-center gap-3">
                       <img 
                         src="/images/smart_piano_sink_1789548024514.jpg" 
-                        alt="Smart Piano Sink"
+                        alt="Smart Paino Sink Workstation"
                         className="w-14 h-14 rounded-xl object-cover border border-slate-200 shrink-0" 
                       />
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-1.5">
-                          <span className="text-xs font-black text-[#0a192f] truncate">Smart Piano Sink</span>
-                          <span className="text-[10px] bg-blue-100 text-blue-800 font-bold px-1.5 py-0.2 rounded shrink-0">75×45cm</span>
+                          <span className="text-xs font-black text-[#0a192f] truncate">Smart Paino Sink</span>
+                          <span className="text-[10px] bg-blue-100 text-blue-900 font-bold px-1.5 py-0.2 rounded shrink-0">75×45cm</span>
                         </div>
-                        <p className="text-[11px] text-slate-500 truncate">Digital °C, Waterfall &amp; Full Prep Set</p>
+                        <p className="text-[11px] text-slate-500 truncate">Waterfall, LED Temp °C &amp; 9-Piece Kit</p>
                         <div className="flex items-center gap-1.5 mt-0.5">
                           <span className="text-xs font-extrabold text-blue-700 font-mono">{formatNaira(SINK_PRICE)}</span>
                           <span className="text-[10px] text-slate-400 line-through">₦160,000</span>
@@ -579,6 +528,55 @@ export const QuickOrderModal: React.FC<QuickOrderModalProps> = ({
                           onClick={() => setSinkQty(prev => Math.min(10, prev + 1))}
                           className="w-6 h-6 rounded-lg bg-blue-600 hover:bg-blue-500 text-white flex items-center justify-center font-bold text-xs cursor-pointer transition-colors"
                           aria-label="Increase sink quantity"
+                        >
+                          <Plus className="w-3 h-3" />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Product 2: 2-Flip-Up Cooker (Companion Product) */}
+                  <div className={`p-3 rounded-2xl border transition-all ${
+                    cooker2bQty > 0 
+                      ? 'bg-amber-50/70 border-amber-500/60 ring-1 ring-amber-500/30' 
+                      : 'bg-white border-slate-200 opacity-80 hover:opacity-100'
+                  }`}>
+                    <div className="flex items-center gap-3">
+                      <img 
+                        src="https://www.moonlightluxuryhometech.shop/images/cooker_active_blue_flames.jpg" 
+                        alt="2-Flip-Up Double Gas Cooker"
+                        className="w-14 h-14 rounded-xl object-cover border border-slate-200 shrink-0" 
+                      />
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-1.5">
+                          <span className="text-xs font-black text-[#0a192f] truncate">2-Flip-Up Gas Burner</span>
+                          <span className="text-[10px] bg-amber-100 text-amber-900 font-bold px-1.5 py-0.2 rounded shrink-0">Timer</span>
+                        </div>
+                        <p className="text-[11px] text-slate-500 truncate">90° Flip-Up Hinges &amp; Safety Auto-Off</p>
+                        <div className="flex items-center gap-1.5 mt-0.5">
+                          <span className="text-xs font-extrabold text-amber-700 font-mono">{formatNaira(COOKER_2B_PRICE)}</span>
+                          <span className="text-[10px] text-slate-400 line-through">₦200,000</span>
+                          <span className="text-[9px] font-black text-emerald-700 bg-emerald-100 border border-emerald-300 px-1 py-0.2 rounded">
+                            Save ₦30,000
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-1.5 shrink-0 bg-white border border-slate-200 rounded-xl p-1 shadow-2xs">
+                        <button
+                          type="button"
+                          onClick={() => setCooker2bQty(prev => Math.max(0, prev - 1))}
+                          className="w-6 h-6 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center font-bold text-xs cursor-pointer transition-colors"
+                          aria-label="Decrease cooker quantity"
+                        >
+                          <Minus className="w-3 h-3" />
+                        </button>
+                        <span className="w-6 text-center text-xs font-black font-mono">{cooker2bQty}</span>
+                        <button
+                          type="button"
+                          onClick={() => setCooker2bQty(prev => Math.min(10, prev + 1))}
+                          className="w-6 h-6 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 flex items-center justify-center font-bold text-xs cursor-pointer transition-colors"
+                          aria-label="Increase cooker quantity"
                         >
                           <Plus className="w-3 h-3" />
                         </button>

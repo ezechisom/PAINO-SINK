@@ -15,7 +15,7 @@ export const LifestyleSection: React.FC<LifestyleSectionProps> = ({ onOrderClick
           {/* Left Text */}
           <div className="lg:col-span-6">
             <span className="text-amber-400 font-bold text-[11px] uppercase tracking-widest bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20 mb-2.5 inline-block">
-              Luxury Living &bull; Everyday Convenience
+              Modern Lifestyle &bull; Everyday Luxury
             </span>
 
             <h2 className="text-xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight leading-tight mb-3">
@@ -23,7 +23,7 @@ export const LifestyleSection: React.FC<LifestyleSectionProps> = ({ onOrderClick
             </h2>
 
             <p className="text-slate-300 text-xs sm:text-sm leading-relaxed mb-5">
-              Designed to bring an architectural centerpiece and practical functionality to your kitchen.
+              Designed to bring an architectural centerpiece and practical workstation functionality to your home.
             </p>
 
             <div className="space-y-2.5 mb-6 text-slate-300 text-xs sm:text-sm">
@@ -31,19 +31,19 @@ export const LifestyleSection: React.FC<LifestyleSectionProps> = ({ onOrderClick
                 <div className="w-4.5 h-4.5 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center shrink-0">
                   <CheckCircle2 className="w-3.5 h-3.5" />
                 </div>
-                <span>90° flip-up burners let you wipe the tempered glass spotless in 5 seconds</span>
+                <span>Gunmetal nano finish matches modern countertops &amp; luxury appliances</span>
               </div>
               <div className="flex items-center gap-2.5">
                 <div className="w-4.5 h-4.5 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center shrink-0">
                   <CheckCircle2 className="w-3.5 h-3.5" />
                 </div>
-                <span>0–180m mechanical timer prevents burnt pots and stops gas waste automatically</span>
+                <span>Integrated sliding ledges keep food prep mess off limited counter slabs</span>
               </div>
               <div className="flex items-center gap-2.5">
                 <div className="w-4.5 h-4.5 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center shrink-0">
                   <CheckCircle2 className="w-3.5 h-3.5" />
                 </div>
-                <span>High-efficiency pure blue flame keeps your cookware 100% free of black soot</span>
+                <span>High-pressure glass rinser cleans drinkware in seconds without sponges</span>
               </div>
             </div>
           </div>
@@ -52,20 +52,20 @@ export const LifestyleSection: React.FC<LifestyleSectionProps> = ({ onOrderClick
           <div className="lg:col-span-6">
             <div className="relative rounded-2xl overflow-hidden border border-slate-700 shadow-xl bg-slate-900 group">
               <img
-                src="https://www.moonlightluxuryhometech.shop/images/cooker_active_blue_flames.jpg"
-                alt="2-Flip-Up Double Gas Burner with active pure blue flames"
+                src="/images/luxury_kitchen_lifestyle_1789548098794.jpg"
+                alt="Modern kitchen featuring installed gunmetal smart piano sink"
                 className="w-full aspect-[16/10] object-cover group-hover:scale-105 transition-transform duration-500"
                 referrerPolicy="no-referrer"
               />
               
               <div className="absolute top-3 right-3 bg-black/80 backdrop-blur-md px-2.5 py-1 rounded-full border border-slate-700 text-[11px] font-semibold text-amber-300 flex items-center gap-1">
                 <Sparkles className="w-3 h-3" />
-                <span>Active Pure Blue Flame</span>
+                <span>Gunmetal Nano Stainless Steel</span>
               </div>
 
               <div className="p-3 bg-slate-950/90 border-t border-slate-800 text-xs text-slate-400 flex items-center justify-between">
                 <span>750 × 450 mm Outer Dimensions</span>
-                <span className="text-slate-300 font-medium">Standard 650 × 350 mm Cutout Fit</span>
+                <span className="text-slate-300 font-medium">Topmount / Flushmount / Undermount</span>
               </div>
             </div>
           </div>

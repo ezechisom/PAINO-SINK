@@ -111,9 +111,9 @@ export const OrderForm: React.FC<OrderFormProps> = ({
     notes: '',
   });
 
-  // Multi-product quantities for checkout: Cooker is main product (1), Sink is companion (0)
-  const [cooker2bQty, setCooker2bQty] = useState<number>(1);
-  const [sinkQty, setSinkQty] = useState<number>(0);
+  // Multi-product quantities for checkout: Sink is main product (1), Cooker is companion (0)
+  const [sinkQty, setSinkQty] = useState<number>(1);
+  const [cooker2bQty, setCooker2bQty] = useState<number>(0);
   const [recentlyAddedId, setRecentlyAddedId] = useState<string | null>(null);
 
   // Automatically react to product additions from gallery or ticker
@@ -173,28 +173,28 @@ export const OrderForm: React.FC<OrderFormProps> = ({
   const isLagosState = formData.state.toLowerCase().trim() === 'lagos';
   const deliveryFee = isLagosState ? 0 : (deliveryMethod === 'doorstep' ? 5000 : 0);
   
-  // Product Unit Prices: Cooker is 170K, Sink is 135K
-  const COOKER_2B_PRICE = config.promoPrice; // 170000
-  const SINK_PRICE = 135000;
+  // Product Unit Prices: Sink is 135K (config.promoPrice), Cooker is 170K
+  const SINK_PRICE = config.promoPrice; // 135000
+  const COOKER_2B_PRICE = 170000;
 
   // Itemized array of selected products
   const selectedItems: OrderItem[] = [];
-  if (cooker2bQty > 0) {
-    selectedItems.push({
-      id: 'cooker-2burner',
-      name: `${config.productName} (75×45cm)`,
-      quantity: cooker2bQty,
-      unitPrice: COOKER_2B_PRICE,
-      totalPrice: cooker2bQty * COOKER_2B_PRICE
-    });
-  }
   if (sinkQty > 0) {
     selectedItems.push({
       id: 'sink',
-      name: 'Smart Kitchen Piano Sink (75×45cm)',
+      name: `${config.productName} (75×45cm)`,
       quantity: sinkQty,
       unitPrice: SINK_PRICE,
       totalPrice: sinkQty * SINK_PRICE
+    });
+  }
+  if (cooker2bQty > 0) {
+    selectedItems.push({
+      id: 'cooker-2burner',
+      name: '2-Flip-Up Double Gas Burner With Timer (75×45cm)',
+      quantity: cooker2bQty,
+      unitPrice: COOKER_2B_PRICE,
+      totalPrice: cooker2bQty * COOKER_2B_PRICE
     });
   }
 
@@ -923,16 +923,16 @@ export const OrderForm: React.FC<OrderFormProps> = ({
                 DELIVERY DETAILS &amp; ORDER FORM
               </h2>
               <p className="text-slate-600 text-xs sm:text-sm mt-2 max-w-lg mx-auto">
-                Fill the form below to receive your 2-Flip-Up Double Gas Burner anywhere in Nigeria. Pay upon inspection in eligible locations!
+                Fill the form below to receive your {config.productName} anywhere in Nigeria. Pay upon inspection in eligible locations!
               </p>
             </div>
 
-            {/* 7 Days Promo Urgency Countdown */}
+            {/* 14 Days Promo Urgency Countdown */}
             <div className="mb-6">
               <CountdownTimer 
                 targetDate={config.countdownEndDate}
                 variant="card"
-                title="7-DAY PROMOTIONAL OFFER ENDS IN"
+                title="14-DAY PROMOTIONAL OFFER ENDS IN"
               />
             </div>
 
@@ -949,7 +949,7 @@ export const OrderForm: React.FC<OrderFormProps> = ({
                   </span>
                 </div>
                 <p className="text-xs text-slate-600">
-                  Select your 2-Flip-Up Gas Cooker and/or matching Smart Kitchen Piano Sink. Order 2 or more products to get an instant <strong>₦5,000 multi-product bundle discount</strong>!
+                  Select your Smart Paino Sink Workstation and/or matching 2-Flip-Up Gas Cooker. Order 2 or more products to get an instant <strong>₦5,000 multi-product bundle discount</strong>!
                 </p>
 
                 {/* Quick Presets / Bundle Shortcuts */}
@@ -960,36 +960,36 @@ export const OrderForm: React.FC<OrderFormProps> = ({
                   <div className="flex flex-wrap gap-2">
                     <button
                       type="button"
-                      onClick={() => { setCooker2bQty(1); setSinkQty(0); }}
+                      onClick={() => { setSinkQty(1); setCooker2bQty(0); }}
                       className={`text-xs px-3.5 py-2 rounded-xl border transition-all cursor-pointer font-bold ${
-                        cooker2bQty === 1 && sinkQty === 0
+                        sinkQty === 1 && cooker2bQty === 0
                           ? 'bg-[#0a192f] border-[#0a192f] text-white shadow-xs'
                           : 'bg-white border-slate-200 text-slate-700 hover:border-slate-300'
                       }`}
                     >
-                      1x 2-Burner Cooker ({formatNaira(COOKER_2B_PRICE)})
+                      1x Smart Paino Sink ({formatNaira(SINK_PRICE)})
                     </button>
                     <button
                       type="button"
-                      onClick={() => { setCooker2bQty(1); setSinkQty(1); }}
+                      onClick={() => { setSinkQty(1); setCooker2bQty(1); }}
                       className={`text-xs px-3.5 py-2 rounded-xl border transition-all cursor-pointer font-bold ${
-                        cooker2bQty === 1 && sinkQty === 1
+                        sinkQty === 1 && cooker2bQty === 1
                           ? 'bg-blue-600 border-blue-600 text-white shadow-xs'
                           : 'bg-white border-slate-200 text-slate-700 hover:border-slate-300'
                       }`}
                     >
-                      Cooker + Piano Sink Bundle (Save ₦5k 🎉)
+                      Piano Sink + Cooker Bundle (Save ₦5k 🎉)
                     </button>
                     <button
                       type="button"
-                      onClick={() => { setCooker2bQty(0); setSinkQty(1); }}
+                      onClick={() => { setSinkQty(0); setCooker2bQty(1); }}
                       className={`text-xs px-3.5 py-2 rounded-xl border transition-all cursor-pointer font-bold ${
-                        cooker2bQty === 0 && sinkQty === 1
+                        sinkQty === 0 && cooker2bQty === 1
                           ? 'bg-[#0a192f] border-[#0a192f] text-white shadow-xs'
                           : 'bg-white border-slate-200 text-slate-700 hover:border-slate-300'
                       }`}
                     >
-                      Only Smart Piano Sink ({formatNaira(SINK_PRICE)})
+                      Only 2-Burner Gas Cooker ({formatNaira(COOKER_2B_PRICE)})
                     </button>
                   </div>
                 </div>
@@ -998,119 +998,29 @@ export const OrderForm: React.FC<OrderFormProps> = ({
               {/* Product Selection List */}
               <div className="space-y-4">
                 
-                {/* Product 1: 2-Flip-Up Double Gas Burner With Timer (Main Product) */}
+                {/* Product 1: Smart Paino Sink (Main Product) */}
                 <div 
-                  id="product-card-cooker-2burner"
+                  id="product-card-sink"
                   className={`p-4 rounded-xl border transition-all ${
-                    recentlyAddedId === 'cooker-2burner'
-                      ? 'ring-4 ring-amber-400 bg-amber-50/60 border-amber-500 shadow-md animate-pulse'
-                      : cooker2bQty > 0 
-                        ? 'bg-white border-2 border-amber-500 shadow-sm' 
+                    recentlyAddedId === 'sink'
+                      ? 'ring-4 ring-blue-400 bg-blue-50/60 border-blue-500 shadow-md animate-pulse'
+                      : sinkQty > 0 
+                        ? 'bg-white border-2 border-blue-500 shadow-sm' 
                         : 'bg-white/70 border-slate-200 opacity-90'
                   }`}
                 >
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div className="flex items-start gap-3">
                       <img 
-                        src="https://www.moonlightluxuryhometech.shop/images/cooker_active_blue_flames.jpg" 
-                        alt="2-Flip-Up Double Gas Burner" 
+                        src="/images/smart_piano_sink_1789548024514.jpg" 
+                        alt="Smart Paino Sink Workstation" 
                         className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-lg border border-slate-200 bg-slate-100 flex-shrink-0"
                       />
                       <div>
                         <div className="flex items-center gap-2 mb-1 flex-wrap">
-                          <span className="text-[10px] font-bold uppercase tracking-wider bg-amber-100 text-amber-900 px-2 py-0.5 rounded border border-amber-200 flex items-center gap-1">
-                            <Flame className="w-3 h-3 text-amber-600" />
-                            <span>90° Flip-Up Gas Burner (Main Product)</span>
-                          </span>
-                          <span className="text-xs text-slate-400 line-through">{formatNaira(config.normalPrice)}</span>
-                          <span className="text-xs font-black text-[#0a192f]">{formatNaira(COOKER_2B_PRICE)}</span>
-                          {config.normalPrice > COOKER_2B_PRICE && (
-                            <span className="text-[10px] font-black text-emerald-700 bg-emerald-100 border border-emerald-300 px-1.5 py-0.2 rounded">
-                              Save {formatNaira(config.normalPrice - COOKER_2B_PRICE)}
-                            </span>
-                          )}
-                          {recentlyAddedId === 'cooker-2burner' && (
-                            <span className="text-[10px] font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded border border-emerald-300 animate-pulse">
-                              ✨ Added to Your Form!
-                            </span>
-                          )}
-                        </div>
-                        <h4 className="text-sm sm:text-base font-bold text-[#0a192f] leading-snug">
-                          {config.productName} (75×45cm)
-                        </h4>
-                        <p className="text-[11px] text-slate-500 mt-1 line-clamp-2">
-                          90° hinged burners for instant 1-wipe cleanups underneath, 0–180m mechanical auto-off safety timer, pure blue flame.
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center justify-between sm:justify-end gap-3 pt-2 sm:pt-0 border-t border-slate-200 sm:border-0">
-                      <div className="text-left sm:text-right">
-                        <span className="text-[10px] uppercase text-slate-500 block">Subtotal</span>
-                        <span className="text-sm font-bold font-mono text-amber-700">
-                          {cooker2bQty > 0 ? formatNaira(cooker2bQty * COOKER_2B_PRICE) : '₦0'}
-                        </span>
-                      </div>
-
-                      <div className="flex items-center bg-slate-100 border border-slate-300 rounded-lg p-1">
-                        <button
-                          type="button"
-                          onClick={() => setCooker2bQty(prev => Math.max(0, prev - 1))}
-                          className="p-1 text-slate-600 hover:text-slate-900 hover:bg-white rounded transition-colors cursor-pointer"
-                          aria-label="Decrease cooker quantity"
-                        >
-                          <Minus className="w-4 h-4" />
-                        </button>
-                        <span className="px-3 text-sm font-bold text-slate-900 font-mono min-w-[28px] text-center">
-                          {cooker2bQty}
-                        </span>
-                        <button
-                          type="button"
-                          onClick={() => setCooker2bQty(prev => Math.min(10, prev + 1))}
-                          className="p-1 text-slate-600 hover:text-slate-900 hover:bg-white rounded transition-colors cursor-pointer"
-                          aria-label="Increase cooker quantity"
-                        >
-                          <Plus className="w-4 h-4" />
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Product 2: Smart Kitchen Piano Sink (Alternative / Companion Appliance) */}
-                <div 
-                  id="product-card-sink"
-                  className={`p-4 rounded-xl border transition-all ${
-                    recentlyAddedId === 'sink'
-                      ? 'ring-4 ring-blue-400 bg-blue-50/50 border-blue-500 shadow-md animate-pulse'
-                      : sinkQty > 0 
-                        ? 'bg-white border-2 border-blue-500 shadow-sm' 
-                        : 'bg-white/70 border-slate-200 opacity-80'
-                  }`}
-                >
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                    <div className="flex items-start gap-3">
-                      <div 
-                        onClick={() => {
-                          const prod = ALTERNATIVE_PRODUCTS.find(p => p.id === 'sink');
-                          if (prod && onViewSuggestedProduct) onViewSuggestedProduct(prod);
-                        }}
-                        className="relative cursor-pointer group shrink-0"
-                        title="Click to view 5 pictures and full details"
-                      >
-                        <img 
-                          src="/images/smart_piano_sink_1789548024514.jpg" 
-                          alt="Smart Kitchen Piano Sink" 
-                          className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-lg border border-slate-200 bg-slate-100 group-hover:scale-105 transition-transform"
-                        />
-                        <span className="absolute bottom-0 inset-x-0 bg-black/80 text-[8px] font-bold text-blue-300 text-center py-0.5 rounded-b-lg">
-                          5 Photos
-                        </span>
-                      </div>
-                      <div>
-                        <div className="flex items-center gap-2 mb-1 flex-wrap">
-                          <span className="text-[10px] font-bold uppercase tracking-wider bg-blue-100 text-blue-800 px-2 py-0.5 rounded border border-blue-200">
-                            Matching Workstation Sink
+                          <span className="text-[10px] font-bold uppercase tracking-wider bg-blue-100 text-blue-900 px-2 py-0.5 rounded border border-blue-200 flex items-center gap-1">
+                            <Sparkles className="w-3 h-3 text-blue-600" />
+                            <span>Multifunctional Workstation (Main Product)</span>
                           </span>
                           <span className="text-xs text-slate-400 line-through">₦160,000</span>
                           <span className="text-xs font-black text-[#0a192f]">{formatNaira(SINK_PRICE)}</span>
@@ -1123,31 +1033,11 @@ export const OrderForm: React.FC<OrderFormProps> = ({
                             </span>
                           )}
                         </div>
-                        <div className="flex items-center gap-2 flex-wrap">
-                          <h4 
-                            onClick={() => {
-                              const prod = ALTERNATIVE_PRODUCTS.find(p => p.id === 'sink');
-                              if (prod && onViewSuggestedProduct) onViewSuggestedProduct(prod);
-                            }}
-                            className="text-sm sm:text-base font-bold text-[#0a192f] hover:text-blue-600 cursor-pointer leading-snug"
-                            title="Click to view full pictures and specifications"
-                          >
-                            Smart Kitchen Piano Sink (75×45cm)
-                          </h4>
-                          <button
-                            type="button"
-                            onClick={() => {
-                              const prod = ALTERNATIVE_PRODUCTS.find(p => p.id === 'sink');
-                              if (prod && onViewSuggestedProduct) onViewSuggestedProduct(prod);
-                            }}
-                            className="text-[11px] font-bold text-blue-700 hover:text-blue-900 underline inline-flex items-center gap-1 cursor-pointer bg-blue-50 px-2 py-0.5 rounded border border-blue-200"
-                          >
-                            <Camera className="w-3 h-3 text-blue-600" />
-                            <span>View 5 Pictures &amp; Specs</span>
-                          </button>
-                        </div>
+                        <h4 className="text-sm sm:text-base font-bold text-[#0a192f] leading-snug">
+                          {config.productName} (75×45cm)
+                        </h4>
                         <p className="text-[11px] text-slate-500 mt-1 line-clamp-2">
-                          Piano key waterfall, digital °C display, pull-out faucet, cup washer, cutting board &amp; prep basins.
+                          Tactile piano keys, flying rain waterfall, real-time LED temp display (°C), high-pressure cup washer, solid wood cutting board &amp; nested colanders.
                         </p>
                       </div>
                     </div>
@@ -1160,11 +1050,120 @@ export const OrderForm: React.FC<OrderFormProps> = ({
                         </span>
                       </div>
 
-                      {sinkQty === 0 ? (
+                      <div className="flex items-center bg-slate-100 border border-slate-300 rounded-lg p-1">
                         <button
                           type="button"
-                          onClick={() => setSinkQty(1)}
-                          className="px-3.5 py-2 bg-blue-600 hover:bg-blue-500 text-white text-xs font-black rounded-lg transition-all shadow-xs cursor-pointer flex items-center gap-1.5"
+                          onClick={() => setSinkQty(prev => Math.max(0, prev - 1))}
+                          className="p-1 text-slate-600 hover:text-slate-900 hover:bg-white rounded transition-colors cursor-pointer"
+                          aria-label="Decrease sink quantity"
+                        >
+                          <Minus className="w-4 h-4" />
+                        </button>
+                        <span className="px-3 text-sm font-bold text-slate-900 font-mono min-w-[28px] text-center">
+                          {sinkQty}
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => setSinkQty(prev => Math.min(10, prev + 1))}
+                          className="p-1 text-slate-600 hover:text-slate-900 hover:bg-white rounded transition-colors cursor-pointer"
+                          aria-label="Increase sink quantity"
+                        >
+                          <Plus className="w-4 h-4" />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Product 2: 2-Flip-Up Double Gas Burner With Timer (Companion Appliance) */}
+                <div 
+                  id="product-card-cooker-2burner"
+                  className={`p-4 rounded-xl border transition-all ${
+                    recentlyAddedId === 'cooker-2burner'
+                      ? 'ring-4 ring-amber-400 bg-amber-50/50 border-amber-500 shadow-md animate-pulse'
+                      : cooker2bQty > 0 
+                        ? 'bg-white border-2 border-amber-500 shadow-sm' 
+                        : 'bg-white/70 border-slate-200 opacity-80'
+                  }`}
+                >
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div className="flex items-start gap-3">
+                      <div 
+                        onClick={() => {
+                          const prod = ALTERNATIVE_PRODUCTS[0];
+                          if (prod && onViewSuggestedProduct) onViewSuggestedProduct(prod);
+                        }}
+                        className="relative cursor-pointer group shrink-0"
+                        title="Click to view 4 pictures and full details"
+                      >
+                        <img 
+                          src="https://www.moonlightluxuryhometech.shop/images/cooker_active_blue_flames.jpg" 
+                          alt="2-Flip-Up Double Gas Burner" 
+                          className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-lg border border-slate-200 bg-slate-100 group-hover:scale-105 transition-transform"
+                        />
+                        <span className="absolute bottom-0 inset-x-0 bg-black/80 text-[8px] font-bold text-amber-300 text-center py-0.5 rounded-b-lg">
+                          4 Photos
+                        </span>
+                      </div>
+                      <div>
+                        <div className="flex items-center gap-2 mb-1 flex-wrap">
+                          <span className="text-[10px] font-bold uppercase tracking-wider bg-amber-100 text-amber-900 px-2 py-0.5 rounded border border-amber-200 flex items-center gap-1">
+                            <Flame className="w-3 h-3 text-amber-600" />
+                            <span>Matching Luxury Gas Cooker</span>
+                          </span>
+                          <span className="text-xs text-slate-400 line-through">₦200,000</span>
+                          <span className="text-xs font-black text-[#0a192f]">{formatNaira(COOKER_2B_PRICE)}</span>
+                          <span className="text-[10px] font-black text-emerald-700 bg-emerald-100 border border-emerald-300 px-1.5 py-0.2 rounded">
+                            Save ₦30,000
+                          </span>
+                          {recentlyAddedId === 'cooker-2burner' && (
+                            <span className="text-[10px] font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded border border-emerald-300 animate-pulse">
+                              ✨ Added to Your Form!
+                            </span>
+                          )}
+                        </div>
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <h4 
+                            onClick={() => {
+                              const prod = ALTERNATIVE_PRODUCTS[0];
+                              if (prod && onViewSuggestedProduct) onViewSuggestedProduct(prod);
+                            }}
+                            className="text-sm sm:text-base font-bold text-[#0a192f] hover:text-amber-600 cursor-pointer leading-snug"
+                            title="Click to view full pictures and specifications"
+                          >
+                            2-Flip-Up Double Gas Burner With Timer (75×45cm)
+                          </h4>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const prod = ALTERNATIVE_PRODUCTS[0];
+                              if (prod && onViewSuggestedProduct) onViewSuggestedProduct(prod);
+                            }}
+                            className="text-[11px] font-bold text-amber-700 hover:text-amber-900 underline inline-flex items-center gap-1 cursor-pointer bg-amber-50 px-2 py-0.5 rounded border border-amber-200"
+                          >
+                            <Camera className="w-3 h-3 text-amber-600" />
+                            <span>View 4 Pictures &amp; Specs</span>
+                          </button>
+                        </div>
+                        <p className="text-[11px] text-slate-500 mt-1 line-clamp-2">
+                          90° hinged burners for instant 1-wipe cleanups underneath, 0–180m mechanical auto-off safety timer, pure blue flame zero pot soot.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center justify-between sm:justify-end gap-3 pt-2 sm:pt-0 border-t border-slate-200 sm:border-0">
+                      <div className="text-left sm:text-right">
+                        <span className="text-[10px] uppercase text-slate-500 block">Subtotal</span>
+                        <span className="text-sm font-bold font-mono text-amber-700">
+                          {cooker2bQty > 0 ? formatNaira(cooker2bQty * COOKER_2B_PRICE) : '₦0'}
+                        </span>
+                      </div>
+
+                      {cooker2bQty === 0 ? (
+                        <button
+                          type="button"
+                          onClick={() => setCooker2bQty(1)}
+                          className="px-3.5 py-2 bg-amber-600 hover:bg-amber-500 text-white text-xs font-black rounded-lg transition-all shadow-xs cursor-pointer flex items-center gap-1.5"
                         >
                           <Plus className="w-3.5 h-3.5" />
                           <span>Add to Order</span>
@@ -1173,20 +1172,20 @@ export const OrderForm: React.FC<OrderFormProps> = ({
                         <div className="flex items-center bg-slate-100 border border-slate-300 rounded-lg p-1">
                           <button
                             type="button"
-                            onClick={() => setSinkQty(prev => Math.max(0, prev - 1))}
+                            onClick={() => setCooker2bQty(prev => Math.max(0, prev - 1))}
                             className="p-1 text-slate-600 hover:text-slate-900 hover:bg-white rounded transition-colors cursor-pointer"
-                            aria-label="Decrease sink quantity"
+                            aria-label="Decrease cooker quantity"
                           >
                             <Minus className="w-4 h-4" />
                           </button>
                           <span className="px-3 text-sm font-bold text-slate-900 font-mono min-w-[28px] text-center">
-                            {sinkQty}
+                            {cooker2bQty}
                           </span>
                           <button
                             type="button"
-                            onClick={() => setSinkQty(prev => Math.min(10, prev + 1))}
+                            onClick={() => setCooker2bQty(prev => Math.min(10, prev + 1))}
                             className="p-1 text-slate-600 hover:text-slate-900 hover:bg-white rounded transition-colors cursor-pointer"
-                            aria-label="Increase sink quantity"
+                            aria-label="Increase cooker quantity"
                           >
                             <Plus className="w-4 h-4" />
                           </button>

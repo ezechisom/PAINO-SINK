@@ -29,8 +29,15 @@ interface AlternativeProductModalProps {
   hasPlacedOrder?: boolean;
 }
 
+const COOKER_IMAGE_CAPTIONS = [
+  "Dual 4.8kW High-Heat Pure Blue Flames with 8-Nozzle Brass Crowns",
+  "90° Flip-Up Hinged Burner Heads — Lift with One Finger for 5-Second Cleaning",
+  "Pure Blue High-Efficiency Flame — Zero Black Pot Soot Guaranteed",
+  "Side View of Flip Hinge & 8mm Explosion-Proof Tempered Crystal Glass"
+];
+
 const SINK_IMAGE_CAPTIONS = [
-  "Main Workstation View — Multifunctional Smart Piano Sink (75 × 45 cm)",
+  "Main Workstation View — Multifunctional Smart Paino Sink (75 × 45 cm)",
   "Digital Console — Piano Water Keys, Hydroelectric LED Temp Display & Waterfall Spout",
   "Workstation Accessories — Solid Wood Prep Board, Nested Colander & Drain Basket",
   "Luxury Installation — Gunmetal Nano Steel in Modern Kitchen Countertop",
@@ -132,7 +139,9 @@ export const AlternativeProductModal: React.FC<AlternativeProductModalProps> = (
               {/* Photo Caption Overlay at Bottom */}
               <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/95 via-black/75 to-transparent px-4 py-2.5 text-center">
                 <p className="text-xs sm:text-sm font-semibold text-white drop-shadow-sm">
-                  {SINK_IMAGE_CAPTIONS[activeImageIndex] || `${product.name} - View ${activeImageIndex + 1}`}
+                  {product.id.includes('sink')
+                    ? (SINK_IMAGE_CAPTIONS[activeImageIndex] || `${product.name} - View ${activeImageIndex + 1}`)
+                    : (COOKER_IMAGE_CAPTIONS[activeImageIndex] || `${product.name} - View ${activeImageIndex + 1}`)}
                 </p>
               </div>
 

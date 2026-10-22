@@ -12,7 +12,7 @@ export const ReviewsSection: React.FC<ReviewsSectionProps> = ({ reviews }) => {
     name: "Mrs. Chioma Okonkwo",
     location: "Magodo Phase 2, Lagos",
     rating: 5,
-    review: "The 90-degree flip-up burners have completely transformed my kitchen routine! Previously, scrubbing burned oil around cooker rings was a nightmare. Now I just lift the burner heads and wipe the glass clean in 5 seconds. The auto-off timer is a lifesaver when boiling beans or soups. Absolutely worth every Naira!",
+    review: "The waterfall faucet and piano keys have completely transformed my kitchen! The digital temperature display works smoothly without any batteries, and the sliding wooden cutting board saves so much counter space when prepping meals. Cleaning oily soup pots is effortless with the nano honeycomb finish. Absolutely worth every single Naira!",
     date: "Verified Homeowner • Lagos",
     verified: true
   };

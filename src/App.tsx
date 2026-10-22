@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { CONFIG as initialConfig } from './config';
 import { SiteConfig } from './types';
 import { PromoTopBar } from './components/PromoTopBar';
@@ -52,25 +52,47 @@ export default function App() {
     timestamp: string;
   } | null>(null);
 
+  const prevQuickOrderOpenRef = useRef(isQuickOrderOpen);
+  const quickOrderCloseTimerRef = useRef<NodeJS.Timeout | null>(null);
+
   // Meta Pixel ViewContent event on page load
   useEffect(() => {
     trackViewContent(config.productName, config.promoPrice);
   }, [config.productName, config.promoPrice]);
 
-  // 1. Auto-open Suggested Product popup after 45 seconds, and re-trigger every 45 seconds when closed
+  // If the client closes the Quick Order Form, let the suggested product still pop up after 15 seconds
   useEffect(() => {
-    if (placedOrder || isSuggestedProductOpen) return;
+    const wasOpen = prevQuickOrderOpenRef.current;
+    prevQuickOrderOpenRef.current = isQuickOrderOpen;
+
+    if (wasOpen && !isQuickOrderOpen && !placedOrder) {
+      if (quickOrderCloseTimerRef.current) {
+        clearTimeout(quickOrderCloseTimerRef.current);
+      }
+      // Ensure suggested product is not immediately open so it pops up cleanly after 15s
+      setIsSuggestedProductOpen((prev) => (prev ? false : prev));
+
+      quickOrderCloseTimerRef.current = setTimeout(() => {
+        if (!placedOrder) {
+          setIsSuggestedProductOpen(true);
+        }
+      }, 15000);
+    }
+  }, [isQuickOrderOpen, placedOrder]);
+
+  // Auto-open Suggested Product popup initially after 15 seconds, and re-trigger 15s after closing (if not ordered and quick order not active)
+  useEffect(() => {
+    if (placedOrder || isSuggestedProductOpen || isQuickOrderOpen) return;
 
     const timer = setTimeout(() => {
       setIsSuggestedProductOpen(true);
-    }, 45000); // 45 seconds
+    }, 15000); // 15 seconds
 
     return () => clearTimeout(timer);
-  }, [isSuggestedProductOpen, placedOrder]);
+  }, [isSuggestedProductOpen, isQuickOrderOpen, placedOrder]);
 
-  // 2. Auto-open Quick Order Form after 60 seconds on site, and re-trigger every 60 seconds when closed
+  // Auto-open Quick Order Form after 60 seconds on site, and re-trigger every 60 seconds when closed
   useEffect(() => {
-    // If the customer has already completed an order, do not auto-popup
     if (placedOrder || isQuickOrderOpen) return;
 
     const timer = setTimeout(() => {
@@ -92,6 +114,21 @@ export default function App() {
     trackInitiateCheckout(config.promoPrice);
     setQuickOrderProductId(productId || null);
     setIsQuickOrderOpen(true);
+  };
+
+  const handleCloseQuickOrder = () => {
+    setIsQuickOrderOpen(false);
+    if (!placedOrder) {
+      if (quickOrderCloseTimerRef.current) {
+        clearTimeout(quickOrderCloseTimerRef.current);
+      }
+      setIsSuggestedProductOpen(false);
+      quickOrderCloseTimerRef.current = setTimeout(() => {
+        if (!placedOrder) {
+          setIsSuggestedProductOpen(true);
+        }
+      }, 15000); // Pops up after 15 seconds of closing the quick order form
+    }
   };
 
   // Click handler to open the detailed specs & full photo gallery modal for the suggested product
@@ -155,7 +192,7 @@ export default function App() {
         hasPlacedOrder={!!placedOrder}
       />
 
-      {/* 1. TOP PROMOTIONAL BAR WITH 7-DAY LIVE COUNTDOWN */}
+      {/* 1. TOP PROMOTIONAL BAR WITH 14-DAY LIVE COUNTDOWN */}
       <PromoTopBar 
         promoPrice={config.promoPrice} 
         countdownEndDate={config.countdownEndDate}
@@ -172,10 +209,10 @@ export default function App() {
             </div>
             <div>
               <span className="font-extrabold text-[#0a192f] text-base sm:text-lg tracking-tight font-display block leading-tight">
-                2 FLIP UP DOUBLE GAS BURNER
+                SMART PAINO SINK
               </span>
-              <span className="text-[10px] text-amber-700 font-bold tracking-wider uppercase">
-                With Auto Safety Timer &bull; 90° Hinges
+              <span className="text-[10px] text-blue-700 font-bold tracking-wider uppercase">
+                Multifunctional Workstation &bull; Moonlight Luxury
               </span>
             </div>
           </div>
@@ -378,10 +415,13 @@ export default function App() {
       {/* 1-Click Quick Order Form Pop Up Modal */}
       <QuickOrderModal
         isOpen={isQuickOrderOpen}
-        onClose={() => setIsQuickOrderOpen(false)}
+        onClose={handleCloseQuickOrder}
         config={config}
         initialProductId={quickOrderProductId}
         onOrderPlaced={(order) => {
+          if (quickOrderCloseTimerRef.current) {
+            clearTimeout(quickOrderCloseTimerRef.current);
+          }
           setPlacedOrder(order);
         }}
       />
