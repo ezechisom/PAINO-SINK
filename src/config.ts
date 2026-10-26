@@ -32,7 +32,7 @@ const getInitialPromoEndDate = (): string => {
 };
 
 // Central Formspree Form Submission Endpoint
-export const FORMSPREE_ENDPOINT = "https://formspree.io/f/xppwqdyj";
+export const FORMSPREE_ENDPOINT = "https://formspree.io/f/xzeeegpw";
 
 export const CONFIG: SiteConfig = {
   productName: "Smart Paino Sink",

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { SiteConfig } from '../types';
+import { FORMSPREE_ENDPOINT } from '../config';
 import { Settings, X, Save, RotateCcw, Check } from 'lucide-react';
 
 interface ConfigEditorModalProps {
@@ -26,7 +27,7 @@ export const ConfigEditorModal: React.FC<ConfigEditorModalProps> = ({
     paymentInformation: currentConfig.paymentInformation,
     returnPolicy: currentConfig.returnPolicy,
     warrantyInformation: currentConfig.warrantyInformation,
-    formspreeEndpoint: currentConfig.formspreeEndpoint || 'https://formspree.io/f/xppwqdyj',
+    formspreeEndpoint: currentConfig.formspreeEndpoint || FORMSPREE_ENDPOINT,
   });
 
   React.useEffect(() => {
@@ -41,7 +42,7 @@ export const ConfigEditorModal: React.FC<ConfigEditorModalProps> = ({
       paymentInformation: currentConfig.paymentInformation,
       returnPolicy: currentConfig.returnPolicy,
       warrantyInformation: currentConfig.warrantyInformation,
-      formspreeEndpoint: currentConfig.formspreeEndpoint || 'https://formspree.io/f/xppwqdyj',
+      formspreeEndpoint: currentConfig.formspreeEndpoint || FORMSPREE_ENDPOINT,
     });
   }, [currentConfig]);
 
@@ -196,7 +197,7 @@ export const ConfigEditorModal: React.FC<ConfigEditorModalProps> = ({
                   name="formspreeEndpoint"
                   value={formData.formspreeEndpoint}
                   onChange={handleChange}
-                  placeholder="https://formspree.io/f/xppwqdyj"
+                  placeholder={FORMSPREE_ENDPOINT}
                   className="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white font-mono text-xs"
                 />
                 <span className="text-[10px] text-slate-400 mt-0.5 block">Customer submissions will be sent directly to this URL.</span>
