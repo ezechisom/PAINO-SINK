@@ -53,7 +53,7 @@ export const StickyMobileBar: React.FC<StickyMobileBarProps> = ({
               title="Open Quick Order Pop Up"
             >
               <Zap className="w-3.5 h-3.5 fill-slate-950" />
-              <span>⚡ Quick Order</span>
+              <span>🎄 Quick Order</span>
             </button>
           )}
 

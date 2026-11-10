@@ -54,12 +54,12 @@ export const FinalOfferSection: React.FC<FinalOfferSectionProps> = ({ config, on
             <span>Complete Factory Direct Unit &bull; Free Lagos Delivery &bull; 1-Year Warranty</span>
           </div>
 
-          {/* 14-Day Countdown Timer */}
+          {/* 30-Day Countdown Timer */}
           <div className="pt-3 border-t border-slate-800/80">
             <CountdownTimer 
               targetDate={config.countdownEndDate} 
               variant="card" 
-              title="14-DAY PROMOTIONAL OFFER ENDS IN" 
+              title="30-DAY XMAS DISCOUNT OFFER ENDS IN" 
             />
           </div>
         </div>

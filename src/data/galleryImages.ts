@@ -11,7 +11,7 @@ export const ALL_GALLERY_IMAGES: GalleryImage[] = [
     alt: "2-Flip-Up Double Gas Burner with active pure blue flames",
     productId: "cooker-2burner",
     productName: "2-Flip-Up Double Gas Burner With Timer",
-    price: 170000,
+    price: 160000,
     dimensions: "750 × 450 mm",
     badge: "90° Flip-Up Cooktop"
   },
@@ -24,7 +24,7 @@ export const ALL_GALLERY_IMAGES: GalleryImage[] = [
     alt: "Burner head lifted 90 degrees on its hinge showing effortless cleaning access",
     productId: "cooker-2burner",
     productName: "2-Flip-Up Double Gas Burner With Timer",
-    price: 170000,
+    price: 160000,
     dimensions: "750 × 450 mm",
     badge: "5-Second 1-Wipe Cleaning"
   },
@@ -37,7 +37,7 @@ export const ALL_GALLERY_IMAGES: GalleryImage[] = [
     alt: "Pure blue flame close up and burner detail",
     productId: "cooker-2burner",
     productName: "2-Flip-Up Double Gas Burner With Timer",
-    price: 170000,
+    price: 160000,
     dimensions: "750 × 450 mm",
     badge: "Auto-Off Timer (0-180m)"
   },
@@ -50,7 +50,7 @@ export const ALL_GALLERY_IMAGES: GalleryImage[] = [
     alt: "2-Flip-Up Gas Burner glass panel and cast iron pot supports",
     productId: "cooker-2burner",
     productName: "2-Flip-Up Double Gas Burner With Timer",
-    price: 170000,
+    price: 160000,
     dimensions: "750 × 450 mm",
     badge: "Tempered Crystal Glass"
   },
@@ -65,7 +65,7 @@ export const ALL_GALLERY_IMAGES: GalleryImage[] = [
     alt: "Smart Kitchen Piano Sink with piano keys and digital temperature display",
     productId: "sink",
     productName: "Smart Kitchen Piano Sink",
-    price: 135000,
+    price: 120000,
     dimensions: "750 × 450 mm",
     badge: "Matching Workstation Sink"
   },
@@ -78,7 +78,7 @@ export const ALL_GALLERY_IMAGES: GalleryImage[] = [
     alt: "Close up of piano keys, LED digital screen and ambient light illuminating as water passes through",
     productId: "sink",
     productName: "Smart Kitchen Piano Sink",
-    price: 135000,
+    price: 120000,
     dimensions: "750 × 450 mm",
     badge: "Hydroelectric LED"
   },
@@ -91,7 +91,7 @@ export const ALL_GALLERY_IMAGES: GalleryImage[] = [
     alt: "Technical dimension diagram of the Smart Piano Sink with standard 750x450mm fit",
     productId: "sink",
     productName: "Smart Kitchen Piano Sink",
-    price: 135000,
+    price: 120000,
     dimensions: "750 × 450 mm",
     badge: "Standard Fit Blueprint"
   },
@@ -104,7 +104,7 @@ export const ALL_GALLERY_IMAGES: GalleryImage[] = [
     alt: "Piano key control console demonstrating tap water, rain stream, waterfall, and cup washer modes",
     productId: "sink",
     productName: "Smart Kitchen Piano Sink",
-    price: 135000,
+    price: 120000,
     dimensions: "750 × 450 mm",
     badge: "4 Water Modes"
   },
@@ -117,7 +117,7 @@ export const ALL_GALLERY_IMAGES: GalleryImage[] = [
     alt: "Unboxing package layout showing all included components and fittings",
     productId: "sink",
     productName: "Smart Kitchen Piano Sink",
-    price: 135000,
+    price: 120000,
     dimensions: "750 × 450 mm",
     badge: "Full Package Included"
   }

@@ -59,10 +59,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ config, onOrderClick, 
           {/* Text Content Block */}
           <div className="lg:col-span-7 order-2 lg:order-1 flex flex-col justify-center">
             
-            {/* Attention Badge */}
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-[#0a192f] text-[11px] font-bold tracking-wide uppercase mb-2.5 w-fit shadow-xs">
-              <span className="w-1.5 h-1.5 rounded-full bg-blue-600 animate-pulse" />
-              <span>Factory Direct &bull; Premium Quality</span>
+            {/* Attention Badge - Bold Xmas Discount */}
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-red-600 text-white text-xs font-black tracking-wider uppercase mb-3 w-fit shadow-md border-2 border-amber-300 animate-soft-blink">
+              <span className="text-base">🎄</span>
+              <span className="font-black">BOLD XMAS DISCOUNT &bull; UNIT PRICE NOW ₦120,000 (SAVE ₦40,000)</span>
             </div>
 
             {/* Main Headline */}
@@ -102,16 +102,18 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ config, onOrderClick, 
                   Regular Price: <span className="line-through text-slate-400 font-semibold">{formatNaira(config.normalPrice)}</span>
                 </div>
                 {savings > 0 && (
-                  <div className="bg-emerald-50 text-emerald-800 border border-emerald-300 text-[10px] font-extrabold px-2 py-0.5 rounded-full flex items-center gap-1">
-                    <span>YOU SAVE {formatNaira(savings)}</span>
-                    <span className="bg-emerald-600 text-white px-1.5 py-0.2 rounded-full text-[9px] font-black">{discountPercent}% OFF</span>
+                  <div className="bg-red-600 text-white border-2 border-amber-300 text-[10px] sm:text-xs font-black px-2.5 py-0.5 rounded-full flex items-center gap-1.5 shadow-sm">
+                    <span className="font-black">BOLD XMAS DISCOUNT: SAVE {formatNaira(savings)}</span>
+                    <span className="bg-amber-400 text-slate-950 px-1.5 py-0.2 rounded-full text-[9px] font-black">{discountPercent}% OFF</span>
                   </div>
                 )}
               </div>
 
               <div className="flex items-baseline gap-2.5">
-                <span className="text-[11px] text-slate-500 font-bold uppercase tracking-wider">Promo Price:</span>
-                <span className="text-2xl sm:text-3xl font-extrabold text-[#0a192f] tracking-tight font-mono">
+                <span className="text-[11px] text-white bg-red-600 px-2 py-0.5 rounded font-black uppercase tracking-wider border border-amber-300">
+                  BOLD XMAS DISCOUNT:
+                </span>
+                <span className="text-2xl sm:text-3xl font-black text-[#0a192f] tracking-tight font-mono">
                   {formatNaira(config.promoPrice)}
                 </span>
                 <span className="text-[11px] text-emerald-700 font-bold bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
@@ -120,12 +122,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ config, onOrderClick, 
               </div>
             </div>
 
-            {/* 14 Days Promo Countdown Timer */}
+            {/* 30 Days Promo Countdown Timer */}
             <div className="mb-4">
               <CountdownTimer 
                 targetDate={config.countdownEndDate} 
                 variant="hero" 
-                title="14-DAY PROMOTIONAL OFFER ENDS IN" 
+                title="30-DAY XMAS DISCOUNT OFFER ENDS IN" 
               />
             </div>
 

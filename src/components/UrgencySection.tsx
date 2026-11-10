@@ -66,12 +66,12 @@ export const UrgencySection: React.FC<UrgencySectionProps> = ({ config, onOrderC
             </div>
           </div>
 
-          {/* 14-Day Countdown Timer */}
+          {/* 30-Day Countdown Timer */}
           <div className="mt-4 pt-4 border-t border-slate-800">
             <CountdownTimer 
               targetDate={config.countdownEndDate} 
               variant="card" 
-              title="14-DAY PROMOTIONAL OFFER ENDS IN" 
+              title="30-DAY XMAS DISCOUNT OFFER ENDS IN" 
             />
           </div>
         </div>

@@ -33,6 +33,10 @@ import { SuggestedProductTicker } from './components/SuggestedProductTicker';
 import { QuickOrderModal } from './components/QuickOrderModal';
 import { FloatingQuickOrderBtn } from './components/FloatingQuickOrderBtn';
 import { FloatingSuggestedProduct } from './components/FloatingSuggestedProduct';
+import { ChristmasBaubles } from './components/ChristmasBaubles';
+import { SnowfallEffect } from './components/SnowfallEffect';
+import { XmasMusicPlayer } from './components/XmasMusicPlayer';
+import { xmasMusic } from './utils/xmasMusic';
 import { ALTERNATIVE_PRODUCTS, AlternativeProduct } from './data/alternativeProducts';
 import { getWhatsAppUrl } from './utils/whatsapp';
 import { trackViewContent, trackInitiateCheckout, trackContact } from './utils/metaPixel';
@@ -43,6 +47,7 @@ export default function App() {
   const [selectedAltProduct, setSelectedAltProduct] = useState<AlternativeProduct | null>(null);
   const [productToAddToForm, setProductToAddToForm] = useState<{ productId: string; timestamp: number } | null>(null);
   const [isQuickOrderOpen, setIsQuickOrderOpen] = useState(false);
+  const [isSnowing, setIsSnowing] = useState(true);
   const [isSuggestedProductOpen, setIsSuggestedProductOpen] = useState(false);
   const [quickOrderProductId, setQuickOrderProductId] = useState<string | null>(null);
   const [placedOrder, setPlacedOrder] = useState<{
@@ -54,6 +59,11 @@ export default function App() {
 
   const prevQuickOrderOpenRef = useRef(isQuickOrderOpen);
   const quickOrderCloseTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Automatically start gentle, mild Christmas carol on site load
+  useEffect(() => {
+    xmasMusic.initAutoPlay();
+  }, []);
 
   // Meta Pixel ViewContent event on page load
   useEffect(() => {
@@ -183,6 +193,9 @@ export default function App() {
   return (
     <div className="min-h-screen bg-white text-slate-900 flex flex-col font-sans selection:bg-blue-500/20 selection:text-blue-900">
       
+      {/* Gentle Snowfall Particle Overlay */}
+      <SnowfallEffect enabled={isSnowing} />
+
       {/* Floating FAQ Chat Icon at the top of the website */}
       <FloatingFaqChat 
         faqs={config.faqs}
@@ -192,11 +205,15 @@ export default function App() {
         hasPlacedOrder={!!placedOrder}
       />
 
-      {/* 1. TOP PROMOTIONAL BAR WITH 14-DAY LIVE COUNTDOWN */}
-      <PromoTopBar 
-        promoPrice={config.promoPrice} 
-        countdownEndDate={config.countdownEndDate}
-      />
+      {/* 1. TOP PROMOTIONAL BAR WITH 30-DAY LIVE COUNTDOWN & HANGING DROPPING BALLS */}
+      <div className="relative z-30">
+        <PromoTopBar 
+          promoPrice={config.promoPrice} 
+          countdownEndDate={config.countdownEndDate}
+        />
+        {/* Hanging Dropping Christmas Baubles / Ornaments */}
+        <ChristmasBaubles />
+      </div>
 
       {/* Main Brand Navigation Bar */}
       <header className="bg-white/95 backdrop-blur-md border-b border-slate-200 sticky top-0 z-40 transition-colors shadow-xs">
@@ -424,6 +441,12 @@ export default function App() {
           }
           setPlacedOrder(order);
         }}
+      />
+
+      {/* Gentle Christmas Carol Music Player */}
+      <XmasMusicPlayer 
+        isSnowing={isSnowing}
+        onToggleSnow={() => setIsSnowing(prev => !prev)}
       />
 
     </div>

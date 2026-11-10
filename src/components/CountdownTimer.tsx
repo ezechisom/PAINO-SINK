@@ -12,7 +12,7 @@ interface CountdownTimerProps {
 export const CountdownTimer: React.FC<CountdownTimerProps> = ({
   targetDate,
   variant = 'card',
-  title = '14-DAY PROMOTIONAL OFFER ENDS IN',
+  title = '30-DAY XMAS DISCOUNT OFFER ENDS IN',
   className = '',
 }) => {
   const { days, hours, minutes, seconds, isExpired } = useCountdown(targetDate);
@@ -177,7 +177,7 @@ export const CountdownTimer: React.FC<CountdownTimerProps> = ({
       <div className="mt-3 pt-2.5 border-t border-slate-800 text-center">
         <span className="text-[11px] text-slate-300 font-medium flex items-center justify-center gap-1.5">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
-          <span>Special 14-Day Discount Rate Active &bull; Pay on Delivery</span>
+          <span>Special 30-Day Xmas Discount Rate Active &bull; Pay on Delivery</span>
         </span>
       </div>
     </div>

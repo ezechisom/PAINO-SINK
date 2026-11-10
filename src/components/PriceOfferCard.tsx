@@ -30,9 +30,9 @@ export const PriceOfferCard: React.FC<PriceOfferCardProps> = ({
 
           {/* Top Badge */}
           <div className="flex justify-center mb-4">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-[#0a192f] font-extrabold text-[11px] sm:text-xs tracking-wider uppercase shadow-xs">
-              <Sparkles className="w-3.5 h-3.5 text-blue-600" />
-              FACTORY-DIRECT SPECIAL OFFER
+            <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-red-600 text-white font-black text-xs sm:text-sm tracking-wider uppercase shadow-md border-2 border-amber-300">
+              <span className="text-base">🎄</span>
+              <span>BOLD XMAS DISCOUNT SPECIAL &bull; SAVE ₦40,000</span>
             </span>
           </div>
 
@@ -60,8 +60,8 @@ export const PriceOfferCard: React.FC<PriceOfferCardProps> = ({
             </div>
 
             <div className="flex flex-col items-center justify-center gap-0.5 mb-3">
-              <span className="text-blue-800 font-extrabold text-[10px] sm:text-xs tracking-widest uppercase bg-blue-100 px-2.5 py-0.5 rounded-full border border-blue-200">
-                TODAY'S PROMO PRICE
+              <span className="text-white font-black text-xs sm:text-sm tracking-widest uppercase bg-red-600 px-3.5 py-1 rounded-full border-2 border-amber-300 shadow-sm">
+                TODAY'S BOLD XMAS DISCOUNT PRICE
               </span>
               <span className="text-3xl sm:text-5xl font-black text-[#0a192f] tracking-tight font-display mt-1">
                 {formatNaira(config.promoPrice)}
@@ -112,12 +112,12 @@ export const PriceOfferCard: React.FC<PriceOfferCardProps> = ({
             </div>
           </div>
 
-          {/* 14 Days Promo Countdown Timer */}
+          {/* 30 Days Promo Countdown Timer */}
           <div className="mb-6">
             <CountdownTimer 
               targetDate={config.countdownEndDate} 
               variant="card" 
-              title="14-DAY PROMOTIONAL OFFER ENDS IN" 
+              title="30-DAY XMAS DISCOUNT OFFER ENDS IN" 
             />
           </div>
 

@@ -173,9 +173,9 @@ export const OrderForm: React.FC<OrderFormProps> = ({
   const isLagosState = formData.state.toLowerCase().trim() === 'lagos';
   const deliveryFee = isLagosState ? 0 : (deliveryMethod === 'doorstep' ? 5000 : 0);
   
-  // Product Unit Prices: Sink is 135K (config.promoPrice), Cooker is 170K
-  const SINK_PRICE = config.promoPrice; // 135000
-  const COOKER_2B_PRICE = 170000;
+  // Product Unit Prices: Sink is 120K (config.promoPrice), Cooker is 160K
+  const SINK_PRICE = config.promoPrice; // 120000
+  const COOKER_2B_PRICE = 160000;
 
   // Itemized array of selected products
   const selectedItems: OrderItem[] = [];
@@ -927,12 +927,12 @@ export const OrderForm: React.FC<OrderFormProps> = ({
               </p>
             </div>
 
-            {/* 14 Days Promo Urgency Countdown */}
+            {/* 30 Days Promo Urgency Countdown */}
             <div className="mb-6">
               <CountdownTimer 
                 targetDate={config.countdownEndDate}
                 variant="card"
-                title="14-DAY PROMOTIONAL OFFER ENDS IN"
+                title="30-DAY XMAS DISCOUNT OFFER ENDS IN"
               />
             </div>
 
@@ -1024,8 +1024,8 @@ export const OrderForm: React.FC<OrderFormProps> = ({
                           </span>
                           <span className="text-xs text-slate-400 line-through">₦160,000</span>
                           <span className="text-xs font-black text-[#0a192f]">{formatNaira(SINK_PRICE)}</span>
-                          <span className="text-[10px] font-black text-emerald-700 bg-emerald-100 border border-emerald-300 px-1.5 py-0.2 rounded">
-                            Save ₦25,000
+                          <span className="text-[10px] font-black text-white bg-red-600 border border-amber-300 px-2 py-0.5 rounded shadow-xs uppercase">
+                            SAVE ₦40,000 (BOLD XMAS DISCOUNT)
                           </span>
                           {recentlyAddedId === 'sink' && (
                             <span className="text-[10px] font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded border border-emerald-300 animate-pulse">
@@ -1113,8 +1113,8 @@ export const OrderForm: React.FC<OrderFormProps> = ({
                           </span>
                           <span className="text-xs text-slate-400 line-through">₦200,000</span>
                           <span className="text-xs font-black text-[#0a192f]">{formatNaira(COOKER_2B_PRICE)}</span>
-                          <span className="text-[10px] font-black text-emerald-700 bg-emerald-100 border border-emerald-300 px-1.5 py-0.2 rounded">
-                            Save ₦30,000
+                          <span className="text-[10px] font-black text-white bg-red-600 border border-amber-300 px-2 py-0.5 rounded shadow-xs uppercase">
+                            SAVE ₦40,000 (BOLD XMAS DISCOUNT)
                           </span>
                           {recentlyAddedId === 'cooker-2burner' && (
                             <span className="text-[10px] font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded border border-emerald-300 animate-pulse">

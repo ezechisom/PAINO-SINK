@@ -83,7 +83,7 @@ export const AlternativeProductModal: React.FC<AlternativeProductModalProps> = (
     whatsappNumber,
     product.name,
     1,
-    `Hello! I saw the ${product.name} (${formatNaira(product.price)}) on your website as a matching appliance for the 2-Burner Gas Cooker. I would like to order or get more details about dispatch.`
+    `Hello! I saw the ${product.name} (${formatNaira(product.price)}) on your website as a matching appliance for the Smart Paino Sink. I would like to order or get more details about dispatch.`
   );
 
   return (
@@ -291,7 +291,7 @@ export const AlternativeProductModal: React.FC<AlternativeProductModalProps> = (
             </span>
             <span className="flex items-center gap-1.5 text-amber-400 font-medium">
               <Truck className="w-4 h-4" />
-              Ships Together With Your 2-Burner Cooker (Save ₦5,000 Bundle)
+              Ships Together With Your Smart Paino Sink (Save ₦5,000 Bundle)
             </span>
           </div>
 

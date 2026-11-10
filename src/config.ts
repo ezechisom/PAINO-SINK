@@ -1,8 +1,8 @@
 import { SiteConfig } from './types';
 
-// 14-Day Promotional Countdown Timer with localStorage persistence
+// 30-Day Promotional Countdown Timer with localStorage persistence
 const getInitialPromoEndDate = (): string => {
-  const STORAGE_KEY = 'moonlight_promo_14d_timer_end';
+  const STORAGE_KEY = 'moonlight_promo_30d_timer_end';
   try {
     if (typeof window !== 'undefined' && window.localStorage) {
       const saved = localStorage.getItem(STORAGE_KEY);
@@ -18,7 +18,7 @@ const getInitialPromoEndDate = (): string => {
   }
 
   const target = new Date();
-  target.setDate(target.getDate() + 14);
+  target.setDate(target.getDate() + 30);
   target.setHours(23, 59, 59, 999);
   const targetIso = target.toISOString();
   try {
@@ -37,7 +37,7 @@ export const FORMSPREE_ENDPOINT = "https://formspree.io/f/xzeeegpw";
 export const CONFIG: SiteConfig = {
   productName: "Smart Paino Sink",
   normalPrice: 160000,
-  promoPrice: 135000,
+  promoPrice: 120000,
   currency: "₦",
   countdownEndDate: getInitialPromoEndDate(),
   whatsappNumber: "2349136827730", // Store WhatsApp number (09136827730)
@@ -242,7 +242,7 @@ export const CONFIG: SiteConfig = {
     {
       id: "faq-7",
       question: "7. Can I also order the matching 2-Flip-Up Double Gas Burner?",
-      answer: "Yes! The 2-Flip-Up Double Gas Burner With Timer is available on this website as a matching companion appliance for ₦170,000. When you order both together, you receive an extra ₦5,000 multi-product bundle discount."
+      answer: "Yes! The 2-Flip-Up Double Gas Burner With Timer is available on this website as a matching companion appliance for ₦160,000. When you order both together, you receive an extra ₦5,000 multi-product bundle discount."
     },
     {
       id: "faq-8",

@@ -21,7 +21,7 @@ export const ALTERNATIVE_PRODUCTS: AlternativeProduct[] = [
     name: "2-Flip-Up Double Gas Burner With Timer",
     tagline: "90° Flip-Up Burners for Instant 1-Wipe Cleaning & Built-In Safety Timer",
     category: "Hinged Gas Cooktop (75 × 45 cm)",
-    price: 170000,
+    price: 160000,
     normalPrice: 200000,
     dimensions: "750 × 450 mm (75 × 45 cm)",
     cutout: "650 × 350 mm / standard 750 × 450 mm counter fit",

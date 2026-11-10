@@ -117,9 +117,9 @@ export const QuickOrderModal: React.FC<QuickOrderModalProps> = ({
 
   if (!isOpen) return null;
 
-  // Prices: Sink is config.promoPrice (135K), Cooker is 170K
-  const SINK_PRICE = config.promoPrice; // 135000
-  const COOKER_2B_PRICE = 170000;
+  // Prices: Sink is config.promoPrice (120K), Cooker is 160K
+  const SINK_PRICE = config.promoPrice; // 120000
+  const COOKER_2B_PRICE = 160000;
 
   const isLagosState = state.toLowerCase().trim() === 'lagos';
   const deliveryFee = isLagosState ? 0 : (deliveryMethod === 'doorstep' ? 5000 : 0);
@@ -286,23 +286,29 @@ export const QuickOrderModal: React.FC<QuickOrderModalProps> = ({
         aria-labelledby="quick-order-title"
       >
         {/* Modal Top Header Bar */}
-        <div className="bg-[#0a192f] text-white px-5 sm:px-6 py-4 flex items-center justify-between border-b border-blue-900/60 shrink-0">
+        <div className="bg-gradient-to-r from-[#070e1c] via-[#0a192f] to-[#052115] text-white px-5 sm:px-6 py-4 flex items-center justify-between border-b border-amber-500/40 shrink-0 relative overflow-hidden">
+          {/* Festive top accent stripe */}
+          <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-red-500 via-amber-400 to-emerald-500" />
+
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-xl bg-blue-600 flex items-center justify-center text-white shadow-xs">
-              <Sparkles className="w-4 h-4 text-blue-200" />
+            {/* Christmas Tree Icon Box */}
+            <div className="w-10 h-10 rounded-2xl bg-gradient-to-b from-emerald-600 via-emerald-800 to-emerald-950 border-2 border-amber-400/80 flex items-center justify-center text-white shadow-lg relative shrink-0">
+              <span className="text-2xl leading-none filter drop-shadow">🎄</span>
+              <span className="absolute -top-1 -right-1 text-[11px] leading-none">⭐</span>
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <span className="text-[10px] sm:text-xs font-black bg-blue-500/30 text-blue-300 border border-blue-400/30 px-2 py-0.5 rounded-full uppercase tracking-wider">
-                  Express Checkout
+                <span className="text-[10px] sm:text-xs font-black bg-emerald-500/30 text-emerald-300 border border-emerald-400/40 px-2 py-0.5 rounded-full uppercase tracking-wider flex items-center gap-1">
+                  <span>🎄 Xmas Express Checkout</span>
                 </span>
-                <span className="text-[10px] text-emerald-400 font-bold flex items-center gap-1">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                  Ready to Dispatch
+                <span className="text-[10px] text-amber-300 font-bold flex items-center gap-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+                  Save ₦40,000
                 </span>
               </div>
-              <h2 id="quick-order-title" className="text-base sm:text-lg font-black text-white tracking-tight mt-0.5 font-display">
-                ⚡ Quick Order Form
+              <h2 id="quick-order-title" className="text-base sm:text-lg font-black text-white tracking-tight mt-0.5 font-display flex items-center gap-1.5">
+                <span>🎄 Quick Order Form</span>
+                <span className="text-xs text-amber-300">✨</span>
               </h2>
             </div>
           </div>
@@ -317,16 +323,16 @@ export const QuickOrderModal: React.FC<QuickOrderModalProps> = ({
           </button>
         </div>
 
-        {/* 14-Day Limited Promo Timer Urgency Ribbon */}
+        {/* 30-Day Limited Promo Timer Urgency Ribbon */}
         <div className="bg-amber-500/10 border-b border-amber-500/20 px-4 py-2 flex flex-wrap items-center justify-between gap-2 text-xs">
           <div className="flex items-center gap-1.5 text-amber-800 font-bold text-[11px]">
             <Clock className="w-3.5 h-3.5 text-amber-600 shrink-0" />
-            <span>14-DAY PROMO: {formatNaira(config.promoPrice)}</span>
+            <span className="font-black text-white bg-red-600 px-2 py-0.5 rounded border border-amber-300 shadow-xs">🎄 BOLD XMAS DISCOUNT: {formatNaira(config.promoPrice)}</span>
           </div>
           <CountdownTimer 
             targetDate={config.countdownEndDate}
             variant="banner"
-            title="OFFER ENDS IN"
+            title="30-DAY OFFER ENDS IN"
           />
         </div>
 
@@ -337,13 +343,14 @@ export const QuickOrderModal: React.FC<QuickOrderModalProps> = ({
             /* SUCCESS CONFIRMATION RECEIPT SCREEN */
             <div className="space-y-5 animate-fadeIn text-center">
               
-              <div className="w-16 h-16 rounded-full bg-emerald-100 border-4 border-emerald-200 text-emerald-600 flex items-center justify-center mx-auto shadow-sm">
-                <CheckCircle2 className="w-9 h-9" />
+              <div className="w-18 h-18 rounded-3xl bg-gradient-to-b from-emerald-100 to-emerald-200 border-4 border-emerald-300 text-emerald-700 flex items-center justify-center mx-auto shadow-md relative">
+                <span className="text-3xl">🎄</span>
+                <CheckCircle2 className="w-6 h-6 text-emerald-600 bg-white rounded-full absolute -bottom-1.5 -right-1.5 shadow-xs" />
               </div>
 
               <div>
-                <span className="text-xs font-black tracking-widest text-emerald-600 uppercase bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full">
-                  Order Successfully Placed!
+                <span className="text-xs font-black tracking-widest text-emerald-700 uppercase bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full inline-flex items-center gap-1.5">
+                  <span>🎄 Xmas Promo Order Successfully Placed!</span>
                 </span>
                 <h3 className="text-xl sm:text-2xl font-black text-[#0a192f] mt-2">
                   Thank You, {submittedOrder.orderData.fullName}!
@@ -466,6 +473,34 @@ export const QuickOrderModal: React.FC<QuickOrderModalProps> = ({
             /* QUICK ORDER FORM */
             <form onSubmit={handleSubmit} className="space-y-5">
               
+              {/* Christmas Tree Festive Announcement Card */}
+              <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-emerald-950 via-[#0a192f] to-[#052115] border-2 border-amber-400/80 p-3 sm:p-4 shadow-md text-white">
+                <div className="flex items-center gap-3">
+                  {/* Decorative Illuminated Christmas Tree */}
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-b from-emerald-600 via-emerald-800 to-emerald-950 border-2 border-amber-400/80 flex items-center justify-center shrink-0 shadow-lg relative group">
+                    <span className="text-3xl sm:text-4xl filter drop-shadow">🎄</span>
+                    <span className="absolute -top-1.5 -right-1 text-sm animate-bounce">⭐</span>
+                    <span className="absolute -bottom-0.5 -left-0.5 text-[10px]">❄️</span>
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-1.5 flex-wrap">
+                      <span className="text-[10px] font-black uppercase tracking-wider text-amber-300 bg-amber-500/25 px-2 py-0.5 rounded-full border border-amber-400/40 flex items-center gap-1">
+                        <span>🎄 XMAS HOLIDAY SPECIAL</span>
+                      </span>
+                      <span className="text-[10px] font-bold text-emerald-300 bg-emerald-500/20 px-2 py-0.5 rounded-full border border-emerald-400/30">
+                        Pay on Delivery
+                      </span>
+                    </div>
+                    <p className="text-xs sm:text-sm font-extrabold text-white mt-1 leading-snug">
+                      Smart Paino Sink slashed to <span className="text-amber-300 font-mono">₦120,000</span> (Save ₦40,000)!
+                    </p>
+                    <span className="text-[10px] sm:text-[11px] text-slate-300 block mt-0.5">
+                      Matching 2-Flip-Up Cooker: <strong className="text-amber-300">₦160,000</strong> &bull; Free Lagos Delivery
+                    </span>
+                  </div>
+                </div>
+              </div>
+
               {/* Product Selector Section */}
               <div>
                 <div className="flex items-center justify-between mb-2">
@@ -507,8 +542,8 @@ export const QuickOrderModal: React.FC<QuickOrderModalProps> = ({
                         <div className="flex items-center gap-1.5 mt-0.5">
                           <span className="text-xs font-extrabold text-blue-700 font-mono">{formatNaira(SINK_PRICE)}</span>
                           <span className="text-[10px] text-slate-400 line-through">₦160,000</span>
-                          <span className="text-[9px] font-black text-emerald-700 bg-emerald-100 border border-emerald-300 px-1 py-0.2 rounded">
-                            Save ₦25,000
+                          <span className="text-[9px] font-black text-white bg-red-600 border border-amber-300 px-1.5 py-0.2 rounded shadow-2xs">
+                            Save ₦40,000 (Bold Xmas Discount)
                           </span>
                         </div>
                       </div>
@@ -556,8 +591,8 @@ export const QuickOrderModal: React.FC<QuickOrderModalProps> = ({
                         <div className="flex items-center gap-1.5 mt-0.5">
                           <span className="text-xs font-extrabold text-amber-700 font-mono">{formatNaira(COOKER_2B_PRICE)}</span>
                           <span className="text-[10px] text-slate-400 line-through">₦200,000</span>
-                          <span className="text-[9px] font-black text-emerald-700 bg-emerald-100 border border-emerald-300 px-1 py-0.2 rounded">
-                            Save ₦30,000
+                          <span className="text-[9px] font-black text-white bg-red-600 border border-amber-300 px-1.5 py-0.2 rounded shadow-2xs">
+                            Save ₦40,000 (Bold Xmas Discount)
                           </span>
                         </div>
                       </div>

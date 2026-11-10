@@ -20,13 +20,13 @@ export const FloatingQuickOrderBtn: React.FC<FloatingQuickOrderBtnProps> = ({ on
           <span className="relative inline-flex rounded-full h-3 w-3 bg-amber-400" />
         </span>
         <div className="flex items-center gap-1.5">
-          <Zap className="w-4 h-4 text-amber-400 fill-amber-400 group-hover:rotate-12 transition-transform" />
+          <span className="text-base leading-none">🎄</span>
           <span className="text-xs sm:text-sm font-black tracking-wide uppercase">
             Quick Order Form
           </span>
         </div>
         <span className="hidden sm:inline-block bg-amber-400 text-slate-950 text-[10px] font-extrabold px-1.5 py-0.5 rounded-full">
-          Pop-up
+          Xmas Pop-up
         </span>
       </button>
     </div>
