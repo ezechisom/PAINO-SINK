@@ -6,37 +6,37 @@ export const PerfectForSection: React.FC = () => {
     {
       id: "family-homes",
       title: "Family Homes",
-      description: "Deep 220mm basin fits large pots, while nested prep boards keep busy family kitchen counters organized and splash-free.",
+      description: "Heavy-duty windproof cast iron pot stands support large Nigerian cooking pots, while 90° flip-up hinges make post-meal cleaning effortless.",
       icon: Home
     },
     {
       id: "apartments",
       title: "Modern Apartments",
-      description: "Integrated double tracks turn the sink basin into an active food prep zone, maximizing compact countertop space.",
+      description: "Dual-use tabletop or built-in design fits neatly onto compact counters without complicated masonry work.",
       icon: Building2
     },
     {
       id: "new-homes",
       title: "New Architectural Builds",
-      description: "Sleek gunmetal nano stainless steel and LED digital ambient display create an instant luxury focal point on quartz slabs.",
+      description: "8mm glossy black tempered crystal glass and pure blue flames create a refined luxury centerpiece on marble or quartz slabs.",
       icon: Sparkles
     },
     {
       id: "renovations",
       title: "Kitchen Renovations",
-      description: "Directly drop into standard 700×400mm countertop cutouts to replace outdated, leaky sinks without rebuilding cabinetry.",
+      description: "Drops directly into standard 650×350mm countertop cutouts (750×450mm outer glass frame) to upgrade outdated cooktops immediately.",
       icon: Hammer
     },
     {
       id: "shortlets",
       title: "Shortlets & Airbnb",
-      description: "Scratch-resistant nano coating and self-powered digital display impress guests with low maintenance and zero battery hassles.",
+      description: "Built-in 0–180 minute mechanical auto-off timer prevents forgotten stoves and gives property hosts lasting peace of mind.",
       icon: Hotel
     },
     {
       id: "chefs",
-      title: "Passionate Home Chefs",
-      description: "Nested cutting board, prep colander, and instant high-pressure glass rinser make multi-course meal preparation effortless.",
+      title: "Busy Professionals & Parents",
+      description: "Set the timer and step away safely without burning rice, stews, or soups while multitasking around the house.",
       icon: Building
     }
   ];
@@ -54,7 +54,7 @@ export const PerfectForSection: React.FC = () => {
             PERFECT FOR MODERN KITCHENS
           </h2>
           <p className="text-slate-400 text-xs sm:text-sm mt-2">
-            Engineered to fit seamlessly into modern residential and luxury kitchen layouts.
+            Engineered to fit seamlessly as either a recessed built-in hob or a freestanding tabletop gas stove.
           </p>
         </div>
 

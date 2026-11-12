@@ -37,7 +37,7 @@ export function trackTikTokViewContent(productName: string, price: number, curre
   trackTikTokPixel('ViewContent', {
     content_name: productName,
     content_type: 'product',
-    content_id: 'sink',
+    content_id: 'cooker-2burner',
     value: price,
     currency: currency,
   });
@@ -61,7 +61,7 @@ export function trackTikTokPurchase(orderId: string, totalAmount: number, curren
   trackTikTokPixel('CompletePayment', {
     content_id: orderId,
     content_type: 'product',
-    content_name: 'Smart Kitchen Piano Sink',
+    content_name: '2-Flip-Up Double Gas Burner With Timer',
     quantity: quantity,
     value: totalAmount,
     currency: currency,
@@ -70,7 +70,7 @@ export function trackTikTokPurchase(orderId: string, totalAmount: number, curren
   trackTikTokPixel('PlaceAnOrder', {
     content_id: orderId,
     content_type: 'product',
-    content_name: 'Smart Kitchen Piano Sink',
+    content_name: '2-Flip-Up Double Gas Burner With Timer',
     quantity: quantity,
     value: totalAmount,
     currency: currency,

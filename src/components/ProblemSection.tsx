@@ -1,5 +1,5 @@
 import React from 'react';
-import { AlertCircle, LayoutGrid, Layers, Sparkles, ArrowDown, Droplets } from 'lucide-react';
+import { AlertCircle, Layers, Sparkles, ArrowDown, Flame, Clock } from 'lucide-react';
 
 interface ProblemSectionProps {
   onDiscoverClick: () => void;
@@ -8,32 +8,32 @@ interface ProblemSectionProps {
 export const ProblemSection: React.FC<ProblemSectionProps> = ({ onDiscoverClick }) => {
   const problems = [
     {
-      id: "splashing",
-      title: "UNCONTROLLABLE WATER SPLASHING?",
-      description: "Shallow, flat traditional sinks cause water to rebound violently onto your clothes and kitchen floor. Our 220mm extra-deep basin and gentle flying rain waterfall keep countertops completely dry.",
+      id: "trapped-grease",
+      title: "TRAPPED GREASE & BURNT SPILLS UNDER BURNERS?",
+      description: "Fixed gas burners trap boiled-over stew, oil splatters, and burnt food around screws you cannot reach without tools. Our 90° flip-up hinges lift upright with one finger so you wipe clean in 5 seconds.",
       icon: AlertCircle,
-      tag: "Water Splash"
+      tag: "Messy Cleanup"
     },
     {
-      id: "temperature",
-      title: "TEMPERATURE GUESSWORK & BURNS?",
-      description: "Standard taps force you to test hot water blindly with your bare fingers. Our hydroelectric digital LED screen shows live water temperature in °C and running timer without batteries.",
-      icon: Droplets,
-      tag: "Temp Control"
+      id: "forgotten-gas",
+      title: "BURNT FOOD OR FORGOTTEN GAS ON THE STOVE?",
+      description: "Stepping out of the kitchen while boiling beans or stew can easily burn your food and waste cooking gas. Our built-in 0–180 minute mechanical timer automatically cuts off the gas when time is up.",
+      icon: Clock,
+      tag: "Timer Safety"
     },
     {
-      id: "cup-washing",
-      title: "TEDIOUS GLASS & BOTTLE CLEANING?",
-      description: "Bulky sponges cannot reach the bottoms of slim wine glasses, thermal mugs, or baby bottles. Simply press down on the high-pressure glass rinser for a 2-second spotless multi-angle jet wash.",
-      icon: Sparkles,
-      tag: "Hard to Clean"
+      id: "black-soot",
+      title: "BLACK SOOT STAINING YOUR EXPENSIVE POTS?",
+      description: "Weak yellow smoky flames blacken the bottoms of your stainless cookware and waste cylinder gas. Our 8-nozzle brass crowns with oxygen damper balance burn a crisp, pure blue flame with zero soot.",
+      icon: Flame,
+      tag: "Zero Pot Soot"
     },
     {
-      id: "rust-stains",
-      title: "RUSTY, STAINED, SCRATCHED BASIN?",
-      description: "Thin metal sinks dent easily, scratch under heavy pots, and trap foul odors. Our 3mm SUS304 nano stainless steel features a honeycomb embossed coating that repels scratches, stains, and oil.",
+      id: "flimsy-stands",
+      title: "RUSTED COOKER TOPS & WOBBLY POT STANDS?",
+      description: "Cheap painted metal cookers peel, rust, and bend under heavy family pots. Our 8mm explosion-proof crystal glass and heavy windproof cast iron stands handle large Nigerian pots effortlessly.",
       icon: Layers,
-      tag: "Basin Damage"
+      tag: "Heavy-Duty Build"
     }
   ];
 
@@ -46,10 +46,10 @@ export const ProblemSection: React.FC<ProblemSectionProps> = ({ onDiscoverClick 
             The Everyday Kitchen Challenge
           </span>
           <h2 className="text-xl sm:text-3xl font-extrabold text-white tracking-tight leading-tight">
-            YOUR KITCHEN DESERVES MORE THAN JUST AN ORDINARY SINK.
+            STOP STRUGGLING WITH HARD-TO-CLEAN GAS COOKERS.
           </h2>
           <p className="text-slate-400 text-xs sm:text-sm mt-2">
-            Why settle for wet counters, scalding water, and endless pot scrubbing when your workstation sink can work smarter for you?
+            Why spend 20 minutes scrubbing around fixed burners or worrying about forgotten food on the fire when your gas stove can clean in 5 seconds and switch itself off?
           </p>
         </div>
 
@@ -92,7 +92,7 @@ export const ProblemSection: React.FC<ProblemSectionProps> = ({ onDiscoverClick 
               THE MODERN SOLUTION IS HERE
             </span>
             <div className="text-lg sm:text-2xl font-black text-amber-400 tracking-tight flex items-center gap-2 font-display">
-              <span>MEET THE SMART PAINO SINK.</span>
+              <span>MEET THE 2-FLIP-UP DOUBLE GAS BURNER WITH TIMER.</span>
             </div>
             <button
               onClick={onDiscoverClick}

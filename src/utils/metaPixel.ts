@@ -41,7 +41,7 @@ export function trackMetaPixel(eventName: string, params?: Record<string, any>) 
 export function trackViewContent(productName: string, price: number, currency: string = 'NGN') {
   trackMetaPixel('ViewContent', {
     content_name: productName,
-    content_category: 'Kitchen Fixtures',
+    content_category: 'Kitchen Appliances',
     value: price,
     currency: currency,
   });
@@ -64,7 +64,7 @@ export function trackInitiateCheckout(value: number, currency: string = 'NGN') {
  */
 export function trackPurchase(orderId: string, totalAmount: number, currency: string = 'NGN', quantity: number = 1) {
   trackMetaPixel('Purchase', {
-    content_name: 'Smart Kitchen Piano Sink',
+    content_name: '2-Flip-Up Double Gas Burner With Timer',
     content_type: 'product',
     content_ids: [orderId],
     num_items: quantity,
@@ -73,7 +73,7 @@ export function trackPurchase(orderId: string, totalAmount: number, currency: st
   });
   // Also track Lead as common in direct response landing pages
   trackMetaPixel('Lead', {
-    content_name: 'Smart Kitchen Piano Sink Order',
+    content_name: '2-Flip-Up Double Gas Burner Order',
     value: totalAmount,
     currency: currency,
   });

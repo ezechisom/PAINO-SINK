@@ -30,7 +30,7 @@ export const FinalOfferSection: React.FC<FinalOfferSectionProps> = ({ config, on
         </h2>
 
         <p className="text-slate-300 text-xs sm:text-sm max-w-lg mx-auto mb-6">
-          Order now to secure your Smart Paino Sink Workstation, featuring tactile piano keys, self-powered LED temperature display, flying rain waterfall, and complete 9-piece accessory kit.
+          Order now to secure your 2-Flip-Up Double Gas Burner With Timer, featuring 90° flip-up hinges for 5-second cleaning, 0–180m safety auto-off timer, pure blue zero-soot flames, and 8mm explosion-proof crystal glass.
         </p>
 
         {/* Promo Price Card */}
@@ -68,15 +68,15 @@ export const FinalOfferSection: React.FC<FinalOfferSectionProps> = ({ config, on
         <div className="flex flex-wrap items-center justify-center gap-2.5 max-w-lg mx-auto mb-6 text-xs text-slate-300">
           <span className="flex items-center gap-1 bg-slate-900/80 px-2.5 py-1 rounded-full border border-slate-800 text-[11px]">
             <CheckCircle2 className="w-3 h-3 text-amber-400" />
-            Tactile Piano Keys
+            90° Flip-Up Burners
           </span>
           <span className="flex items-center gap-1 bg-slate-900/80 px-2.5 py-1 rounded-full border border-slate-800 text-[11px]">
             <CheckCircle2 className="w-3 h-3 text-blue-400" />
-            Hydroelectric LED Temp
+            0–180m Auto-Off Timer
           </span>
           <span className="flex items-center gap-1 bg-slate-900/80 px-2.5 py-1 rounded-full border border-slate-800 text-[11px]">
             <CheckCircle2 className="w-3 h-3 text-emerald-400" />
-            Flying Rain Waterfall
+            Pure Blue Zero-Soot Flame
           </span>
         </div>
 

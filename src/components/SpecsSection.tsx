@@ -11,6 +11,11 @@ import {
   PackageCheck, 
   Hammer, 
   RotateCw,
+  Flame,
+  Clock,
+  Zap,
+  Layers,
+  Sliders,
   Info
 } from 'lucide-react';
 
@@ -30,6 +35,11 @@ export const SpecsSection: React.FC<SpecsSectionProps> = ({ config }) => {
     PackageCheck,
     Hammer,
     RotateCw,
+    Flame,
+    Clock,
+    Zap,
+    Layers,
+    Sliders,
   };
 
   return (
@@ -45,7 +55,7 @@ export const SpecsSection: React.FC<SpecsSectionProps> = ({ config }) => {
             DETAILED PRODUCT SPECIFICATIONS
           </h2>
           <p className="text-slate-400 text-xs sm:text-sm mt-2">
-            Measurements and structural data confirmed directly from factory engineering diagrams.
+            Measurements and engineering details confirmed directly from factory production specs.
           </p>
         </div>
 
@@ -77,7 +87,7 @@ export const SpecsSection: React.FC<SpecsSectionProps> = ({ config }) => {
 
         <div className="mt-4 flex items-center justify-center gap-1.5 text-xs text-slate-400">
           <Info className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-          <span>Universal plumbing fit. Compatible with standard Nigerian countertop cutouts (75 × 45 cm).</span>
+          <span>Universal LPG gas hose fit. Supports both Built-In Cutout (650 × 350 mm) and Countertop Tabletop placement.</span>
         </div>
 
       </div>

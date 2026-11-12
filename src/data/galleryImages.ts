@@ -1,7 +1,7 @@
 import { GalleryImage } from '../types';
 
 export const ALL_GALLERY_IMAGES: GalleryImage[] = [
-  // --- 1. 2-FLIP-UP DOUBLE GAS BURNER WITH TIMER (4 Photos) ---
+  // --- 1. 2-FLIP-UP DOUBLE GAS BURNER WITH TIMER (MAIN PRODUCT - 4 Photos) ---
   {
     id: "cooker2b-active",
     url: "https://www.moonlightluxuryhometech.shop/images/cooker_active_blue_flames.jpg",
@@ -13,7 +13,7 @@ export const ALL_GALLERY_IMAGES: GalleryImage[] = [
     productName: "2-Flip-Up Double Gas Burner With Timer",
     price: 160000,
     dimensions: "750 × 450 mm",
-    badge: "90° Flip-Up Cooktop"
+    badge: "90° Flip-Up Cooktop (Main)"
   },
   {
     id: "cooker2b-hinge",
@@ -55,17 +55,17 @@ export const ALL_GALLERY_IMAGES: GalleryImage[] = [
     badge: "Tempered Crystal Glass"
   },
 
-  // --- 2. SMART PIANO SINK COMPANION APPLIANCE (5 Photos) ---
+  // --- 2. SMART PAINO SINK COMPANION APPLIANCE (5 Photos - ₦130,000) ---
   {
     id: "sink-main",
     url: "/images/smart_piano_sink_1789548024514.jpg",
-    title: "Smart Multifunctional Piano Sink (75 × 45 cm)",
+    title: "Smart Multifunctional Paino Sink (75 × 45 cm)",
     subtitle: "SUS304 honeycomb nano stainless steel with mechanical piano key water controls and digital display console.",
     tag: "Workstation Overview",
-    alt: "Smart Kitchen Piano Sink with piano keys and digital temperature display",
+    alt: "Smart Paino Sink with piano keys and digital temperature display",
     productId: "sink",
-    productName: "Smart Kitchen Piano Sink",
-    price: 120000,
+    productName: "Smart Paino Sink",
+    price: 130000,
     dimensions: "750 × 450 mm",
     badge: "Matching Workstation Sink"
   },
@@ -77,8 +77,8 @@ export const ALL_GALLERY_IMAGES: GalleryImage[] = [
     tag: "Piano Controls & LED",
     alt: "Close up of piano keys, LED digital screen and ambient light illuminating as water passes through",
     productId: "sink",
-    productName: "Smart Kitchen Piano Sink",
-    price: 120000,
+    productName: "Smart Paino Sink",
+    price: 130000,
     dimensions: "750 × 450 mm",
     badge: "Hydroelectric LED"
   },
@@ -86,12 +86,12 @@ export const ALL_GALLERY_IMAGES: GalleryImage[] = [
     id: "sink-cutout",
     url: "/images/workstation_accessories_1789548079842.jpg",
     title: "Cutout Specifications & Dimensions Blueprint",
-    subtitle: "Fits standard 750 × 450 mm countertop opening with 205 mm deep basin, multi-level sliding workstation ledges, and anti-overflow drainage.",
+    subtitle: "Fits standard 750 × 450 mm countertop opening with 220 mm deep basin, multi-level sliding workstation ledges, and anti-overflow drainage.",
     tag: "Dimensions & Fit",
-    alt: "Technical dimension diagram of the Smart Piano Sink with standard 750x450mm fit",
+    alt: "Technical dimension diagram of the Smart Paino Sink with standard 750x450mm fit",
     productId: "sink",
-    productName: "Smart Kitchen Piano Sink",
-    price: 120000,
+    productName: "Smart Paino Sink",
+    price: 130000,
     dimensions: "750 × 450 mm",
     badge: "Standard Fit Blueprint"
   },
@@ -103,8 +103,8 @@ export const ALL_GALLERY_IMAGES: GalleryImage[] = [
     tag: "Water Modes & Faucet",
     alt: "Piano key control console demonstrating tap water, rain stream, waterfall, and cup washer modes",
     productId: "sink",
-    productName: "Smart Kitchen Piano Sink",
-    price: 120000,
+    productName: "Smart Paino Sink",
+    price: 130000,
     dimensions: "750 × 450 mm",
     badge: "4 Water Modes"
   },
@@ -116,8 +116,8 @@ export const ALL_GALLERY_IMAGES: GalleryImage[] = [
     tag: "Complete Package Box",
     alt: "Unboxing package layout showing all included components and fittings",
     productId: "sink",
-    productName: "Smart Kitchen Piano Sink",
-    price: 120000,
+    productName: "Smart Paino Sink",
+    price: 130000,
     dimensions: "750 × 450 mm",
     badge: "Full Package Included"
   }

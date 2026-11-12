@@ -101,7 +101,7 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({
   };
 
   const handleQuickOrderTarget = (productId?: string) => {
-    const targetId = productId || activeImage?.productId || 'sink';
+    const targetId = productId || activeImage?.productId || 'cooker-2burner';
     if (onQuickOrderClick) {
       onQuickOrderClick(targetId);
     } else {
@@ -113,7 +113,7 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({
     const targetId = productId || activeImage?.productId || 'cooker-2burner';
     if (onViewSpecs) {
       onViewSpecs(targetId);
-    } else if (targetId === 'sink') {
+    } else if (targetId === 'cooker-2burner') {
       const el = document.getElementById('specs-section');
       if (el) el.scrollIntoView({ behavior: 'smooth' });
     }
@@ -138,25 +138,12 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({
             Explore Kitchen Appliances
           </h2>
           <p className="text-slate-600 text-xs sm:text-sm mt-1.5">
-            Inspect every angle, finish, and dimension for our Smart Piano Sink and companion 2-burner gas cooker.
+            Inspect every angle, finish, and dimension for our 2-Flip-Up Double Gas Burner and companion Smart Paino Sink.
           </p>
         </div>
 
         {/* 1. Main Product Selector Tabs */}
         <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-5">
-          <button
-            type="button"
-            onClick={() => handleProductTabChange('sink')}
-            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer border ${
-              selectedProduct === 'sink'
-                ? 'bg-[#0a192f] text-white border-[#0a192f] shadow-md'
-                : 'bg-white text-slate-700 border-slate-200 hover:border-slate-300 hover:bg-slate-100'
-            }`}
-          >
-            <Waves className="w-4 h-4 text-blue-400" />
-            <span>Smart Paino Sink (Main) ({sinkCount})</span>
-          </button>
-
           <button
             type="button"
             onClick={() => handleProductTabChange('cooker-2burner')}
@@ -167,7 +154,20 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({
             }`}
           >
             <Flame className="w-4 h-4 text-amber-500" />
-            <span>2-Flip Gas Cooker (Suggested) ({cooker2bCount})</span>
+            <span>2-Flip-Up Gas Burner (Main) ({cooker2bCount})</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => handleProductTabChange('sink')}
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer border ${
+              selectedProduct === 'sink'
+                ? 'bg-[#0a192f] text-white border-[#0a192f] shadow-md'
+                : 'bg-white text-slate-700 border-slate-200 hover:border-slate-300 hover:bg-slate-100'
+            }`}
+          >
+            <Waves className="w-4 h-4 text-blue-400" />
+            <span>Smart Paino Sink (Suggested) ({sinkCount})</span>
           </button>
 
           <button

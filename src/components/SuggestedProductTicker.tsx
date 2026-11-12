@@ -1,7 +1,7 @@
 import React from 'react';
 import { ALTERNATIVE_PRODUCTS, AlternativeProduct } from '../data/alternativeProducts';
 import { formatNaira } from '../config';
-import { Flame, Zap, ArrowRight, Sparkles, ChevronRight, Eye, PlusCircle } from 'lucide-react';
+import { Waves, Zap, ArrowRight, Sparkles, ChevronRight, Eye, PlusCircle } from 'lucide-react';
 
 interface SuggestedProductTickerProps {
   onViewSpecs: (product: AlternativeProduct) => void;
@@ -38,28 +38,28 @@ export const SuggestedProductTicker: React.FC<SuggestedProductTickerProps> = ({
   const tickerItems = [
     {
       product: suggestedProduct,
-      icon: Flame,
-      badge: "MATCHING LUXURY GAS COOKER",
-      badgeColor: "bg-amber-500/20 text-amber-300 border-amber-500/30",
-      title: "2-Flip-Up Double Gas Burner With Timer (75×45cm)",
-      highlight: "90° Flip-Up Hinges • 0-180m Auto-Off Safety Timer • Pure Blue Flame",
+      icon: Waves,
+      badge: "MATCHING LUXURY PIANO SINK",
+      badgeColor: "bg-blue-500/20 text-blue-300 border-blue-500/30",
+      title: "Smart Paino Sink Workstation (75×45cm)",
+      highlight: "Tactile Piano Keys • Hydroelectric LED Temp °C • Flying Rain Waterfall",
       price: formatNaira(suggestedProduct.price),
     },
     {
       product: suggestedProduct,
       icon: Zap,
-      badge: "5-SECOND INSTANT CLEANUP",
+      badge: "COMPLETE 9-PIECE KIT",
       badgeColor: "bg-red-500/20 text-red-300 border-red-500/30",
-      title: "Lift Burners Upright with One Finger",
-      highlight: "Wipe Underneath Without Dismantling • 8mm Tempered Crystal Glass",
+      title: "SUS304 Honeycomb Nano Steel Basin",
+      highlight: "High-Pressure Glass Rinser • Solid Wood Cutting Board • Nested Colanders",
       price: formatNaira(suggestedProduct.price),
     },
     {
       product: suggestedProduct,
       icon: Sparkles,
       badge: "PERFECT COUNTERTOP MATCH",
-      badgeColor: "bg-blue-500/20 text-blue-300 border-blue-500/30",
-      title: "Designed to Pair With Your Smart Paino Sink",
+      badgeColor: "bg-amber-500/20 text-amber-300 border-amber-500/30",
+      title: "Designed to Pair With Your 2-Flip-Up Gas Burner",
       highlight: "Save ₦5,000 Multi-Product Bundle Discount • Pay On Delivery Nationwide",
       price: "Bundle Available",
     },
@@ -76,10 +76,10 @@ export const SuggestedProductTicker: React.FC<SuggestedProductTickerProps> = ({
 
       {/* Floating Sticky Indicator on Left (Desktop & Mobile) */}
       <div className="absolute left-0 top-0 bottom-0 z-20 flex items-center px-2.5 sm:px-3.5 bg-gradient-to-r from-[#070e1c] via-[#070e1c] to-transparent pointer-events-none">
-        <div className="flex items-center gap-1.5 bg-amber-600/90 backdrop-blur-md text-white text-[10px] sm:text-xs font-black px-2.5 py-1 rounded-full uppercase tracking-wider shadow-sm pointer-events-auto shrink-0 border border-amber-400/40">
-          <Flame className="w-3 h-3 text-yellow-300 animate-pulse shrink-0" />
-          <span className="hidden sm:inline">MATCHING GAS COOKER:</span>
-          <span className="sm:hidden">COOKER:</span>
+        <div className="flex items-center gap-1.5 bg-blue-600/90 backdrop-blur-md text-white text-[10px] sm:text-xs font-black px-2.5 py-1 rounded-full uppercase tracking-wider shadow-sm pointer-events-auto shrink-0 border border-blue-400/40">
+          <Waves className="w-3 h-3 text-cyan-300 animate-pulse shrink-0" />
+          <span className="hidden sm:inline">MATCHING PIANO SINK:</span>
+          <span className="sm:hidden">SINK:</span>
         </div>
       </div>
 
@@ -87,7 +87,7 @@ export const SuggestedProductTicker: React.FC<SuggestedProductTickerProps> = ({
       <div className="absolute right-0 top-0 bottom-0 z-20 w-12 sm:w-20 bg-gradient-to-l from-[#070e1c] to-transparent pointer-events-none" />
 
       {/* Marquee Track Container */}
-      <div className="py-2.5 sm:py-3 pl-28 sm:pl-48 overflow-hidden">
+      <div className="py-2.5 sm:py-3 pl-24 sm:pl-48 overflow-hidden">
         <div 
           className="animate-marquee-slide flex items-center gap-6 sm:gap-10 cursor-pointer"
           title="Pause and click any suggested appliance to view specs and add to order form"

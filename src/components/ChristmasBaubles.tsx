@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { xmasMusic } from '../utils/xmasMusic';
 import { Sparkles } from 'lucide-react';
 
 interface BaubleItem {
@@ -32,7 +31,7 @@ const BAUBLES: BaubleItem[] = [
     colorScheme: 'gold',
     animationClass: 'animate-bauble-2',
     pattern: 'stars',
-    label: '₦120K Unit'
+    label: '₦160K Unit'
   },
   {
     id: 'b3',
@@ -42,7 +41,7 @@ const BAUBLES: BaubleItem[] = [
     colorScheme: 'sapphire',
     animationClass: 'animate-bauble-3',
     pattern: 'diamonds',
-    label: 'Paino Sink'
+    label: 'Flip-Up Gas'
   },
   {
     id: 'b4',
@@ -52,7 +51,7 @@ const BAUBLES: BaubleItem[] = [
     colorScheme: 'emerald',
     animationClass: 'animate-bauble-1',
     pattern: 'snowflake',
-    label: 'Cooker ₦160K'
+    label: 'Sink ₦130K'
   },
   {
     id: 'b5',
@@ -79,10 +78,7 @@ const BAUBLES: BaubleItem[] = [
 export const ChristmasBaubles: React.FC = () => {
   const [activeSparkleId, setActiveSparkleId] = useState<string | null>(null);
 
-  const handleBaubleClick = (b: BaubleItem, index: number) => {
-    // Play gentle acoustic ornament chime
-    xmasMusic.playOrnamentChime(1.0 + index * 0.12);
-
+  const handleBaubleClick = (b: BaubleItem) => {
     // Show temporary sparkle burst
     setActiveSparkleId(b.id);
     setTimeout(() => {
@@ -138,8 +134,8 @@ export const ChristmasBaubles: React.FC = () => {
             key={b.id}
             className={`absolute top-0 pointer-events-auto cursor-pointer group ${hideOnMobile ? 'hidden md:block' : 'block'}`}
             style={{ left: `${b.leftPercent}%` }}
-            onClick={() => handleBaubleClick(b, idx)}
-            title={`Christmas Ornament: ${b.label} (Tap to chime!)`}
+            onClick={() => handleBaubleClick(b)}
+            title={`Christmas Ornament: ${b.label}`}
           >
             {/* Swinging container with top-center pivot */}
             <div className={`${b.animationClass} flex flex-col items-center group-hover:scale-110 transition-transform duration-300`}>

@@ -111,9 +111,9 @@ export const OrderForm: React.FC<OrderFormProps> = ({
     notes: '',
   });
 
-  // Multi-product quantities for checkout: Sink is main product (1), Cooker is companion (0)
-  const [sinkQty, setSinkQty] = useState<number>(1);
-  const [cooker2bQty, setCooker2bQty] = useState<number>(0);
+  // Multi-product quantities for checkout: Cooker is main product (1), Sink is companion (0)
+  const [cooker2bQty, setCooker2bQty] = useState<number>(1);
+  const [sinkQty, setSinkQty] = useState<number>(0);
   const [recentlyAddedId, setRecentlyAddedId] = useState<string | null>(null);
 
   // Automatically react to product additions from gallery or ticker
@@ -171,30 +171,31 @@ export const OrderForm: React.FC<OrderFormProps> = ({
   }, [formData.state]);
 
   const isLagosState = formData.state.toLowerCase().trim() === 'lagos';
+  const isAbujaState = formData.state.toLowerCase().includes('abuja');
   const deliveryFee = isLagosState ? 0 : (deliveryMethod === 'doorstep' ? 5000 : 0);
   
-  // Product Unit Prices: Sink is 120K (config.promoPrice), Cooker is 160K
-  const SINK_PRICE = config.promoPrice; // 120000
-  const COOKER_2B_PRICE = 160000;
+  // Product Unit Prices: Cooker is 160K (config.promoPrice), Sink is 130K
+  const COOKER_2B_PRICE = config.promoPrice; // 160000
+  const SINK_PRICE = 130000;
 
   // Itemized array of selected products
   const selectedItems: OrderItem[] = [];
-  if (sinkQty > 0) {
-    selectedItems.push({
-      id: 'sink',
-      name: `${config.productName} (75×45cm)`,
-      quantity: sinkQty,
-      unitPrice: SINK_PRICE,
-      totalPrice: sinkQty * SINK_PRICE
-    });
-  }
   if (cooker2bQty > 0) {
     selectedItems.push({
       id: 'cooker-2burner',
-      name: '2-Flip-Up Double Gas Burner With Timer (75×45cm)',
+      name: `${config.productName} (75×45cm)`,
       quantity: cooker2bQty,
       unitPrice: COOKER_2B_PRICE,
       totalPrice: cooker2bQty * COOKER_2B_PRICE
+    });
+  }
+  if (sinkQty > 0) {
+    selectedItems.push({
+      id: 'sink',
+      name: 'Smart Paino Sink (75×45cm)',
+      quantity: sinkQty,
+      unitPrice: SINK_PRICE,
+      totalPrice: sinkQty * SINK_PRICE
     });
   }
 
@@ -208,7 +209,11 @@ export const OrderForm: React.FC<OrderFormProps> = ({
   }
 
   const totalPrice = Math.max(0, itemsSubtotal - multiItemDiscount) + deliveryFee;
-  const estimatedDays = isLagosState ? '1 to 2 business days' : '3 to 5 business days';
+  const estimatedDays = isLagosState
+    ? '1 to 2 business days'
+    : isAbujaState
+      ? '24 hrs / Same-Day Delivery'
+      : '3 to 5 business days';
 
   // Handler when customer adds a suggested companion cooktop on the order receipt screen
   const handleAddSuggestedProduct = async (product: AlternativeProduct, qtyToAdd?: number) => {
@@ -436,6 +441,7 @@ export const OrderForm: React.FC<OrderFormProps> = ({
           delivery_address: formData.address,
           email: formData.email || "Not provided",
           delivery_method: deliveryMethodText,
+          estimated_delivery: estimatedDays,
           pickup_motor_park: effectivePark || "N/A",
           ordered_items: itemsSummaryText,
           total_products_count: totalItemCount,
@@ -496,6 +502,7 @@ export const OrderForm: React.FC<OrderFormProps> = ({
     if (!submittedOrder) return '';
     const { orderId, orderData, totalAmount } = submittedOrder;
     const isCustomerLagos = orderData.state.toLowerCase().trim() === 'lagos';
+    const isCustomerAbuja = orderData.state.toLowerCase().includes('abuja');
     const deliveryMethodText = isCustomerLagos
       ? 'Direct Doorstep Delivery (FREE)'
       : (orderData.deliveryMethod === 'doorstep'
@@ -518,7 +525,7 @@ export const OrderForm: React.FC<OrderFormProps> = ({
       (orderData.multiItemDiscount && orderData.multiItemDiscount > 0 ? `*Package Discount:* -${formatNaira(orderData.multiItemDiscount)} 🎉\n` : '') +
       `*Delivery Method:* ${deliveryMethodText}\n` +
       (orderData.pickupMotorPark ? `*Pick-Up Station:* ${orderData.pickupMotorPark}\n` : '') +
-      `*Estimated Delivery Time:* ${orderData.estimatedDeliveryDays || (isCustomerLagos ? '1 to 2 business days' : '3 to 5 business days')}\n` +
+      `*Estimated Delivery Time:* ${orderData.estimatedDeliveryDays || (isCustomerLagos ? '1 to 2 business days' : isCustomerAbuja ? '24 hrs / Same-Day Delivery' : '3 to 5 business days')}\n` +
       `*TOTAL PAYABLE ON DELIVERY:* ${formatNaira(totalAmount)}\n\n` +
       `*Customer Details:*\n` +
       `• Name: ${orderData.fullName}\n` +
@@ -542,7 +549,7 @@ export const OrderForm: React.FC<OrderFormProps> = ({
             id="order-success-receipt"
             className="bg-white border-2 border-blue-500 rounded-3xl p-6 sm:p-10 shadow-xl relative overflow-hidden"
           >
-            <div className="text-center mb-8">
+            <div className="text-center mb-6">
               <div className="w-16 h-16 rounded-full bg-blue-100 text-blue-600 border border-blue-300 flex items-center justify-center mx-auto mb-4 animate-bounce">
                 <CheckCircle2 className="w-10 h-10" />
               </div>
@@ -555,6 +562,23 @@ export const OrderForm: React.FC<OrderFormProps> = ({
               <p className="text-slate-600 text-sm mt-2 max-w-lg mx-auto">
                 Your order has been recorded in our dispatch system. We will call you shortly to confirm your delivery address before shipment.
               </p>
+            </div>
+
+            {/* Merry Christmas in Advance Celebration Message */}
+            <div className="mb-8 rounded-2xl bg-gradient-to-r from-red-700 via-emerald-900 to-red-700 border-2 border-amber-400 p-4 sm:p-5 text-white text-center shadow-lg relative overflow-hidden">
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+                <div className="w-11 h-11 rounded-2xl bg-white/10 border border-amber-300/60 flex items-center justify-center text-2xl shrink-0">
+                  🎄
+                </div>
+                <div>
+                  <h4 className="text-base sm:text-lg font-black tracking-tight text-amber-300">
+                    🎄 Merry Christmas in Advance, {submittedOrder.orderData.fullName}! 🎁✨
+                  </h4>
+                  <p className="text-xs sm:text-sm text-white/95 mt-0.5 leading-relaxed">
+                    From all of us at <strong>Moonlight Luxury Home Tech</strong>, we wish you and your family a joyful festive season filled with warmth, delicious meals, and a sparkling new kitchen!
+                  </p>
+                </div>
+              </div>
             </div>
 
             {/* Order Summary Receipt Box */}
@@ -662,7 +686,7 @@ export const OrderForm: React.FC<OrderFormProps> = ({
               <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
                 <span className="inline-flex items-center gap-1.5 text-xs font-black tracking-wider uppercase text-amber-900 bg-amber-200/80 border border-amber-400 px-3 py-1 rounded-full shadow-xs">
                   <Sparkles className="w-3.5 h-3.5 text-amber-700" />
-                  <span>SUGGESTED COMPANIONS FOR YOUR NEW SINK</span>
+                  <span>SUGGESTED COMPANION FOR YOUR NEW COOKER</span>
                 </span>
                 <span className="text-[11px] font-bold text-blue-900 bg-blue-100 px-2.5 py-0.5 rounded-md border border-blue-200">
                   Ships in Same Parcel &bull; Free Combined Dispatch
@@ -673,7 +697,7 @@ export const OrderForm: React.FC<OrderFormProps> = ({
                 Complete Your Luxury Kitchen Before We Dispatch!
               </h4>
               <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-5 max-w-2xl">
-                Customers who ordered the <strong>Smart Piano Sink</strong> often add one of Moonlight's matching executive built-in cooktops to their package. Add one or more now to your existing order <span className="font-mono font-bold text-blue-700">#{submittedOrder.orderId}</span> to enjoy an instant <strong>₦5,000 multi-product bundle discount</strong> and combined pay-on-delivery inspection.
+                Customers who ordered the <strong>2-Flip-Up Double Gas Burner</strong> often add Moonlight&apos;s matching <strong>Smart Paino Sink</strong> (<strong>₦130,000</strong>) to their package. Add it now to your existing order <span className="font-mono font-bold text-blue-700">#{submittedOrder.orderId}</span> to enjoy an instant <strong>₦5,000 multi-product bundle discount</strong> and combined pay-on-delivery inspection.
               </p>
 
               {/* Live Feedback banner if product was added */}
@@ -949,7 +973,7 @@ export const OrderForm: React.FC<OrderFormProps> = ({
                   </span>
                 </div>
                 <p className="text-xs text-slate-600">
-                  Select your Smart Paino Sink Workstation and/or matching 2-Flip-Up Gas Cooker. Order 2 or more products to get an instant <strong>₦5,000 multi-product bundle discount</strong>!
+                  Select your 2-Flip-Up Double Gas Burner With Timer and/or matching Smart Paino Sink. Order 2 or more products to get an instant <strong>₦5,000 multi-product bundle discount</strong>!
                 </p>
 
                 {/* Quick Presets / Bundle Shortcuts */}
@@ -960,36 +984,36 @@ export const OrderForm: React.FC<OrderFormProps> = ({
                   <div className="flex flex-wrap gap-2">
                     <button
                       type="button"
-                      onClick={() => { setSinkQty(1); setCooker2bQty(0); }}
+                      onClick={() => { setCooker2bQty(1); setSinkQty(0); }}
                       className={`text-xs px-3.5 py-2 rounded-xl border transition-all cursor-pointer font-bold ${
-                        sinkQty === 1 && cooker2bQty === 0
+                        cooker2bQty === 1 && sinkQty === 0
                           ? 'bg-[#0a192f] border-[#0a192f] text-white shadow-xs'
                           : 'bg-white border-slate-200 text-slate-700 hover:border-slate-300'
                       }`}
                     >
-                      1x Smart Paino Sink ({formatNaira(SINK_PRICE)})
+                      1x 2-Flip-Up Gas Burner ({formatNaira(COOKER_2B_PRICE)})
                     </button>
                     <button
                       type="button"
-                      onClick={() => { setSinkQty(1); setCooker2bQty(1); }}
+                      onClick={() => { setCooker2bQty(1); setSinkQty(1); }}
                       className={`text-xs px-3.5 py-2 rounded-xl border transition-all cursor-pointer font-bold ${
-                        sinkQty === 1 && cooker2bQty === 1
+                        cooker2bQty === 1 && sinkQty === 1
                           ? 'bg-blue-600 border-blue-600 text-white shadow-xs'
                           : 'bg-white border-slate-200 text-slate-700 hover:border-slate-300'
                       }`}
                     >
-                      Piano Sink + Cooker Bundle (Save ₦5k 🎉)
+                      Gas Burner + Piano Sink Bundle (Save ₦5k 🎉)
                     </button>
                     <button
                       type="button"
-                      onClick={() => { setSinkQty(0); setCooker2bQty(1); }}
+                      onClick={() => { setCooker2bQty(0); setSinkQty(1); }}
                       className={`text-xs px-3.5 py-2 rounded-xl border transition-all cursor-pointer font-bold ${
-                        sinkQty === 0 && cooker2bQty === 1
+                        cooker2bQty === 0 && sinkQty === 1
                           ? 'bg-[#0a192f] border-[#0a192f] text-white shadow-xs'
                           : 'bg-white border-slate-200 text-slate-700 hover:border-slate-300'
                       }`}
                     >
-                      Only 2-Burner Gas Cooker ({formatNaira(COOKER_2B_PRICE)})
+                      Only Smart Paino Sink ({formatNaira(SINK_PRICE)})
                     </button>
                   </div>
                 </div>
@@ -998,13 +1022,13 @@ export const OrderForm: React.FC<OrderFormProps> = ({
               {/* Product Selection List */}
               <div className="space-y-4">
                 
-                {/* Product 1: Smart Paino Sink (Main Product) */}
+                {/* Product 1: 2-Flip-Up Double Gas Burner With Timer (Main Product) */}
                 <div 
-                  id="product-card-sink"
+                  id="product-card-cooker-2burner"
                   className={`p-4 rounded-xl border transition-all ${
-                    recentlyAddedId === 'sink'
+                    recentlyAddedId === 'cooker-2burner'
                       ? 'ring-4 ring-blue-400 bg-blue-50/60 border-blue-500 shadow-md animate-pulse'
-                      : sinkQty > 0 
+                      : cooker2bQty > 0 
                         ? 'bg-white border-2 border-blue-500 shadow-sm' 
                         : 'bg-white/70 border-slate-200 opacity-90'
                   }`}
@@ -1012,22 +1036,22 @@ export const OrderForm: React.FC<OrderFormProps> = ({
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div className="flex items-start gap-3">
                       <img 
-                        src="/images/smart_piano_sink_1789548024514.jpg" 
-                        alt="Smart Paino Sink Workstation" 
+                        src="https://www.moonlightluxuryhometech.shop/images/cooker_active_blue_flames.jpg" 
+                        alt="2-Flip-Up Double Gas Burner With Timer" 
                         className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-lg border border-slate-200 bg-slate-100 flex-shrink-0"
                       />
                       <div>
                         <div className="flex items-center gap-2 mb-1 flex-wrap">
                           <span className="text-[10px] font-bold uppercase tracking-wider bg-blue-100 text-blue-900 px-2 py-0.5 rounded border border-blue-200 flex items-center gap-1">
-                            <Sparkles className="w-3 h-3 text-blue-600" />
-                            <span>Multifunctional Workstation (Main Product)</span>
+                            <Flame className="w-3 h-3 text-blue-600" />
+                            <span>90° Hinged Cooktop (Main Product)</span>
                           </span>
-                          <span className="text-xs text-slate-400 line-through">₦160,000</span>
-                          <span className="text-xs font-black text-[#0a192f]">{formatNaira(SINK_PRICE)}</span>
+                          <span className="text-xs text-slate-400 line-through">₦200,000</span>
+                          <span className="text-xs font-black text-[#0a192f]">{formatNaira(COOKER_2B_PRICE)}</span>
                           <span className="text-[10px] font-black text-white bg-red-600 border border-amber-300 px-2 py-0.5 rounded shadow-xs uppercase">
                             SAVE ₦40,000 (BOLD XMAS DISCOUNT)
                           </span>
-                          {recentlyAddedId === 'sink' && (
+                          {recentlyAddedId === 'cooker-2burner' && (
                             <span className="text-[10px] font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded border border-emerald-300 animate-pulse">
                               ✨ Added to Your Form!
                             </span>
@@ -1037,7 +1061,7 @@ export const OrderForm: React.FC<OrderFormProps> = ({
                           {config.productName} (75×45cm)
                         </h4>
                         <p className="text-[11px] text-slate-500 mt-1 line-clamp-2">
-                          Tactile piano keys, flying rain waterfall, real-time LED temp display (°C), high-pressure cup washer, solid wood cutting board &amp; nested colanders.
+                          90° flip-up hinged burners for instant 1-wipe cleanups underneath, 0–180m auto-off timer, 8mm explosion-proof tempered glass &amp; pure blue flame jets.
                         </p>
                       </div>
                     </div>
@@ -1046,27 +1070,27 @@ export const OrderForm: React.FC<OrderFormProps> = ({
                       <div className="text-left sm:text-right">
                         <span className="text-[10px] uppercase text-slate-500 block">Subtotal</span>
                         <span className="text-sm font-bold font-mono text-blue-700">
-                          {sinkQty > 0 ? formatNaira(sinkQty * SINK_PRICE) : '₦0'}
+                          {cooker2bQty > 0 ? formatNaira(cooker2bQty * COOKER_2B_PRICE) : '₦0'}
                         </span>
                       </div>
 
                       <div className="flex items-center bg-slate-100 border border-slate-300 rounded-lg p-1">
                         <button
                           type="button"
-                          onClick={() => setSinkQty(prev => Math.max(0, prev - 1))}
+                          onClick={() => setCooker2bQty(prev => Math.max(0, prev - 1))}
                           className="p-1 text-slate-600 hover:text-slate-900 hover:bg-white rounded transition-colors cursor-pointer"
-                          aria-label="Decrease sink quantity"
+                          aria-label="Decrease gas burner quantity"
                         >
                           <Minus className="w-4 h-4" />
                         </button>
                         <span className="px-3 text-sm font-bold text-slate-900 font-mono min-w-[28px] text-center">
-                          {sinkQty}
+                          {cooker2bQty}
                         </span>
                         <button
                           type="button"
-                          onClick={() => setSinkQty(prev => Math.min(10, prev + 1))}
+                          onClick={() => setCooker2bQty(prev => Math.min(10, prev + 1))}
                           className="p-1 text-slate-600 hover:text-slate-900 hover:bg-white rounded transition-colors cursor-pointer"
-                          aria-label="Increase sink quantity"
+                          aria-label="Increase gas burner quantity"
                         >
                           <Plus className="w-4 h-4" />
                         </button>
@@ -1075,13 +1099,13 @@ export const OrderForm: React.FC<OrderFormProps> = ({
                   </div>
                 </div>
 
-                {/* Product 2: 2-Flip-Up Double Gas Burner With Timer (Companion Appliance) */}
+                {/* Product 2: Smart Paino Sink (Companion Appliance) */}
                 <div 
-                  id="product-card-cooker-2burner"
+                  id="product-card-sink"
                   className={`p-4 rounded-xl border transition-all ${
-                    recentlyAddedId === 'cooker-2burner'
+                    recentlyAddedId === 'sink'
                       ? 'ring-4 ring-amber-400 bg-amber-50/50 border-amber-500 shadow-md animate-pulse'
-                      : cooker2bQty > 0 
+                      : sinkQty > 0 
                         ? 'bg-white border-2 border-amber-500 shadow-sm' 
                         : 'bg-white/70 border-slate-200 opacity-80'
                   }`}
@@ -1094,29 +1118,29 @@ export const OrderForm: React.FC<OrderFormProps> = ({
                           if (prod && onViewSuggestedProduct) onViewSuggestedProduct(prod);
                         }}
                         className="relative cursor-pointer group shrink-0"
-                        title="Click to view 4 pictures and full details"
+                        title="Click to view 5 pictures and full details"
                       >
                         <img 
-                          src="https://www.moonlightluxuryhometech.shop/images/cooker_active_blue_flames.jpg" 
-                          alt="2-Flip-Up Double Gas Burner" 
+                          src="/images/smart_piano_sink_1789548024514.jpg" 
+                          alt="Smart Paino Sink" 
                           className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-lg border border-slate-200 bg-slate-100 group-hover:scale-105 transition-transform"
                         />
                         <span className="absolute bottom-0 inset-x-0 bg-black/80 text-[8px] font-bold text-amber-300 text-center py-0.5 rounded-b-lg">
-                          4 Photos
+                          5 Photos
                         </span>
                       </div>
                       <div>
                         <div className="flex items-center gap-2 mb-1 flex-wrap">
                           <span className="text-[10px] font-bold uppercase tracking-wider bg-amber-100 text-amber-900 px-2 py-0.5 rounded border border-amber-200 flex items-center gap-1">
-                            <Flame className="w-3 h-3 text-amber-600" />
-                            <span>Matching Luxury Gas Cooker</span>
+                            <Sparkles className="w-3 h-3 text-amber-600" />
+                            <span>Matching Luxury Piano Sink</span>
                           </span>
-                          <span className="text-xs text-slate-400 line-through">₦200,000</span>
-                          <span className="text-xs font-black text-[#0a192f]">{formatNaira(COOKER_2B_PRICE)}</span>
+                          <span className="text-xs text-slate-400 line-through">₦160,000</span>
+                          <span className="text-xs font-black text-[#0a192f]">{formatNaira(SINK_PRICE)}</span>
                           <span className="text-[10px] font-black text-white bg-red-600 border border-amber-300 px-2 py-0.5 rounded shadow-xs uppercase">
-                            SAVE ₦40,000 (BOLD XMAS DISCOUNT)
+                            SAVE ₦30,000 (BOLD XMAS DISCOUNT)
                           </span>
-                          {recentlyAddedId === 'cooker-2burner' && (
+                          {recentlyAddedId === 'sink' && (
                             <span className="text-[10px] font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded border border-emerald-300 animate-pulse">
                               ✨ Added to Your Form!
                             </span>
@@ -1131,7 +1155,7 @@ export const OrderForm: React.FC<OrderFormProps> = ({
                             className="text-sm sm:text-base font-bold text-[#0a192f] hover:text-amber-600 cursor-pointer leading-snug"
                             title="Click to view full pictures and specifications"
                           >
-                            2-Flip-Up Double Gas Burner With Timer (75×45cm)
+                            Smart Paino Sink (75×45cm)
                           </h4>
                           <button
                             type="button"
@@ -1142,11 +1166,11 @@ export const OrderForm: React.FC<OrderFormProps> = ({
                             className="text-[11px] font-bold text-amber-700 hover:text-amber-900 underline inline-flex items-center gap-1 cursor-pointer bg-amber-50 px-2 py-0.5 rounded border border-amber-200"
                           >
                             <Camera className="w-3 h-3 text-amber-600" />
-                            <span>View 4 Pictures &amp; Specs</span>
+                            <span>View 5 Pictures &amp; Specs</span>
                           </button>
                         </div>
                         <p className="text-[11px] text-slate-500 mt-1 line-clamp-2">
-                          90° hinged burners for instant 1-wipe cleanups underneath, 0–180m mechanical auto-off safety timer, pure blue flame zero pot soot.
+                          Tactile piano keys, flying rain waterfall, real-time LED temp display (°C), high-pressure cup washer, solid wood cutting board &amp; nested colanders.
                         </p>
                       </div>
                     </div>
@@ -1155,14 +1179,14 @@ export const OrderForm: React.FC<OrderFormProps> = ({
                       <div className="text-left sm:text-right">
                         <span className="text-[10px] uppercase text-slate-500 block">Subtotal</span>
                         <span className="text-sm font-bold font-mono text-amber-700">
-                          {cooker2bQty > 0 ? formatNaira(cooker2bQty * COOKER_2B_PRICE) : '₦0'}
+                          {sinkQty > 0 ? formatNaira(sinkQty * SINK_PRICE) : '₦0'}
                         </span>
                       </div>
 
-                      {cooker2bQty === 0 ? (
+                      {sinkQty === 0 ? (
                         <button
                           type="button"
-                          onClick={() => setCooker2bQty(1)}
+                          onClick={() => setSinkQty(1)}
                           className="px-3.5 py-2 bg-amber-600 hover:bg-amber-500 text-white text-xs font-black rounded-lg transition-all shadow-xs cursor-pointer flex items-center gap-1.5"
                         >
                           <Plus className="w-3.5 h-3.5" />
@@ -1172,20 +1196,20 @@ export const OrderForm: React.FC<OrderFormProps> = ({
                         <div className="flex items-center bg-slate-100 border border-slate-300 rounded-lg p-1">
                           <button
                             type="button"
-                            onClick={() => setCooker2bQty(prev => Math.max(0, prev - 1))}
+                            onClick={() => setSinkQty(prev => Math.max(0, prev - 1))}
                             className="p-1 text-slate-600 hover:text-slate-900 hover:bg-white rounded transition-colors cursor-pointer"
-                            aria-label="Decrease cooker quantity"
+                            aria-label="Decrease sink quantity"
                           >
                             <Minus className="w-4 h-4" />
                           </button>
                           <span className="px-3 text-sm font-bold text-slate-900 font-mono min-w-[28px] text-center">
-                            {cooker2bQty}
+                            {sinkQty}
                           </span>
                           <button
                             type="button"
-                            onClick={() => setCooker2bQty(prev => Math.min(10, prev + 1))}
+                            onClick={() => setSinkQty(prev => Math.min(10, prev + 1))}
                             className="p-1 text-slate-600 hover:text-slate-900 hover:bg-white rounded transition-colors cursor-pointer"
-                            aria-label="Increase cooker quantity"
+                            aria-label="Increase sink quantity"
                           >
                             <Plus className="w-4 h-4" />
                           </button>
@@ -1257,6 +1281,12 @@ export const OrderForm: React.FC<OrderFormProps> = ({
                     <span className="font-semibold text-slate-800">
                       {isLagosState ? (
                         <span className="text-blue-700 font-bold">FREE Doorstep (1–2 Days)</span>
+                      ) : isAbujaState ? (
+                        deliveryMethod === 'doorstep' ? (
+                          <span className="text-emerald-700 font-bold">+₦5,000 Doorstep (24 hrs / Same-Day)</span>
+                        ) : (
+                          <span className="text-emerald-700 font-bold">FREE Park Pickup (24 hrs / Same-Day)</span>
+                        )
                       ) : deliveryMethod === 'doorstep' ? (
                         <span className="text-blue-900 font-bold">+₦5,000 Doorstep (3–5 Days)</span>
                       ) : (
@@ -1379,22 +1409,35 @@ export const OrderForm: React.FC<OrderFormProps> = ({
                           Delivery Options for {formData.state}
                         </span>
                         <p className="text-[11px] text-slate-500 mt-0.5">
-                          Choose how you would like to receive your sink in {formData.state}
+                          Choose how you would like to receive your gas cooker package in {formData.state}
                         </p>
                       </div>
-                      <div className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 bg-white border border-slate-200 px-3 py-1 rounded-full self-start sm:self-auto shadow-xs">
-                        <Clock className="w-3.5 h-3.5 text-blue-600" />
-                        <span>Estimated Transit: 3 to 5 Business Days</span>
+                      <div className={`inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1 rounded-full self-start sm:self-auto shadow-xs border ${
+                        isAbujaState
+                          ? 'bg-emerald-50 text-emerald-800 border-emerald-300'
+                          : 'bg-white text-slate-700 border-slate-200'
+                      }`}>
+                        <Clock className={`w-3.5 h-3.5 ${isAbujaState ? 'text-emerald-600' : 'text-blue-600'}`} />
+                        <span>{isAbujaState ? '24 Hrs / Same-Day Delivery' : 'Estimated Transit: 3 to 5 Business Days'}</span>
                       </div>
                     </div>
 
-                    {/* Notice for Other States */}
-                    <div className="bg-blue-50 border border-blue-200 rounded-xl p-3 text-xs text-slate-700 flex items-start gap-2.5">
-                      <AlertCircle className="w-4 h-4 text-blue-700 shrink-0 mt-0.5" />
-                      <div className="leading-relaxed">
-                        <strong className="text-[#0a192f]">Delivery Policy for {formData.state}:</strong> For states outside Lagos, standard dispatch is shipped to your state/city's major commercial motor park for pick-up (FREE). If you want it delivered directly to your doorstep/site, it will attract an extra fee of <strong>₦5,000</strong>.
+                    {/* Notice for Abuja vs Other States */}
+                    {isAbujaState ? (
+                      <div className="bg-emerald-50 border border-emerald-300 rounded-xl p-3 text-xs text-emerald-950 flex items-start gap-2.5">
+                        <Zap className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                        <div className="leading-relaxed">
+                          <strong className="text-emerald-900">Abuja (FCT) 24 Hrs / Same-Day Delivery:</strong> Customers in Abuja enjoy express <strong>24 hrs / Same-Day Delivery</strong>! Pick up at your selected Abuja motor park (FREE) or choose direct doorstep delivery (<strong>+₦5,000</strong>).
+                        </div>
                       </div>
-                    </div>
+                    ) : (
+                      <div className="bg-blue-50 border border-blue-200 rounded-xl p-3 text-xs text-slate-700 flex items-start gap-2.5">
+                        <AlertCircle className="w-4 h-4 text-blue-700 shrink-0 mt-0.5" />
+                        <div className="leading-relaxed">
+                          <strong className="text-[#0a192f]">Delivery Policy for {formData.state}:</strong> For states outside Lagos, standard dispatch is shipped to your state/city's major commercial motor park for pick-up (FREE). If you want it delivered directly to your doorstep/site, it will attract an extra fee of <strong>₦5,000</strong>.
+                        </div>
+                      </div>
+                    )}
 
                     {/* Interactive Selection Cards */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
@@ -1421,8 +1464,8 @@ export const OrderForm: React.FC<OrderFormProps> = ({
                           Standard collection at your city's central commercial transport park or terminal (e.g. Peace Mass, GIGM, Young Shall Grow, ABC).
                         </p>
                         <div className="flex items-center justify-between text-[11px] pt-2 border-t border-slate-200 text-slate-500 w-full">
-                          <span className="flex items-center gap-1 text-slate-600">
-                            <Clock className="w-3 h-3 text-blue-600" /> 3–5 Business Days
+                          <span className={`flex items-center gap-1 font-semibold ${isAbujaState ? 'text-emerald-700' : 'text-slate-600'}`}>
+                            <Clock className={`w-3 h-3 ${isAbujaState ? 'text-emerald-600' : 'text-blue-600'}`} /> {isAbujaState ? '24 hrs / Same-Day' : '3–5 Business Days'}
                           </span>
                           <span className={`font-bold ${deliveryMethod === 'park_pickup' ? 'text-blue-700' : 'text-slate-400'}`}>
                             {deliveryMethod === 'park_pickup' ? '✓ Selected' : 'Choose this'}
@@ -1453,8 +1496,8 @@ export const OrderForm: React.FC<OrderFormProps> = ({
                           A local dispatch courier brings the heavy package directly to your house, site, or office gate in {formData.state}.
                         </p>
                         <div className="flex items-center justify-between text-[11px] pt-2 border-t border-slate-200 text-slate-500 w-full">
-                          <span className="flex items-center gap-1 text-slate-600">
-                            <Clock className="w-3 h-3 text-blue-900" /> 3–5 Business Days
+                          <span className={`flex items-center gap-1 font-semibold ${isAbujaState ? 'text-emerald-700' : 'text-slate-600'}`}>
+                            <Clock className={`w-3 h-3 ${isAbujaState ? 'text-emerald-600' : 'text-blue-900'}`} /> {isAbujaState ? '24 hrs / Same-Day' : '3–5 Business Days'}
                           </span>
                           <span className={`font-bold ${deliveryMethod === 'doorstep' ? 'text-blue-900' : 'text-slate-400'}`}>
                             {deliveryMethod === 'doorstep' ? '✓ Selected (+₦5K)' : 'Choose this'}
@@ -1510,7 +1553,7 @@ export const OrderForm: React.FC<OrderFormProps> = ({
                         
                         <div className="mt-2.5 text-[11px] text-slate-700 flex items-center gap-1.5 bg-blue-50/60 p-2.5 rounded-lg border border-blue-200">
                           <CheckCircle2 className="w-3.5 h-3.5 text-blue-600 shrink-0" />
-                          <span>Your sink workstation will be booked directly to <strong>{selectedMotorPark || availableParks[0].name}</strong> for easy collection.</span>
+                          <span>Your order package will be booked directly to <strong>{selectedMotorPark || availableParks[0].name}</strong> for easy collection.</span>
                         </div>
                       </div>
                     )}
@@ -1581,7 +1624,7 @@ export const OrderForm: React.FC<OrderFormProps> = ({
               <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-600 flex items-start gap-3">
                 <Truck className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
                 <div>
-                  <span className="font-semibold text-[#0a192f]">Estimated Delivery Notice:</span> Lagos orders arrive in <strong>1 to 2 business days</strong>. Other states arrive in <strong>3 to 5 business days</strong> (Park Pickup or Doorstep delivery). Please submit only if you or your representative are available to receive the package and complete payment.
+                  <span className="font-semibold text-[#0a192f]">Estimated Delivery Notice:</span> <strong>Abuja (FCT)</strong> orders qualify for <strong>24 hrs / Same-Day Delivery</strong>. Lagos orders arrive in <strong>1 to 2 business days</strong>. Other states arrive in <strong>3 to 5 business days</strong> (Park Pickup or Doorstep delivery). Please submit only if you or your representative are available to receive the package and complete payment.
                 </div>
               </div>
 
@@ -1611,7 +1654,7 @@ export const OrderForm: React.FC<OrderFormProps> = ({
                     <div className="flex flex-col items-center">
                       <span className="text-base sm:text-lg tracking-wide">CONFIRM ORDER &amp; DISPATCH (PAY ON DELIVERY)</span>
                       <span className="text-[11px] font-medium text-blue-100 normal-case tracking-normal">
-                        No advance payment needed &bull; Pay when your sink arrives
+                        No advance payment needed &bull; Pay when your package arrives
                       </span>
                     </div>
                     <ArrowRight className="w-6 h-6 shrink-0" />
@@ -1683,18 +1726,18 @@ export const OrderForm: React.FC<OrderFormProps> = ({
                     </div>
                   </div>
 
-                  {/* Badge 4: Guaranteed Genuine Steel */}
+                  {/* Badge 4: 8mm Tempered Glass */}
                   <div className="bg-slate-50 border border-slate-200 rounded-2xl p-3.5 flex items-center gap-3">
                     <div className="w-10 h-10 rounded-xl bg-purple-100/80 border border-purple-200 flex items-center justify-center text-purple-700 shrink-0">
                       <ShieldCheck className="w-5 h-5" />
                     </div>
                     <div className="min-w-0">
                       <div className="flex items-center gap-1">
-                        <span className="text-xs font-black text-[#0a192f] tracking-tight">SUS304 Certified</span>
+                        <span className="text-xs font-black text-[#0a192f] tracking-tight">8mm Crystal Glass</span>
                         <CheckCircle2 className="w-3.5 h-3.5 text-purple-600 shrink-0" />
                       </div>
                       <span className="text-[11px] text-slate-500 block leading-tight mt-0.5">
-                        Original Honeycomb Nano Steel
+                        Explosion-Proof &amp; Cast Iron
                       </span>
                     </div>
                   </div>

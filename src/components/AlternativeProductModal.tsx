@@ -83,7 +83,7 @@ export const AlternativeProductModal: React.FC<AlternativeProductModalProps> = (
     whatsappNumber,
     product.name,
     1,
-    `Hello! I saw the ${product.name} (${formatNaira(product.price)}) on your website as a matching appliance for the Smart Paino Sink. I would like to order or get more details about dispatch.`
+    `Hello! I saw the ${product.name} (${formatNaira(product.price)}) on your website as a matching appliance for the 2-Flip-Up Double Gas Burner. I would like to order or get more details about dispatch.`
   );
 
   return (
@@ -291,7 +291,7 @@ export const AlternativeProductModal: React.FC<AlternativeProductModalProps> = (
             </span>
             <span className="flex items-center gap-1.5 text-amber-400 font-medium">
               <Truck className="w-4 h-4" />
-              Ships Together With Your Smart Paino Sink (Save ₦5,000 Bundle)
+              Ships Together With Your 2-Flip-Up Gas Burner (Save ₦5,000 Bundle)
             </span>
           </div>
 
@@ -307,7 +307,7 @@ export const AlternativeProductModal: React.FC<AlternativeProductModalProps> = (
                 className="flex-1 inline-flex items-center justify-center gap-2 bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 hover:from-amber-400 hover:to-amber-500 text-black font-black text-sm py-3.5 px-5 rounded-xl shadow-lg transition-transform active:scale-95 cursor-pointer uppercase tracking-wider animate-action-blink"
               >
                 <Zap className="w-4 h-4 fill-slate-950" />
-                <span>⚡ QUICK ORDER PIANO SINK ({formatNaira(product.price)})</span>
+                <span>⚡ QUICK ORDER {product.id === 'sink' ? 'PIANO SINK' : 'GAS BURNER'} ({formatNaira(product.price)})</span>
               </button>
             )}
 

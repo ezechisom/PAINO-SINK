@@ -32,16 +32,16 @@ export const PriceOfferCard: React.FC<PriceOfferCardProps> = ({
           <div className="flex justify-center mb-4">
             <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-red-600 text-white font-black text-xs sm:text-sm tracking-wider uppercase shadow-md border-2 border-amber-300">
               <span className="text-base">🎄</span>
-              <span>BOLD XMAS DISCOUNT SPECIAL &bull; SAVE ₦40,000</span>
+              <span>BOLD XMAS DISCOUNT SPECIAL &bull; SAVE {formatNaira(savings)}</span>
             </span>
           </div>
 
           <div className="text-center mb-5">
             <h2 className="text-xl sm:text-3xl font-extrabold text-[#0a192f] tracking-tight mb-1">
-              COMPLETE SMART PAINO SINK WORKSTATION (75×45CM)
+              COMPLETE 2-FLIP-UP DOUBLE GAS BURNER WITH TIMER (75×45CM)
             </h2>
             <p className="text-slate-600 text-xs sm:text-sm max-w-lg mx-auto">
-              Complete luxury workstation with tactile piano key controls, self-powered LED temperature display, flying rain waterfall spout, and full 9-piece accessories kit.
+              Luxury 90° flip-up double gas cooktop with one-finger lift cleaning, 0–180 minute mechanical safety auto-off timer, pure blue zero-soot flames, and 8mm explosion-proof crystal glass.
             </p>
           </div>
 
@@ -71,13 +71,13 @@ export const PriceOfferCard: React.FC<PriceOfferCardProps> = ({
             {/* Reassurance Banner */}
             <div className="pt-3 border-t border-slate-200 flex flex-wrap items-center justify-center gap-2.5 text-[11px] font-semibold text-slate-700">
               <span className="flex items-center gap-1 text-[#0a192f]">
-                <Flame className="w-3 h-3 text-blue-600" />
-                Piano Water Keys
+                <Flame className="w-3 h-3 text-amber-600" />
+                90° Flip-Up Hinges
               </span>
               <span className="text-slate-300 hidden sm:inline">•</span>
               <span className="flex items-center gap-1 text-[#0a192f]">
                 <Clock className="w-3 h-3 text-blue-600" />
-                Hydro LED Display
+                180-Min Auto-Off Timer
               </span>
               <span className="text-slate-300 hidden sm:inline">•</span>
               <span className="flex items-center gap-1 text-slate-700">
@@ -96,19 +96,19 @@ export const PriceOfferCard: React.FC<PriceOfferCardProps> = ({
           <div className="grid grid-cols-2 gap-2 mb-6 text-xs text-slate-700">
             <div className="flex items-center gap-1.5">
               <CheckCircle2 className="w-3.5 h-3.5 text-blue-600 shrink-0" />
-              <span className="truncate">SUS304 Nano Stainless Steel</span>
+              <span className="truncate">90° One-Finger Flip-Up Burners</span>
             </div>
             <div className="flex items-center gap-1.5">
               <CheckCircle2 className="w-3.5 h-3.5 text-blue-600 shrink-0" />
-              <span className="truncate">Flying Rain Waterfall Spout</span>
+              <span className="truncate">0–180m Auto-Off Safety Timer</span>
             </div>
             <div className="flex items-center gap-1.5">
               <CheckCircle2 className="w-3.5 h-3.5 text-blue-600 shrink-0" />
-              <span className="truncate">High-Pressure Glass Rinser</span>
+              <span className="truncate">8mm Explosion-Proof Glass</span>
             </div>
             <div className="flex items-center gap-1.5">
               <CheckCircle2 className="w-3.5 h-3.5 text-blue-600 shrink-0" />
-              <span className="truncate">Chopping Board &amp; Colander Baskets</span>
+              <span className="truncate">Windproof Cast Iron Stands</span>
             </div>
           </div>
 

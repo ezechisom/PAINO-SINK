@@ -35,8 +35,6 @@ import { FloatingQuickOrderBtn } from './components/FloatingQuickOrderBtn';
 import { FloatingSuggestedProduct } from './components/FloatingSuggestedProduct';
 import { ChristmasBaubles } from './components/ChristmasBaubles';
 import { SnowfallEffect } from './components/SnowfallEffect';
-import { XmasMusicPlayer } from './components/XmasMusicPlayer';
-import { xmasMusic } from './utils/xmasMusic';
 import { ALTERNATIVE_PRODUCTS, AlternativeProduct } from './data/alternativeProducts';
 import { getWhatsAppUrl } from './utils/whatsapp';
 import { trackViewContent, trackInitiateCheckout, trackContact } from './utils/metaPixel';
@@ -59,11 +57,6 @@ export default function App() {
 
   const prevQuickOrderOpenRef = useRef(isQuickOrderOpen);
   const quickOrderCloseTimerRef = useRef<NodeJS.Timeout | null>(null);
-
-  // Automatically start gentle, mild Christmas carol on site load
-  useEffect(() => {
-    xmasMusic.initAutoPlay();
-  }, []);
 
   // Meta Pixel ViewContent event on page load
   useEffect(() => {
@@ -143,6 +136,14 @@ export default function App() {
 
   // Click handler to open the detailed specs & full photo gallery modal for the suggested product
   const handleViewProductSpecs = (productIdOrProduct: string | AlternativeProduct) => {
+    if (typeof productIdOrProduct === 'string' && (productIdOrProduct === 'cooker-2burner' || productIdOrProduct === 'cooker')) {
+      const el = document.getElementById('specs-section');
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+        return;
+      }
+    }
+
     let prod: AlternativeProduct | undefined;
     if (typeof productIdOrProduct === 'string') {
       prod = ALTERNATIVE_PRODUCTS.find(p => p.id === productIdOrProduct);
@@ -226,10 +227,10 @@ export default function App() {
             </div>
             <div>
               <span className="font-extrabold text-[#0a192f] text-base sm:text-lg tracking-tight font-display block leading-tight">
-                SMART PAINO SINK
+                2-FLIP-UP GAS BURNER
               </span>
               <span className="text-[10px] text-blue-700 font-bold tracking-wider uppercase">
-                Multifunctional Workstation &bull; Moonlight Luxury
+                90° Hinged Burners &amp; Timer &bull; Moonlight Luxury
               </span>
             </div>
           </div>
@@ -441,12 +442,6 @@ export default function App() {
           }
           setPlacedOrder(order);
         }}
-      />
-
-      {/* Gentle Christmas Carol Music Player */}
-      <XmasMusicPlayer 
-        isSnowing={isSnowing}
-        onToggleSnow={() => setIsSnowing(prev => !prev)}
       />
 
     </div>

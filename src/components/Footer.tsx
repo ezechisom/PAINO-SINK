@@ -55,7 +55,7 @@ export const Footer: React.FC<FooterProps> = ({ config, onOrderClick, hasPlacedO
               </a>
 
               <a
-                href={`https://wa.me/${config.whatsappNumber}?text=${encodeURIComponent("Hello Moonlight Luxury Home Tech, I just placed an order for the Smart Kitchen Piano Sink.")}`}
+                href={`https://wa.me/${config.whatsappNumber}?text=${encodeURIComponent("Hello Moonlight Luxury Home Tech, I just placed an order for the 2-Flip-Up Double Gas Burner With Timer.")}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 id="footer-whatsapp-support-btn"
@@ -119,7 +119,7 @@ export const Footer: React.FC<FooterProps> = ({ config, onOrderClick, hasPlacedO
               </span>
             </div>
             <p className="text-slate-400 max-w-md leading-relaxed mb-4">
-              Modern multifunctional kitchen workstation engineered with SUS304 nano stainless steel, flying rain cascade waterfall, piano key controls, and integrated preparation accessories.
+              Modern 2-flip-up luxury gas cooktop engineered with 90° hinged burners, 0–180 minute auto-off safety timer, 8mm explosion-proof tempered crystal glass, and pure blue flame jets.
             </p>
             {hasPlacedOrder ? (
               <div className="flex items-center gap-4 text-slate-300">
@@ -176,11 +176,11 @@ export const Footer: React.FC<FooterProps> = ({ config, onOrderClick, hasPlacedO
             &copy; {new Date().getFullYear()} {config.productName}. All rights reserved. Designed for Nigerian homes and modern living.
           </p>
           <div className="flex items-center gap-3">
-            <span>Standard Plumbing Fit</span>
+            <span>Built-In &amp; Tabletop Fit</span>
             <span>&bull;</span>
             <span>750 x 450 mm</span>
             <span>&bull;</span>
-            <span>1-Year Valve Warranty</span>
+            <span>1-Year Timer &amp; Valve Warranty</span>
           </div>
         </div>
 

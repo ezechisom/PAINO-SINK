@@ -1,5 +1,5 @@
 import React from 'react';
-import { CheckCircle2, ArrowRight, Truck, Package, ShieldCheck, Zap, Flame, Clock } from 'lucide-react';
+import { CheckCircle2, ArrowRight, Truck, Package, ShieldCheck, Zap, Flame } from 'lucide-react';
 import { formatNaira } from '../config';
 import { SiteConfig } from '../types';
 import { CountdownTimer } from './CountdownTimer';
@@ -30,15 +30,15 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ config, onOrderClick, 
             <div className="relative rounded-2xl overflow-hidden border border-slate-200 shadow-md bg-white group">
               {/* Product Badge */}
               <div className="absolute top-2.5 left-2.5 z-10 bg-[#0a192f]/90 backdrop-blur-md text-white font-bold text-[10px] tracking-wide px-2.5 py-0.5 rounded-full shadow-xs border border-slate-700 flex items-center gap-1.5">
-                <span className="text-amber-400 font-extrabold">SUS304 NANO STEEL</span>
+                <span className="text-amber-400 font-extrabold">90° FLIP-UP BURNERS</span>
                 <span className="text-slate-200">75 × 45 cm</span>
               </div>
 
               {/* Product Image */}
               <div className="relative overflow-hidden aspect-[4/3] bg-slate-100">
                 <img
-                  src={config.productImages[0]?.url || "/images/smart_piano_sink_1789548024514.jpg"}
-                  alt={config.productImages[0]?.alt || "Smart Paino Sink Workstation"}
+                  src={config.productImages[0]?.url || "https://www.moonlightluxuryhometech.shop/images/cooker_active_blue_flames.jpg"}
+                  alt={config.productImages[0]?.alt || "2-Flip-Up Double Gas Burner With Timer"}
                   className="w-full h-full object-cover object-center"
                   referrerPolicy="no-referrer"
                 />
@@ -46,11 +46,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ config, onOrderClick, 
 
               <div className="p-2.5 bg-white border-t border-slate-100 flex items-center justify-between text-xs text-slate-700">
                 <span className="font-bold text-[#0a192f] flex items-center gap-1.5 text-[11px]">
-                  <Flame className="w-3.5 h-3.5 text-blue-600" />
-                  Multifunctional Paino Sink + LED Temp
+                  <Flame className="w-3.5 h-3.5 text-amber-600" />
+                  2-Flip-Up Double Gas Burner + Timer
                 </span>
                 <span className="text-[10px] text-blue-700 font-bold bg-blue-50 px-2 py-0.5 rounded-full border border-blue-200">
-                  Full 9-Piece Kit Included
+                  8mm Tempered Crystal Glass
                 </span>
               </div>
             </div>
@@ -62,36 +62,36 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ config, onOrderClick, 
             {/* Attention Badge - Bold Xmas Discount */}
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-red-600 text-white text-xs font-black tracking-wider uppercase mb-3 w-fit shadow-md border-2 border-amber-300 animate-soft-blink">
               <span className="text-base">🎄</span>
-              <span className="font-black">BOLD XMAS DISCOUNT &bull; UNIT PRICE NOW ₦120,000 (SAVE ₦40,000)</span>
+              <span className="font-black">BOLD XMAS DISCOUNT &bull; UNIT PRICE NOW {formatNaira(config.promoPrice)} (SAVE {formatNaira(savings)})</span>
             </div>
 
             {/* Main Headline */}
             <h1 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-[#0a192f] tracking-tight leading-[1.15] mb-2">
-              UPGRADE YOUR KITCHEN WITH THE <span className="text-blue-900 underline decoration-blue-600 decoration-4 underline-offset-4">SMART PAINO SINK</span>
+              UPGRADE YOUR KITCHEN WITH THE <span className="text-blue-900 underline decoration-amber-500 decoration-4 underline-offset-4">2-FLIP-UP DOUBLE GAS BURNER</span>
             </h1>
 
             {/* Subheadline */}
             <p className="text-xs sm:text-base font-semibold text-slate-600 mb-3.5 max-w-xl leading-relaxed">
-              Tactile piano key controls, real-time LED temperature display, flying rain waterfall spout, and high-pressure glass rinser.
+              90° hinged burner heads lift upright with one finger for 5-second wipe cleanups, built-in 0–180m safety auto-off timer, pure blue zero-soot flame, and 8mm explosion-proof crystal glass.
             </p>
 
             {/* Compact 4-Chip Feature Grid */}
             <div className="grid grid-cols-2 gap-2 mb-3.5 bg-slate-50/80 p-2.5 rounded-xl border border-slate-200/80 text-xs">
               <div className="flex items-center gap-1.5 text-slate-800 font-medium">
                 <CheckCircle2 className="w-3.5 h-3.5 text-blue-600 shrink-0" />
-                <span className="truncate">Digital °C &amp; Auto LED Light</span>
+                <span className="truncate">90° One-Finger Flip-Up Hinges</span>
               </div>
               <div className="flex items-center gap-1.5 text-slate-800 font-medium">
                 <CheckCircle2 className="w-3.5 h-3.5 text-blue-600 shrink-0" />
-                <span className="truncate">Flying Rain Waterfall Spout</span>
+                <span className="truncate">0–180m Auto-Off Safety Timer</span>
               </div>
               <div className="flex items-center gap-1.5 text-slate-800 font-medium">
                 <CheckCircle2 className="w-3.5 h-3.5 text-blue-600 shrink-0" />
-                <span className="truncate">SUS304 Nano Stainless Steel</span>
+                <span className="truncate">Pure Blue Zero-Soot Flame</span>
               </div>
               <div className="flex items-center gap-1.5 text-slate-800 font-medium">
                 <CheckCircle2 className="w-3.5 h-3.5 text-blue-600 shrink-0" />
-                <span className="truncate">High-Pressure Glass Rinser</span>
+                <span className="truncate">8mm Explosion-Proof Glass</span>
               </div>
             </div>
 
@@ -109,7 +109,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ config, onOrderClick, 
                 )}
               </div>
 
-              <div className="flex items-baseline gap-2.5">
+              <div className="flex items-baseline gap-2.5 flex-wrap">
                 <span className="text-[11px] text-white bg-red-600 px-2 py-0.5 rounded font-black uppercase tracking-wider border border-amber-300">
                   BOLD XMAS DISCOUNT:
                 </span>
@@ -117,7 +117,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ config, onOrderClick, 
                   {formatNaira(config.promoPrice)}
                 </span>
                 <span className="text-[11px] text-emerald-700 font-bold bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
-                  Full Set &amp; All Accessories
+                  Built-In &amp; Tabletop Ready
                 </span>
               </div>
             </div>
@@ -141,7 +141,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ config, onOrderClick, 
                 <div className="flex flex-col items-center">
                   <span>ORDER NOW — PAYMENT ON DELIVERY</span>
                   <span className="text-[11px] font-bold text-white/90 normal-case tracking-normal">
-                    {formatNaira(config.promoPrice)} &bull; Pay when you receive your sink
+                    {formatNaira(config.promoPrice)} &bull; Pay when you receive your cooker
                   </span>
                 </div>
                 <ArrowRight className="w-5 h-5 shrink-0" />
@@ -183,7 +183,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ config, onOrderClick, 
             <div className="relative rounded-3xl overflow-hidden border border-slate-200 shadow-xl bg-white group">
               {/* Product Badge */}
               <div className="absolute top-4 left-4 z-20 bg-[#0a192f]/90 backdrop-blur-md text-white border border-slate-700 font-bold text-xs tracking-wide px-3.5 py-1.5 rounded-full shadow-md flex items-center gap-2">
-                <span className="text-amber-400 font-extrabold">SUS304 NANO STEEL</span>
+                <span className="text-amber-400 font-extrabold">90° FLIP-UP BURNERS</span>
                 <span className="text-slate-300 border-l border-slate-700 pl-2">75 × 45 cm</span>
               </div>
 
@@ -196,8 +196,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ config, onOrderClick, 
               {/* Main Image Container */}
               <div className="relative overflow-hidden aspect-[4/3] bg-slate-100">
                 <img
-                  src={config.productImages[0]?.url || "/images/smart_piano_sink_1789548024514.jpg"}
-                  alt={config.productImages[0]?.alt || "Smart Paino Sink Workstation"}
+                  src={config.productImages[0]?.url || "https://www.moonlightluxuryhometech.shop/images/cooker_active_blue_flames.jpg"}
+                  alt={config.productImages[0]?.alt || "2-Flip-Up Double Gas Burner With Timer"}
                   className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
                   referrerPolicy="no-referrer"
                 />
@@ -206,15 +206,15 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ config, onOrderClick, 
               <div className="p-4 bg-white border-t border-slate-100">
                 <div className="flex items-center justify-between text-xs text-slate-700 mb-1">
                   <span className="font-bold text-[#0a192f] text-sm flex items-center gap-1.5">
-                    <Flame className="w-4 h-4 text-blue-600" />
-                    Smart Multifunctional Paino Sink
+                    <Flame className="w-4 h-4 text-amber-600" />
+                    2-Flip-Up Double Gas Burner With Timer
                   </span>
                   <span className="text-blue-700 font-bold flex items-center gap-1.5 bg-blue-50 border border-blue-200 px-2.5 py-0.5 rounded-full text-[11px]">
                     In Stock &bull; Ships Nationwide
                   </span>
                 </div>
                 <p className="text-slate-500 text-xs">
-                  Includes Waterfall Faucet, Digital Temp Display, Solid Wood Cutting Board, Colander &amp; Full Plumbing Kit.
+                  Includes 90° Hinged Brass Burners, 0–180m Auto-Off Timer, Windproof Cast Iron Stands &amp; 8mm Crystal Glass.
                 </p>
               </div>
             </div>

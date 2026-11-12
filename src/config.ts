@@ -35,9 +35,9 @@ const getInitialPromoEndDate = (): string => {
 export const FORMSPREE_ENDPOINT = "https://formspree.io/f/xzeeegpw";
 
 export const CONFIG: SiteConfig = {
-  productName: "Smart Paino Sink",
-  normalPrice: 160000,
-  promoPrice: 120000,
+  productName: "2-Flip-Up Double Gas Burner With Timer",
+  normalPrice: 200000,
+  promoPrice: 160000,
   currency: "₦",
   countdownEndDate: getInitialPromoEndDate(),
   whatsappNumber: "2349136827730", // Store WhatsApp number (09136827730)
@@ -45,9 +45,9 @@ export const CONFIG: SiteConfig = {
   formspreeEndpoint: FORMSPREE_ENDPOINT,
   
   deliveryInformation: "Nationwide delivery across Nigeria. Lagos orders arrive in 1–2 business days. For other states, delivery takes 3–5 business days: standard orders are picked up at your city's major commercial motor park terminal, while direct doorstep delivery is available for an extra fee of ₦5,000.",
-  paymentInformation: "Payment on Delivery available in selected major cities (Lagos, Abuja, PH). Bank transfer and secure online payment available nationwide. Inspect your sink before payment!",
+  paymentInformation: "Payment on Delivery available in selected major cities (Lagos, Abuja, PH). Bank transfer and secure online payment available nationwide. Inspect your cooker before payment!",
   returnPolicy: "7-day inspection and exchange period upon delivery. Items must remain unused in original protective packaging.",
-  warrantyInformation: "1-Year Manufacturer Warranty covering the digital LED turbine display, piano keys valve core, pull-out sprayer, and stainless steel basin.",
+  warrantyInformation: "1-Year Manufacturer Warranty covering the 90° flip-up burner hinges, mechanical auto-off timer, brass burner crowns, and 8mm explosion-proof tempered crystal glass.",
 
   trustStatements: {
     delivery: "Nationwide Delivery (1-5 Days)",
@@ -57,141 +57,133 @@ export const CONFIG: SiteConfig = {
 
   productImages: [
     {
-      id: "hero-sink",
-      url: "/images/smart_piano_sink_1789548024514.jpg",
-      title: "Smart Multifunctional Paino Sink",
-      subtitle: "75×45cm SUS304 Nano Stainless Steel Workstation with Digital Display & Waterfall",
+      id: "cooker-active",
+      url: "https://www.moonlightluxuryhometech.shop/images/cooker_active_blue_flames.jpg",
+      title: "2-Flip-Up Double Gas Burner With Timer",
+      subtitle: "Dual high-heat pure blue flames with 8-nozzle brass burner crowns and built-in auto-off safety timer",
       tag: "main",
-      alt: "Smart Multifunctional Paino Sink workstation with cutting board and accessories"
+      alt: "2-Flip-Up Double Gas Burner With Timer firing pure blue flames"
     },
     {
-      id: "console-details",
-      url: "/images/piano_console_details_1789548059707.jpg",
-      title: "Tactile Piano Keys & LED Temperature Display",
-      subtitle: "Hydro-powered digital display shows water temperature and running time without batteries",
-      tag: "console",
-      alt: "Piano key buttons, digital temperature display and waterfall spout"
+      id: "cooker-hinge",
+      url: "https://www.moonlightluxuryhometech.shop/images/burner_flip_hinge.jpg",
+      title: "90° Flip-Up Hinged Burner Mechanism",
+      subtitle: "Lift both burner heads upright with one finger to wipe spills and grease underneath in 5 seconds",
+      tag: "hinge",
+      alt: "Burner head flipped up 90 degrees showing effortless cleaning access underneath"
     },
     {
-      id: "workstation-kit",
-      url: "/images/workstation_accessories_1789548079842.jpg",
-      title: "Dual-Tier Workstation Accessories",
-      subtitle: "Solid wood cutting board, triangular colander, and nested prep basin slide on built-in ledges",
-      tag: "accessories",
-      alt: "Cutting board, colander, and prep basin nested inside sink"
+      id: "cooker-flame",
+      url: "https://www.moonlightluxuryhometech.shop/images/pure_blue_flame.jpg",
+      title: "Pure Blue Zero-Soot Flame & Auto-Off Timer",
+      subtitle: "Oxygen-balanced combustion keeps pots spotless while the 0–180m mechanical timer shuts off gas automatically",
+      tag: "timer",
+      alt: "Pure blue flame close-up showing zero soot combustion"
     },
     {
-      id: "kitchen-lifestyle",
-      url: "/images/luxury_kitchen_lifestyle_1789548098794.jpg",
-      title: "Gunmetal Nano Finish in Modern Kitchen",
-      subtitle: "Premium honeycomb embossed surface resists oil, scratches, and water spots",
-      tag: "lifestyle",
-      alt: "Modern kitchen featuring installed gunmetal smart paino sink"
-    },
-    {
-      id: "package-kit",
-      url: "/images/complete_package_kit_1789548119458.jpg",
-      title: "Complete Unboxed Package Kit",
-      subtitle: "Everything included: faucet, cutting board, baskets, cup washer, and plumbing fittings",
-      tag: "unboxing",
-      alt: "Complete 9-piece kit laid out including drain pipes and valves"
+      id: "cooker-overview",
+      url: "https://www.moonlightluxuryhometech.shop/images/cooker_blue_flames.jpg",
+      title: "8mm Tempered Crystal Glass & Cast Iron Stands",
+      subtitle: "Explosion-proof crystal glass panel with heavy-duty windproof cast iron pot supports",
+      tag: "overview",
+      alt: "2-Flip-Up Double Gas Burner glass surface and windproof cast iron stands"
     }
   ],
 
   features: [
     {
-      id: "piano-keys",
-      title: "Tactile Piano Water Keys",
-      description: "Effortlessly switch between flying rain waterfall, pull-out sprayer, glass rinser, and drinking tap with satisfying mechanical buttons.",
+      id: "flip-up-hinge",
+      title: "90° Flip-Up Burner Heads",
+      description: "Lift both burner heads upright with one finger to wipe burnt food and oil spills underneath in 5 seconds without unscrewing or dismantling anything.",
       iconName: "Sliders",
       badge: "Signature Feature",
       highlight: true
     },
     {
-      id: "hydro-display",
-      title: "Digital LED Temp Display (°C)",
-      description: "Self-powered internal hydroelectric turbine lights up the real-time water temperature in °C and running timer with zero batteries or wiring.",
-      iconName: "Thermometer",
-      badge: "Self-Powered",
+      id: "safety-timer",
+      title: "Built-In 0–180m Safety Timer",
+      description: "Mechanical auto-off timer automatically shuts off the gas supply when your cooking countdown finishes—preventing burnt meals and forgotten stoves.",
+      iconName: "Clock",
+      badge: "Auto-Off Safety",
       highlight: true
     },
     {
-      id: "waterfall-spout",
-      title: "Flying Rain Waterfall Spout",
-      description: "Wide gentle curtain of water makes rinsing delicate fruits, leafy vegetables, and large cutting boards fast with zero counter splashing.",
-      iconName: "Waves",
-      badge: "Splash-Free",
+      id: "pure-blue-flame",
+      title: "Pure Blue Zero-Soot Flame",
+      description: "8-nozzle solid brass burner crowns with precision oxygen damper air balance deliver fast high heat with zero black soot on your cooking pots.",
+      iconName: "Flame",
+      badge: "Zero Pot Soot",
       highlight: true
     },
     {
-      id: "cup-washer",
-      title: "High-Pressure Glass Rinser",
-      description: "Inverted high-pressure multi-angle spray jets blast glasses, baby bottles, and mugs spotless in 2 seconds with a simple downward press.",
-      iconName: "Maximize2"
-    },
-    {
-      id: "nano-steel",
-      title: "SUS304 Nano Stainless Steel",
-      description: "Heavy-duty 3mm thick SUS304 steel with honeycomb bionic embossed finish that resists knives, scratches, oil stains, and rust.",
+      id: "crystal-glass",
+      title: "8mm Tempered Crystal Glass",
+      description: "Explosion-proof, thermal-shock resistant 8mm crystal glass panel wipes sparkling clean in one sweep and resists scratches and staining.",
       iconName: "ShieldCheck"
     },
     {
-      id: "double-track",
-      title: "Double-Track Multi-Tier Ledge",
-      description: "Built-in stepped tracks allow solid wood cutting board and stainless colander baskets to slide smoothly across the basin.",
+      id: "cast-iron-stands",
+      title: "Windproof Cast Iron Stands",
+      description: "Heavy-duty non-slip cast iron pot supports hold large Nigerian family cooking pots and heavy woks rock-steady without wobbling.",
+      iconName: "Layers"
+    },
+    {
+      id: "dual-install",
+      title: "Dual Built-In or Tabletop Fit",
+      description: "Install recessed into your granite/marble countertop cutout (650 × 350 mm) or place directly on top of your counter as a luxury tabletop stove.",
       iconName: "Sparkles"
     }
   ],
 
   specifications: [
     {
-      feature: "Workstation Sink Type",
-      detail: "Multifunctional Nano SUS304 Stainless Steel Workstation Sink with Piano Water Keys",
-      iconName: "Square"
+      feature: "Cooktop Type",
+      detail: "Dual-Burner 90° Flip-Up Hinged Luxury Gas Cooker with Integrated Safety Timer",
+      iconName: "Flame"
     },
     {
-      feature: "Outer Basin Dimensions",
-      detail: "750 × 450 × 220 mm (75 × 45 × 22 cm deep)",
+      feature: "Outer Frame Dimensions",
+      detail: "750 × 450 mm (75 × 45 cm) — matches standard luxury kitchen workstations",
       iconName: "Ruler"
     },
     {
       feature: "Counter Cutout Dimensions",
-      detail: "700 × 400 mm (compatible with topmount, flushmount, and undermount installs)",
+      detail: "650 × 350 mm (supports both Built-In recessed cutout & Countertop tabletop placement)",
       iconName: "Box"
     },
     {
-      feature: "Basin Material & Finish",
-      detail: "3mm Heavy-Duty SUS304 Food-Grade Stainless Steel with Honeycomb Nano Bionic Coating",
-      iconName: "Shield"
-    },
-    {
-      feature: "Digital Display & LED",
-      detail: "Hydroelectric internal turbine (100% self-powered by water flow, zero batteries or AC wiring)",
-      iconName: "Cpu"
-    },
-    {
-      feature: "Water Dispensing Modes",
-      detail: "Tactile Piano Keys: Flying Rain Waterfall, 3-Function Pull-Out Spray, Cup Rinser, Filtered Water Tap",
-      iconName: "Droplets"
-    },
-    {
-      feature: "Pull-Out Hose Reach",
-      detail: "Up to 60cm flexible braided pull-out hose with 360° swivel sprayer head",
-      iconName: "RotateCw"
-    },
-    {
-      feature: "Included Accessories",
-      detail: "Solid Ebony Wood Cutting Board, Triangular Colander, Prep Basin, High-Pressure Glass Rinser, Full Siphon Drain Kit",
-      iconName: "PackageCheck"
-    },
-    {
-      feature: "Drainage System",
-      detail: "Right-offset fast-drain vortex outlet with rotary control knob and anti-odor siphon pipe",
+      feature: "Burner Cleaning Mechanism",
+      detail: "90° One-Finger Flip-Up Stainless Steel Hinged Burner Heads for 5-second wipe cleaning",
       iconName: "Sliders"
     },
     {
-      feature: "Installation Style",
-      detail: "Universal drop-in topmount, flushmount, or undermount into granite, marble, or tile slabs",
+      feature: "Safety Timer Control",
+      detail: "Independent 0–180 Minute Mechanical Auto-Off Timer (automatically cuts gas supply at zero)",
+      iconName: "Clock"
+    },
+    {
+      feature: "Flame & Burner Crowns",
+      detail: "8-Nozzle Brass Burner Crowns producing Pure Blue High-Heat Flame (Zero Pot Soot)",
+      iconName: "Zap"
+    },
+    {
+      feature: "Top Surface Panel",
+      detail: "8mm Heavy-Duty Explosion-Proof Tempered Crystal Glass (thermal-shock & scratch resistant)",
+      iconName: "Shield"
+    },
+    {
+      feature: "Pot & Wok Supports",
+      detail: "Windproof Heavy-Duty Cast Iron Stands designed for large Nigerian cooking pots",
+      iconName: "Layers"
+    },
+    {
+      feature: "Ignition & Air Control",
+      detail: "Push-and-turn automatic piezo pulse ignition with underside oxygen damper adjustment",
+      iconName: "Cpu"
+    },
+    {
+      feature: "Gas Compatibility",
+      detail: "Standard Nigerian LPG Cooking Gas Cylinder (universal hose barb connection included)",
       iconName: "Hammer"
     }
   ],
@@ -202,7 +194,7 @@ export const CONFIG: SiteConfig = {
       name: "Mrs. Chioma Okonkwo",
       location: "Magodo Phase 2, Lagos",
       rating: 5,
-      review: "The waterfall faucet and piano keys have completely transformed my kitchen! The digital temperature display works smoothly without any batteries, and the sliding wooden cutting board saves so much counter space when prepping meals. Cleaning oily soup pots is effortless with the nano honeycomb finish. Absolutely worth every single Naira!",
+      review: "The 90-degree flip-up burners are a complete lifesaver! Whenever stew boils over, I just lift the burner head up with one finger, wipe underneath in 5 seconds, and flip it back down. The pure blue flame cooks super fast with zero black soot on my pots, and the built-in timer automatically turns off the gas when I'm busy. Worth every single Naira!",
       date: "Verified Homeowner &bull; Lagos",
       verified: true
     }
@@ -211,38 +203,38 @@ export const CONFIG: SiteConfig = {
   faqs: [
     {
       id: "faq-1",
-      question: "1. What is the Smart Paino Sink?",
-      answer: "It is an all-in-one luxury kitchen workstation featuring mechanical piano-key controls, a self-powered hydroelectric LED temperature display, flying rain waterfall rinser, 3-mode pull-out spray faucet, high-pressure glass rinser, and nested double-track accessories."
+      question: "1. What makes the 2-Flip-Up Double Gas Burner With Timer special?",
+      answer: "Unlike fixed gas cookers where spilled soup gets trapped around screws, both burner heads hinge upward 90 degrees with one finger so you can wipe the crystal glass spotless in 5 seconds. It also features a built-in 0–180 minute safety auto-off timer and pure blue zero-soot flames."
     },
     {
       id: "faq-2",
-      question: "2. Does the digital LED temperature display require electrical wiring or batteries?",
-      answer: "No electrical wiring or batteries are needed! The display is powered by an internal micro-hydroelectric water turbine. Whenever water runs through the faucet, the turbine instantly powers the LED screen showing the exact water temperature in °C and running time."
+      question: "2. How does the 0–180 minute auto-off safety timer work?",
+      answer: "Simply turn the timer dial to your desired cooking duration (from 1 to 180 minutes). Once the countdown reaches zero, the mechanical valve automatically shuts off the gas flow to that burner—no electricity required and zero risk of forgotten food burning."
     },
     {
       id: "faq-3",
-      question: "3. What are the product dimensions and countertop cutout size?",
-      answer: "Outer Basin Dimensions: 750 mm × 450 mm × 220 mm (75 × 45 × 22 cm). Countertop Cutout Dimensions: 700 mm × 400 mm. It fits standard Nigerian kitchen countertop openings and can be installed as topmount, undermount, or flushmount."
+      question: "3. What are the dimensions and can I use it both built-in and on tabletop?",
+      answer: "Outer Dimensions: 750 mm × 450 mm (75 × 45 cm). Countertop Cutout Dimensions: 650 mm × 350 mm. Yes! It includes non-slip rubber base feet so you can either drop it into a granite/marble cutout or place it directly on top of your kitchen slab."
     },
     {
       id: "faq-4",
-      question: "4. What accessories come in the complete unboxed package?",
-      answer: "The package includes the SUS304 Nano Stainless Steel Basin, Piano Key Digital Console & Pull-Out Faucet, Solid Wood Chopping Board, Triangular Stainless Colander Basket, Nested Prep Basin, High-Pressure Glass Rinser, Soap Dispenser, Filtered Water Drinking Tap, and complete Anti-Odor Siphon Drainage Fittings."
+      question: "4. Will it stain my pots with black soot?",
+      answer: "No! The cooker uses 8-nozzle brass burner crowns paired with an adjustable oxygen damper valve underneath. This guarantees balanced air-to-gas combustion that burns as a crisp, pure blue flame with zero black smoke or pot soot."
     },
     {
       id: "faq-5",
-      question: "5. Will the sink scratch or stain easily from Nigerian cooking pots?",
-      answer: "No! The sink is engineered with heavy-duty 3mm SUS304 stainless steel coated in a micro-embossed honeycomb nano bionic finish. It is resistant to knife scratches, prevents oil and grease adhesion, and resists heavy hard-water spots."
+      question: "5. Is the tempered crystal glass strong enough for heavy Nigerian pots?",
+      answer: "Yes. It is built with an 8mm thick explosion-proof tempered crystal glass top supported by a reinforced metal chassis and windproof cast iron stands rated for heavy family-sized pots, pressure cookers, and pounding pots."
     },
     {
       id: "faq-6",
-      question: "6. How does the high-pressure cup/glass rinser work?",
-      answer: "Simply invert any glass, mug, or baby bottle over the rinser nozzle and press down gently. Multi-directional high-pressure water jets blast the inside clean in 2 seconds, then automatically shut off when released."
+      question: "6. Can the 90° flip-up hinges loosen or leak gas?",
+      answer: "No. The heavy-duty stainless steel hinge mechanism uses sealed flexible gas piping engineered specifically for thousands of lift cycles without loosening or leaking."
     },
     {
       id: "faq-7",
-      question: "7. Can I also order the matching 2-Flip-Up Double Gas Burner?",
-      answer: "Yes! The 2-Flip-Up Double Gas Burner With Timer is available on this website as a matching companion appliance for ₦160,000. When you order both together, you receive an extra ₦5,000 multi-product bundle discount."
+      question: "7. Can I also order the matching Smart Paino Sink?",
+      answer: "Yes! The Smart Paino Sink Workstation (75×45cm) is available on this website as a matching companion appliance for ₦130,000. When you order both together, you receive an extra ₦5,000 multi-product bundle discount."
     },
     {
       id: "faq-8",
@@ -252,12 +244,12 @@ export const CONFIG: SiteConfig = {
     {
       id: "faq-9",
       question: "9. What payment options are available?",
-      answer: "We offer Payment on Delivery (POD) in eligible locations (Lagos, Abuja, Port Harcourt). Direct bank transfer and secure online checkout are also supported nationwide. Inspect your sink before payment!"
+      answer: "We offer Payment on Delivery (POD) in eligible locations (Lagos, Abuja, Port Harcourt). Direct bank transfer and secure online checkout are also supported nationwide. Inspect your cooker before payment!"
     },
     {
       id: "faq-10",
       question: "10. What warranty is provided?",
-      answer: "The Smart Paino Sink comes with a 1-Year Manufacturer Warranty covering the digital turbine display, valve cartridges, pull-out sprayer, and stainless steel basin, backed by our 7-day inspection guarantee upon delivery."
+      answer: "The 2-Flip-Up Double Gas Burner With Timer comes with a 1-Year Manufacturer Warranty covering the 90° hinges, mechanical timer valve, brass burners, and tempered crystal glass panel, backed by our 7-day inspection guarantee."
     }
   ]
 };

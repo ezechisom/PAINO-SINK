@@ -35,7 +35,7 @@ export const FloatingFaqChat: React.FC<FloatingFaqChatProps> = ({
   faqs,
   phoneNumber = '09136827730',
   whatsappNumber = '09136827730',
-  productName = 'Smart Luxury Piano Sink',
+  productName = '2-Flip-Up Double Gas Burner With Timer',
   hasPlacedOrder = false
 }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -232,7 +232,7 @@ export const FloatingFaqChat: React.FC<FloatingFaqChatProps> = ({
                 </div>
                 <div className="bg-slate-800/90 border border-slate-700/80 text-slate-200 text-xs sm:text-sm p-3.5 rounded-2xl rounded-tl-sm shadow-sm leading-relaxed">
                   <p>
-                    Hello! 👋 Welcome to <strong>Moonlight Luxury Home Tech</strong>. Have a question about our Smart Kitchen Piano Sink, installations, or pay-on-delivery across Nigeria?
+                    Hello! 👋 Welcome to <strong>Moonlight Luxury Home Tech</strong>. Have a question about our 2-Flip-Up Double Gas Burner With Timer, installations, or pay-on-delivery across Nigeria?
                   </p>
                   <p className="mt-2 text-slate-300 font-semibold text-[11px] text-amber-300/90">
                     👇 Tap any question below for an immediate answer:

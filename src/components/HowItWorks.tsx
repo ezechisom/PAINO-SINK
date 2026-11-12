@@ -1,31 +1,31 @@
 import React from 'react';
-import { Utensils, Waves, CheckCircle, Sparkles } from 'lucide-react';
+import { Flame, Clock, Sparkles } from 'lucide-react';
 
 export const HowItWorks: React.FC = () => {
   const steps = [
     {
       number: "01",
-      title: "PREP ON SLIDING LEDGES",
-      subtitle: "Multi-Tier Dual Track",
-      description: "Slide the solid wood cutting board and stainless colander directly across the sink ledge to chop, rinse, and prep without taking up dry counter space.",
-      icon: Utensils,
-      color: "from-blue-500/20 to-blue-500/5",
-      borderColor: "border-blue-500/30"
-    },
-    {
-      number: "02",
-      title: "PIANO KEYS & WATERFALL",
-      subtitle: "Tactile Valves + LED Temp",
-      description: "Press mechanical piano buttons to switch between gentle flying rain waterfall and 3-mode pull-out sprayer while the hydroelectric screen shows real-time °C.",
-      icon: Waves,
+      title: "PUSH-TURN IGNITION",
+      subtitle: "Instant Pure Blue Flame",
+      description: "Push and turn the metallic control knob for instant battery-free ignition. 8-nozzle brass crowns deliver a hot, soot-free pure blue flame immediately.",
+      icon: Flame,
       color: "from-amber-500/20 to-amber-500/5",
       borderColor: "border-amber-500/30"
     },
     {
+      number: "02",
+      title: "SET SAFETY TIMER",
+      subtitle: "0–180m Auto Shut-Off",
+      description: "Turn the dedicated mechanical timer dial to set your cooking minutes. Once time expires, the valve automatically shuts off gas flow so food never burns.",
+      icon: Clock,
+      color: "from-blue-500/20 to-blue-500/5",
+      borderColor: "border-blue-500/30"
+    },
+    {
       number: "03",
-      title: "2-SEC CUP WASH & DRAIN",
-      subtitle: "High-Pressure Rinser",
-      description: "Invert drinking glasses over the cup rinser for an instant multi-angle high-pressure blast, then turn the rotary knob to drain the vortex basin effortlessly.",
+      title: "FLIP 90° & 1-WIPE CLEAN",
+      subtitle: "5-Second Spill Cleanup",
+      description: "Done cooking or had a stew boil-over? Lift the hinged burner head upright 90° with one finger, wipe the 8mm crystal glass spotless, and flip it back down.",
       icon: Sparkles,
       color: "from-emerald-500/20 to-emerald-500/5",
       borderColor: "border-emerald-500/30"
@@ -42,10 +42,10 @@ export const HowItWorks: React.FC = () => {
             Seamless Kitchen Workflow
           </span>
           <h2 className="text-xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight leading-tight">
-            HOW IT TRANSFORMS YOUR DAILY ROUTINE
+            HOW IT TRANSFORMS YOUR DAILY COOKING
           </h2>
           <p className="text-slate-400 text-xs sm:text-sm mt-2">
-            Three simple ergonomic steps that turn cooking and washing into an organized, effortless experience.
+            Three effortless steps for faster meals, worry-free timing, and spotless 5-second stove cleanups.
           </p>
         </div>
 
@@ -82,7 +82,7 @@ export const HowItWorks: React.FC = () => {
 
                 <div className="mt-4 pt-3 border-t border-slate-800/80 flex items-center gap-1.5 text-[11px] text-slate-400">
                   <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
-                  <span>Step {step.number} of 3 in the Smart Workstation System</span>
+                  <span>Step {step.number} of 3 in the Smart Flip-Up System</span>
                 </div>
               </div>
             );

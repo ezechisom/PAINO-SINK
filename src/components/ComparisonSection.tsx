@@ -1,41 +1,41 @@
 import React from 'react';
-import { X, Check, ArrowRight, Waves } from 'lucide-react';
+import { X, Check } from 'lucide-react';
 
 interface ComparisonSectionProps {
   onOrderClick: () => void;
 }
 
-export const ComparisonSection: React.FC<ComparisonSectionProps> = ({ onOrderClick }) => {
+export const ComparisonSection: React.FC<ComparisonSectionProps> = () => {
   const comparisonItems = [
     {
-      feature: "Water Dispensing Controls",
-      traditional: "Single stiff lever that is hard to toggle with soapy hands and lacks dedicated spray modes",
-      smartSink: "Tactile piano key valves: dedicated mechanical buttons for waterfall, pull-out sprayer, glass rinser, and filtered tap"
+      feature: "Burner Cleaning & Spill Access",
+      traditional: "Fixed screwed burners trap burnt stew and grease underneath; requires screwdrivers to clean",
+      flipCooker: "90° Flip-Up hinged burners lift upright with one finger so you wipe underneath spotless in 5 seconds"
     },
     {
-      feature: "Gentle Produce & Dish Rinsing",
-      traditional: "Violent single tap stream that splashes water onto counters, floors, and clothing",
-      smartSink: "Wide flying rain waterfall curtain gently washes vegetables, delicate fruits, and wide cutting boards with zero splashing"
+      feature: "Cooking Timer & Auto Shut-Off",
+      traditional: "Zero safety timer; walking away risks burnt food, ruined pots, and wasted gas",
+      flipCooker: "Integrated 0–180 minute mechanical safety timer cuts off gas supply automatically when time expires"
     },
     {
-      feature: "Real-Time Water Temperature",
-      traditional: "Zero temperature indicator; stepping under tap risks painful scalding or freezing shocks",
-      smartSink: "Hydroelectric digital LED display shows live water temperature in °C and running timer without batteries"
+      feature: "Flame Color & Pot Cleanliness",
+      traditional: "Unbalanced yellow smoky flame that leaves stubborn black soot stains on expensive pots",
+      flipCooker: "8-nozzle brass burner crowns + oxygen damper produce crisp, pure blue high-heat flame with zero soot"
     },
     {
-      feature: "Glass & Mug Washing",
-      traditional: "Awkward sponge twisting that cannot reach deep into thermal tumblers or slim wine glasses",
-      smartSink: "High-pressure inverted cup washer blasts multi-angle water jets in 2 seconds with a light downward press"
+      feature: "Cooktop Surface & Hygiene",
+      traditional: "Thin painted metal tops that rust, stain permanently, and peel around burner edges",
+      flipCooker: "8mm explosion-proof tempered crystal glass panel wipes clean in one swipe without rusting"
     },
     {
-      feature: "Workstation Prep Capacity",
-      traditional: "Cluttered countertops with wet cutting boards and separate colander bowls taking up space",
-      smartSink: "Double-track stepped ledges fit solid wood cutting board and stainless prep baskets directly over the basin"
+      feature: "Heavy Pot Support & Wind Shield",
+      traditional: "Light wire grates that bend or wobble under heavy family pots and let drafts blow flames",
+      flipCooker: "Heavy-duty windproof cast iron pot stands keep large pots rock-steady and block kitchen drafts"
     },
     {
-      feature: "Basin Durability & Cleanliness",
-      traditional: "Thin, noisy sheet steel prone to deep scratches, grease stains, and permanent water spotting",
-      smartSink: "Heavy 3mm SUS304 food-grade stainless steel with bionic honeycomb nano embossing that wipes clean in seconds"
+      feature: "Installation Versatility",
+      traditional: "Locked to only tabletop OR only recessed cabinet installation",
+      flipCooker: "Dual-use engineering works seamlessly built-in (650×350mm cutout) or straight on your countertop"
     }
   ];
 
@@ -49,23 +49,23 @@ export const ComparisonSection: React.FC<ComparisonSectionProps> = ({ onOrderCli
             Functional Comparison
           </span>
           <h2 className="text-xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight leading-tight">
-            NOT JUST A SINK. A COMPLETE KITCHEN WORKSTATION.
+            NOT JUST A STOVE. A SMARTER, SAFER WAY TO COOK.
           </h2>
           <p className="text-slate-400 text-xs sm:text-sm mt-2">
-            See the practical daily difference between an ordinary kitchen sink and the Smart Paino Sink Workstation.
+            See the practical daily difference between a regular gas cooker and the 2-Flip-Up Double Gas Burner With Timer.
           </p>
         </div>
 
         {/* Comparison Table / Dual Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-8 sm:mb-10">
           
-          {/* Traditional Sink Column */}
+          {/* Traditional Cooker Column */}
           <div className="rounded-2xl bg-slate-900/50 border border-slate-800 p-4 sm:p-6 flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between pb-3 border-b border-slate-800 mb-4">
                 <div>
                   <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider block">Standard Option</span>
-                  <h3 className="text-base sm:text-lg font-bold text-slate-300">BASIC TRADITIONAL SINK</h3>
+                  <h3 className="text-base sm:text-lg font-bold text-slate-300">BASIC FIXED GAS COOKER</h3>
                 </div>
                 <span className="px-2.5 py-0.5 bg-slate-800 text-slate-400 text-[11px] font-medium rounded-full">
                   Basic Utility
@@ -88,44 +88,44 @@ export const ComparisonSection: React.FC<ComparisonSectionProps> = ({ onOrderCli
             </div>
 
             <div className="mt-5 pt-3 border-t border-slate-800 text-center">
-              <span className="text-[11px] text-slate-500 italic">Splashing water, stained basins &amp; cluttered countertops</span>
+              <span className="text-[11px] text-slate-500 italic">Trapped grease, blackened pots &amp; zero auto shut-off safety</span>
             </div>
           </div>
 
-          {/* Smart Piano Sink Column */}
-          <div className="rounded-2xl bg-gradient-to-b from-slate-900 via-[#101926] to-slate-950 border-2 border-blue-500/40 p-4 sm:p-6 shadow-xl relative flex flex-col justify-between">
-            <div className="absolute -top-2.5 right-4 bg-gradient-to-r from-blue-600 to-blue-500 text-white font-extrabold text-[10px] tracking-wider uppercase px-2.5 py-0.5 rounded-full shadow-xs">
-              Luxury Workstation
+          {/* 2-Flip-Up Double Gas Burner Column */}
+          <div className="rounded-2xl bg-gradient-to-b from-slate-900 via-[#101926] to-slate-950 border-2 border-amber-500/50 p-4 sm:p-6 shadow-xl relative flex flex-col justify-between">
+            <div className="absolute -top-2.5 right-4 bg-gradient-to-r from-amber-500 to-amber-400 text-slate-950 font-extrabold text-[10px] tracking-wider uppercase px-2.5 py-0.5 rounded-full shadow-xs">
+              Luxury Flip-Up System
             </div>
 
             <div>
               <div className="flex items-center justify-between pb-3 border-b border-slate-700/80 mb-4">
                 <div>
-                  <span className="text-[10px] font-bold text-blue-400 uppercase tracking-wider block">Modern Upgrade</span>
-                  <h3 className="text-base sm:text-lg font-extrabold text-white">SMART PAINO SINK WORKSTATION</h3>
+                  <span className="text-[10px] font-bold text-amber-400 uppercase tracking-wider block">Modern Upgrade</span>
+                  <h3 className="text-base sm:text-lg font-extrabold text-white">2-FLIP-UP GAS BURNER WITH TIMER</h3>
                 </div>
-                <span className="px-2.5 py-0.5 bg-blue-500/20 text-blue-300 text-[11px] font-bold rounded-full border border-blue-500/30">
-                  Piano Keys + Waterfall + LED
+                <span className="px-2.5 py-0.5 bg-amber-500/20 text-amber-300 text-[11px] font-bold rounded-full border border-amber-500/30">
+                  90° Flip + 180m Timer
                 </span>
               </div>
 
               <ul className="space-y-3">
                 {comparisonItems.map((item, idx) => (
                   <li key={idx} className="flex items-start gap-2.5 text-slate-200 text-xs sm:text-sm">
-                    <div className="w-4 h-4 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center shrink-0 mt-0.5">
+                    <div className="w-4 h-4 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center shrink-0 mt-0.5">
                       <Check className="w-3 h-3" />
                     </div>
                     <div>
-                      <strong className="text-blue-300 block text-[11px] uppercase font-bold">{item.feature}:</strong>
-                      <span>{item.smartSink}</span>
+                      <strong className="text-amber-300 block text-[11px] uppercase font-bold">{item.feature}:</strong>
+                      <span>{item.flipCooker}</span>
                     </div>
                   </li>
                 ))}
               </ul>
             </div>
 
-            <div className="mt-5 pt-3 border-t border-slate-800 text-center text-xs text-blue-300/80 font-medium">
-              <span>Piano key valves, flying rain waterfall, hydroelectric LED temp &amp; full 9-piece kit</span>
+            <div className="mt-5 pt-3 border-t border-slate-800 text-center text-xs text-amber-300/80 font-medium">
+              <span>90° one-finger flip-up hinges, 0–180m auto-off timer, pure blue flame &amp; 8mm crystal glass</span>
             </div>
           </div>
 

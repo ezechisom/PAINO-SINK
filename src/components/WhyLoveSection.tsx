@@ -9,8 +9,10 @@ import {
   Layers, 
   ShieldCheck, 
   Droplet,
-  Check,
-  ArrowRight
+  Flame,
+  Clock,
+  Zap,
+  Check
 } from 'lucide-react';
 
 interface WhyLoveSectionProps {
@@ -18,7 +20,7 @@ interface WhyLoveSectionProps {
   onOrderClick: () => void;
 }
 
-export const WhyLoveSection: React.FC<WhyLoveSectionProps> = ({ config, onOrderClick }) => {
+export const WhyLoveSection: React.FC<WhyLoveSectionProps> = ({ config }) => {
   const iconMap: Record<string, React.ElementType> = {
     Sliders,
     Gauge,
@@ -28,6 +30,9 @@ export const WhyLoveSection: React.FC<WhyLoveSectionProps> = ({ config, onOrderC
     Layers,
     ShieldCheck,
     Droplet,
+    Flame,
+    Clock,
+    Zap,
   };
 
   return (
@@ -40,15 +45,15 @@ export const WhyLoveSection: React.FC<WhyLoveSectionProps> = ({ config, onOrderC
             Verified Product Capabilities
           </span>
           <h2 className="text-xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight leading-tight">
-            WHY THIS SMART PAINO SINK BELONGS IN YOUR KITCHEN
+            WHY THIS 2-FLIP-UP GAS BURNER BELONGS IN YOUR KITCHEN
           </h2>
           <p className="text-slate-400 text-xs sm:text-sm mt-2 max-w-xl mx-auto leading-relaxed">
-            Engineered to transform everyday prep, washing, and kitchen cleanup into an effortless, modern luxury experience.
+            Engineered for effortless 5-second cleanup, automatic timer protection, and fast soot-free cooking performance.
           </p>
         </div>
 
         {/* Feature Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-5 mb-8 sm:mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-5 mb-8 sm:mb-12">
           {config.features.map((feat) => {
             const IconComponent = iconMap[feat.iconName] || Sparkles;
             return (

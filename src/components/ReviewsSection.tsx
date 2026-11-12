@@ -12,7 +12,7 @@ export const ReviewsSection: React.FC<ReviewsSectionProps> = ({ reviews }) => {
     name: "Mrs. Chioma Okonkwo",
     location: "Magodo Phase 2, Lagos",
     rating: 5,
-    review: "The waterfall faucet and piano keys have completely transformed my kitchen! The digital temperature display works smoothly without any batteries, and the sliding wooden cutting board saves so much counter space when prepping meals. Cleaning oily soup pots is effortless with the nano honeycomb finish. Absolutely worth every single Naira!",
+    review: "The 90-degree flip-up burners and built-in safety timer have completely changed how I cook! Cleaning boiled-over stew or oil under the burners now takes seconds with one wipe, and the auto shut-off timer means I never worry about forgetting soup on the fire. Pure blue flame with zero soot on my pots!",
     date: "Verified Homeowner • Lagos",
     verified: true
   };
