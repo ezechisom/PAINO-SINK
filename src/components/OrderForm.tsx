@@ -212,7 +212,7 @@ export const OrderForm: React.FC<OrderFormProps> = ({
   const estimatedDays = isLagosState
     ? '1 to 2 business days'
     : isAbujaState
-      ? '24 hrs / Same-Day Delivery'
+      ? '2 to 3 days'
       : '3 to 5 business days';
 
   // Handler when customer adds a suggested companion cooktop on the order receipt screen
@@ -525,7 +525,7 @@ export const OrderForm: React.FC<OrderFormProps> = ({
       (orderData.multiItemDiscount && orderData.multiItemDiscount > 0 ? `*Package Discount:* -${formatNaira(orderData.multiItemDiscount)} 🎉\n` : '') +
       `*Delivery Method:* ${deliveryMethodText}\n` +
       (orderData.pickupMotorPark ? `*Pick-Up Station:* ${orderData.pickupMotorPark}\n` : '') +
-      `*Estimated Delivery Time:* ${orderData.estimatedDeliveryDays || (isCustomerLagos ? '1 to 2 business days' : isCustomerAbuja ? '24 hrs / Same-Day Delivery' : '3 to 5 business days')}\n` +
+      `*Estimated Delivery Time:* ${orderData.estimatedDeliveryDays || (isCustomerLagos ? '1 to 2 business days' : isCustomerAbuja ? '2 to 3 days' : '3 to 5 business days')}\n` +
       `*TOTAL PAYABLE ON DELIVERY:* ${formatNaira(totalAmount)}\n\n` +
       `*Customer Details:*\n` +
       `• Name: ${orderData.fullName}\n` +
@@ -1283,9 +1283,9 @@ export const OrderForm: React.FC<OrderFormProps> = ({
                         <span className="text-blue-700 font-bold">FREE Doorstep (1–2 Days)</span>
                       ) : isAbujaState ? (
                         deliveryMethod === 'doorstep' ? (
-                          <span className="text-emerald-700 font-bold">+₦5,000 Doorstep (24 hrs / Same-Day)</span>
+                          <span className="text-blue-900 font-bold">+₦5,000 Doorstep (2 to 3 Days)</span>
                         ) : (
-                          <span className="text-emerald-700 font-bold">FREE Park Pickup (24 hrs / Same-Day)</span>
+                          <span className="text-blue-700 font-bold">FREE Park Pickup (2 to 3 Days)</span>
                         )
                       ) : deliveryMethod === 'doorstep' ? (
                         <span className="text-blue-900 font-bold">+₦5,000 Doorstep (3–5 Days)</span>
@@ -1412,22 +1412,18 @@ export const OrderForm: React.FC<OrderFormProps> = ({
                           Choose how you would like to receive your sink workstation in {formData.state}
                         </p>
                       </div>
-                      <div className={`inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1 rounded-full self-start sm:self-auto shadow-xs border ${
-                        isAbujaState
-                          ? 'bg-emerald-50 text-emerald-800 border-emerald-300'
-                          : 'bg-white text-slate-700 border-slate-200'
-                      }`}>
-                        <Clock className={`w-3.5 h-3.5 ${isAbujaState ? 'text-emerald-600' : 'text-blue-600'}`} />
-                        <span>{isAbujaState ? '24 Hrs / Same-Day Delivery' : 'Estimated Transit: 3 to 5 Business Days'}</span>
+                      <div className="inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1 rounded-full self-start sm:self-auto shadow-xs border bg-white text-slate-700 border-slate-200">
+                        <Clock className="w-3.5 h-3.5 text-blue-600" />
+                        <span>{isAbujaState ? 'Estimated Transit: 2 to 3 Days' : 'Estimated Transit: 3 to 5 Business Days'}</span>
                       </div>
                     </div>
 
                     {/* Notice for Abuja vs Other States */}
                     {isAbujaState ? (
-                      <div className="bg-emerald-50 border border-emerald-300 rounded-xl p-3 text-xs text-emerald-950 flex items-start gap-2.5">
-                        <Zap className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                      <div className="bg-blue-50 border border-blue-200 rounded-xl p-3 text-xs text-slate-700 flex items-start gap-2.5">
+                        <Clock className="w-4 h-4 text-blue-700 shrink-0 mt-0.5" />
                         <div className="leading-relaxed">
-                          <strong className="text-emerald-900">Abuja (FCT) 24 Hrs / Same-Day Delivery:</strong> Customers in Abuja enjoy express <strong>24 hrs / Same-Day Delivery</strong>! Pick up at your selected Abuja motor park (FREE) or choose direct doorstep delivery (<strong>+₦5,000</strong>).
+                          <strong className="text-[#0a192f]">Abuja (FCT) Delivery (2 to 3 Days):</strong> Orders to Abuja arrive within <strong>2 to 3 days</strong>. Pick up at your selected Abuja motor park (FREE) or choose direct doorstep delivery (<strong>+₦5,000</strong>).
                         </div>
                       </div>
                     ) : (
@@ -1464,8 +1460,8 @@ export const OrderForm: React.FC<OrderFormProps> = ({
                           Standard collection at your city's central commercial transport park or terminal (e.g. Peace Mass, GIGM, Young Shall Grow, ABC).
                         </p>
                         <div className="flex items-center justify-between text-[11px] pt-2 border-t border-slate-200 text-slate-500 w-full">
-                          <span className={`flex items-center gap-1 font-semibold ${isAbujaState ? 'text-emerald-700' : 'text-slate-600'}`}>
-                            <Clock className={`w-3 h-3 ${isAbujaState ? 'text-emerald-600' : 'text-blue-600'}`} /> {isAbujaState ? '24 hrs / Same-Day' : '3–5 Business Days'}
+                          <span className="flex items-center gap-1 font-semibold text-slate-600">
+                            <Clock className="w-3 h-3 text-blue-600" /> {isAbujaState ? '2 to 3 Days' : '3–5 Business Days'}
                           </span>
                           <span className={`font-bold ${deliveryMethod === 'park_pickup' ? 'text-blue-700' : 'text-slate-400'}`}>
                             {deliveryMethod === 'park_pickup' ? '✓ Selected' : 'Choose this'}
@@ -1496,8 +1492,8 @@ export const OrderForm: React.FC<OrderFormProps> = ({
                           A local dispatch courier brings the heavy package directly to your house, site, or office gate in {formData.state}.
                         </p>
                         <div className="flex items-center justify-between text-[11px] pt-2 border-t border-slate-200 text-slate-500 w-full">
-                          <span className={`flex items-center gap-1 font-semibold ${isAbujaState ? 'text-emerald-700' : 'text-slate-600'}`}>
-                            <Clock className={`w-3 h-3 ${isAbujaState ? 'text-emerald-600' : 'text-blue-900'}`} /> {isAbujaState ? '24 hrs / Same-Day' : '3–5 Business Days'}
+                          <span className="flex items-center gap-1 font-semibold text-slate-600">
+                            <Clock className="w-3 h-3 text-blue-900" /> {isAbujaState ? '2 to 3 Days' : '3–5 Business Days'}
                           </span>
                           <span className={`font-bold ${deliveryMethod === 'doorstep' ? 'text-blue-900' : 'text-slate-400'}`}>
                             {deliveryMethod === 'doorstep' ? '✓ Selected (+₦5K)' : 'Choose this'}
@@ -1624,7 +1620,7 @@ export const OrderForm: React.FC<OrderFormProps> = ({
               <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-600 flex items-start gap-3">
                 <Truck className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
                 <div>
-                  <span className="font-semibold text-[#0a192f]">Estimated Delivery Notice:</span> <strong>Abuja (FCT)</strong> orders qualify for <strong>24 hrs / Same-Day Delivery</strong>. Lagos orders arrive in <strong>1 to 2 business days</strong>. Other states arrive in <strong>3 to 5 business days</strong> (Park Pickup or Doorstep delivery). Please submit only if you or your representative are available to receive the package and complete payment.
+                  <span className="font-semibold text-[#0a192f]">Estimated Delivery Notice:</span> <strong>Abuja (FCT)</strong> orders arrive in <strong>2 to 3 days</strong>. Lagos orders arrive in <strong>1 to 2 business days</strong>. Other states arrive in <strong>3 to 5 business days</strong> (Park Pickup or Doorstep delivery). Please submit only if you or your representative are available to receive the package and complete payment.
                 </div>
               </div>
 

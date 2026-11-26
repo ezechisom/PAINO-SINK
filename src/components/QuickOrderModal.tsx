@@ -126,7 +126,7 @@ export const QuickOrderModal: React.FC<QuickOrderModalProps> = ({
   const estimatedDays = isLagosState
     ? '1 to 2 business days'
     : isAbujaState
-      ? '24 hrs / Same-Day Delivery'
+      ? '2 to 3 days'
       : '3 to 5 business days';
   const deliveryFee = isLagosState ? 0 : (deliveryMethod === 'doorstep' ? 5000 : 0);
 
@@ -726,18 +726,18 @@ export const QuickOrderModal: React.FC<QuickOrderModalProps> = ({
                         onChange={(e) => setDeliveryMethod(e.target.value as any)}
                         className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-xs sm:text-sm text-slate-900 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-600 font-medium"
                       >
-                        <option value="park_pickup">{isAbujaState ? 'Motor Park Pick-Up • 24 hrs / Same-Day (FREE)' : 'Motor Park Pick-Up (FREE)'}</option>
-                        <option value="doorstep">{isAbujaState ? 'Doorstep Delivery • 24 hrs / Same-Day (+₦5,000)' : 'Doorstep Delivery (+₦5,000)'}</option>
+                        <option value="park_pickup">{isAbujaState ? 'Motor Park Pick-Up • 2 to 3 Days (FREE)' : 'Motor Park Pick-Up (FREE)'}</option>
+                        <option value="doorstep">{isAbujaState ? 'Doorstep Delivery • 2 to 3 Days (+₦5,000)' : 'Doorstep Delivery (+₦5,000)'}</option>
                       </select>
                     )}
                   </div>
                 </div>
 
-                {/* Abuja 24 Hrs / Same-Day Express Delivery Banner */}
+                {/* Abuja 2 to 3 Days Delivery Banner */}
                 {isAbujaState && (
-                  <div className="bg-emerald-50 border border-emerald-300 rounded-xl px-3 py-2 text-xs text-emerald-900 font-bold flex items-center gap-2">
-                    <Zap className="w-4 h-4 text-emerald-600 shrink-0" />
-                    <span>Abuja (FCT) Express: 24 hrs / Same-Day Delivery Available!</span>
+                  <div className="bg-blue-50 border border-blue-200 rounded-xl px-3 py-2 text-xs text-blue-950 font-bold flex items-center gap-2">
+                    <Clock className="w-4 h-4 text-blue-600 shrink-0" />
+                    <span>Abuja (FCT) Delivery: Estimated 2 to 3 Days</span>
                   </div>
                 )}
 
@@ -801,7 +801,7 @@ export const QuickOrderModal: React.FC<QuickOrderModalProps> = ({
                 )}
 
                 <div className="flex justify-between items-center text-slate-300">
-                  <span>Delivery ({isLagosState ? 'Lagos Doorstep' : isAbujaState ? 'Abuja 24 hrs / Same-Day' : (deliveryMethod === 'doorstep' ? 'Doorstep Extra' : 'Motor Park')}):</span>
+                  <span>Delivery ({isLagosState ? 'Lagos Doorstep' : isAbujaState ? 'Abuja 2 to 3 Days' : (deliveryMethod === 'doorstep' ? 'Doorstep Extra' : 'Motor Park')}):</span>
                   <span className="font-mono font-bold">{deliveryFee > 0 ? formatNaira(deliveryFee) : 'FREE'}</span>
                 </div>
 

@@ -55,8 +55,11 @@ export default function App() {
     timestamp: string;
   } | null>(null);
 
+  const [hasScrolled, setHasScrolled] = useState(false);
+
   const prevQuickOrderOpenRef = useRef(isQuickOrderOpen);
   const quickOrderCloseTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const scrollOriginRef = useRef<number>(0);
 
   // Meta Pixel ViewContent event on page load
   useEffect(() => {
@@ -94,16 +97,32 @@ export default function App() {
     return () => clearTimeout(timer);
   }, [isSuggestedProductOpen, isQuickOrderOpen, placedOrder]);
 
-  // Auto-open Quick Order Form after 60 seconds on site, and re-trigger every 60 seconds when closed
+  // Detect when the client starts scrolling on the website before starting the 1-minute pop-up form timer
   useEffect(() => {
-    if (placedOrder || isQuickOrderOpen) return;
+    if (placedOrder || isQuickOrderOpen || hasScrolled) return;
+
+    scrollOriginRef.current = window.scrollY;
+
+    const handleScroll = () => {
+      if (Math.abs(window.scrollY - scrollOriginRef.current) > 20) {
+        setHasScrolled(true);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [hasScrolled, isQuickOrderOpen, placedOrder]);
+
+  // Auto-open Quick Order Form 1 minute (60 seconds) after the client starts scrolling
+  useEffect(() => {
+    if (placedOrder || isQuickOrderOpen || !hasScrolled) return;
 
     const timer = setTimeout(() => {
       setIsQuickOrderOpen(true);
-    }, 60000); // 60 seconds
+    }, 60000); // 1 minute (60 seconds) after scrolling starts
 
     return () => clearTimeout(timer);
-  }, [isQuickOrderOpen, placedOrder]);
+  }, [hasScrolled, isQuickOrderOpen, placedOrder]);
 
   const scrollToOrder = () => {
     trackInitiateCheckout(config.promoPrice);
@@ -121,6 +140,7 @@ export default function App() {
 
   const handleCloseQuickOrder = () => {
     setIsQuickOrderOpen(false);
+    setHasScrolled(false);
     if (!placedOrder) {
       if (quickOrderCloseTimerRef.current) {
         clearTimeout(quickOrderCloseTimerRef.current);

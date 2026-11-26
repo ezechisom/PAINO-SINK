@@ -44,7 +44,7 @@ export const CONFIG: SiteConfig = {
   phoneNumber: "09136827730",
   formspreeEndpoint: FORMSPREE_ENDPOINT,
   
-  deliveryInformation: "Nationwide delivery across Nigeria. Abuja (FCT) orders enjoy 24 hrs / Same-Day Delivery. Lagos orders arrive in 1–2 business days. For other states, delivery takes 3–5 business days: standard orders are picked up at your city's major commercial motor park terminal, while direct doorstep delivery is available for an extra fee of ₦5,000.",
+  deliveryInformation: "Nationwide delivery across Nigeria. Abuja (FCT) orders arrive in 2 to 3 days. Lagos orders arrive in 1–2 business days. For other states, delivery takes 3–5 business days: standard orders are picked up at your city's major commercial motor park terminal, while direct doorstep delivery is available for an extra fee of ₦5,000.",
   paymentInformation: "Payment on Delivery available in selected major cities (Lagos, Abuja, PH). Bank transfer and secure online payment available nationwide. Inspect your sink workstation before payment!",
   returnPolicy: "7-day inspection and exchange period upon delivery. Items must remain unused in original protective packaging.",
   warrantyInformation: "1-Year Manufacturer Warranty covering the SUS304 stainless steel basin, piano water control valves, pull-out waterfall faucet, and hydroelectric LED display module.",
@@ -247,7 +247,7 @@ export const CONFIG: SiteConfig = {
     {
       id: "faq-8",
       question: "8. How does delivery work across Nigeria?",
-      answer: "We deliver nationwide across all 36 states and the FCT. Abuja (FCT) orders qualify for express 24 hrs / Same-Day Delivery. Lagos doorstep delivery is free and takes 1–2 business days. Other states take 3–5 business days to your city's major commercial motor park terminal (free) or direct doorstep delivery (+₦5,000)."
+      answer: "We deliver nationwide across all 36 states and the FCT. Abuja (FCT) orders arrive in 2 to 3 days. Lagos doorstep delivery is free and takes 1–2 business days. Other states take 3–5 business days to your city's major commercial motor park terminal (free) or direct doorstep delivery (+₦5,000)."
     },
     {
       id: "faq-9",
