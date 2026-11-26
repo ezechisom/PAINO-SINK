@@ -25,15 +25,15 @@ export const AlternativeProductsSection: React.FC<AlternativeProductsSectionProp
         {/* Compact Header */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-6">
           <div>
-            <div className="inline-flex items-center gap-1.5 bg-blue-100 text-blue-900 text-[11px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider mb-1 border border-blue-200">
-              <Flame className="w-3.5 h-3.5 text-blue-600" />
-              <span>Matching Kitchen Workstation</span>
+            <div className="inline-flex items-center gap-1.5 bg-amber-100 text-amber-950 text-[11px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider mb-1 border border-amber-300">
+              <Flame className="w-3.5 h-3.5 text-amber-600" />
+              <span>Matching Gas Cooktop</span>
             </div>
             <h3 className="text-xl sm:text-2xl font-black text-[#0a192f] tracking-tight">
-              Optional Smart Paino Sink Workstation from Moonlight Luxury
+              Optional 2-Flip-Up Double Gas Burner from Moonlight Luxury
             </h3>
             <p className="text-xs sm:text-sm text-slate-600">
-              Pair your 2-Flip-Up Double Gas Burner with our matching multifunctional Smart Paino Sink with digital LED display.
+              Pair your Smart Paino Sink with our matching 90° flip-up double gas cooktop featuring a built-in 0–180m safety auto-off timer.
             </p>
           </div>
 
@@ -66,10 +66,10 @@ export const AlternativeProductsSection: React.FC<AlternativeProductsSectionProp
                       referrerPolicy="no-referrer"
                     />
                     <div className="absolute top-2 left-2 bg-[#0a192f]/90 backdrop-blur-xs text-white text-[10px] font-black px-2.5 py-1 rounded-md shadow-sm border border-slate-700">
-                      💧 {prod.badge || "MATCHING PIANO SINK"}
+                      🔥 {prod.badge || "MATCHING 2-FLIP-UP GAS BURNER"}
                     </div>
-                    <div className="absolute bottom-2 inset-x-2 bg-black/80 backdrop-blur-xs text-blue-300 text-[9px] font-bold px-2 py-1 rounded text-center">
-                      Piano Keys + Waterfall + LED Display
+                    <div className="absolute bottom-2 inset-x-2 bg-black/80 backdrop-blur-xs text-amber-300 text-[9px] font-bold px-2 py-1 rounded text-center">
+                      90° Flip-Up + 0–180m Timer + Blue Flame
                     </div>
                   </div>
 

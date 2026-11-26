@@ -8,34 +8,34 @@ interface ComparisonSectionProps {
 export const ComparisonSection: React.FC<ComparisonSectionProps> = () => {
   const comparisonItems = [
     {
-      feature: "Burner Cleaning & Spill Access",
-      traditional: "Fixed screwed burners trap burnt stew and grease underneath; requires screwdrivers to clean",
-      flipCooker: "90° Flip-Up hinged burners lift upright with one finger so you wipe underneath spotless in 5 seconds"
+      feature: "Piano Key 4-Mode Water Console",
+      traditional: "Single stiff faucet with weak spray that splashes across your kitchen counter",
+      smartSink: "4 independent tactile piano keys switch between flying rain waterfall, pull-out sprayer, drinking water & glass rinser"
     },
     {
-      feature: "Cooking Timer & Auto Shut-Off",
-      traditional: "Zero safety timer; walking away risks burnt food, ruined pots, and wasted gas",
-      flipCooker: "Integrated 0–180 minute mechanical safety timer cuts off gas supply automatically when time expires"
+      feature: "Live LED Water Temperature (°C)",
+      traditional: "No temperature visibility; risk of unexpected hot water splashes",
+      smartSink: "Battery-free hydroelectric LED display lights up automatically via water flow to show real-time °C temperature"
     },
     {
-      feature: "Flame Color & Pot Cleanliness",
-      traditional: "Unbalanced yellow smoky flame that leaves stubborn black soot stains on expensive pots",
-      flipCooker: "8-nozzle brass burner crowns + oxygen damper produce crisp, pure blue high-heat flame with zero soot"
+      feature: "Flying Rain Cascade Waterfall",
+      traditional: "Harsh single stream bruises delicate vegetables and wastes water",
+      smartSink: "Wide aerated sheet waterfall gently washes leafy vegetables, fruits, and large family pots with zero splash"
     },
     {
-      feature: "Cooktop Surface & Hygiene",
-      traditional: "Thin painted metal tops that rust, stain permanently, and peel around burner edges",
-      flipCooker: "8mm explosion-proof tempered crystal glass panel wipes clean in one swipe without rusting"
+      feature: "SUS304 3mm Nano Honeycomb Steel",
+      traditional: "Thin steel basin that scratches easily, stains with palm oil, and dents under heavy pots",
+      smartSink: "3mm commercial-grade SUS304 stainless steel with honeycomb nano-embossing resists scratches, grease, and rust"
     },
     {
-      feature: "Heavy Pot Support & Wind Shield",
-      traditional: "Light wire grates that bend or wobble under heavy family pots and let drafts blow flames",
-      flipCooker: "Heavy-duty windproof cast iron pot stands keep large pots rock-steady and block kitchen drafts"
+      feature: "Multi-Tier Sliding Workstation Kit",
+      traditional: "Empty basin with no prep accessories; forces chopping and drying onto cluttered counters",
+      smartSink: "Integrated dual-tier sliding ledges hold hardwood cutting board, perforated colander & inner basin right over the sink"
     },
     {
-      feature: "Installation Versatility",
-      traditional: "Locked to only tabletop OR only recessed cabinet installation",
-      flipCooker: "Dual-use engineering works seamlessly built-in (650×350mm cutout) or straight on your countertop"
+      feature: "Rotary Knob Drain & High-Pressure Rinser",
+      traditional: "Dipping hands into dirty soapy dishwater to pull the drain plug; hand-scrubbing narrow cups",
+      smartSink: "Deck-mounted rotary drain knob opens cleanly from above + one-press cup rinser blasts glasses sparkling clean"
     }
   ];
 
@@ -49,23 +49,23 @@ export const ComparisonSection: React.FC<ComparisonSectionProps> = () => {
             Functional Comparison
           </span>
           <h2 className="text-xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight leading-tight">
-            NOT JUST A STOVE. A SMARTER, SAFER WAY TO COOK.
+            NOT JUST A SINK. A COMPLETE KITCHEN WORKSTATION.
           </h2>
           <p className="text-slate-400 text-xs sm:text-sm mt-2">
-            See the practical daily difference between a regular gas cooker and the 2-Flip-Up Double Gas Burner With Timer.
+            See the practical daily difference between a basic steel sink and the Smart Paino Sink Workstation.
           </p>
         </div>
 
         {/* Comparison Table / Dual Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-8 sm:mb-10">
           
-          {/* Traditional Cooker Column */}
+          {/* Traditional Sink Column */}
           <div className="rounded-2xl bg-slate-900/50 border border-slate-800 p-4 sm:p-6 flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between pb-3 border-b border-slate-800 mb-4">
                 <div>
                   <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider block">Standard Option</span>
-                  <h3 className="text-base sm:text-lg font-bold text-slate-300">BASIC FIXED GAS COOKER</h3>
+                  <h3 className="text-base sm:text-lg font-bold text-slate-300">BASIC STANDARD SINK</h3>
                 </div>
                 <span className="px-2.5 py-0.5 bg-slate-800 text-slate-400 text-[11px] font-medium rounded-full">
                   Basic Utility
@@ -88,24 +88,24 @@ export const ComparisonSection: React.FC<ComparisonSectionProps> = () => {
             </div>
 
             <div className="mt-5 pt-3 border-t border-slate-800 text-center">
-              <span className="text-[11px] text-slate-500 italic">Trapped grease, blackened pots &amp; zero auto shut-off safety</span>
+              <span className="text-[11px] text-slate-500 italic">Splashing faucet, scratched steel &amp; cramped countertop prep</span>
             </div>
           </div>
 
-          {/* 2-Flip-Up Double Gas Burner Column */}
+          {/* Smart Paino Sink Workstation Column */}
           <div className="rounded-2xl bg-gradient-to-b from-slate-900 via-[#101926] to-slate-950 border-2 border-amber-500/50 p-4 sm:p-6 shadow-xl relative flex flex-col justify-between">
             <div className="absolute -top-2.5 right-4 bg-gradient-to-r from-amber-500 to-amber-400 text-slate-950 font-extrabold text-[10px] tracking-wider uppercase px-2.5 py-0.5 rounded-full shadow-xs">
-              Luxury Flip-Up System
+              Luxury Smart Workstation
             </div>
 
             <div>
               <div className="flex items-center justify-between pb-3 border-b border-slate-700/80 mb-4">
                 <div>
                   <span className="text-[10px] font-bold text-amber-400 uppercase tracking-wider block">Modern Upgrade</span>
-                  <h3 className="text-base sm:text-lg font-extrabold text-white">2-FLIP-UP GAS BURNER WITH TIMER</h3>
+                  <h3 className="text-base sm:text-lg font-extrabold text-white">SMART PAINO SINK WORKSTATION</h3>
                 </div>
                 <span className="px-2.5 py-0.5 bg-amber-500/20 text-amber-300 text-[11px] font-bold rounded-full border border-amber-500/30">
-                  90° Flip + 180m Timer
+                  Piano Keys + LED °C
                 </span>
               </div>
 
@@ -117,7 +117,7 @@ export const ComparisonSection: React.FC<ComparisonSectionProps> = () => {
                     </div>
                     <div>
                       <strong className="text-amber-300 block text-[11px] uppercase font-bold">{item.feature}:</strong>
-                      <span>{item.flipCooker}</span>
+                      <span>{item.smartSink}</span>
                     </div>
                   </li>
                 ))}
@@ -125,7 +125,7 @@ export const ComparisonSection: React.FC<ComparisonSectionProps> = () => {
             </div>
 
             <div className="mt-5 pt-3 border-t border-slate-800 text-center text-xs text-amber-300/80 font-medium">
-              <span>90° one-finger flip-up hinges, 0–180m auto-off timer, pure blue flame &amp; 8mm crystal glass</span>
+              <span>Tactile piano water console, battery-free LED temp °C, flying rain waterfall &amp; 9-piece kit</span>
             </div>
           </div>
 

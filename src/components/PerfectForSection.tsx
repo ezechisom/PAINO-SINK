@@ -6,37 +6,37 @@ export const PerfectForSection: React.FC = () => {
     {
       id: "family-homes",
       title: "Family Homes",
-      description: "Heavy-duty windproof cast iron pot stands support large Nigerian cooking pots, while 90° flip-up hinges make post-meal cleaning effortless.",
+      description: "Deep 220mm SUS304 honeycomb basin easily accommodates large Nigerian cooking pots, while sliding colanders keep vegetable prep organized.",
       icon: Home
     },
     {
       id: "apartments",
       title: "Modern Apartments",
-      description: "Dual-use tabletop or built-in design fits neatly onto compact counters without complicated masonry work.",
+      description: "Dual-tier sliding cutting board and draining trays turn your sink basin into extra counter space in compact apartment kitchens.",
       icon: Building2
     },
     {
       id: "new-homes",
       title: "New Architectural Builds",
-      description: "8mm glossy black tempered crystal glass and pure blue flames create a refined luxury centerpiece on marble or quartz slabs.",
+      description: "Gunmetal nano-coated steel, tactile piano water keys, and glowing hydroelectric LED temperature display create an instant luxury centerpiece.",
       icon: Sparkles
     },
     {
       id: "renovations",
       title: "Kitchen Renovations",
-      description: "Drops directly into standard 650×350mm countertop cutouts (750×450mm outer glass frame) to upgrade outdated cooktops immediately.",
+      description: "Fits standard 750×450mm sink openings (700×400mm cutout) with Topmount, Flushmount, or Undermount support and standard Nigerian plumbing lines.",
       icon: Hammer
     },
     {
       id: "shortlets",
       title: "Shortlets & Airbnb",
-      description: "Built-in 0–180 minute mechanical auto-off timer prevents forgotten stoves and gives property hosts lasting peace of mind.",
+      description: "High-pressure cup rinser, scratch-proof honeycomb surface, and zero-battery hydroelectric LED display impress guests and cut maintenance.",
       icon: Hotel
     },
     {
       id: "chefs",
-      title: "Busy Professionals & Parents",
-      description: "Set the timer and step away safely without burning rice, stews, or soups while multitasking around the house.",
+      title: "Home Chefs & Busy Parents",
+      description: "Wash produce under the gentle flying rain waterfall, chop over the basin, and drain with the rotary knob without dipping hands in dishwater.",
       icon: Building
     }
   ];
@@ -54,7 +54,7 @@ export const PerfectForSection: React.FC = () => {
             PERFECT FOR MODERN KITCHENS
           </h2>
           <p className="text-slate-400 text-xs sm:text-sm mt-2">
-            Engineered to fit seamlessly as either a recessed built-in hob or a freestanding tabletop gas stove.
+            Engineered for standard Nigerian plumbing (cold-only or hot &amp; cold) with Topmount, Flushmount, and Undermount installation.
           </p>
         </div>
 

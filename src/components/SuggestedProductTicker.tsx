@@ -1,7 +1,7 @@
 import React from 'react';
 import { ALTERNATIVE_PRODUCTS, AlternativeProduct } from '../data/alternativeProducts';
 import { formatNaira } from '../config';
-import { Waves, Zap, ArrowRight, Sparkles, ChevronRight, Eye, PlusCircle } from 'lucide-react';
+import { Flame, Zap, ArrowRight, Sparkles, ChevronRight, Eye, PlusCircle } from 'lucide-react';
 
 interface SuggestedProductTickerProps {
   onViewSpecs: (product: AlternativeProduct) => void;
@@ -38,28 +38,28 @@ export const SuggestedProductTicker: React.FC<SuggestedProductTickerProps> = ({
   const tickerItems = [
     {
       product: suggestedProduct,
-      icon: Waves,
-      badge: "MATCHING LUXURY PIANO SINK",
-      badgeColor: "bg-blue-500/20 text-blue-300 border-blue-500/30",
-      title: "Smart Paino Sink Workstation (75×45cm)",
-      highlight: "Tactile Piano Keys • Hydroelectric LED Temp °C • Flying Rain Waterfall",
+      icon: Flame,
+      badge: "MATCHING 2-FLIP-UP GAS BURNER",
+      badgeColor: "bg-amber-500/20 text-amber-300 border-amber-500/30",
+      title: "2-Flip-Up Double Gas Burner With Timer (75×45cm)",
+      highlight: "90° Flip-Up Hinges • 0–180m Auto-Off Timer • Pure Blue Zero-Soot Flame",
       price: formatNaira(suggestedProduct.price),
     },
     {
       product: suggestedProduct,
       icon: Zap,
-      badge: "COMPLETE 9-PIECE KIT",
+      badge: "5-SECOND WIPE CLEAN",
       badgeColor: "bg-red-500/20 text-red-300 border-red-500/30",
-      title: "SUS304 Honeycomb Nano Steel Basin",
-      highlight: "High-Pressure Glass Rinser • Solid Wood Cutting Board • Nested Colanders",
+      title: "8mm Explosion-Proof Tempered Crystal Glass",
+      highlight: "8-Nozzle Brass Crowns • Windproof Cast Iron Stands • Built-In & Tabletop",
       price: formatNaira(suggestedProduct.price),
     },
     {
       product: suggestedProduct,
       icon: Sparkles,
       badge: "PERFECT COUNTERTOP MATCH",
-      badgeColor: "bg-amber-500/20 text-amber-300 border-amber-500/30",
-      title: "Designed to Pair With Your 2-Flip-Up Gas Burner",
+      badgeColor: "bg-blue-500/20 text-blue-300 border-blue-500/30",
+      title: "Designed to Pair With Your Smart Paino Sink",
       highlight: "Save ₦5,000 Multi-Product Bundle Discount • Pay On Delivery Nationwide",
       price: "Bundle Available",
     },
@@ -76,10 +76,10 @@ export const SuggestedProductTicker: React.FC<SuggestedProductTickerProps> = ({
 
       {/* Floating Sticky Indicator on Left (Desktop & Mobile) */}
       <div className="absolute left-0 top-0 bottom-0 z-20 flex items-center px-2.5 sm:px-3.5 bg-gradient-to-r from-[#070e1c] via-[#070e1c] to-transparent pointer-events-none">
-        <div className="flex items-center gap-1.5 bg-blue-600/90 backdrop-blur-md text-white text-[10px] sm:text-xs font-black px-2.5 py-1 rounded-full uppercase tracking-wider shadow-sm pointer-events-auto shrink-0 border border-blue-400/40">
-          <Waves className="w-3 h-3 text-cyan-300 animate-pulse shrink-0" />
-          <span className="hidden sm:inline">MATCHING PIANO SINK:</span>
-          <span className="sm:hidden">SINK:</span>
+        <div className="flex items-center gap-1.5 bg-amber-500/95 backdrop-blur-md text-slate-950 text-[10px] sm:text-xs font-black px-2.5 py-1 rounded-full uppercase tracking-wider shadow-sm pointer-events-auto shrink-0 border border-amber-300/60">
+          <Flame className="w-3 h-3 text-red-700 animate-pulse shrink-0" />
+          <span className="hidden sm:inline">MATCHING GAS BURNER:</span>
+          <span className="sm:hidden">COOKER:</span>
         </div>
       </div>
 

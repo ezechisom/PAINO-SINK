@@ -45,10 +45,10 @@ export const WhyLoveSection: React.FC<WhyLoveSectionProps> = ({ config }) => {
             Verified Product Capabilities
           </span>
           <h2 className="text-xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight leading-tight">
-            WHY THIS 2-FLIP-UP GAS BURNER BELONGS IN YOUR KITCHEN
+            WHY THIS SMART PAINO SINK BELONGS IN YOUR KITCHEN
           </h2>
           <p className="text-slate-400 text-xs sm:text-sm mt-2 max-w-xl mx-auto leading-relaxed">
-            Engineered for effortless 5-second cleanup, automatic timer protection, and fast soot-free cooking performance.
+            Engineered with piano-key water control, hydroelectric temperature display, flying rain waterfall, and heavy-duty SUS304 honeycomb nano steel.
           </p>
         </div>
 

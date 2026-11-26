@@ -1,5 +1,5 @@
 import React from 'react';
-import { AlertCircle, Layers, Sparkles, ArrowDown, Flame, Clock } from 'lucide-react';
+import { AlertCircle, Layers, Droplets, ArrowDown, ShieldAlert } from 'lucide-react';
 
 interface ProblemSectionProps {
   onDiscoverClick: () => void;
@@ -8,32 +8,32 @@ interface ProblemSectionProps {
 export const ProblemSection: React.FC<ProblemSectionProps> = ({ onDiscoverClick }) => {
   const problems = [
     {
-      id: "trapped-grease",
-      title: "TRAPPED GREASE & BURNT SPILLS UNDER BURNERS?",
-      description: "Fixed gas burners trap boiled-over stew, oil splatters, and burnt food around screws you cannot reach without tools. Our 90° flip-up hinges lift upright with one finger so you wipe clean in 5 seconds.",
-      icon: AlertCircle,
-      tag: "Messy Cleanup"
+      id: "splashing-tap",
+      title: "SPLASHING, WEAK SINGLE KITCHEN TAP?",
+      description: "Standard stiff kitchen faucets splash water across your shirt and countertop while struggling to rinse wide pots or fresh leafy vegetables. Our piano-key console gives you 4 instant water modes including a gentle flying rain waterfall.",
+      icon: Droplets,
+      tag: "Messy Washing"
     },
     {
-      id: "forgotten-gas",
-      title: "BURNT FOOD OR FORGOTTEN GAS ON THE STOVE?",
-      description: "Stepping out of the kitchen while boiling beans or stew can easily burn your food and waste cooking gas. Our built-in 0–180 minute mechanical timer automatically cuts off the gas when time is up.",
-      icon: Clock,
-      tag: "Timer Safety"
+      id: "scratching-sink",
+      title: "SCRATCHED, STAINED & RUSTING CHEAP SINKS?",
+      description: "Thin steel sinks dent, accumulate permanent oil stains, and scratch within months of heavy Nigerian pot washing. Our 3mm thick SUS304 honeycomb nano-embossed basin resists scratches, oil grease, and rust.",
+      icon: ShieldAlert,
+      tag: "Built to Last"
     },
     {
-      id: "black-soot",
-      title: "BLACK SOOT STAINING YOUR EXPENSIVE POTS?",
-      description: "Weak yellow smoky flames blacken the bottoms of your stainless cookware and waste cylinder gas. Our 8-nozzle brass crowns with oxygen damper balance burn a crisp, pure blue flame with zero soot.",
-      icon: Flame,
-      tag: "Zero Pot Soot"
-    },
-    {
-      id: "flimsy-stands",
-      title: "RUSTED COOKER TOPS & WOBBLY POT STANDS?",
-      description: "Cheap painted metal cookers peel, rust, and bend under heavy family pots. Our 8mm explosion-proof crystal glass and heavy windproof cast iron stands handle large Nigerian pots effortlessly.",
+      id: "cluttered-counter",
+      title: "CLUTTERED COUNTERTOP SPACE WHILE PREPPING?",
+      description: "Chopping vegetables, rinsing fruits, and drying dishes eat up your entire kitchen counter. Our built-in dual-tier sliding ledges hold your cutting board, perforated colander, and inner washing basin right over the sink.",
       icon: Layers,
-      tag: "Heavy-Duty Build"
+      tag: "Space Saver"
+    },
+    {
+      id: "dirty-dishwater",
+      title: "DIPPING HANDS INTO GREASY DISHWATER TO DRAIN?",
+      description: "Reaching into soapy, oily water just to pull a sink plug is unpleasant and unhygienic. Turn the deck-mounted rotary drain knob cleanly from above the counter to open or seal the drain in a second.",
+      icon: AlertCircle,
+      tag: "Hygienic Drain"
     }
   ];
 
@@ -46,10 +46,10 @@ export const ProblemSection: React.FC<ProblemSectionProps> = ({ onDiscoverClick 
             The Everyday Kitchen Challenge
           </span>
           <h2 className="text-xl sm:text-3xl font-extrabold text-white tracking-tight leading-tight">
-            STOP STRUGGLING WITH HARD-TO-CLEAN GAS COOKERS.
+            STOP STRUGGLING WITH OUTDATED KITCHEN SINKS.
           </h2>
           <p className="text-slate-400 text-xs sm:text-sm mt-2">
-            Why spend 20 minutes scrubbing around fixed burners or worrying about forgotten food on the fire when your gas stove can clean in 5 seconds and switch itself off?
+            Why battle wet counters, scratched steel, and cramped prep space when one smart workstation sink handles washing, chopping, rinsing, and draining effortlessly?
           </p>
         </div>
 
@@ -92,7 +92,7 @@ export const ProblemSection: React.FC<ProblemSectionProps> = ({ onDiscoverClick 
               THE MODERN SOLUTION IS HERE
             </span>
             <div className="text-lg sm:text-2xl font-black text-amber-400 tracking-tight flex items-center gap-2 font-display">
-              <span>MEET THE 2-FLIP-UP DOUBLE GAS BURNER WITH TIMER.</span>
+              <span>MEET THE SMART PAINO SINK WORKSTATION.</span>
             </div>
             <button
               onClick={onDiscoverClick}

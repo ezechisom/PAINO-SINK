@@ -17,30 +17,29 @@ export interface AlternativeProduct {
 
 export const ALTERNATIVE_PRODUCTS: AlternativeProduct[] = [
   {
-    id: "sink",
-    name: "Smart Paino Sink",
-    tagline: "Tactile Piano Water Keys, Hydroelectric LED Temp Display & Flying Rain Waterfall",
-    category: "Multifunctional Kitchen Sink (75 × 45 cm)",
-    price: 130000,
-    normalPrice: 160000,
-    dimensions: "750 × 450 × 220 mm (75 × 45 cm)",
-    cutout: "700 × 400 mm (topmount, flushmount, or undermount)",
-    badge: "Matching Luxury Piano Sink",
-    accentColor: "from-blue-600 to-indigo-600",
+    id: "cooker-2burner",
+    name: "2-Flip-Up Double Gas Burner With Timer",
+    tagline: "90° Flip-Up Hinged Burners, 0–180m Mechanical Safety Timer & Pure Blue Flame",
+    category: "Luxury 2-Burner Flip-Up Gas Cooktop (75 × 45 cm)",
+    price: 160000,
+    normalPrice: 200000,
+    dimensions: "750 × 450 mm (75 × 45 cm)",
+    cutout: "650 × 350 mm (built-in recessed or tabletop placement)",
+    badge: "Matching 2-Flip-Up Gas Burner",
+    accentColor: "from-amber-500 to-orange-600",
     keyFeatures: [
-      "Tactile Piano Water Keys: Switch effortlessly between flying rain waterfall, 3-mode pull-out spray, cup rinser, and filtered drinking tap",
-      "Self-Powered Digital LED Temp Display (°C): Internal hydroelectric turbine lights up live temperature & timer with zero batteries or wiring",
-      "SUS304 Nano Honeycomb Steel: 3mm heavy-duty stainless steel with bionic anti-scratch, oil-repellent embossed finish",
-      "High-Pressure Glass Rinser: Multi-angle water jets blast mugs, wine glasses, and baby bottles spotless in 2 seconds",
-      "Complete 9-Piece Workstation Kit: Includes solid wood cutting board, triangular colander, nested prep basin, and full siphon drain kit"
+      "90° Flip-Up Hinged Burners: Lift both burner heads upright with one finger to wipe burnt spills underneath in 5 seconds",
+      "Built-In 0–180m Auto-Off Timer: Mechanical safety timer automatically shuts off gas flow when cooking time finishes",
+      "Pure Blue Zero-Soot Flame: 8-nozzle brass burner crowns with precision oxygen damper keep cooking pots clean and spotless",
+      "8mm Explosion-Proof Crystal Glass: Thermal-shock resistant tempered glass panel with heavy windproof cast iron pot stands",
+      "Dual Built-In or Tabletop Fit: Drops cleanly into a 650 × 350 mm cutout or sits directly on top of your counter slab"
     ],
-    description: "The perfect luxury companion workstation to pair with your 2-Flip-Up Double Gas Burner. Features tactile piano water keys, battery-free hydroelectric LED temperature display, flying rain waterfall spout, high-pressure cup washer, and nested prep accessories.",
+    description: "The perfect luxury companion gas cooktop to pair with your Smart Paino Sink. Features 90° one-finger flip-up hinged burners for 5-second cleaning, an integrated 0–180 minute mechanical safety auto-off timer, pure blue zero-soot flames, and 8mm explosion-proof tempered crystal glass.",
     images: [
-      "/images/smart_piano_sink_1789548024514.jpg",
-      "/images/piano_console_details_1789548059707.jpg",
-      "/images/workstation_accessories_1789548079842.jpg",
-      "/images/luxury_kitchen_lifestyle_1789548098794.jpg",
-      "/images/complete_package_kit_1789548119458.jpg"
+      "https://www.moonlightluxuryhometech.shop/images/cooker_active_blue_flames.jpg",
+      "https://www.moonlightluxuryhometech.shop/images/burner_flip_hinge.jpg",
+      "https://www.moonlightluxuryhometech.shop/images/pure_blue_flame.jpg",
+      "https://www.moonlightluxuryhometech.shop/images/cooker_blue_flames.jpg"
     ],
     officialUrl: ""
   }

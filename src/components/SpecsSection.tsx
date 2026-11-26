@@ -87,7 +87,7 @@ export const SpecsSection: React.FC<SpecsSectionProps> = ({ config }) => {
 
         <div className="mt-4 flex items-center justify-center gap-1.5 text-xs text-slate-400">
           <Info className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-          <span>Universal LPG gas hose fit. Supports both Built-In Cutout (650 × 350 mm) and Countertop Tabletop placement.</span>
+          <span>Universal standard Nigerian plumbing fit (cold-only or hot &amp; cold lines). Supports Topmount, Flushmount &amp; Undermount (700 × 400 mm cutout).</span>
         </div>
 
       </div>

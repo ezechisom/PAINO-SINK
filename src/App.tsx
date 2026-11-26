@@ -136,7 +136,7 @@ export default function App() {
 
   // Click handler to open the detailed specs & full photo gallery modal for the suggested product
   const handleViewProductSpecs = (productIdOrProduct: string | AlternativeProduct) => {
-    if (typeof productIdOrProduct === 'string' && (productIdOrProduct === 'cooker-2burner' || productIdOrProduct === 'cooker')) {
+    if (typeof productIdOrProduct === 'string' && productIdOrProduct === 'sink') {
       const el = document.getElementById('specs-section');
       if (el) {
         el.scrollIntoView({ behavior: 'smooth' });
@@ -227,10 +227,10 @@ export default function App() {
             </div>
             <div>
               <span className="font-extrabold text-[#0a192f] text-base sm:text-lg tracking-tight font-display block leading-tight">
-                2-FLIP-UP GAS BURNER
+                SMART PAINO SINK
               </span>
               <span className="text-[10px] text-blue-700 font-bold tracking-wider uppercase">
-                90° Hinged Burners &amp; Timer &bull; Moonlight Luxury
+                Piano Keys &amp; Waterfall Workstation &bull; Moonlight Luxury
               </span>
             </div>
           </div>

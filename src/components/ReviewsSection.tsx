@@ -12,7 +12,7 @@ export const ReviewsSection: React.FC<ReviewsSectionProps> = ({ reviews }) => {
     name: "Mrs. Chioma Okonkwo",
     location: "Magodo Phase 2, Lagos",
     rating: 5,
-    review: "The 90-degree flip-up burners and built-in safety timer have completely changed how I cook! Cleaning boiled-over stew or oil under the burners now takes seconds with one wipe, and the auto shut-off timer means I never worry about forgetting soup on the fire. Pure blue flame with zero soot on my pots!",
+    review: "The Smart Paino Sink completely transformed my kitchen! The piano water keys, wide waterfall rinse for vegetables, and live LED temperature display work without batteries, and the sliding cutting board saves so much counter space. Worth every kobo!",
     date: "Verified Homeowner • Lagos",
     verified: true
   };

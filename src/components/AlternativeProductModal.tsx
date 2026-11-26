@@ -83,7 +83,7 @@ export const AlternativeProductModal: React.FC<AlternativeProductModalProps> = (
     whatsappNumber,
     product.name,
     1,
-    `Hello! I saw the ${product.name} (${formatNaira(product.price)}) on your website as a matching appliance for the 2-Flip-Up Double Gas Burner. I would like to order or get more details about dispatch.`
+    `Hello! I saw the ${product.name} (${formatNaira(product.price)}) on your website as a matching appliance for the Smart Paino Sink. I would like to order or get more details about dispatch.`
   );
 
   return (
@@ -181,7 +181,7 @@ export const AlternativeProductModal: React.FC<AlternativeProductModalProps> = (
                   <span>CLICK ANY THUMBNAIL TO SWITCH PHOTO:</span>
                   <span className="text-blue-400">{product.images.length} High-Res Photos</span>
                 </div>
-                <div className="grid grid-cols-5 gap-2">
+                <div className={`grid ${product.images.length <= 4 ? 'grid-cols-4' : 'grid-cols-5'} gap-2`}>
                   {product.images.map((img, idx) => (
                     <button
                       key={idx}
@@ -244,7 +244,7 @@ export const AlternativeProductModal: React.FC<AlternativeProductModalProps> = (
                 <Maximize2 className="w-4 h-4" />
               </div>
               <div>
-                <span className="text-[11px] text-slate-400 uppercase font-semibold block">Outer Basin Dimensions</span>
+                <span className="text-[11px] text-slate-400 uppercase font-semibold block">Outer Dimensions</span>
                 <span className="text-sm font-bold text-white">{product.dimensions}</span>
               </div>
             </div>
@@ -291,7 +291,7 @@ export const AlternativeProductModal: React.FC<AlternativeProductModalProps> = (
             </span>
             <span className="flex items-center gap-1.5 text-amber-400 font-medium">
               <Truck className="w-4 h-4" />
-              Ships Together With Your 2-Flip-Up Gas Burner (Save ₦5,000 Bundle)
+              Ships Together With Your Smart Paino Sink (Save ₦5,000 Bundle)
             </span>
           </div>
 

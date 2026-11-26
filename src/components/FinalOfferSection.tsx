@@ -30,7 +30,7 @@ export const FinalOfferSection: React.FC<FinalOfferSectionProps> = ({ config, on
         </h2>
 
         <p className="text-slate-300 text-xs sm:text-sm max-w-lg mx-auto mb-6">
-          Order now to secure your 2-Flip-Up Double Gas Burner With Timer, featuring 90° flip-up hinges for 5-second cleaning, 0–180m safety auto-off timer, pure blue zero-soot flames, and 8mm explosion-proof crystal glass.
+          Order now to secure your Smart Paino Sink Workstation, featuring tactile piano water keys, battery-free hydroelectric LED temperature display (°C), flying rain waterfall, and 3mm SUS304 honeycomb nano steel.
         </p>
 
         {/* Promo Price Card */}
@@ -51,7 +51,7 @@ export const FinalOfferSection: React.FC<FinalOfferSectionProps> = ({ config, on
 
           <div className="pt-3 border-t border-slate-800 flex items-center justify-center gap-2 text-xs font-semibold text-slate-300 mb-4">
             <Truck className="w-3.5 h-3.5 text-amber-400" />
-            <span>Complete Factory Direct Unit &bull; Free Lagos Delivery &bull; 1-Year Warranty</span>
+            <span>Complete 9-Piece Workstation &bull; Free Lagos Delivery &bull; 1-Year Warranty</span>
           </div>
 
           {/* 30-Day Countdown Timer */}
@@ -68,15 +68,15 @@ export const FinalOfferSection: React.FC<FinalOfferSectionProps> = ({ config, on
         <div className="flex flex-wrap items-center justify-center gap-2.5 max-w-lg mx-auto mb-6 text-xs text-slate-300">
           <span className="flex items-center gap-1 bg-slate-900/80 px-2.5 py-1 rounded-full border border-slate-800 text-[11px]">
             <CheckCircle2 className="w-3 h-3 text-amber-400" />
-            90° Flip-Up Burners
+            Tactile Piano Keys
           </span>
           <span className="flex items-center gap-1 bg-slate-900/80 px-2.5 py-1 rounded-full border border-slate-800 text-[11px]">
             <CheckCircle2 className="w-3 h-3 text-blue-400" />
-            0–180m Auto-Off Timer
+            Battery-Free LED Temp (°C)
           </span>
           <span className="flex items-center gap-1 bg-slate-900/80 px-2.5 py-1 rounded-full border border-slate-800 text-[11px]">
             <CheckCircle2 className="w-3 h-3 text-emerald-400" />
-            Pure Blue Zero-Soot Flame
+            SUS304 Honeycomb Steel
           </span>
         </div>
 

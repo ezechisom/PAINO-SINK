@@ -19,11 +19,11 @@ export const LifestyleSection: React.FC<LifestyleSectionProps> = () => {
             </span>
 
             <h2 className="text-xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight leading-tight mb-3">
-              COOK FASTER, CLEAN IN 5 SECONDS, STAY SAFE.
+              WASH, PREP, RINSE &amp; DRAIN — ALL IN ONE PLACE.
             </h2>
 
             <p className="text-slate-300 text-xs sm:text-sm leading-relaxed mb-5">
-              Designed to bring sleek crystal glass elegance, zero-soot brass power, and automatic timer security into your home kitchen.
+              Designed to bring gunmetal nano-steel elegance, whisper-quiet sound dampening, and effortless workstation organization into your daily kitchen routine.
             </p>
 
             <div className="space-y-2.5 mb-6 text-slate-300 text-xs sm:text-sm">
@@ -31,19 +31,19 @@ export const LifestyleSection: React.FC<LifestyleSectionProps> = () => {
                 <div className="w-4.5 h-4.5 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center shrink-0">
                   <CheckCircle2 className="w-3.5 h-3.5" />
                 </div>
-                <span>90° flip-up burners lift with one finger so grease never builds up</span>
+                <span>Tactile piano water keys switch smoothly between waterfall, pull-out sprayer &amp; cup rinser</span>
               </div>
               <div className="flex items-center gap-2.5">
                 <div className="w-4.5 h-4.5 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center shrink-0">
                   <CheckCircle2 className="w-3.5 h-3.5" />
                 </div>
-                <span>Mechanical 0–180m auto shut-off timer protects every meal without electricity</span>
+                <span>Hydroelectric LED display tracks real-time water temperature (°C) with zero batteries</span>
               </div>
               <div className="flex items-center gap-2.5">
                 <div className="w-4.5 h-4.5 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center shrink-0">
                   <CheckCircle2 className="w-3.5 h-3.5" />
                 </div>
-                <span>Oxygen-balanced pure blue flames keep stainless pots clean and spotless</span>
+                <span>Sliding cutting board, colanders &amp; rotary drain knob keep countertops dry and spotless</span>
               </div>
             </div>
           </div>
@@ -52,20 +52,20 @@ export const LifestyleSection: React.FC<LifestyleSectionProps> = () => {
           <div className="lg:col-span-6">
             <div className="relative rounded-2xl overflow-hidden border border-slate-700 shadow-xl bg-slate-900 group">
               <img
-                src="https://www.moonlightluxuryhometech.shop/images/cooker_active_blue_flames.jpg"
-                alt="2-Flip-Up Double Gas Burner With Timer active pure blue flames"
+                src="/images/luxury_kitchen_lifestyle_1789548098794.jpg"
+                alt="Smart Paino Sink Workstation installed in a modern luxury kitchen"
                 className="w-full aspect-[16/10] object-cover group-hover:scale-105 transition-transform duration-500"
                 referrerPolicy="no-referrer"
               />
               
               <div className="absolute top-3 right-3 bg-black/80 backdrop-blur-md px-2.5 py-1 rounded-full border border-slate-700 text-[11px] font-semibold text-amber-300 flex items-center gap-1">
                 <Sparkles className="w-3 h-3" />
-                <span>8mm Tempered Crystal Glass</span>
+                <span>SUS304 Honeycomb Nano Steel</span>
               </div>
 
               <div className="p-3 bg-slate-950/90 border-t border-slate-800 text-xs text-slate-400 flex items-center justify-between">
-                <span>750 × 450 mm Outer Dimensions</span>
-                <span className="text-slate-300 font-medium">Built-In Recessed / Tabletop</span>
+                <span>750 × 450 × 220 mm Deep Basin</span>
+                <span className="text-slate-300 font-medium">Topmount • Flushmount • Undermount</span>
               </div>
             </div>
           </div>

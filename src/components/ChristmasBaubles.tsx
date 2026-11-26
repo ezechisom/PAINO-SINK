@@ -31,7 +31,7 @@ const BAUBLES: BaubleItem[] = [
     colorScheme: 'gold',
     animationClass: 'animate-bauble-2',
     pattern: 'stars',
-    label: '₦160K Unit'
+    label: '₦130K Unit'
   },
   {
     id: 'b3',
@@ -41,7 +41,7 @@ const BAUBLES: BaubleItem[] = [
     colorScheme: 'sapphire',
     animationClass: 'animate-bauble-3',
     pattern: 'diamonds',
-    label: 'Flip-Up Gas'
+    label: 'Smart Paino Sink'
   },
   {
     id: 'b4',
@@ -51,7 +51,7 @@ const BAUBLES: BaubleItem[] = [
     colorScheme: 'emerald',
     animationClass: 'animate-bauble-1',
     pattern: 'snowflake',
-    label: 'Sink ₦130K'
+    label: 'Gas Burner ₦160K'
   },
   {
     id: 'b5',

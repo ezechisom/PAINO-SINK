@@ -45,9 +45,9 @@ export const QuickOrderModal: React.FC<QuickOrderModalProps> = ({
   initialProductId,
   onOrderPlaced
 }) => {
-  // Product quantities: Cooker is main product (1), Sink is companion (0)
-  const [cooker2bQty, setCooker2bQty] = useState<number>(1);
-  const [sinkQty, setSinkQty] = useState<number>(0);
+  // Product quantities: Sink is main product (1), Cooker is companion (0)
+  const [sinkQty, setSinkQty] = useState<number>(1);
+  const [cooker2bQty, setCooker2bQty] = useState<number>(0);
 
   // Form Fields
   const [fullName, setFullName] = useState('');
@@ -73,12 +73,12 @@ export const QuickOrderModal: React.FC<QuickOrderModalProps> = ({
   useEffect(() => {
     if (!isOpen) return;
 
-    if (initialProductId === 'sink') {
-      setSinkQty(1);
-      setCooker2bQty(0);
-    } else {
+    if (initialProductId === 'cooker-2burner' || initialProductId === 'cooker') {
       setCooker2bQty(1);
       setSinkQty(0);
+    } else {
+      setSinkQty(1);
+      setCooker2bQty(0);
     }
   }, [isOpen, initialProductId]);
 
@@ -117,9 +117,9 @@ export const QuickOrderModal: React.FC<QuickOrderModalProps> = ({
 
   if (!isOpen) return null;
 
-  // Prices: Cooker is config.promoPrice (160K), Sink is 130K
-  const COOKER_2B_PRICE = config.promoPrice; // 160000
-  const SINK_PRICE = 130000;
+  // Prices: Sink is config.promoPrice (130K), Cooker is 160K
+  const SINK_PRICE = config.promoPrice; // 130000
+  const COOKER_2B_PRICE = 160000;
 
   const isLagosState = state.toLowerCase().trim() === 'lagos';
   const isAbujaState = state.toLowerCase().includes('abuja');
@@ -132,26 +132,26 @@ export const QuickOrderModal: React.FC<QuickOrderModalProps> = ({
 
   // Selected items array
   const selectedItems: OrderItem[] = [];
-  if (cooker2bQty > 0) {
-    selectedItems.push({
-      id: 'cooker-2burner',
-      name: `${config.productName} (75×45cm)`,
-      quantity: cooker2bQty,
-      unitPrice: COOKER_2B_PRICE,
-      totalPrice: cooker2bQty * COOKER_2B_PRICE
-    });
-  }
   if (sinkQty > 0) {
     selectedItems.push({
       id: 'sink',
-      name: 'Smart Paino Sink (75×45cm)',
+      name: `${config.productName} (75×45cm)`,
       quantity: sinkQty,
       unitPrice: SINK_PRICE,
       totalPrice: sinkQty * SINK_PRICE
     });
   }
+  if (cooker2bQty > 0) {
+    selectedItems.push({
+      id: 'cooker-2burner',
+      name: '2-Flip-Up Double Gas Burner With Timer (75×45cm)',
+      quantity: cooker2bQty,
+      unitPrice: COOKER_2B_PRICE,
+      totalPrice: cooker2bQty * COOKER_2B_PRICE
+    });
+  }
 
-  const totalItemCount = cooker2bQty + sinkQty;
+  const totalItemCount = sinkQty + cooker2bQty;
   const itemsSubtotal = selectedItems.reduce((acc, it) => acc + it.totalPrice, 0);
 
   // Multi-product discount (₦5,000 for 2 or more products)
@@ -310,7 +310,7 @@ export const QuickOrderModal: React.FC<QuickOrderModalProps> = ({
                 </span>
                 <span className="text-[10px] text-amber-300 font-bold flex items-center gap-1">
                   <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
-                  Save ₦40,000
+                  Save ₦30,000
                 </span>
               </div>
               <h2 id="quick-order-title" className="text-base sm:text-lg font-black text-white tracking-tight mt-0.5 font-display flex items-center gap-1.5">
@@ -510,10 +510,10 @@ export const QuickOrderModal: React.FC<QuickOrderModalProps> = ({
                       </span>
                     </div>
                     <p className="text-xs sm:text-sm font-extrabold text-white mt-1 leading-snug">
-                      2-Flip-Up Double Gas Burner slashed to <span className="text-amber-300 font-mono">₦160,000</span> (Save ₦40,000)!
+                      Smart Paino Sink slashed to <span className="text-amber-300 font-mono">₦130,000</span> (Save ₦30,000)!
                     </p>
                     <span className="text-[10px] sm:text-[11px] text-slate-300 block mt-0.5">
-                      Matching Smart Paino Sink: <strong className="text-amber-300">₦130,000</strong> (Save ₦30,000) &bull; Free Lagos Delivery
+                      Matching 2-Flip-Up Gas Burner: <strong className="text-amber-300">₦160,000</strong> (Save ₦40,000) &bull; Free Lagos Delivery
                     </span>
                   </div>
                 </div>
@@ -539,59 +539,10 @@ export const QuickOrderModal: React.FC<QuickOrderModalProps> = ({
                 )}
 
                 <div className="space-y-2.5">
-                  {/* Product 1: 2-Flip-Up Double Gas Burner With Timer (Main Product) */}
-                  <div className={`p-3 rounded-2xl border transition-all ${
-                    cooker2bQty > 0 
-                      ? 'bg-blue-50/70 border-blue-500/60 ring-1 ring-blue-500/30' 
-                      : 'bg-white border-slate-200 opacity-80 hover:opacity-100'
-                  }`}>
-                    <div className="flex items-center gap-3">
-                      <img 
-                        src="https://www.moonlightluxuryhometech.shop/images/cooker_active_blue_flames.jpg" 
-                        alt="2-Flip-Up Double Gas Burner With Timer"
-                        className="w-14 h-14 rounded-xl object-cover border border-slate-200 shrink-0" 
-                      />
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-1.5">
-                          <span className="text-xs font-black text-[#0a192f] truncate">2-Flip-Up Gas Burner</span>
-                          <span className="text-[10px] bg-blue-100 text-blue-900 font-bold px-1.5 py-0.2 rounded shrink-0">75×45cm</span>
-                        </div>
-                        <p className="text-[11px] text-slate-500 truncate">90° Flip-Up Hinges &amp; Safety Timer</p>
-                        <div className="flex items-center gap-1.5 mt-0.5 flex-wrap">
-                          <span className="text-xs font-extrabold text-blue-700 font-mono">{formatNaira(COOKER_2B_PRICE)}</span>
-                          <span className="text-[10px] text-slate-400 line-through">₦200,000</span>
-                          <span className="text-[9px] font-black text-white bg-red-600 border border-amber-300 px-1.5 py-0.2 rounded shadow-2xs">
-                            Save ₦40,000 (Bold Xmas Discount)
-                          </span>
-                        </div>
-                      </div>
-
-                      <div className="flex items-center gap-1.5 shrink-0 bg-white border border-slate-200 rounded-xl p-1 shadow-2xs">
-                        <button
-                          type="button"
-                          onClick={() => setCooker2bQty(prev => Math.max(0, prev - 1))}
-                          className="w-6 h-6 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center font-bold text-xs cursor-pointer transition-colors"
-                          aria-label="Decrease gas burner quantity"
-                        >
-                          <Minus className="w-3 h-3" />
-                        </button>
-                        <span className="w-6 text-center text-xs font-black font-mono">{cooker2bQty}</span>
-                        <button
-                          type="button"
-                          onClick={() => setCooker2bQty(prev => Math.min(10, prev + 1))}
-                          className="w-6 h-6 rounded-lg bg-blue-600 hover:bg-blue-500 text-white flex items-center justify-center font-bold text-xs cursor-pointer transition-colors"
-                          aria-label="Increase gas burner quantity"
-                        >
-                          <Plus className="w-3 h-3" />
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Product 2: Smart Paino Sink (Companion Product) */}
+                  {/* Product 1: Smart Paino Sink (Main Product) */}
                   <div className={`p-3 rounded-2xl border transition-all ${
                     sinkQty > 0 
-                      ? 'bg-amber-50/70 border-amber-500/60 ring-1 ring-amber-500/30' 
+                      ? 'bg-blue-50/70 border-blue-500/60 ring-1 ring-blue-500/30' 
                       : 'bg-white border-slate-200 opacity-80 hover:opacity-100'
                   }`}>
                     <div className="flex items-center gap-3">
@@ -603,11 +554,11 @@ export const QuickOrderModal: React.FC<QuickOrderModalProps> = ({
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-1.5">
                           <span className="text-xs font-black text-[#0a192f] truncate">Smart Paino Sink</span>
-                          <span className="text-[10px] bg-amber-100 text-amber-900 font-bold px-1.5 py-0.2 rounded shrink-0">75×45cm</span>
+                          <span className="text-[10px] bg-blue-100 text-blue-900 font-bold px-1.5 py-0.2 rounded shrink-0">75×45cm</span>
                         </div>
                         <p className="text-[11px] text-slate-500 truncate">Waterfall, LED Temp °C &amp; 9-Piece Kit</p>
                         <div className="flex items-center gap-1.5 mt-0.5 flex-wrap">
-                          <span className="text-xs font-extrabold text-amber-700 font-mono">{formatNaira(SINK_PRICE)}</span>
+                          <span className="text-xs font-extrabold text-blue-700 font-mono">{formatNaira(SINK_PRICE)}</span>
                           <span className="text-[10px] text-slate-400 line-through">₦160,000</span>
                           <span className="text-[9px] font-black text-white bg-red-600 border border-amber-300 px-1.5 py-0.2 rounded shadow-2xs">
                             Save ₦30,000 (Bold Xmas Discount)
@@ -628,8 +579,57 @@ export const QuickOrderModal: React.FC<QuickOrderModalProps> = ({
                         <button
                           type="button"
                           onClick={() => setSinkQty(prev => Math.min(10, prev + 1))}
-                          className="w-6 h-6 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 flex items-center justify-center font-bold text-xs cursor-pointer transition-colors"
+                          className="w-6 h-6 rounded-lg bg-blue-600 hover:bg-blue-500 text-white flex items-center justify-center font-bold text-xs cursor-pointer transition-colors"
                           aria-label="Increase sink quantity"
+                        >
+                          <Plus className="w-3 h-3" />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Product 2: 2-Flip-Up Double Gas Burner With Timer (Companion Product) */}
+                  <div className={`p-3 rounded-2xl border transition-all ${
+                    cooker2bQty > 0 
+                      ? 'bg-amber-50/70 border-amber-500/60 ring-1 ring-amber-500/30' 
+                      : 'bg-white border-slate-200 opacity-80 hover:opacity-100'
+                  }`}>
+                    <div className="flex items-center gap-3">
+                      <img 
+                        src="https://www.moonlightluxuryhometech.shop/images/cooker_active_blue_flames.jpg" 
+                        alt="2-Flip-Up Double Gas Burner With Timer"
+                        className="w-14 h-14 rounded-xl object-cover border border-slate-200 shrink-0" 
+                      />
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-1.5">
+                          <span className="text-xs font-black text-[#0a192f] truncate">2-Flip-Up Gas Burner</span>
+                          <span className="text-[10px] bg-amber-100 text-amber-900 font-bold px-1.5 py-0.2 rounded shrink-0">75×45cm</span>
+                        </div>
+                        <p className="text-[11px] text-slate-500 truncate">90° Flip-Up Hinges &amp; Safety Timer</p>
+                        <div className="flex items-center gap-1.5 mt-0.5 flex-wrap">
+                          <span className="text-xs font-extrabold text-amber-700 font-mono">{formatNaira(COOKER_2B_PRICE)}</span>
+                          <span className="text-[10px] text-slate-400 line-through">₦200,000</span>
+                          <span className="text-[9px] font-black text-white bg-red-600 border border-amber-300 px-1.5 py-0.2 rounded shadow-2xs">
+                            Save ₦40,000 (Bold Xmas Discount)
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-1.5 shrink-0 bg-white border border-slate-200 rounded-xl p-1 shadow-2xs">
+                        <button
+                          type="button"
+                          onClick={() => setCooker2bQty(prev => Math.max(0, prev - 1))}
+                          className="w-6 h-6 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center font-bold text-xs cursor-pointer transition-colors"
+                          aria-label="Decrease gas burner quantity"
+                        >
+                          <Minus className="w-3 h-3" />
+                        </button>
+                        <span className="w-6 text-center text-xs font-black font-mono">{cooker2bQty}</span>
+                        <button
+                          type="button"
+                          onClick={() => setCooker2bQty(prev => Math.min(10, prev + 1))}
+                          className="w-6 h-6 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 flex items-center justify-center font-bold text-xs cursor-pointer transition-colors"
+                          aria-label="Increase gas burner quantity"
                         >
                           <Plus className="w-3 h-3" />
                         </button>

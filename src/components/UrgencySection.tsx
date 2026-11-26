@@ -27,7 +27,7 @@ export const UrgencySection: React.FC<UrgencySectionProps> = ({ config, onOrderC
         </h2>
 
         <p className="text-slate-300 text-xs sm:text-sm max-w-lg mx-auto mb-6">
-          Lock in this special promotional rate today. Includes the complete 2-Flip-Up Double Gas Burner With Timer, windproof cast iron pot stands, and full 1-year manufacturer warranty.
+          Lock in this special promotional rate today. Includes the complete 9-piece Smart Paino Sink Workstation, waterfall piano console, cutting board, colanders, and full 1-year manufacturer warranty.
         </p>
 
         {/* Pricing card in urgency */}

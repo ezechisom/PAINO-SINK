@@ -24,7 +24,7 @@ export const PromoTopBar: React.FC<PromoTopBarProps> = ({
             <strong className="text-amber-300 font-black text-sm sm:text-base font-mono">
               {formatNaira(promoPrice)}
             </strong>
-            <span className="text-slate-200 font-extrabold">— 2-FLIP-UP GAS BURNER WITH TIMER</span>
+            <span className="text-slate-200 font-extrabold">— SMART PAINO SINK (75×45CM)</span>
           </span>
           <span className="text-amber-400 text-xs hidden sm:inline">❄️</span>
         </div>
